@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://franciscoderek7.github.io/francisco-holdings/sitemap.xml
