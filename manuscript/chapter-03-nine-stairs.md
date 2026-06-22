@@ -1,6 +1,6 @@
 # Chapter Three: Nine Stairs, No Railing
 
-My son was one year old the year they threw me down a staircase in handcuffs. I want that sitting at the front of this chapter before anything else, because everything that happened that day happened to a father, not just to me.
+My son Dylan was one year old the year they threw me down a staircase in handcuffs. I want that sitting at the front of this chapter before anything else, because everything that happened that day happened to a father, not just to me.
 
 It started over a ticket. Tinted windows. The officer — her name was Tammy Brighton — wrote the wrong section number on it. A simple clerical mistake, the kind that gets a charge thrown out. And it did get thrown out. The judge had already withdrawn the same charge for a kid ahead of me in line that day, for the exact same error. So when my turn came, the judge looked at the ticket, looked at her, and told me I was free to go.
 
