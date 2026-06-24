@@ -14,7 +14,7 @@ They walked me out through the east entrance in cuffs. Going down the stairs, th
 
 They took me to the hospital, where they handcuffed me to a wheelchair and waited for a doctor. When the doctor walked in, the officers found a reason to leave the room. The doctor asked me one question: "Are you paranoid?"
 
-"No," I told him. "I'm pissed off."
+"No!" I told him. "I'm fucking pissed off!"
 
 He looked at me, said "You're free to go," and that was that. No paranoia. No mental health crisis. Just a man who'd been dropped down a flight of stairs in cuffs for trying to leave a room he'd been told he could leave.
 
