@@ -8,9 +8,11 @@ She didn't take that well. Before I even got out of my seat, she turned to me an
 
 I stood up to leave the courtroom — the way the judge had just told me I was allowed to. I walked toward the door, and the guard on duty put his hand on my chest and physically blocked me from walking out. I freaked out. Anybody would have. I'd just been told by a judge, in a courtroom, that I was free, and now a hand was on my chest telling me otherwise.
 
-That's when an OPP officer I knew, Pat Hickey, walked into the courtroom and asked what was going on. I told him: they won't let me leave, the judge said I could leave. It didn't matter. They arrested me under the Mental Health Act anyway. Cuffed me. And then they walked me to a staircase — nine steps, no railing — and dropped me down it. I hit the floor at the bottom in handcuffs, unable to do a single thing to break my own fall.
+That's when an OPP officer I knew, Pat Hickey, walked into the courtroom and asked what was going on. I told him: they won't let me leave, the judge said I could leave. It didn't matter. They arrested me under the Mental Health Act anyway. Somebody told me the fastest way out of this was to just go to the hospital.
 
-They threw me in the back of a police car and took me to the hospital, where they handcuffed me to a wheelchair and waited for a doctor. When the doctor walked in, the officers found a reason to leave the room. The doctor asked me one question: "Are you paranoid?"
+They walked me out through the east entrance in cuffs. Going down the stairs, the officer holding me — Tammy — hit her shoulder on the wall and lost her grip on me. I went down nine stairs in handcuffs with nothing to catch myself with. Another officer grabbed for my coat to try to stop the fall and it ripped straight down the arm instead. I hit the marble floor at the bottom on my right side. Then they hauled me up off the ground and threw me in the back of a police car.
+
+They took me to the hospital, where they handcuffed me to a wheelchair and waited for a doctor. When the doctor walked in, the officers found a reason to leave the room. The doctor asked me one question: "Are you paranoid?"
 
 "No," I told him. "I'm pissed off."
 
