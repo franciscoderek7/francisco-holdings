@@ -2,13 +2,13 @@
 
 My son Dylan was one year old the year they threw me down a staircase in handcuffs. I want that sitting at the front of this chapter before anything else, because everything that happened that day happened to a father, not just to me.
 
-It started over a ticket. Tinted windows. The officer — her name was Tammy Brighton — wrote the wrong section number on it. A simple clerical mistake, the kind that gets a charge thrown out. And it did get thrown out. The judge had already withdrawn the same charge for a kid ahead of me in line that day, for the exact same error. So when my turn came, the judge looked at the ticket, looked at her, and told me I was free to go.
+It started over a ticket. Tinted windows. The officer wrote the wrong section number on it — a clerical mistake, the kind that gets a charge thrown out. She'd gone back through the courts trying to repair the summons so she could properly serve me, but it didn't matter. The judge called my case, looked at the ticket, and withdrew the charges. He'd already done the same thing for a kid ahead of me in line that day, for the exact same error. He told me I was free to go.
 
-Tammy Brighton didn't take that well. Before I even got out of my seat, she turned to me and said, "I'm gonna get you."
+She didn't take that well. Before I even got out of my seat, she turned to me and said, "I'm gonna get you."
 
-I stood up to leave the courtroom — the way the judge had just told me I was allowed to. Court security put a hand on my chest and physically stopped me from walking out a door I had every legal right to walk out of. I started yelling. Anybody would have. I'd just been told by a judge, in a courtroom, that I was free, and now a hand was on my chest telling me otherwise.
+I stood up to leave the courtroom — the way the judge had just told me I was allowed to. I walked toward the door, and the guard on duty put his hand on my chest and physically blocked me from walking out. I freaked out. Anybody would have. I'd just been told by a judge, in a courtroom, that I was free, and now a hand was on my chest telling me otherwise.
 
-They arrested me under the Mental Health Act. Cuffed me. And then they walked me to a staircase — nine steps, no railing — and dropped me down it. I hit the floor at the bottom in handcuffs, unable to do a single thing to break my own fall.
+That's when an OPP officer I knew, Pat Hickey, walked into the courtroom and asked what was going on. I told him: they won't let me leave, the judge said I could leave. It didn't matter. They arrested me under the Mental Health Act anyway. Cuffed me. And then they walked me to a staircase — nine steps, no railing — and dropped me down it. I hit the floor at the bottom in handcuffs, unable to do a single thing to break my own fall.
 
 They threw me in the back of a police car and took me to the hospital, where they handcuffed me to a wheelchair and waited for a doctor. When the doctor walked in, the officers found a reason to leave the room. The doctor asked me one question: "Are you paranoid?"
 
@@ -24,4 +24,4 @@ What it cost me took longer to add up. But out of that day, eventually, came my 
 
 ---
 
-*[Derek — still need: the full Dave Palmer story (who died, how you solved it, how it reached the courts), 3-5 childhood moments, your son's name or initials, how this all landed on him and on Michaella, and a pen name decision for the cover.]*
+*[Derek — still need: confirm the officer's correct name spelling (Brighton or Brydon?) and the year/location (2001 or 2002, Lindsay?) so I can fix it everywhere in this chapter. Also still need the full Dave Palmer story — the sequence from the text to the conviction.]*
