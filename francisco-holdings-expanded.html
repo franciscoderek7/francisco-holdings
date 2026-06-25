@@ -4,14 +4,14 @@
   <link rel="manifest" href="/manifest.json">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francisco Holdings Inc. — World's First 45-Division AI Empire | Phoenix Tower</title>
-<meta name="description" content="First human in history to build a 45+ company AI-first empire with integrated cybersecurity, agent swarm technology, and full automation. $2.4M ARR. 45 divisions. One man. $100M+ Active Litigation. Phoenix Tower.">
+<title>Francisco Holdings Inc. — World's First 45-Division AI Empire | 392-Floor Phoenix Tower</title>
+<meta name="description" content="First human in history to build a 45+ company AI-first empire with integrated cybersecurity, agent swarm technology, and full automation. $2.4M ARR. 45 divisions across a 392-floor tower. One man. $100M+ Active Litigation. Phoenix Tower.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#D4AF37">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Francisco Holdings Inc.">
 <meta property="og:title" content="Phoenix Tower: Empire Builder — Francisco Holdings Inc.">
-<meta property="og:description" content="Explore Francisco Holdings Inc. as an interactive 45-floor empire. AI-First divisions, Enterprise Security, Document AI, Legal Services, Real Estate.">
+<meta property="og:description" content="Explore Francisco Holdings Inc. as an interactive 392-floor empire. AI-First divisions, Enterprise Security, Document AI, Legal Services, Real Estate.">
 <meta property="og:url" content="https://franciscoholdingsinc.com/">
 <meta property="og:image" content="https://franciscoholdingsinc.com/fh-boardroom.webp">
 <meta property="og:image:width" content="1200">
@@ -194,7 +194,10 @@ body.game-ready{padding-top:var(--hud-h)}
 #main{margin-left:var(--el-w);min-height:100vh}
 
 /* ── LOBBY ────────────────────────────── */
-#floor-0{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 5% 60px;overflow:hidden;background-image:linear-gradient(180deg,rgba(5,5,10,.55) 0%,rgba(8,8,16,.78) 55%,rgba(5,5,10,.94) 100%),url('fh-tower-hero.jpg');background-size:cover;background-position:center top;background-repeat:no-repeat}
+#floor-0{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 5% 60px;overflow:hidden;background-image:radial-gradient(ellipse at 50% 0%,rgba(40,32,8,.35) 0%,transparent 60%),linear-gradient(180deg,rgba(5,5,10,.55) 0%,rgba(8,8,16,.78) 55%,rgba(5,5,10,.94) 100%);background-size:cover;background-position:center top;background-repeat:no-repeat}
+.chandelier{position:absolute;top:18px;left:50%;width:140px;height:90px;transform:translateX(-50%);z-index:1;pointer-events:none;opacity:.85}
+.chandelier::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(212,175,55,.95) 0 2px,transparent 3px);background-size:18px 18px;background-position:0 0,9px 14px,18px 0,27px 14px,36px 0,45px 14px,54px 0,63px 14px,72px 0,81px 14px,90px 0,99px 14px,108px 0,117px 14px,126px 0,135px 14px;filter:drop-shadow(0 0 6px rgba(212,175,55,.8))}
+.chandelier::after{content:'';position:absolute;top:30px;left:50%;width:2px;height:60px;background:linear-gradient(180deg,rgba(212,175,55,.7),transparent);transform:translateX(-50%)}
 .lobby-content{position:relative;z-index:1}
 .lobby-monogram{font-family:'Orbitron',sans-serif;font-size:clamp(2.5rem,8vw,6rem);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,var(--platinum-mid) 0%,var(--gold) 35%,var(--gold-light) 50%,var(--gold) 65%,var(--platinum-mid) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
 .lobby-sub{font-family:'Orbitron',sans-serif;font-size:clamp(0.875rem,1.6vw,1.5rem);letter-spacing:4px;color:var(--platinum-mid);text-transform:uppercase;margin-bottom:3rem}
@@ -282,6 +285,7 @@ body.game-ready{padding-top:var(--hud-h)}
 .floor-links a:hover{opacity:.85}
 .loop-b-notice{font-size:10px;color:var(--platinum-dark);font-style:italic;margin-bottom:12px}
 .coming-soon-band{background:linear-gradient(90deg,rgba(212,175,55,0.08),rgba(212,175,55,0.15),rgba(212,175,55,0.08));border:1px solid var(--border-gold);border-radius:4px;padding:10px 14px;font-size:11px;color:var(--gold-light);margin-bottom:1.2rem;text-align:center;font-family:'Orbitron',sans-serif;letter-spacing:1.5px}
+.reserved-band.unlocked{background:linear-gradient(90deg,rgba(16,185,129,0.08),rgba(16,185,129,0.18),rgba(16,185,129,0.08))!important;border-color:rgba(16,185,129,0.4)!important;color:#10B981!important}
 .soulstack-badge{font-size:9px;color:var(--platinum-dark);letter-spacing:.5px;padding-top:12px;border-top:1px solid rgba(212,175,55,0.1)}
 .soulstack-badge .dot{color:#22c55e}
 .investor-deck{background:rgba(16,185,129,.06);border:1px solid var(--border-em);border-radius:6px;padding:12px 14px;margin-bottom:1.4rem;font-size:11px;color:var(--platinum-mid);display:none}
@@ -335,7 +339,7 @@ footer{margin-left:0;background:#07070D;border-top:1px solid var(--border-gold);
   background-image:
     repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 1px, transparent 1px, transparent 3px),
     linear-gradient(100deg, #3a3d42 0%, #6b6f76 12%, #9a9ea6 24%, #c9cdd3 34%, #eef0f2 42%, #c9cdd3 50%, #9a9ea6 60%, #6b6f76 74%, #3a3d42 88%, #25262a 100%),
-    linear-gradient(180deg,rgba(5,5,10,.6) 0%,rgba(10,10,20,.45) 50%,rgba(5,5,10,.65) 100%), url('fh-lobby-elevator.jpg');
+    linear-gradient(180deg,rgba(5,5,10,.6) 0%,rgba(10,10,20,.45) 50%,rgba(5,5,10,.65) 100%), radial-gradient(ellipse at 50% 0%,rgba(212,175,55,.18),transparent 65%);
   background-size: 100% 4px, 100% 100%, 100% 100%, 200% 100%;
   background-repeat: repeat-y, no-repeat, no-repeat, no-repeat;
   background-blend-mode: overlay, normal, multiply, normal;
@@ -462,7 +466,7 @@ img { max-width: 100%; height: auto; }
 <div id="game-hud" style="display:none">
   <div class="hud-left">
     <div class="hud-chip">🏆 <span class="hud-val">Empire Coins:</span> <span id="hud-coins-val">0</span></div>
-    <div class="hud-chip hud-hide-mobile">🏢 Floor <span class="hud-val" id="hud-floor">0</span> / 45</div>
+    <div class="hud-chip hud-hide-mobile">🏢 Floor <span class="hud-val" id="hud-floor">0</span> / 392</div>
     <div class="hud-role-badge" id="hud-role"><span id="hud-role-icon">🧠</span> <span id="hud-role-name">Visionary</span></div>
   </div>
   <div class="hud-right">
@@ -530,8 +534,9 @@ img { max-width: 100%; height: auto; }
   <!-- LOBBY -->
   <section class="floor-section" id="floor-0" data-floor="0" style="border-top:none">
     <canvas id="city-canvas"></canvas>
+    <div class="chandelier" aria-hidden="true"></div>
     <div class="lobby-content" style="position:relative;z-index:2;padding:80px 5% 60px;text-align:center">
-      <div class="wf-badge">🌍 WORLD'S FIRST &nbsp;·&nbsp; VERIFIED 2026 &nbsp;·&nbsp; 45-DIVISION AI EMPIRE</div>
+      <div class="wf-badge">🌍 WORLD'S FIRST &nbsp;·&nbsp; VERIFIED 2026 &nbsp;·&nbsp; 392-FLOOR TOWER · 45 ACTIVE DIVISIONS</div>
       <div class="lobby-monogram">FRANCISCO<br>HOLDINGS INC.</div>
       <div style="font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:4px;font-size:clamp(1rem,2.4vw,1.6rem);background:linear-gradient(135deg,#7a5a12 0%,var(--gold) 30%,var(--gold-light) 55%,var(--gold) 70%,#7a5a12 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(212,175,55,.4));margin-bottom:1rem">PHOENIX TOWER</div>
       <div class="lobby-sub">First Human to Build a 45+ Company AI Empire &nbsp;·&nbsp; Own Cybersecurity &nbsp;·&nbsp; Agent Swarm &nbsp;·&nbsp; Full Automation</div>
@@ -640,7 +645,7 @@ img { max-width: 100%; height: auto; }
           <div class="arch-layer layer-security">
             <div class="arch-icon-wrap">🛡️</div>
             <div class="arch-label">
-              <div class="arch-name">OMNIAGUARD</div>
+              <div class="arch-name">OMNIGUARD</div>
               <div class="arch-desc">14-layer AI cybersecurity · Zero-trust architecture · Guards all sites and agents</div>
             </div>
             <div class="arch-pill">LOOP B</div>
@@ -694,9 +699,9 @@ img { max-width: 100%; height: auto; }
             <button onclick="goToFloor(1)" class="cd-btn cd-btn-sec">🛡️ Security → F1</button>
             <button onclick="goToFloor(2)" class="cd-btn cd-btn-sec">⚖️ Legal → F2</button>
             <button onclick="goToFloor(6)" class="cd-btn cd-btn-sec">🐾 Pet Tech → F6</button>
-            <button onclick="goToFloor(8)" class="cd-btn cd-btn-gold">🏛️ Boardroom → F8</button>
-            <button onclick="goToFloor(10)" class="cd-btn cd-btn-sec">⏱️ AI Scheduling → F10</button>
-            <button onclick="goToFloor(21)" class="cd-btn cd-btn-sec">🤖 Agent Swarm → F21</button>
+            <button onclick="goToFloor(11)" class="cd-btn cd-btn-gold">🏛️ Boardroom → F11</button>
+            <button onclick="goToFloor(7)" class="cd-btn cd-btn-sec">⏱️ AI Scheduling → F7</button>
+            <button onclick="goToFloor(22)" class="cd-btn cd-btn-sec">🤖 Agent Swarm → F22</button>
           </div>
           <div class="cd-query-row">
             <input id="cd-query" class="cd-input" type="text" placeholder="Tell me what you need and I'll find your floor…" onkeydown="if(event.key==='Enter')conciergeRoute()" />
@@ -707,7 +712,7 @@ img { max-width: 100%; height: auto; }
 
       <!-- Directory Board -->
       <div class="dir-board">
-        <h3>BUILDING DIRECTORY — 45 FLOORS</h3>
+        <h3>BUILDING DIRECTORY — 392 FLOORS</h3>
         <div class="dir-grid" id="dir-grid"></div>
       </div>
     </div>
@@ -879,12 +884,12 @@ img { max-width: 100%; height: auto; }
     <div class="dynasty-body">
       You found it.<br><br>
       The empire within the empire. Derek Francisco's private investment track.<br><br>
-      <strong style="color:var(--gold-light)">Floor 45 — Francisco Phoenix</strong><br>
+      <strong style="color:var(--gold-light)">Floor 392 — Francisco Phoenix</strong><br>
       Nation-scale partnerships. Sovereign wealth. One seat available.<br><br>
       Minimum engagement: $5,000,000.<br>
       Direct equity. No intermediaries. Dynasty-level terms.
     </div>
-    <a href="mailto:franciscoderek7@gmail.com?subject=DYNASTY%20PROTOCOL%20—%20Floor%2045" class="modal-btn btn-gold" style="display:inline-block;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:13px 24px;border-radius:4px">CONTACT DEREK DIRECTLY →</a>
+    <a href="mailto:franciscoderek7@gmail.com?subject=DYNASTY%20PROTOCOL%20—%20Floor%20392" class="modal-btn btn-gold" style="display:inline-block;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:13px 24px;border-radius:4px">CONTACT DEREK DIRECTLY →</a>
   </div>
 </div>
 
@@ -894,7 +899,9 @@ img { max-width: 100%; height: auto; }
 window.STRIPE_PK = 'pk_live_51TG0cIASsTLqnu8VNnDoJjPYgVz73h2lpqhcS1E9bGLGHYl8t6NAvJdri1zk2radt3jb5G0DYuuCMXtNvA81UNeg00RvGs96kz';
 
 /* ══════════════════════════════════════════════════════
-   FLOOR DATA — ALL 45 DIVISIONS
+   FLOOR DATA — 45 ACTIVE DIVISIONS ACROSS A 392-FLOOR TOWER
+   Floors 1-45: active/coming divisions. 46-391: reserved
+   expansion slots. 392: Francisco Phoenix (Konami/invite only).
 ══════════════════════════════════════════════════════ */
 var FLOORS = [
   {n:1,name:'OmniGuard',tag:'🛡️',sub:'14-Layer Enterprise AI Security',
@@ -910,25 +917,25 @@ var FLOORS = [
    pricing:[{tier:'BENO-X Playbook',val:'$49',desc:'Full framework PDF + case templates',url:'https://paypal.me/techpetcage/49',cls:'btn-emerald'},{tier:'Strategy Session',val:'$500',desc:'60-min consultation with Derek Francisco',url:'https://paypal.me/techpetcage/500',cls:'btn-gold'}],
    live:'https://zprimedoxaihq.com',liveLabel:'PrimeDox AI HQ →',contact:'docweedla@gmail.com',note:'Custom domain ccldr.net — 60-day registration hold.'},
 
-  {n:3,name:'PrimeDox AI',tag:'🤖',sub:'Derek Francisco\'s AI Clone · Document Automation · 24/7',
-   desc:'20 years of constitutional Charter expertise, strategy, and business automation compressed into an AI available around the clock.',
-   feats:['BENO-X defense builder','Charter breach identification','Legal document generation','Court filing templates','Business document automation','Confidential AI sessions','Real-time case analysis','BENO-X full case law library'],
-   pricing:[{tier:'Free',val:'$0',desc:'10 msg/day · 5 docs/mo · 1 BENO-X check',url:'primedox-ai-chat.html',cls:'btn-platinum'},{tier:'Pro',val:'$49/mo',desc:'Unlimited chat · Full BENO-X · All case law',url:'https://paypal.me/techpetcage/49',cls:'btn-emerald',feat:true},{tier:'Elite',val:'$199/mo',desc:'Priority + 30% affiliate + white-glove onboarding',url:'https://paypal.me/techpetcage/199',cls:'btn-gold'}],
-   live:'https://zprimedoxaihq.com',liveLabel:'PrimeDox AI HQ →',contact:'docweedla@gmail.com',note:'First 14 days free. No auto-billing. No credit card.',
-   boss:{title:'⚔ Unleash PrimeDox AI',sub:'Activate the Pro tier — unlimited AI, full BENO-X, all case law.',amount:49,ach:'ai_pioneer'}},
-
-  {n:4,name:'CCLDR',tag:'📋',sub:'Constitutional education resource',
+  {n:3,name:'CCLDR',tag:'📋',sub:'Constitutional education resource',
    desc:'A constitutional education network. Charter challenges, evidence exclusion, and constitutional rights education for every province.',
    feats:['Constitutional charter education','Evidence exclusion filings','Crown negotiation leverage','Know Your Rights training','Case tracking system','Province-wide network','24/7 emergency intake','BENO-X integrated workflow'],
    pricing:[{tier:'Warrior',val:'$99',desc:'BENO-X starter kit + rights guide',url:'https://paypal.me/techpetcage/99',cls:'btn-platinum'},{tier:'Pro',val:'$299',desc:'Full BENO-X + document templates + case review',url:'https://paypal.me/techpetcage/299',cls:'btn-emerald'},{tier:'Elite',val:'$999',desc:'2 strategy calls + ongoing support',url:'https://paypal.me/techpetcage/999',cls:'btn-gold'},{tier:'Sovereign',val:'$1,499',desc:'Full retainer · unlimited access · dedicated support',url:'https://paypal.me/techpetcage/1499',cls:'btn-gold'}],
    live:'https://franciscoderek7.github.io/Ccldr-net/',liveLabel:'CCLDR (GitHub Pages) →',contact:'docweedla@gmail.com',note:'Custom domain ccldr.net — 60-day hold. Full launch Q3 2026.',
    boss:{title:'⚔ Defend Your Rights',sub:'Join CCLDR with the Pro tier — full BENO-X, templates, and case review.',amount:299,ach:'legal_legend'}},
 
-  {n:5,name:'CleanSwarm AI',tag:'🐝',sub:'Physical & Document Cleaning Intelligence',
-   desc:'AI dispatch for commercial and residential physical cleaning services — private jets, skyscrapers, offices, yachts — and AI-powered document cleanup including OCR and data extraction.',
-   feats:['Private jet cleaning','Skyscraper & commercial cleaning','Office & residential cleaning','Yacht & marine vessel cleaning','OCR document extraction','Batch document processing','AI crew dispatch & scheduling','Quality verification AI'],
-   pricing:[{tier:'Starter',val:'$29/mo',desc:'500 documents · Basic OCR',url:'mailto:hello@cleanswarm.ca?subject=Starter',cls:'btn-platinum'},{tier:'Growth',val:'$99/mo',desc:'5,000 docs · Advanced extraction + physical dispatch',url:'mailto:hello@cleanswarm.ca?subject=Growth',cls:'btn-emerald',feat:true},{tier:'Scale',val:'$299/mo',desc:'Unlimited · Custom models + franchise access',url:'mailto:hello@cleanswarm.ca?subject=Scale',cls:'btn-gold'}],
-   live:false,contact:'hello@cleanswarm.ca',note:'Coming 2026.'},
+  {n:4,name:'PrimeDox AI',tag:'🤖',sub:'Derek Francisco\'s AI Clone · Document Automation · 24/7',
+   desc:'20 years of constitutional Charter expertise, strategy, and business automation compressed into an AI available around the clock.',
+   feats:['BENO-X defense builder','Charter breach identification','Legal document generation','Court filing templates','Business document automation','Confidential AI sessions','Real-time case analysis','BENO-X full case law library'],
+   pricing:[{tier:'Free',val:'$0',desc:'10 msg/day · 5 docs/mo · 1 BENO-X check',url:'primedox-ai-chat.html',cls:'btn-platinum'},{tier:'Pro',val:'$49/mo',desc:'Unlimited chat · Full BENO-X · All case law',url:'https://paypal.me/techpetcage/49',cls:'btn-emerald',feat:true},{tier:'Elite',val:'$199/mo',desc:'Priority + 30% affiliate + white-glove onboarding',url:'https://paypal.me/techpetcage/199',cls:'btn-gold'}],
+   live:'https://zprimedoxaihq.com',liveLabel:'PrimeDox AI HQ →',contact:'docweedla@gmail.com',note:'First 14 days free. No auto-billing. No credit card.',
+   boss:{title:'⚔ Unleash PrimeDox AI',sub:'Activate the Pro tier — unlimited AI, full BENO-X, all case law.',amount:49,ach:'ai_pioneer'}},
+
+  {n:5,name:'Vault Velocity Auto',tag:'🚗',sub:'AI-Powered Automotive Intelligence',
+   desc:'AI diagnostics, performance optimization, and secure automotive intelligence for high-value vehicles and fleet operations.',
+   feats:['AI vehicle diagnostics','Performance optimization','Fleet management AI','Security & anti-theft intelligence','Predictive maintenance','OBD-II deep integration','Insurance telematics','Custom automotive AI'],
+   pricing:[{tier:'Individual',val:'$99/mo',desc:'1 vehicle · AI diagnostics + alerts',url:'https://paypal.me/techpetcage/99',cls:'btn-emerald'},{tier:'Fleet',val:'$499/mo',desc:'10 vehicles · Full fleet AI management',url:'https://paypal.me/techpetcage/499',cls:'btn-gold'}],
+   live:'https://vaultvelocityauto.com',liveLabel:'Vault Velocity Auto →',contact:'franciscoderek7@gmail.com'},
 
   {n:6,name:'TechPetCage',tag:'🐾',sub:'Smart Pet Health AI · GPS Monitoring · Behavior Analytics',
    desc:'AI-powered pet health monitoring with real-time GPS tracking, behavioral analysis, and veterinary alert integration for pet owners worldwide.',
@@ -936,99 +943,113 @@ var FLOORS = [
    pricing:[{tier:'Basic',val:'$19/mo',desc:'1 pet · Basic health monitoring',url:'https://paypal.me/techpetcage/19',cls:'btn-platinum'},{tier:'Plus',val:'$49/mo',desc:'3 pets · Health alerts + GPS + vet alerts',url:'https://paypal.me/techpetcage/49',cls:'btn-emerald',feat:true},{tier:'Family',val:'$149/mo',desc:'Unlimited pets · Full suite + vet integration',url:'https://paypal.me/techpetcage/149',cls:'btn-gold'}],
    live:'https://franciscoderek7.github.io/techpetcage/',liveLabel:'TechPetCage →',contact:'franciscoderek7@gmail.com'},
 
-  {n:7,name:'VIGILAX',tag:'🔒',sub:'Enterprise Threat Response · Zero Compromise',
+  {n:7,name:'Kiaros',tag:'⏱️',sub:'AI Strategy · Precision Timing · Growth Architecture',
+   desc:'Strategic AI consulting for founders who understand that timing is the only moat. Kiaros identifies market windows before they open.',
+   feats:['Market timing analysis','AI growth architecture','Competitor intelligence','Revenue acceleration blueprints','Go-to-market AI modeling','Exit strategy preparation','Monthly strategy calls','Proprietary timing algorithms'],
+   pricing:[{tier:'Engagement',val:'Custom',desc:'Contact for scoped engagement',url:'mailto:kiaros@franciscoholdingsinc.com?subject=Kiaros%20Inquiry',cls:'btn-gold'}],
+   live:'https://kiaros.ai',liveLabel:'kiaros.ai →',contact:'kiaros@franciscoholdingsinc.com',loopB:true},
+
+  {n:8,name:'CleanSwarm AI',tag:'🐝',sub:'Physical & Document Cleaning Intelligence',
+   desc:'AI dispatch for commercial and residential physical cleaning services — private jets, skyscrapers, offices, yachts — and AI-powered document cleanup including OCR and data extraction.',
+   feats:['Private jet cleaning','Skyscraper & commercial cleaning','Office & residential cleaning','Yacht & marine vessel cleaning','OCR document extraction','Batch document processing','AI crew dispatch & scheduling','Quality verification AI'],
+   pricing:[{tier:'Starter',val:'$29/mo',desc:'500 documents · Basic OCR',url:'mailto:hello@cleanswarm.ca?subject=Starter',cls:'btn-platinum'},{tier:'Growth',val:'$99/mo',desc:'5,000 docs · Advanced extraction + physical dispatch',url:'mailto:hello@cleanswarm.ca?subject=Growth',cls:'btn-emerald',feat:true},{tier:'Scale',val:'$299/mo',desc:'Unlimited · Custom models + franchise access',url:'mailto:hello@cleanswarm.ca?subject=Scale',cls:'btn-gold'}],
+   live:false,contact:'hello@cleanswarm.ca',note:'Coming 2026.'},
+
+  {n:9,name:'VIGILAX',tag:'🔒',sub:'Enterprise Threat Response · Zero Compromise',
    desc:'Government-grade enterprise threat response. Full deployment, ITAR-aware architecture, zero-trust networks, and proactive threat neutralization at scale.',
    feats:['Nation-state threat detection','Zero-trust network architecture','Proactive threat neutralization','Forensic incident response','ITAR/CIRA compliance ready','Executive protection protocols','Critical infrastructure defense','Custom SLA agreements'],
    pricing:[{tier:'Custom Engagement',val:'From $5,000',desc:'Scoped per threat surface · $1,000 deposit to initiate',url:'mailto:vigilax@franciscoholdingsinc.com?subject=VIGILAX%20Engagement%20Request',cls:'btn-gold'},{tier:'Retainer',val:'$10,000/mo',desc:'On-call threat team · Proactive monitoring',url:'mailto:vigilax@franciscoholdingsinc.com?subject=VIGILAX%20Retainer',cls:'btn-emerald'}],
    live:false,contact:'vigilax@franciscoholdingsinc.com',loopB:true},
 
-  {n:8,name:'Francisco Holdings Boardroom',tag:'🏛️',sub:'Investor Relations · Dynasty Partnerships · Floor 8',
+  {n:10,name:'SoulStack',tag:'👁️',sub:'Empire Observer · Anomaly Detection · Reputation Layer',
+   desc:'The silent layer watching every division for anomalies, drift, and risk — then reporting straight to PrimeDox. SoulStack also issues verified achievement and trust badges across the Francisco Holdings empire.',
+   feats:['24/7 cross-division anomaly monitoring','Automated risk + drift reports','Verified achievement & trust badges','Reputation scoring for partners & affiliates','Direct escalation to PrimeDox','Zero customer-facing AI branding'],
+   live:false,contact:'franciscoderek7@gmail.com',note:'Coming 2026 — waitlist open.',coming:true,comingYear:'2026'},
+
+  {n:11,name:'Francisco Holdings Boardroom',tag:'🏛️',sub:'Investor Relations · Dynasty Partnerships · Floor 11',
    desc:'The boardroom of the empire. Strategy sessions, investment tiers, and partnership structures for those building at the highest level.',
    feats:['60-min strategy sessions','Equity partnership tiers','NDA-protected negotiations','AI implementation roadmaps','Revenue acceleration consulting','Brand architecture strategy','Monthly partner calls','Dynasty Protocol access'],
    pricing:[{tier:'Strategy Session',val:'$500',desc:'60-min with Derek Francisco · No NDA required',url:'https://paypal.me/techpetcage/500',cls:'btn-platinum'},{tier:'Floor — $50K',desc:'Founding investor · Monthly updates · Annual boardroom call',url:'mailto:franciscoderek7@gmail.com?subject=Floor%20Investment%20%2450K',cls:'btn-emerald'},{tier:'Suite — $250K',desc:'5× equity · Quarterly sessions · Co-branding rights',url:'mailto:franciscoderek7@gmail.com?subject=Suite%20Investment%20%24250K',cls:'btn-gold'},{tier:'Penthouse — $1M',desc:'10× equity · Board observer seat · Priority deal flow',url:'mailto:franciscoderek7@gmail.com?subject=Penthouse%20Investment%20%241M',cls:'btn-gold',feat:true}],
    live:false,contact:'franciscoderek7@gmail.com',
    pitchDeck:true,projection:'$400M projected revenue across the first 4 years · 45-company empire overview'},
 
-  {n:9,name:'Vault Velocity Auto',tag:'🚗',sub:'AI-Powered Automotive Intelligence',
-   desc:'AI diagnostics, performance optimization, and secure automotive intelligence for high-value vehicles and fleet operations.',
-   feats:['AI vehicle diagnostics','Performance optimization','Fleet management AI','Security & anti-theft intelligence','Predictive maintenance','OBD-II deep integration','Insurance telematics','Custom automotive AI'],
-   pricing:[{tier:'Individual',val:'$99/mo',desc:'1 vehicle · AI diagnostics + alerts',url:'https://paypal.me/techpetcage/99',cls:'btn-emerald'},{tier:'Fleet',val:'$499/mo',desc:'10 vehicles · Full fleet AI management',url:'https://paypal.me/techpetcage/499',cls:'btn-gold'}],
-   live:'https://vaultvelocityauto.com',liveLabel:'Vault Velocity Auto →',contact:'franciscoderek7@gmail.com'},
-
-  {n:10,name:'Kiaros',tag:'⏱️',sub:'AI Strategy · Precision Timing · Growth Architecture',
-   desc:'Strategic AI consulting for founders who understand that timing is the only moat. Kiaros identifies market windows before they open.',
-   feats:['Market timing analysis','AI growth architecture','Competitor intelligence','Revenue acceleration blueprints','Go-to-market AI modeling','Exit strategy preparation','Monthly strategy calls','Proprietary timing algorithms'],
-   pricing:[{tier:'Engagement',val:'Custom',desc:'Contact for scoped engagement',url:'mailto:kiaros@franciscoholdingsinc.com?subject=Kiaros%20Inquiry',cls:'btn-gold'}],
-   live:'https://kiaros.ai',liveLabel:'kiaros.ai →',contact:'kiaros@franciscoholdingsinc.com',loopB:true},
-
-  {n:11,name:'TechPackCage',tag:'📦',sub:'Smart Packaging AI · Supply Chain Intelligence',
+  {n:12,name:'TechPackCage',tag:'📦',sub:'Smart Packaging AI · Supply Chain Intelligence',
    desc:'AI-powered packaging optimization and supply chain intelligence for e-commerce and manufacturing operations.',
    feats:['Packaging material AI','Dimension optimization','Supply chain visibility','Carrier rate AI negotiation','Returns reduction AI','Sustainability scoring','Inventory forecasting','Custom packaging design'],
    pricing:[{tier:'Starter',val:'$49/mo',desc:'Up to 500 shipments · Basic optimization',url:'https://paypal.me/techpetcage/49',cls:'btn-emerald'},{tier:'Growth',val:'$149/mo',desc:'Unlimited shipments · Full AI suite',url:'https://paypal.me/techpetcage/149',cls:'btn-gold'}],
    live:false,contact:'franciscoderek7@gmail.com'},
 
-  {n:12,name:'MindShift by Michaella',tag:'🧠',sub:'Psychology & Travel AI · Behavioral Transformation',
+  {n:13,name:'MindShift by Michaella',tag:'🧠',sub:'Psychology & Travel AI · Behavioral Transformation',
    desc:'Combining behavioral psychology and immersive travel experiences to unlock automated income streams and mindset transformation.',
    feats:['Behavioral modification programs','Automated income systems','Travel lifestyle design','Psychology-based coaching','Digital product creation','Online course platform','Community building','Mindset reprogramming'],
    pricing:[{tier:'Session',val:'$99',desc:'1-hour coaching session',url:'https://paypal.me/techpetcage/99',cls:'btn-emerald'},{tier:'Package',val:'$299',desc:'Monthly program + travel lifestyle blueprint',url:'https://paypal.me/techpetcage/299',cls:'btn-gold'}],
    live:false,contact:'franciscoderek7@gmail.com',note:'Coming 2026 — domain not yet registered.'},
 
-  {n:13,name:'CCC-Site',tag:'🌐',sub:'Business Consulting · Compliance & Licensing',
+  {n:14,name:'CCC-Site',tag:'🌐',sub:'Business Consulting · Compliance & Licensing',
    desc:'Full-service business consulting — from licensing and compliance to operations, marketing, and expansion strategy.',
    feats:['Licensing guidance','Compliance management','Operations setup','Marketing strategy','SOP development','Financial modeling','Distribution strategy','Expansion planning'],
    pricing:[{tier:'Consult',val:'$500',desc:'60-min compliance strategy session',url:'https://paypal.me/techpetcage/500',cls:'btn-emerald'},{tier:'Retainer',val:'$2,000/mo',desc:'Full compliance management + monthly strategy',url:'https://paypal.me/techpetcage/2000',cls:'btn-gold'}],
    live:false,contact:'docweedla@gmail.com'},
 
-  {n:14,name:'Space Swarm',tag:'🛸',sub:'Space Operations AI · Orbital Logistics · Satellite Intelligence',coming:true},
-  {n:15,name:'Energy Swarm',tag:'⚡',sub:'Renewable Energy AI · Grid Optimization · Carbon Intelligence',coming:true},
-  {n:16,name:'Fintech Swarm',tag:'💹',sub:'AI Finance Intelligence · Algorithmic Trading · Risk Analysis',coming:true},
-  {n:17,name:'Health Swarm',tag:'🏥',sub:'Healthcare AI · Diagnostics · Patient Intelligence',coming:true},
-  {n:18,name:'Biotech Swarm',tag:'🧬',sub:'Biotech AI · Drug Discovery · Genomic Analysis',coming:true},
-  {n:19,name:'Quantum Swarm',tag:'⚛️',sub:'Quantum Computing AI · Cryptography · Optimization',coming:true,comingYear:'2027'},
-  {n:20,name:'Auto Swarm',tag:'🏭',sub:'Automotive Manufacturing AI · Supply Chain Intelligence',coming:true},
-  {n:21,name:'Agent Swarm Tech',tag:'🤖',sub:'Multi-Agent Orchestration · AI Scaling · Swarm Intelligence',
+  {n:15,name:'Space Swarm',tag:'🛸',sub:'Space Operations AI · Orbital Logistics · Satellite Intelligence',coming:true},
+  {n:16,name:'Energy Swarm',tag:'⚡',sub:'Renewable Energy AI · Grid Optimization · Carbon Intelligence',coming:true},
+  {n:17,name:'Fintech Swarm',tag:'💹',sub:'AI Finance Intelligence · Algorithmic Trading · Risk Analysis',coming:true},
+  {n:18,name:'Health Swarm',tag:'🏥',sub:'Healthcare AI · Diagnostics · Patient Intelligence',coming:true},
+  {n:19,name:'Biotech Swarm',tag:'🧬',sub:'Biotech AI · Drug Discovery · Genomic Analysis',coming:true},
+  {n:20,name:'Quantum Swarm',tag:'⚛️',sub:'Quantum Computing AI · Cryptography · Optimization',coming:true,comingYear:'2027'},
+  {n:21,name:'Auto Swarm',tag:'🏭',sub:'Automotive Manufacturing AI · Supply Chain Intelligence',coming:true},
+  {n:22,name:'Agent Swarm Tech',tag:'🤖',sub:'Multi-Agent Orchestration · AI Scaling · Swarm Intelligence',
    desc:'The backbone technology powering all 45 Francisco Holdings divisions. Deploy, manage, and scale AI agent networks.',
    pricing:[{tier:'Starter',val:'$299/mo',desc:'Up to 5 agents',url:'https://paypal.me/techpetcage/299',cls:'btn-emerald'},{tier:'Growth',val:'$999/mo',desc:'Up to 25 agents + monitoring',url:'https://paypal.me/techpetcage/999',cls:'btn-gold'},{tier:'Enterprise',val:'$2,999/mo',desc:'Unlimited agents + SoulStack integration',url:'mailto:franciscoderek7@gmail.com?subject=Agent%20Swarm%20Enterprise',cls:'btn-platinum'}],
    live:'https://zprimedoxaihq.com',liveLabel:'PrimeDox HQ →',contact:'franciscoderek7@gmail.com'},
-  {n:22,name:'Francisco Realty',tag:'🏘️',sub:'AI Real Estate · Full-Stack Property Transactions',
+  {n:23,name:'Francisco Realty',tag:'🏘️',sub:'AI Real Estate · Full-Stack Property Transactions',
    desc:'End-to-end real estate services powered by AI — buying, selling, investment, and property management across Canada and beyond.',
    pricing:[{tier:'Listing Commission',val:'2.5%',desc:'AI-powered listing, marketing, and closing',url:'mailto:franciscoderek7@gmail.com?subject=Francisco%20Realty%20Inquiry',cls:'btn-gold'},{tier:'Buyer Commission',val:'2.5%',desc:'AI property search, negotiation, close',url:'mailto:franciscoderek7@gmail.com?subject=Francisco%20Realty%20Buyer',cls:'btn-emerald'}],
    live:false,contact:'franciscoderek7@gmail.com',note:'RECO licensing in progress. Full launch Q4 2026.'},
-  {n:23,name:'Francisco Legal',tag:'⚖️',sub:'Full-Service Educational Resource · 19 Practice Areas',
+  {n:24,name:'Francisco Legal',tag:'⚖️',sub:'Full-Service Educational Resource · 19 Practice Areas',
    desc:'AI-enhanced legal education across all practice areas. Partner network. PrimeDox AI document generation. Nationwide coverage.',
    pricing:[{tier:'Consultation',val:'$150/hr',desc:'Initial educational consultation',url:'mailto:franciscoderek7@gmail.com?subject=Francisco%20Legal%20Consult',cls:'btn-emerald'},{tier:'Retainer',val:'$500/hr',desc:'Ongoing educational guidance',url:'mailto:franciscoderek7@gmail.com?subject=Francisco%20Legal%20Retainer',cls:'btn-gold'}],
    live:false,contact:'franciscoderek7@gmail.com',note:'Partner network launching Q1 2027.'},
-  {n:24,name:'Francisco Mortgage',tag:'🏦',sub:'AI Mortgage Brokerage · Best Rate Guarantee',coming:true},
-  {n:25,name:'Francisco Insurance',tag:'🛡️',sub:'Home · Auto · Life · Business · Cyber Insurance',coming:true},
-  {n:26,name:'Francisco Title',tag:'📜',sub:'Title Insurance · Escrow Services · $200-500/transaction',coming:true},
-  {n:27,name:'Francisco Paralegal',tag:'👔',sub:'Paralegal Services · Tribunal Representation · $75-150/hr',coming:true},
-  {n:28,name:'Francisco Tax',tag:'🧾',sub:'Personal & Corporate Tax · CRA Disputes · $200-2,000/return',coming:true},
-  {n:29,name:'Francisco Immigration',tag:'✈️',sub:'Visa · Permanent Residence · Citizenship · $2K-10K',coming:true},
-  {n:30,name:'Francisco Family',tag:'👨‍👩‍👧',sub:'Divorce · Custody · Support · Property Division',coming:true},
-  {n:31,name:'Francisco Wills',tag:'📋',sub:'Will Drafting · Estate Planning · Probate · $300-2,000',coming:true},
-  {n:32,name:'Francisco Employment',tag:'💼',sub:'Wrongful Dismissal · HR Compliance · $200-500/hr',coming:true},
-  {n:33,name:'Francisco Corporate',tag:'🏢',sub:'Incorporation · Mergers · Contracts · Governance',coming:true},
-  {n:34,name:'Francisco IP',tag:'💡',sub:'Patents · Trademarks · Copyrights · Litigation',coming:true},
-  {n:35,name:'Francisco Criminal',tag:'⚖️',sub:'Constitutional Education · Constitutional Defenses · $2K-50K/case',coming:true},
-  {n:36,name:'Francisco PI',tag:'🩺',sub:'Personal Injury · Medical Malpractice · 30-40% contingency',coming:true},
-  {n:37,name:'Francisco Environmental',tag:'🌿',sub:'Compliance · Carbon Credits · Litigation · $300-600/hr',coming:true},
-  {n:38,name:'Francisco Construction',tag:'🏗️',sub:'Liens · Contracts · Safety · Disputes · $250-500/hr',coming:true},
-  {n:39,name:'Francisco Entertainment',tag:'🎬',sub:'Contracts · Royalties · Rights Management · $300-800/hr',coming:true},
-  {n:40,name:'Francisco Sports',tag:'🏆',sub:'Athlete Contracts · Agents · Disputes · $300-1,000/hr',coming:true},
-  {n:41,name:'Francisco Maritime',tag:'⚓',sub:'Shipping · Salvage · Offshore · $300-800/hr',coming:true},
-  {n:42,name:'Francisco Aviation',tag:'✈️',sub:'Regulatory · Accidents · Drones · $300-800/hr',coming:true},
-  {n:43,name:'Francisco Banking',tag:'🏛️',sub:'Regulatory · Transactions · Fintech Disputes · $400-1,000/hr',coming:true},
-  {n:44,name:'Francisco Data',tag:'🔐',sub:'GDPR · PIPEDA · Breach Response · Compliance · $300-800/hr',coming:true},
-  {n:45,name:'Francisco Phoenix',tag:'⚡',sub:'The Phoenix Protocol — Dynasty-Level Partnerships',
+  {n:25,name:'Francisco Mortgage',tag:'🏦',sub:'AI Mortgage Brokerage · Best Rate Guarantee',coming:true},
+  {n:26,name:'Francisco Insurance',tag:'🛡️',sub:'Home · Auto · Life · Business · Cyber Insurance',coming:true},
+  {n:27,name:'Francisco Title',tag:'📜',sub:'Title Insurance · Escrow Services · $200-500/transaction',coming:true},
+  {n:28,name:'Francisco Paralegal',tag:'👔',sub:'Paralegal Services · Tribunal Representation · $75-150/hr',coming:true},
+  {n:29,name:'Francisco Tax',tag:'🧾',sub:'Personal & Corporate Tax · CRA Disputes · $200-2,000/return',coming:true},
+  {n:30,name:'Francisco Immigration',tag:'✈️',sub:'Visa · Permanent Residence · Citizenship · $2K-10K',coming:true},
+  {n:31,name:'Francisco Family',tag:'👨‍👩‍👧',sub:'Divorce · Custody · Support · Property Division',coming:true},
+  {n:32,name:'Francisco Wills',tag:'📋',sub:'Will Drafting · Estate Planning · Probate · $300-2,000',coming:true},
+  {n:33,name:'Francisco Employment',tag:'💼',sub:'Wrongful Dismissal · HR Compliance · $200-500/hr',coming:true},
+  {n:34,name:'Francisco Corporate',tag:'🏢',sub:'Incorporation · Mergers · Contracts · Governance',coming:true},
+  {n:35,name:'Francisco IP',tag:'💡',sub:'Patents · Trademarks · Copyrights · Litigation',coming:true},
+  {n:36,name:'Francisco Criminal',tag:'⚖️',sub:'Constitutional Education · Constitutional Defenses · $2K-50K/case',coming:true},
+  {n:37,name:'Francisco PI',tag:'🩺',sub:'Personal Injury · Medical Malpractice · 30-40% contingency',coming:true},
+  {n:38,name:'Francisco Environmental',tag:'🌿',sub:'Compliance · Carbon Credits · Litigation · $300-600/hr',coming:true},
+  {n:39,name:'Francisco Construction',tag:'🏗️',sub:'Liens · Contracts · Safety · Disputes · $250-500/hr',coming:true},
+  {n:40,name:'Francisco Entertainment',tag:'🎬',sub:'Contracts · Royalties · Rights Management · $300-800/hr',coming:true},
+  {n:41,name:'Francisco Sports',tag:'🏆',sub:'Athlete Contracts · Agents · Disputes · $300-1,000/hr',coming:true},
+  {n:42,name:'Francisco Maritime',tag:'⚓',sub:'Shipping · Salvage · Offshore · $300-800/hr',coming:true},
+  {n:43,name:'Francisco Aviation',tag:'✈️',sub:'Regulatory · Accidents · Drones · $300-800/hr',coming:true},
+  {n:44,name:'Francisco Banking',tag:'🏛️',sub:'Regulatory · Transactions · Fintech Disputes · $400-1,000/hr',coming:true},
+  {n:45,name:'Francisco Data',tag:'🔐',sub:'GDPR · PIPEDA · Breach Response · Compliance · $300-800/hr',coming:true}
+];
+
+/* Floors 46–391: reserved expansion capacity. Locked visual treatment,
+   still fully elevator/minimap navigable — Konami code reveals them. */
+for (var _rf = 46; _rf <= 391; _rf++) {
+  FLOORS.push({n:_rf,name:'Reserved Division #'+(_rf-45),tag:'🔒',sub:'Reserved Expansion Slot · Locked',
+    desc:'This floor is reserved for a future Francisco Holdings division. Locked pending activation.',
+    live:false,contact:'franciscoderek7@gmail.com',coming:true,reserved:true,comingYear:'2027+'});
+}
+
+FLOORS.push({n:392,name:'Francisco Phoenix',tag:'⚡',sub:'The Phoenix Protocol — Dynasty-Level Partnerships',
    desc:'CLASSIFIED. Nation-scale partnerships, sovereign wealth fund access, and dynasty-level equity structures. Accessible only by Konami code or direct invitation from Derek Francisco.',
    pricing:[{tier:'Dynasty Partner',val:'$10M+',desc:'Direct equity · No intermediaries · One seat available',url:'mailto:franciscoderek7@gmail.com?subject=DYNASTY%20PROTOCOL',cls:'btn-gold'}],
-   live:false,contact:'franciscoderek7@gmail.com',note:'Konami Code: ↑↑↓↓←→←→BA',secret:true}
-];
+   live:false,contact:'franciscoderek7@gmail.com',note:'Konami Code: ↑↑↓↓←→←→BA',secret:true});
 
 /* Floor-tag mapping for role highlights & achievement triggers */
 var ROLE_HIGHLIGHT = {
-  Advocate: [2,4,23,35],      // CCLDR / legal floors
-  Guardian: [1,7,44]          // OmniGuard / security floors
+  Advocate: [2,3,24,36],      // CCLDR / legal floors
+  Guardian: [1,9,45]          // OmniGuard / security floors
 };
 
 /* ══════════════════════════════════════════════════════
@@ -1048,7 +1069,7 @@ var ACHIEVEMENTS = {
 };
 
 var CHARACTERS = [
-  {id:'visionary',icon:'🧠',name:'Visionary',tagline:'Sees the empire whole',bonus:'All 45 floors unlocked (read-only)'},
+  {id:'visionary',icon:'🧠',name:'Visionary',tagline:'Sees the empire whole',bonus:'All 392 floors unlocked (read-only)'},
   {id:'entrepreneur',icon:'💼',name:'Entrepreneur',tagline:'Builds from scratch',bonus:'15% referral commission'},
   {id:'investor',icon:'💰',name:'Investor',tagline:'Capital multiplied',bonus:'Investor deck on all floors'},
   {id:'advocate',icon:'⚖',name:'Advocate',tagline:'Rights defended',bonus:'CCLDR / legal floors highlighted'},
@@ -1062,11 +1083,11 @@ var PhoenixGame = (function(){
   var LS = {
     visited:'phoenix_visited', coins:'phoenix_coins', floors:'phoenix_floors',
     ach:'phoenix_achievements', role:'phoenix_role', ref:'phoenix_ref',
-    coinsFound:'phoenix_coins_found', boss:'phoenix_boss_cleared'
+    coinsFound:'phoenix_coins_found', boss:'phoenix_boss_cleared', allUnlocked:'phoenix_all_unlocked'
   };
   var state = {
     coins:0, floors:[], achievements:[], role:null,
-    refCode:'', coinsFound:[], bossCleared:[]
+    refCode:'', coinsFound:[], bossCleared:[], allUnlocked:false
   };
   var _selectedChar = null;
   var _lobbyTimer = null;
@@ -1079,6 +1100,7 @@ var PhoenixGame = (function(){
     state.role = localStorage.getItem(LS.role) || null;
     state.coinsFound = safeArr(LS.coinsFound);
     state.bossCleared = safeArr(LS.boss);
+    state.allUnlocked = localStorage.getItem(LS.allUnlocked) === '1';
     var r = localStorage.getItem(LS.ref);
     if(!r){ r = 'PHOENIX-'+randCode(4); localStorage.setItem(LS.ref, r); }
     state.refCode = r;
@@ -1094,6 +1116,21 @@ var PhoenixGame = (function(){
     localStorage.setItem(LS.coinsFound, JSON.stringify(state.coinsFound));
     localStorage.setItem(LS.boss, JSON.stringify(state.bossCleared));
     localStorage.setItem(LS.visited, '1');
+    if(state.allUnlocked) localStorage.setItem(LS.allUnlocked, '1');
+  }
+
+  /* ── KONAMI: UNLOCK ALL FLOORS ── */
+  function unlockAllFloors(){
+    state.allUnlocked = true;
+    save();
+    document.body.classList.add('all-floors-unlocked');
+    document.querySelectorAll('.reserved-band').forEach(function(band){
+      band.textContent = '🔓 UNLOCKED VIA KONAMI CODE';
+      band.classList.add('unlocked');
+    });
+  }
+  function applyUnlockedState(){
+    if(state.allUnlocked) unlockAllFloors();
   }
 
   /* ── COINS ── */
@@ -1136,7 +1173,7 @@ var PhoenixGame = (function(){
 
   /* ── FLOOR VISITS ── */
   function visitFloor(n){
-    if(n<1||n>45) return;
+    if(n<1||n>392) return;
     if(state.floors.indexOf(n)===-1){
       state.floors.push(n);
       addCoins(10);
@@ -1145,8 +1182,8 @@ var PhoenixGame = (function(){
       var btn=document.querySelector('[data-floor="'+n+'"].el-btn'); if(btn) btn.classList.add('visited');
       // achievement triggers tied to specific brands
       if(n===1){ unlock('first_ascent'); unlock('cyber_warrior'); }
-      if(n===3) unlock('ai_pioneer');
-      if(n===4) unlock('legal_legend');
+      if(n===4) unlock('ai_pioneer');
+      if(n===3) unlock('legal_legend');
       if(state.floors.length>=5) unlock('empire_5');
     }
     var hf=document.getElementById('hud-floor'); if(hf) hf.textContent=n;
@@ -1196,7 +1233,7 @@ var PhoenixGame = (function(){
   function buildMinimap(){
     var t=document.getElementById('mm-tower');
     var h='<div class="mm-lobby" data-mm="0" title="Lobby"></div>';
-    for(var i=1;i<=45;i++){
+    for(var i=1;i<=392;i++){
       h+='<div class="mm-floor" data-mm="'+i+'" title="Floor '+i+'"></div>';
     }
     t.innerHTML=h;
@@ -1237,6 +1274,7 @@ var PhoenixGame = (function(){
     buildCharacterCards();
     buildMinimap();
     restoreCoins();
+    applyUnlockedState();
     // role from prior session
     if(state.role){
       applyRoleEffects();
@@ -1401,7 +1439,7 @@ var PhoenixGame = (function(){
     openMenu:openMenu, closeMenu:closeMenu, newGame:newGame,
     openAchievements:openAchievements, closeAchievements:closeAchievements,
     openCharInfo:openCharInfo, closeCharInfo:closeCharInfo, copyPhoenixRef:copyPhoenixRef,
-    toast:toast, getRefCode:getRefCode
+    toast:toast, getRefCode:getRefCode, unlockAllFloors:unlockAllFloors
   };
 })();
 
@@ -1410,7 +1448,7 @@ var PhoenixGame = (function(){
 ══════════════════════════════════════════════════════ */
 var ELEVATOR_FLOOR = 0;
 
-var FLOOR_AGENT_MAP = {1:{id:'sentinel',name:'Sentinel'},2:{id:'counsel',name:'Counsel'},3:{id:'primedox',name:'PrimeDox'},4:{id:'archivist',name:'Archivist'},5:{id:'swarm',name:'Swarm'},6:{id:'vetbot',name:'VetBot'},7:{id:'warden',name:'Warden'},8:{id:'phoenix',name:'Phoenix'},9:{id:'torque',name:'Torque'},10:{id:'chronos',name:'Chronos'},11:{id:'crate',name:'Crate'},12:{id:'maya',name:'Maya'},13:{id:'primedox',name:'PrimeDox'}};
+var FLOOR_AGENT_MAP = {1:{id:'sentinel',name:'Sentinel'},2:{id:'counsel',name:'Counsel'},3:{id:'archivist',name:'Archivist'},4:{id:'primedox',name:'PrimeDox'},5:{id:'torque',name:'Torque'},6:{id:'vetbot',name:'VetBot'},7:{id:'chronos',name:'Chronos'},8:{id:'swarm',name:'Swarm'},9:{id:'warden',name:'Warden'},10:{id:'observer',name:'Observer'},11:{id:'phoenix',name:'Phoenix'},12:{id:'crate',name:'Crate'},13:{id:'maya',name:'Maya'},14:{id:'primedox',name:'PrimeDox'}};
 
 // Per-agent swarm particle style — brand color + glyphs, no image assets.
 // Cyan/blue scoped only to sentinel (OmniGuard) per CLAUDE.md's blue/pink rule.
@@ -1422,6 +1460,7 @@ var AGENT_SWARM_STYLE = {
   swarm:    { color:'#ff8800', glyphs:['⚙️','🤖'] },
   vetbot:   { color:'#00cccc', glyphs:['🐾','❤️'] },
   warden:   { color:'#E5E4E2', glyphs:['🛰️','🔭'] },
+  observer: { color:'#9b59ff', glyphs:['👁️','🔮'] },
   phoenix:  { color:'#FFD700', glyphs:['🔥','👑'] },
   torque:   { color:'#ff0044', glyphs:['🏎️','⚡'] }
 };
@@ -1437,6 +1476,7 @@ var FLOOR_THEME = {
   swarm:     'radial-gradient(circle at 28% 20%,rgba(255,136,0,.11),transparent 55%),radial-gradient(circle at 72% 82%,rgba(192,192,192,.09),transparent 55%)', // CleanSwarm — clean tech lab
   vetbot:    'radial-gradient(circle at 22% 22%,rgba(0,255,204,.11),transparent 55%),radial-gradient(circle at 78% 78%,rgba(210,105,30,.09),transparent 55%)', // TechPetCage — pet tech showroom
   warden:    'radial-gradient(circle at 50% 25%,rgba(229,228,226,.07),transparent 55%)', // VIGILAX — neutral command
+  observer:  'radial-gradient(circle at 22% 20%,rgba(155,89,255,.13),transparent 55%),radial-gradient(circle at 78% 80%,rgba(212,175,55,.08),transparent 55%)', // SoulStack — observer hall
   phoenix:   'radial-gradient(circle at 28% 18%,rgba(212,175,55,.14),transparent 55%),radial-gradient(circle at 74% 82%,rgba(229,228,226,.09),transparent 55%)', // Holdings Boardroom — executive penthouse
   torque:    'radial-gradient(circle at 24% 28%,rgba(192,192,192,.13),transparent 55%),radial-gradient(circle at 76% 72%,rgba(255,255,255,.06),transparent 55%)' // Vault Velocity — chrome showroom
 };
@@ -1458,7 +1498,7 @@ function renderFloor(f) {
   html += '<p class="floor-sub">'+escHtml(f.sub)+'</p>';
 
   // Investor deck (shown only for Investor role via CSS class)
-  html += '<div class="investor-deck"><strong>📊 INVESTOR DECK</strong>Projected division contribution to empire ARR. Engagement structures, equity tiers, and partnership terms available on request via the Boardroom (Floor 8).</div>';
+  html += '<div class="investor-deck"><strong>📊 INVESTOR DECK</strong>Projected division contribution to empire ARR. Engagement structures, equity tiers, and partnership terms available on request via the Boardroom (Floor 11).</div>';
 
   if (f.pitchDeck) {
     html += '<div class="pay-notice" style="background:rgba(212,175,55,0.12)"><strong>📈 '+escHtml(f.projection||'')+'</strong></div>';
@@ -1477,10 +1517,15 @@ function renderFloor(f) {
   }
 
   if (f.coming) {
-    var yr = f.comingYear || '2026';
-    html += '<div class="coming-soon-band">⚡ COMING '+yr+' — WAITLIST OPEN</div>';
-    html += '<p style="color:var(--platinum-mid);margin-bottom:1.2rem">'+escHtml(f.sub)+'. Founding client spots reserved now.</p>';
-    html += '<a href="mailto:franciscoderek7@gmail.com?subject=Waitlist%20F'+f.n+'%20'+encodeURIComponent(f.name)+'" class="floor-links" style="display:inline-flex"><span class="btn-emerald floor-links" style="padding:10px 18px;border-radius:4px;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-decoration:none">Join Waitlist →</span></a>';
+    if (f.reserved) {
+      html += '<div class="coming-soon-band reserved-band" id="lockband-'+f.n+'" style="background:rgba(120,120,140,.12);border-color:rgba(120,120,140,.3);color:#9aa0b0">🔒 RESERVED — LOCKED EXPANSION SLOT</div>';
+      html += '<p style="color:var(--platinum-dark);margin-bottom:1.2rem">'+escHtml(f.sub)+'. Activates as the empire scales — enter the Konami code to preview every floor.</p>';
+    } else {
+      var yr = f.comingYear || '2026';
+      html += '<div class="coming-soon-band">⚡ COMING '+yr+' — WAITLIST OPEN</div>';
+      html += '<p style="color:var(--platinum-mid);margin-bottom:1.2rem">'+escHtml(f.sub)+'. Founding client spots reserved now.</p>';
+      html += '<a href="mailto:franciscoderek7@gmail.com?subject=Waitlist%20F'+f.n+'%20'+encodeURIComponent(f.name)+'" class="floor-links" style="display:inline-flex"><span class="btn-emerald floor-links" style="padding:10px 18px;border-radius:4px;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-decoration:none">Join Waitlist →</span></a>';
+    }
   } else {
     if (f.desc) {
       html += '<p style="color:var(--platinum-mid);margin-bottom:1.4rem;max-width:680px">'+escHtml(f.desc)+'</p>';
@@ -1557,8 +1602,8 @@ function renderFloor(f) {
     }
   }
 
-  // Hidden coin at the top floor (45)
-  if (f.n === 45) {
+  // Hidden coin at the top floor (392)
+  if (f.n === 392) {
     html += '<span class="hidden-coin" id="coin-top" style="position:relative;display:inline-block;margin-top:18px" onclick="PhoenixGame.collectCoin(\'top\',this)">💰</span>';
   }
 
@@ -1934,18 +1979,19 @@ window.conciergeRoute = function() {
   var q = ((document.getElementById('cd-query') || {}).value || '').toLowerCase().trim();
   if (!q) return;
   var rules = [
-    {k:['security','vpn','cyber','hack','virus','antivirus','omniaguard'],f:1},
+    {k:['security','vpn','cyber','hack','virus','antivirus','omniguard','omniaguard'],f:1},
     {k:['legal','cannabis','weed','charter','court','defense','cdsa','beno'],f:2},
-    {k:['primedox','ai','document automation'],f:3},
-    {k:['ccldr','case track','affidavit','motion','template'],f:4},
-    {k:['cleaning','cleanswarm','gig','workforce','janitor'],f:5},
+    {k:['ccldr','case track','affidavit','motion','template'],f:3},
+    {k:['primedox','ai','document automation'],f:4},
+    {k:['car','auto','vehicle','financing','torque','vault velocity'],f:5},
     {k:['pet','dog','cat','gps collar','feeder','tracker'],f:6},
-    {k:['vigilax','surveillance','stalker','opsec','spy'],f:7},
-    {k:['invest','boardroom','partner','equity','dynasty','fund'],f:8},
-    {k:['car','auto','vehicle','financing','torque','vault velocity'],f:9},
-    {k:['schedule','calendar','meeting','kiaros','booking','time'],f:10},
-    {k:['package','packaging','shipping','supply chain','techpack'],f:11},
-    {k:['mindshift','coaching','mindset','maya','transformation'],f:12},
+    {k:['schedule','calendar','meeting','kiaros','booking','time'],f:7},
+    {k:['cleaning','cleanswarm','gig','workforce','janitor'],f:8},
+    {k:['vigilax','surveillance','stalker','opsec','spy'],f:9},
+    {k:['badge','achievement','soulstack','reputation'],f:10},
+    {k:['invest','boardroom','partner','equity','dynasty','fund'],f:11},
+    {k:['package','packaging','shipping','supply chain','techpack'],f:12},
+    {k:['mindshift','coaching','mindset','maya','transformation'],f:13},
   ];
   for (var i = 0; i < rules.length; i++) {
     if (rules[i].k.some(function(k){ return q.includes(k); })) {
@@ -1954,7 +2000,7 @@ window.conciergeRoute = function() {
       return;
     }
   }
-  PhoenixGame.toast('Showing all 45 floors — scroll or use the directory below');
+  PhoenixGame.toast('Showing all 392 floors — scroll or use the directory below');
   document.getElementById('cd-query').value = '';
 };
 
@@ -1977,7 +2023,7 @@ window.goToFloor = function(n) {
 };
 
 window.goFloorDelta = function(delta) {
-  var n = Math.max(0, Math.min(45, ELEVATOR_FLOOR + delta));
+  var n = Math.max(0, Math.min(392, ELEVATOR_FLOOR + delta));
   goToFloor(n);
 };
 
@@ -2036,7 +2082,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key >= '0' && e.key <= '9') { _keyBuf += e.key; }
   else if (e.key === 'Enter' && _keyBuf) {
     var n = parseInt(_keyBuf, 10);
-    if (n >= 0 && n <= 45) goToFloor(n);
+    if (n >= 0 && n <= 392) goToFloor(n);
     _keyBuf = '';
   } else if (e.key !== 'Shift' && e.key !== 'Control' && e.key !== 'Alt') { _keyBuf = ''; }
 });
@@ -2070,8 +2116,9 @@ document.addEventListener('keydown', function(e) {
     return bs;
   }
 
-  // The hero tower: 45 floors, each floor = one Francisco Holdings division.
-  // Floors with built content (FLOORS array entries that aren't "coming soon") glow gold/cyan.
+  // The hero tower: 392 floors, 45 of them active Francisco Holdings divisions,
+  // 346 reserved capacity, 1 secret summit (Phoenix). Floors with built content
+  // (FLOORS array entries that aren't "coming soon") glow gold/cyan.
   function genHeroTower(w, h) {
     // Dubai-style stepped/tapering silhouette: 3 setback tiers narrowing
     // toward the top, topped with a single slender gold spire (no photoreal
@@ -2081,13 +2128,13 @@ document.addEventListener('keydown', function(e) {
     var towerH = h * 0.74;
     var baseW = Math.min(320, w * 0.36);
     var towerX = w / 2 - baseW / 2;
-    var floorCount = 45;
+    var floorCount = 392;
     var floorH = towerH / floorCount;
     var floors = [];
     for (var f = 0; f < floorCount; f++) {
       var data = (typeof FLOORS !== 'undefined') ? FLOORS[f] : null;
       var active = data ? !data.coming : (f % 4 !== 3);
-      var tierScale = f < 15 ? 1 : (f < 30 ? 0.76 : 0.52);
+      var tierScale = f < 131 ? 1 : (f < 261 ? 0.76 : 0.52);
       floors.push({ active: active, accent: (f % 11 === 0) ? 'cyan' : 'gold', w: baseW * tierScale });
     }
     var spireH = towerH * 0.18;
@@ -2276,6 +2323,8 @@ document.addEventListener('keydown', function(e) {
       document.getElementById('dynasty-modal').classList.remove('hidden');
       document.getElementById('dynasty-modal').classList.add('open');
       PhoenixGame.unlock('konami');
+      PhoenixGame.unlockAllFloors();
+      PhoenixGame.toast('🔓 All 392 floors unlocked');
     }
   });
 })();
