@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  background: #0A0A0A;
+  color: #EAEAEA;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(201,162,39,0.08), transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.04), transparent 50%),
+    linear-gradient(180deg, #0A0A0A, #050505);
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  opacity: 0.12;
+  z-index: -1;
+}
+
+#three-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.carbon-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.75));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 14px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  background: rgba(10,10,10,0.65);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,162,39,0.18);
+}
+
+.logo {
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.logo .gold {
+  color: #C9A227;
+}
+
+.status {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C9A227;
+  box-shadow: 0 0 12px #C9A227;
+}
+
+#elevatorPanel {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 130px;
+  padding: 14px;
+  background: rgba(12,12,12,0.75);
+  border: 1px solid rgba(201,162,39,0.22);
+  border-radius: 10px;
+  z-index: 30;
+  backdrop-filter: blur(16px);
+}
+
+.floorButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floor-btn {
+  background: #111;
+  color: #bbb;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 9px;
+  font-size: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.floor-btn:hover {
+  border-color: #C9A227;
+  color: #C9A227;
+}
+
+.floor-btn.active {
+  background: #C9A227;
+  color: #0A0A0A;
+}
+
+.floor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: 0.6s ease;
+}
+
+.floor.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card {
+  width: min(540px, 92vw);
+  padding: 26px;
+  border-radius: 14px;
+  background: rgba(18,18,18,0.62);
+  border: 1px solid rgba(201,162,39,0.18);
+  backdrop-filter: blur(20px);
+}
+
+.card h1 {
+  color: #C9A227;
+}
+
+.paypal {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 16px;
+  background: #C9A227;
+  color: #0A0A0A;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+#soulstackBadge {
+  position: fixed;
+  bottom: 14px;
+  left: 14px;
+  font-size: 10px;
+  color: #C9A227;
+}
+
+#konamiToast {
+  position: fixed;
+  bottom: 65px;
+  left: 14px;
+  opacity: 0;
+  color: #C9A227;
+}
+
+#konamiToast.show {
+  opacity: 1;
+}
