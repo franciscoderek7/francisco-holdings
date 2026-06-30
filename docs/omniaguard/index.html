@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OmniGuard Cyber Defense HQ</title>
+  <link rel="manifest" href="/omniaguard/manifest.json">
+  <style>
+    body { margin: 0; background: #05070a; color: #00d4ff; font-family: monospace; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; height: 100vh; }
+    .panel { border: 1px solid #00d4ff33; padding: 12px; overflow: auto; }
+    .threat-high { color: #ff3355; }
+    .threat-med { color: #ffaa00; }
+    .threat-low { color: #00ff88; }
+    .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(5,7,10,0.9); border-bottom: 1px solid #00d4ff; padding: 10px; z-index: 100; }
+    .header h1 { margin: 0; font-size: 18px; color: #00d4ff; }
+    .header .status { float: right; color: #00ff88; }
+    .content { padding-top: 60px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>OMNIGUARD CYBER DEFENSE HQ</h1>
+    <div class="status">● ONLINE</div>
+  </div>
+  <div class="content">
+    <div class="grid">
+      <div class="panel" id="threatPanel">
+        <h2>THREAT MATRIX</h2>
+        <div id="threatFeed">Loading...</div>
+      </div>
+      <div class="panel">
+        <h2>AGENT SWARM STATUS</h2>
+        <div id="agentStatus">Loading...</div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/omniaguard/main.js"></script>
+</body>
+</html>
