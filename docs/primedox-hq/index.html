@@ -1,94 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>PrimeDox AI HQ</title>
-<link rel="manifest" href="/primedox-hq/manifest.json">
+<link rel="manifest" href="/primedox-hq/manifest.json"/>
 <style>
-:root { --emerald: #00d4ff; --gold: #d4af37; --bg: #05070a; }
-body { margin: 0; background: var(--bg); color: var(--emerald); font-family: Arial, sans-serif; }
-.layout { display: grid; grid-template-columns: 1fr 2fr; height: 100vh; }
-.sidebar { border-right: 1px solid #00d4ff33; padding: 12px; }
-.main { padding: 12px; display: flex; flex-direction: column; }
-button { background: var(--gold); border: none; padding: 10px; cursor: pointer; font-weight: bold; color: #000; margin: 5px 0; }
-textarea, input { width: 100%; background: #0b0f14; color: var(--emerald); border: 1px solid #00d4ff33; padding: 8px; box-sizing: border-box; }
-.chat { flex: 1; overflow: auto; border: 1px solid #00d4ff33; margin-bottom: 10px; padding: 10px; }
-.msg { margin: 6px 0; }
-.user { color: white; }
-.ai { color: var(--emerald); }
-#status { margin-top: 20px; font-size: 12px; color: #d4af37; }
+body { margin:0; font-family: Arial; background:#05070a; color:#00d4ff; }
+header { padding:12px; border-bottom:1px solid #00d4ff33; display:flex; justify-content:space-between; align-items:center; }
+.brand { color:#d4af37; font-weight:bold; font-size:18px; }
+.layout { display:grid; grid-template-columns:260px 1fr; height:calc(100vh - 60px); }
+nav { border-right:1px solid #00d4ff33; padding:10px; }
+nav button { width:100%; margin-bottom:10px; padding:10px; background:#0b0f14; border:1px solid #00d4ff33; color:#00d4ff; cursor:pointer; }
+nav button:hover { background:#00d4ff22; }
+main { padding:12px; display:flex; flex-direction:column; }
+textarea,input,select { background:#0b0f14; color:#00d4ff; border:1px solid #00d4ff33; padding:8px; width:100%; box-sizing:border-box; margin:5px 0; }
+.chat { flex:1; overflow:auto; border:1px solid #00d4ff33; padding:10px; margin-bottom:10px; }
+.msg-user { color:white; margin:6px 0; }
+.msg-ai { color:#00d4ff; margin:6px 0; }
+#status { font-size:12px; color:#d4af37; }
+button.action { background:#d4af37; color:#000; border:none; padding:10px; cursor:pointer; font-weight:bold; margin:5px 5px 5px 0; }
 </style>
 </head>
 <body>
+<header>
+  <div class="brand">PrimeDox AI HQ</div>
+  <div id="status">Ready</div>
+</header>
 <div class="layout">
-  <div class="sidebar">
-    <h2 style="color: var(--gold);">PrimeDox AI HQ</h2>
-    <button onclick="switchTab('chat')">AI Chat</button>
-    <button onclick="switchTab('generate')">Generate Document</button>
-    <button onclick="switchTab('pricing')">Pricing</button>
-    <hr />
-    <div id="status">Ready</div>
-  </div>
-  <div class="main">
-    <div id="chatTab">
-      <div id="chat" class="chat"></div>
-      <input id="input" placeholder="Ask PrimeDox AI..." onkeypress="if(event.key==='Enter')send()" />
-      <button onclick="send()">Send</button>
-    </div>
-    <div id="generateTab" style="display:none;">
-      <h3>Document Generator</h3>
-      <select id="template">
-        <option>Legal Contract</option>
-        <option>Business Proposal</option>
-        <option>AI Policy Document</option>
-        <option>Creative Script</option>
-      </select>
-      <textarea id="prompt" rows="8" placeholder="Describe document..."></textarea>
-      <button onclick="generate()">Generate</button>
-      <pre id="output" style="background:#0b0f14;padding:10px;border:1px solid #00d4ff33;white-space:pre-wrap;"></pre>
-      <button onclick="exportDoc()">Export PDF</button>
-    </div>
-    <div id="pricingTab" style="display:none;">
-      <h3>Pricing</h3>
-      <p style="color:#d4af37;">PrimeDox AI Legal Intelligence Platform</p>
-      <button onclick="pay(29)">Starter — $29</button>
-      <button onclick="pay(99)">Pro — $99</button>
-      <button onclick="pay(299)">Empire — $299</button>
-    </div>
-  </div>
+<nav>
+  <button onclick="show('chat')">AI Chat</button>
+  <button onclick="show('doc')">Document Generator</button>
+  <button onclick="show('pricing')">Pricing</button>
+  <div id="status" style="margin-top:20px;">Empire Floor 3</div>
+</nav>
+<main>
+<div id="chatView">
+  <div id="chat" class="chat"></div>
+  <input id="input" placeholder="Ask PrimeDox AI..." onkeypress="if(event.key==='Enter')sendChat()" />
+  <button class="action" onclick="sendChat()">Send</button>
+</div>
+<div id="docView" style="display:none;">
+  <h3 style="color:#d4af37;">Document Generator</h3>
+  <select id="template">
+    <option>Legal Contract</option>
+    <option>Business Proposal</option>
+    <option>Policy Document</option>
+    <option>Cannabis Law Brief</option>
+    <option>Constitutional Advocacy</option>
+  </select>
+  <textarea id="prompt" rows="8" placeholder="Describe your document..."></textarea>
+  <button class="action" onclick="generateDoc()">Generate</button>
+  <pre id="output" style="background:#0b0f14;padding:10px;border:1px solid #00d4ff33;white-space:pre-wrap;min-height:100px;"></pre>
+  <button class="action" onclick="exportPDF()">Export PDF</button>
+  <button class="action" onclick="exportDOCX()">Export DOCX</button>
+</div>
+<div id="pricingView" style="display:none;">
+  <h3 style="color:#d4af37;">PrimeDox AI Pricing</h3>
+  <p style="color:#00d4ff;">Legal Intelligence Platform</p>
+  <button class="action" onclick="pay(29)">Starter — $29</button>
+  <button class="action" onclick="pay(99)">Pro — $99</button>
+  <button class="action" onclick="pay(299)">Empire — $299</button>
+</div>
+</main>
 </div>
 <script>
-function switchTab(tab) {
-  document.getElementById("chatTab").style.display = tab === "chat" ? "block" : "none";
-  document.getElementById("generateTab").style.display = tab === "generate" ? "block" : "none";
-  document.getElementById("pricingTab").style.display = tab === "pricing" ? "block" : "none";
+function show(v) {
+  document.getElementById("chatView").style.display = v === "chat" ? "block" : "none";
+  document.getElementById("docView").style.display = v === "doc" ? "block" : "none";
+  document.getElementById("pricingView").style.display = v === "pricing" ? "block" : "none";
 }
-function send() {
+function sendChat() {
   const input = document.getElementById("input");
   const chat = document.getElementById("chat");
   const text = input.value; input.value = "";
-  chat.innerHTML += '<div class="msg user">You: ' + text + '</div>';
+  chat.innerHTML += '<div class="msg-user">You: ' + text + '</div>';
   const replies = {
-    contract: "I can generate legally structured contract drafts with clause separation and risk scoring.",
-    policy: "Policy framework initialized: compliance, enforcement, audit tracking enabled.",
-    legal: "Legal analysis mode active. Constitutional advocacy and cannabis law expertise loaded."
+    contract: "Generating structured legal contract with clause hierarchy and risk scoring...",
+    policy: "Policy engine activated: compliance + enforcement framework loaded.",
+    legal: "Legal analysis mode active. Constitutional advocacy and cannabis law expertise loaded.",
+    cannabis: "Cannabis law intelligence: medical marijuana regulations, constitutional challenges, and compliance frameworks.",
+    constitutional: "Constitutional advocacy engine: Section 7, Section 15, and Charter arguments loaded."
   };
-  let reply = "PrimeDox AI is processing your request across legal + business intelligence layers.";
+  let reply = "PrimeDox AI processing legal + business intelligence layers...";
   for (const key in replies) { if (text.toLowerCase().includes(key)) reply = replies[key]; }
-  setTimeout(() => chat.innerHTML += '<div class="msg ai">PrimeDox: ' + reply + '</div>', 500);
+  setTimeout(() => chat.innerHTML += '<div class="msg-ai">PrimeDox: ' + reply + '</div>', 500);
 }
-function generate() {
-  const prompt = document.getElementById("prompt").value;
+function generateDoc() {
   const template = document.getElementById("template").value;
-  document.getElementById("output").textContent = '=== PRIME DOX AI GENERATED DOCUMENT ===\n\nTemplate: ' + template + '\n\nContent:\n' + prompt + '\n\n---------------------------------------\nRisk Score: LOW-MEDIUM (simulated)\nGenerated by PrimeDox AI HQ\n---------------------------------------';
+  const prompt = document.getElementById("prompt").value;
+  document.getElementById("output").textContent = 'PRIMEDOX AI DOCUMENT\n\nTemplate: ' + template + '\n\nCONTENT:\n' + prompt + '\n\n--------------------------------\nRisk Score: LOW-MEDIUM (simulated)\nClassification: GENERATED\nLegal Review: RECOMMENDED\n--------------------------------\nGenerated by PrimeDox AI HQ\n"Most dangerous legal education platform in the world"';
 }
-function exportDoc() {
+function exportPDF() {
   const text = document.getElementById("output").textContent;
   const blob = new Blob([text], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "primedox-document.pdf"; a.click();
+  const a = document.createElement("a"); a.href = url; a.download = "primedox-document.pdf"; a.click();
+}
+function exportDOCX() {
+  const text = document.getElementById("output").textContent;
+  const blob = new Blob([text], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = "primedox-document.docx"; a.click();
 }
 function pay(amount) {
   window.open('https://paypal.me/techpetcage?amount=' + amount, '_blank');
