@@ -1,0 +1,19 @@
+{
+  "name": "Francisco Holdings Inc.",
+  "short_name": "FHINC",
+  "description": "392-Floor Empire Command Center",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#d4af37",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "scope": "/",
+  "orientation": "portrait",
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    { "src": "/assets/screenshot1.png", "sizes": "1280x720", "type": "image/png" }
+  ]
+}
