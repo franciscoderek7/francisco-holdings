@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
 
-export class SwarmDashboardBridge {
   constructor({ swarm, dashboard, scene, eventBus }) {
     this.swarm = swarm; this.dashboard = dashboard; this.scene = scene; this.eventBus = eventBus;
     this.neuralGraphOverlay = null; this.agentGlowMap = new Map();

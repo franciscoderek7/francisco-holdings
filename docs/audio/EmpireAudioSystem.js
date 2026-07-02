@@ -1,4 +1,3 @@
-export class EmpireAudioSystem {
   constructor({ eventBus }) {
     this.eventBus = eventBus;
     this.context = null;
@@ -53,4 +52,3 @@ export class EmpireAudioSystem {
   setVolume(v) { if (this.masterGain) this.masterGain.gain.value = v; }
   dispose() { if (this.context) this.context.close(); }
 }
-export default EmpireAudioSystem;

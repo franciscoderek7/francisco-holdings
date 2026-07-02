@@ -1,4 +1,3 @@
-export class EmpireScanningSystem {
   constructor({ scene, eventBus }) {
     this.scene = scene;
     this.eventBus = eventBus;
@@ -41,4 +40,3 @@ export class EmpireScanningSystem {
   }
   dispose() { this.scanBeam?.removeFromParent(); }
 }
-export default EmpireScanningSystem;

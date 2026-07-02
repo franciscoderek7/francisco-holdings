@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
 
-export class EmpireHQDashboard {
   constructor({ scene, camera, renderer, eventBus, queryEngine, stateManager, monitor, onFloorSelect }) {
     this.scene = scene; this.camera = camera; this.renderer = renderer;
     this.eventBus = eventBus; this.query = queryEngine; this.state = stateManager;

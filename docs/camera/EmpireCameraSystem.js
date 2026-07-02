@@ -1,4 +1,3 @@
-export class EmpireCameraSystem {
   constructor({ camera, renderer, eventBus }) {
     this.camera = camera;
     this.renderer = renderer;
@@ -44,4 +43,3 @@ export class EmpireCameraSystem {
   }
   dispose() { this.autoRotate = false; }
 }
-export default EmpireCameraSystem;

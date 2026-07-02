@@ -4,7 +4,6 @@
  * All 12 professor fixes applied
  */
 
-export class EmpireWebSocketManager {
   constructor({ serverUrl, jwtToken, eventBus, onPresenceUpdate, onAgentUpdate, onStateSync }) {
     this.serverUrl = serverUrl;
     this.jwtToken = jwtToken;
@@ -382,4 +381,3 @@ export class EmpireWebSocketManager {
   }
 }
 
-export default EmpireWebSocketManager;
