@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Floor 2 — OmniGuard Security</title>
+<link rel="manifest" href="/manifest-omniaguard.json"/>
+<style>
+body { margin:0; background:#05070a; color:#00ff88; font-family:monospace; overflow:hidden; }
+#canvas { position:fixed; top:0; left:0; width:100%; height:100%; }
+#ui { position:fixed; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none; }
+.header { position:fixed; top:0; left:0; right:0; padding:20px; background:rgba(5,7,10,0.9); border-bottom:2px solid #00ff88; display:flex; justify-content:space-between; z-index:20; }
+.header h1 { margin:0; font-size:24px; color:#00ff88; }
+.threat-level { position:fixed; top:100px; right:30px; background:rgba(0,0,0,0.9); border:2px solid #00ff88; padding:20px; z-index:20; text-align:center; }
+.threat-level .value { font-size:48px; color:#00ff88; }
+.radar { position:fixed; bottom:30px; left:30px; width:200px; height:200px; border:2px solid #00ff88; border-radius:50%; z-index:20; background:rgba(0,255,136,0.05); }
+.radar::after { content:''; position:absolute; top:50%; left:50%; width:2px; height:100px; background:#00ff88; transform-origin:top; animation:radar 2s linear infinite; }
+@keyframes radar { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+.nav { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); display:flex; gap:20px; z-index:20; }
+.nav a { padding:15px 30px; background:#00ff88; color:#000; text-decoration:none; font-weight:bold; }
+.agent-status { position:fixed; top:100px; left:30px; background:rgba(0,0,0,0.9); border:1px solid #00ff88; padding:15px; z-index:20; font-size:12px; }
+.notification { position:fixed; top:100px; left:50%; transform:translateX(-50%); background:rgba(255,51,85,0.9); color:#fff; padding:15px; z-index:50; display:none; }
+</style>
+</head>
+<body>
+<div id="canvas"></div>
+<div id="ui">
+  <div class="header">
+    <h1>FLOOR 2 — OMNIGUARD SECURITY</h1>
+    <div style="color:#00ff88;">CYBERGUARD v2.0</div>
+  </div>
+  
+  <div class="threat-level">
+    <div>THREAT LEVEL</div>
+    <div class="value">LOW</div>
+  </div>
+  
+  <div class="agent-status">
+    <div>AGENT SWARM STATUS</div>
+    <hr style="border-color:#00ff88;"/>
+    <div>Active: 45</div>
+    <div>Degraded: 0</div>
+    <div>Failed: 0</div>
+    <div>Health: 100%</div>
+  </div>
+  
+  <div class="radar"></div>
+  
+  <div class="nav">
+    <a href="/floor1/">← Floor 1</a>
+    <a href="/">Empire Hub</a>
+    <a href="/floor3/">Floor 3 →</a>
+  </div>
+  
+  <div class="notification" id="security-alert">
+    <strong>SECURITY ALERT:</strong> Unauthorized access attempt detected.<br/>
+    Derek Francisco notified immediately.
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js";
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('canvas').appendChild(renderer.domElement);
+
+// Cyberpunk grid floor
+const gridHelper = new THREE.GridHelper(100, 50, 0x00ff88, 0x003311);
+scene.add(gridHelper);
+
+// Data towers
+for (let i = 0; i < 8; i++) {
+  const towerGeo = new THREE.BoxGeometry(2, Math.random()*10+5, 2);
+  const towerMat = new THREE.MeshStandardMaterial({ 
+    color: 0x00ff88, 
+    emissive: 0x00ff88, 
+    emissiveIntensity: 0.3,
+    transparent: true,
+    opacity: 0.8
+  });
+  const tower = new THREE.Mesh(towerGeo, towerMat);
+  tower.position.set((Math.random()-0.5)*40, 5, (Math.random()-0.5)*40);
+  scene.add(tower);
+}
+
+// Lighting
+const ambient = new THREE.AmbientLight(0x404040, 1);
+scene.add(ambient);
+const greenLight = new THREE.PointLight(0x00ff88, 2, 100);
+greenLight.position.set(0, 20, 0);
+scene.add(greenLight);
+
+camera.position.set(0, 15, 40);
+camera.lookAt(0, 0, 0);
+
+function animate() {
+  requestAnimationFrame(animate);
+  scene.rotation.y += 0.001;
+  renderer.render(scene, camera);
+}
+animate();
+
+// Simulate security alert
+setTimeout(() => {
+  document.getElementById('security-alert').style.display = 'block';
+  setTimeout(() => document.getElementById('security-alert').style.display = 'none', 5000);
+}, 3000);
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>
