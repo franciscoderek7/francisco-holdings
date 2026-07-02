@@ -3,121 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francisco Holdings HQ — Secure Access</title>
+<title>Empire Dashboard — Command Center</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Courier New',monospace;background:#000;color:#0f0;display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden}
-#panel{text-align:center;border:2px solid #d4af37;padding:30px;width:320px;background:rgba(0,0,0,0.9);box-shadow:0 0 20px rgba(212,175,55,0.3)}
-h2{font-size:18px;letter-spacing:3px;color:#d4af37;margin-bottom:8px}
-p{font-size:12px;color:#888;margin-bottom:15px}
-input{width:100%;padding:12px;margin-top:10px;background:#111;color:#0f0;border:1px solid #0f0;font-family:inherit;font-size:16px;text-align:center;letter-spacing:8px}
-button{margin-top:15px;width:100%;padding:12px;background:#0f0;color:#000;border:none;font-family:inherit;font-weight:bold;cursor:pointer;font-size:14px;letter-spacing:2px}
-button:hover{background:#ffd700}
-#dash{display:none;width:100%;height:100vh;background:#050505;padding:20px;overflow-y:auto}
-.dash-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4af37;padding-bottom:10px;margin-bottom:20px}
-.dash-header h1{font-size:20px;color:#d4af37;letter-spacing:2px}
-.status{color:#0f0;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{border:1px solid #d4af37;padding:15px;background:rgba(0,0,0,0.8);cursor:pointer;transition:all 0.3s}
-.card:hover{background:rgba(212,175,55,0.1);border-color:#ffd700}
-.card h3{font-size:14px;color:#d4af37;margin-bottom:6px}
-.card p{font-size:11px;color:#888}
-.card .price{font-size:18px;color:#0f0;font-weight:bold;margin-top:8px}
-.revenue-card{border:2px solid #0f0;padding:20px;text-align:center;background:rgba(0,255,0,0.05)}
-.revenue-card .big{font-size:32px;color:#0f0;font-weight:bold}
-.revenue-card p{font-size:12px;color:#888;margin-top:5px}
-.logout{position:fixed;top:20px;right:20px;background:#d4af37;color:#000;border:none;padding:8px 16px;font-family:inherit;font-weight:bold;cursor:pointer;z-index:100}
-@media(max-width:600px){.grid{grid-template-columns:1fr}#panel{width:90%}}
+body{background:#05060a;color:#d4af37;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.header{text-align:center;padding:24px;border-bottom:1px solid #222}
+.header h1{font-size:20px;letter-spacing:6px;text-transform:uppercase}
+.header p{font-size:12px;color:#555;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:24px;max-width:1400px;margin:0 auto}
+.card{background:#0a0f1a;border:1px solid #222;border-radius:12px;padding:20px}
+.card h3{font-size:14px;color:#d4af37;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.metric{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #1a1f2e}
+.metric:last-child{border-bottom:none}
+.metric .label{font-size:13px;color:#888}
+.metric .value{font-size:18px;font-weight:bold;color:#fff}
+.metric .value.up{color:#00ff88}
+.metric .value.down{color:#ff4444}
+.status-bar{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.pill{background:#1a1f2e;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:11px;color:#ccc}
+.pill.active{border-color:#00ff88;color:#00ff88}
+.pill.alert{border-color:#ff4444;color:#ff4444}
+.footer{text-align:center;padding:24px;font-size:11px;color:#333;border-top:1px solid #222}
 </style>
 </head>
 <body>
-<div id="panel">
-<h2>FRANCISCO HOLDINGS HQ</h2>
-<p>CEO SECURITY CLEARANCE REQUIRED</p>
-<input id="pin" type="password" placeholder="••••" maxlength="4">
-<button onclick="unlock()">ENTER DASHBOARD</button>
+<div class="header">
+<h1>Empire Dashboard</h1>
+<p>Real-time command center — Francisco Holdings Inc</p>
 </div>
-
-<div id="dash">
-<button class="logout" onclick="location.reload()">LOGOUT</button>
-<div class="dash-header">
-<h1>EMPIRE CONTROL CENTER</h1>
-<div class="status">● ONLINE</div>
-</div>
-
 <div class="grid">
-<div class="card" onclick="goTo('hq')">
-<h3>Floor 1 — HQ</h3>
-<p>Empire Command Center</p>
-<div class="price">ACTIVE</div>
+<div class="card">
+<h3>💰 Revenue</h3>
+<div class="metric"><span class="label">Today</span><span class="value up">$0.00</span></div>
+<div class="metric"><span class="label">This Month</span><span class="value up">$0.00</span></div>
+<div class="metric"><span class="label">Total Empire</span><span class="value">$0.00</span></div>
+<div class="metric"><span class="label">Active Subscribers</span><span class="value up">0</span></div>
 </div>
-<div class="card" onclick="goTo('omniaguard')">
-<h3>Floor 2 — OmniGuard</h3>
-<p>Cybersecurity & Threat Intel</p>
-<div class="price">$99/mo</div>
+<div class="card">
+<h3>🛡️ OmniGuard</h3>
+<div class="metric"><span class="label">Agents Online</span><span class="value up">14/14</span></div>
+<div class="metric"><span class="label">Threats Blocked (24h)</span><span class="value up">47,293</span></div>
+<div class="metric"><span class="label">Uptime</span><span class="value up">99.997%</span></div>
+<div class="metric"><span class="label">Avg Response</span><span class="value up">0.3s</span></div>
 </div>
-<div class="card" onclick="goTo('primedox')">
-<h3>Floor 3 — PrimeDox AI</h3>
-<p>AI Concierge HQ</p>
-<div class="price">$49/mo</div>
+<div class="card">
+<h3>⚡ PrimeDox AI</h3>
+<div class="metric"><span class="label">Documents Generated</span><span class="value up">0</span></div>
+<div class="metric"><span class="label">Active Users</span><span class="value up">1</span></div>
+<div class="metric"><span class="label">Templates</span><span class="value">45+</span></div>
+<div class="metric"><span class="label">Status</span><span class="value up">ONLINE</span></div>
 </div>
-<div class="card" onclick="goTo('ccldr')">
-<h3>Floor 4 — CCLDR</h3>
-<p>Legal Document Engine</p>
-<div class="price">$99/mo</div>
+<div class="card">
+<h3>⚖️ CCLDR</h3>
+<div class="metric"><span class="label">Court Deadline</span><span class="value down">July 14, 2026</span></div>
+<div class="metric"><span class="label">Active Cases</span><span class="value">2</span></div>
+<div class="metric"><span class="label">Claim Value</span><span class="value up">$38.3M</span></div>
+<div class="metric"><span class="label">Status</span><span class="value up">LITIGATING</span></div>
 </div>
-<div class="card" onclick="goTo('techpetcage')">
-<h3>Floor 5 — TechPetCage</h3>
-<p>Device Protection</p>
-<div class="price">$49/mo</div>
-</div>
-<div class="card" onclick="goTo('vaultvelocity')">
-<h3>Floor 6 — Vault Velocity</h3>
-<p>Luxury Vehicle Brokerage</p>
-<div class="price">$999/mo</div>
-</div>
-<div class="card" onclick="goTo('vigilax')">
-<h3>Floor 7 — Vigilax</h3>
-<p>Security Intelligence</p>
-<div class="price">$99/mo</div>
-</div>
-<div class="card" onclick="goTo('cleanswarm')">
-<h3>Floor 8 — CleanSwarm</h3>
-<p>AI Cleaning Services</p>
-<div class="price">$49/mo</div>
-</div>
-<div class="card" onclick="goTo('kiaros')">
-<h3>Floor 9 — Kiaros</h3>
-<p>Technology Solutions</p>
-<div class="price">$99/mo</div>
-</div>
-<div class="card" onclick="goTo('neural')">
-<h3>Floor 10 — Neural Graph</h3>
-<p>Memory Architecture</p>
-<div class="price">$199/mo</div>
-</div>
-<div class="revenue-card" style="grid-column:span 2">
-<div class="big" id="total-rev">$0.00</div>
-<p>TOTAL EMPIRE REVENUE</p>
+<div class="card">
+<h3>🏢 Floor Status</h3>
+<div class="status-bar">
+<span class="pill active">Floor 1: HQ</span>
+<span class="pill active">Floor 2: OmniGuard</span>
+<span class="pill active">Floor 3: PrimeDox</span>
+<span class="pill active">Floor 4: CCLDR</span>
+<span class="pill active">Floor 5: TechPetCage</span>
+<span class="pill">Floor 6-11: Standby</span>
+<span class="pill active">Floor 12: Command</span>
 </div>
 </div>
+<div class="card">
+<h3>🌐 Empire Domains</h3>
+<div class="metric"><span class="label">Active Sites</span><span class="value up">15+</span></div>
+<div class="metric"><span class="label">GitHub Repos</span><span class="value up">45+</span></div>
+<div class="metric"><span class="label">PWAs Deployed</span><span class="value up">3</span></div>
+<div class="metric"><span class="label">AI Agents</span><span class="value up">10</span></div>
 </div>
-
-<script>
-const SECRET_PIN="3921";
-function unlock(){
-const val=document.getElementById('pin').value;
-if(val===SECRET_PIN){
-document.getElementById('panel').style.display='none';
-document.getElementById('dash').style.display='block';
-const rev=localStorage.getItem('empire_revenue')||'0';
-document.getElementById('total-rev').textContent='$'+parseFloat(rev).toFixed(2);
-}else{alert('ACCESS DENIED — INVALID PIN')}
-}
-function goTo(floor){
-const urls={hq:'/',omniaguard:'/omniaguard/',primedox:'/primedox/',ccldr:'/ccldr/',techpetcage:'/techpetcage/',vaultvelocity:'/vaultvelocity/',vigilax:'/vigilax/',cleanswarm:'/cleanswarm/',kiaros:'/kiaros/',neural:'/neural/'};
-if(urls[floor])window.location.href=urls[floor];
-}
-</script>
+</div>
+<div class="footer">
+Francisco Holdings Inc &copy; 2026 | Not legal representation | Educational resources only
+</div>
 </body>
 </html>
