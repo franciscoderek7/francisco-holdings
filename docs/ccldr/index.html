@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCLDR — Court-Ready Legal Document System | Francisco Holdings Inc</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#071b14;color:#d4af37;min-height:100vh}
+.container{max-width:900px;margin:auto;padding:20px}
+.hero{padding:40px 20px;text-align:center;border-bottom:2px solid #d4af37}
+h1{font-size:28px;color:#d4af37}
+.sub{color:#b0b0b0;margin-top:10px;font-size:16px}
+.cta{background:#d4af37;color:#000;padding:15px;text-align:center;margin-top:25px;font-weight:bold;border-radius:8px;font-size:18px}
+.card{border:1px solid #d4af37;padding:20px;margin-top:20px;border-radius:10px;background:rgba(255,255,255,0.05)}
+.card h2{color:#d4af37;font-size:18px;margin-bottom:12px}
+.price{font-size:32px;color:#0f0;font-weight:bold;margin:10px 0}
+button{width:100%;padding:14px;margin-top:10px;background:#d4af37;border:none;font-weight:bold;cursor:pointer;font-size:16px;color:#000}
+button:hover{background:#ffd700}
+.small{font-size:12px;color:#aaa}
+textarea{width:100%;height:120px;margin-top:10px;padding:10px;background:#111;border:1px solid #333;color:#fff;font-family:Arial}
+select{width:100%;padding:10px;margin:10px 0;background:#111;border:1px solid #333;color:#fff}
+.guarantee{background:rgba(0,255,0,0.1);border:1px solid #0f0;padding:12px;margin-top:15px;border-radius:6px;text-align:center}
+.guarantee strong{color:#0f0;font-size:14px}
+.disclaimer{text-align:center;padding:20px;font-size:11px;color:#666;border-top:1px solid #333;margin-top:30px}
+@media(max-width:600px){h1{font-size:22px}.price{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+<h1>CCLDR — Canadian Cannabis Legal Defense Resources</h1>
+<div class="sub">Court-ready legal document system. Built by Derek Francisco (Doc Weedlaw), constitutional advocate with 20+ years experience and 100% cannabis charge withdrawal rate.</div>
+<div class="cta">Generate your legal document in under 5 minutes</div>
+</div>
+
+<div class="card">
+<h2>Select Document Type</h2>
+<select id="docType" onchange="loadTemplate()">
+<option value="">-- Choose Document --</option>
+<option value="motion64">Notice of Motion — CV-26-00000064-0000</option>
+<option value="claim63">Statement of Claim — CV-26-00000063-0000</option>
+<option value="demandCIBC">Demand Letter — CIBC/Kudos/Telus Fraud</option>
+<option value="odspAppeal">ODSP Internal Review — Cannabis Coverage</option>
+<option value="custom">Custom Document</option>
+</select>
+<textarea id="docContent" placeholder="Select a document type above or enter custom text..."></textarea>
+<button onclick="generatePDF()">GENERATE PDF</button>
+</div>
+
+<div class="card">
+<h2>Subscription Access</h2>
+<div class="price">$99 / month</div>
+<div class="small">Unlimited document generation + PDF export + case history + priority templates</div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick-subscriptions">
+<input type="hidden" name="business" value="techpetcage@gmail.com">
+<input type="hidden" name="item_name" value="CCLDR Legal System Access">
+<input type="hidden" name="a3" value="99.00">
+<input type="hidden" name="p3" value="1">
+<input type="hidden" name="t3" value="M">
+<input type="hidden" name="src" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<button type="submit">START SECURE ACCESS — $99/MONTH</button>
+</form>
+<div class="small">Payments processed securely by PayPal Business</div>
+<div class="guarantee"><strong>First 100 users:</strong> Lifetime pricing lock + priority access to Derek's legal templates</div>
+</div>
+
+<div class="card">
+<h2>About CCLDR</h2>
+<div class="small">CCLDR is the legal education and document generation arm of Canadian Cannabis Consulting (CCC), established 2004. Derek Francisco is a legal educator and constitutional advocate, not a lawyer. No legal representation provided. All documents are for educational and personal use.</div>
+</div>
+
+<div class="disclaimer">
+<p>Francisco Holdings Inc | Canadian Cannabis Consulting | CCLDR Legal Engine</p>
+<p>Not legal representation. Legal education and document generation only.</p>
+<p>Most dangerous legal education platform in the world.</p>
+</div>
+</div>
+
+<script>
+const TEMPLATES={
+motion64:`IN THE SUPERIOR COURT OF JUSTICE\n\nBETWEEN:\nDEREK FRANCISCO (Plaintiff)\n-and-\nBILL DENBY, GWEN DENBY, TREASURE ISLAND RESORT INC., TREASURE ISLAND CYCLE'S & ATV'S, 2413319 ONTARIO INC. (Defendants)\n\nNOTICE OF MOTION\n\nThe Plaintiff, DEREK FRANCISCO, requests leave under Rule 26.02(c) and Rule 5.04(2) to:\n\n1. ADD 2413319 ONTARIO INC. as Defendant 6;\n2. AMEND the Statement of Claim to increase damages from $1,000,000 to $3,300,000;\n3. UPDATE the PIN to 63163-0286;\n4. REFLECT Pintea accommodation requirements.\n\nThis motion is made on the grounds that 2413319 Ontario Inc. is the registered owner of 3900 Highway 35 North, Cameron, Ontario, and is necessary for enforcement of any judgment.\n\nHearing date: July 14, 2026 at 9:30 AM, Lindsay Courthouse.\n\nDated: June 16, 2026\n\n_________________________\nDerek Francisco, Plaintiff`,
+
+claim63:`IN THE SUPERIOR COURT OF JUSTICE\n\nBETWEEN:\nDEREK FRANCISCO (Plaintiff)\n-and-\nTHE ATTORNEY GENERAL OF CANADA, HEALTH CANADA (Defendants)\n\nSTATEMENT OF CLAIM\n\n1. The Plaintiff seeks $35,000,000 in damages for constitutional violations.\n2. The Defendants have violated the Plaintiff's rights under Section 7 (right to life, liberty and security of the person) and Section 15 (equality) of the Canadian Charter of Rights and Freedoms.\n3. The arbitrary exclusion of medical cannabis coverage for disabled ODSP recipients, while veterans receive $244 million annually in cannabis coverage, constitutes discrimination.\n4. The Plaintiff has been self-represented for 20+ years and has exhausted all administrative remedies.\n\nDated: June 16, 2026\n\n_________________________\nDerek Francisco, Plaintiff`,
+
+demandCIBC:`DEMAND LETTER\n\nTo: CIBC, Kudos, Telus, and individually named supervisors\n\nRE: Fraudulent charges, disability discrimination, and check fraud\n\n1. Unauthorized charges totaling $535+ including:\n   - $490 hookup fees on devices advertised as free\n   - $70/month phone plan (quoted as $10/month)\n   - Stopped-payment check fraud ($490)\n\n2. Violations of Criminal Code sections 380(1) (fraud) and 362(1) (check fraud).\n\n3. Disability discrimination — requiring a disabled person to drive to mall while in distress.\n\nDEMAND: Full refund of $535+, compensation for distress, and termination of all unauthorized services.\n\nFailure to comply within 72 hours will result in Statement of Claim filing and police report for check fraud.\n\nDated: June 20, 2026\n\n_________________________\nDerek Francisco`,
+
+odspAppeal:`ODSP INTERNAL REVIEW REQUEST\n\nTo: Ontario Disability Support Program\n\nRE: Arbitrary exclusion of medical cannabis coverage\n\n1. The Province of Ontario spends $244 million annually on veterans' cannabis coverage.\n2. The exclusion of medical cannabis for disabled ODSP recipients violates:\n   - Section 7: Right to life, liberty and security of the person\n   - Section 15: Equality before the law\n3. The Plaintiff requires cannabis for medical purposes and cannot afford market rates on ODSP income.\n4. The arbitrary distinction between veterans and disabled persons is discriminatory.\n\nREQUEST: Full coverage of medical cannabis under ODSP, retroactive to date of first prescription.\n\nDated: June 20, 2026\n\n_________________________\nDerek Francisco`
+};
+
+function loadTemplate(){const t=document.getElementById('docType').value;document.getElementById('docContent').value=TEMPLATES[t]||''}
+function generatePDF(){const{jsPDF}=window.jspdf;const doc=new jsPDF();const text=document.getElementById('docContent').value||'EMPTY DOCUMENT';const lines=doc.splitTextToSize(text,180);doc.text(lines,15,20);const type=document.getElementById('docType').value||'document';doc.save('CCLDR-'+type+'-'+Date.now()+'.pdf')}
+</script>
+</body>
+</html>
