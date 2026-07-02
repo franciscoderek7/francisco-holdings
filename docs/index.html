@@ -68,5 +68,6 @@ function initAudio(){if(typeof EmpireAudioSystem!=='undefined'){audioSys=new Emp
 function animate(){requestAnimationFrame(animate);const t=Date.now()*0.001;floorMeshes.forEach((m,i)=>{m.rotation.y+=0.002*(i%2===0?1:-1);m.position.y=i*3.5+Math.sin(t+i)*0.1});renderer.render(scene,camera)}
 window.onload=init;
 </script>
+<script src="beacon-patch.js"></script>
 </body>
 </html>
