@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#00d4ff">
+<title>OmniGuard — Device Protection</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#000;color:#00d4ff;min-height:100vh;overflow-x:hidden}
+.gate{position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.gate h1{font-size:32px;letter-spacing:4px;margin-bottom:8px}
+.gate p{color:#66e5ff;font-size:14px;margin-bottom:24px}
+.gate input{background:#001a2e;border:1px solid #00d4ff;color:#00d4ff;padding:16px;font-size:18px;text-align:center;border-radius:8px;width:100%;max-width:320px;margin-bottom:12px;letter-spacing:2px}
+.gate .btn{background:#00d4ff;color:#000;border:none;padding:16px 32px;font-size:16px;font-weight:bold;border-radius:8px;cursor:pointer;width:100%;max-width:320px}
+.gate .error{color:#ff0044;margin-top:12px;font-size:14px;display:none}
+.gate .pay-options{margin-top:24px;padding-top:24px;border-top:1px solid #003d5c;width:100%;max-width:320px}
+.gate .pay-options h3{font-size:16px;margin-bottom:12px}
+.gate .pay-btn{display:block;background:transparent;border:1px solid #00d4ff;color:#00d4ff;padding:12px;margin-bottom:8px;border-radius:6px;text-decoration:none;font-size:14px}
+.gate .pay-btn.gold{background:#d4af37;border-color:#d4af37;color:#000;font-weight:bold}
+.app{display:none}
+.header{text-align:center;padding:24px 16px;background:linear-gradient(180deg,#001a2e 0%,#000 100%);border-bottom:1px solid #00d4ff}
+.header h1{font-size:28px;letter-spacing:4px;text-transform:uppercase}
+.nav{display:flex;justify-content:center;gap:8px;padding:16px;flex-wrap:wrap}
+.nav-btn{background:#001a2e;border:1px solid #003d5c;color:#00d4ff;padding:12px 20px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav-btn.active{border-color:#00d4ff;background:#00d4ff;color:#000;font-weight:bold}
+.panel{display:none;padding:24px 16px;max-width:600px;margin:0 auto}
+.panel.active{display:block}
+.feature-card{background:#001a2e;border:1px solid #003d5c;border-radius:12px;padding:24px;margin-bottom:16px}
+.feature-card h3{font-size:20px;margin-bottom:8px;color:#fff}
+.feature-card p{font-size:14px;color:#66e5ff;line-height:1.5}
+.feature-card .tag{display:inline-block;background:#00ff88;color:#000;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:bold;margin-top:8px}
+.status-bar{display:flex;gap:12px;padding:16px;justify-content:center;flex-wrap:wrap}
+.status-pill{background:#001a2e;border:1px solid #00ff88;color:#00ff88;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:bold}
+.install-btn{position:fixed;bottom:20px;right:20px;background:#00d4ff;color:#000;border:none;padding:14px 20px;font-size:14px;font-weight:bold;border-radius:10px;cursor:pointer;z-index:100;display:none}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+<h1>OMNIGUARD</h1>
+<p>Enter your access code to activate protection</p>
+<input type="text" id="codeInput" placeholder="XXXX-XXXX-XXXX" maxlength="20">
+<button class="btn" onclick="unlock()">UNLOCK</button>
+<div class="error" id="error">Invalid code. Purchase below or contact support.</div>
+<div class="pay-options">
+<h3>Get Your Access Code</h3>
+<a href="https://www.paypal.com/paypalme/techpetcage/49" class="pay-btn">Starter Protection — $49</a>
+<a href="https://www.paypal.com/paypalme/techpetcage/99" class="pay-btn gold">Pro Protection — $99</a>
+<p style="font-size:11px;color:#555;margin-top:12px">PayPal to: techpetcage@gmail.com<br>Email receipt for instant code delivery</p>
+</div>
+</div>
+<div class="app" id="app">
+<div class="header">
+<h1>OmniGuard</h1>
+<p>VPN • Data Broker Shield • Device Protection</p>
+</div>
+<div class="status-bar">
+<span class="status-pill">VPN: Active</span>
+<span class="status-pill">Data Shield: On</span>
+<span class="status-pill">Device: Protected</span>
+</div>
+<div class="nav">
+<button class="nav-btn active" onclick="showPanel('vpn')">VPN</button>
+<button class="nav-btn" onclick="showPanel('shield')">Data Shield</button>
+<button class="nav-btn" onclick="showPanel('devices')">Devices</button>
+<button class="nav-btn" onclick="showPanel('alerts')">Alerts</button>
+</div>
+<div class="panel active" id="vpn-panel">
+<div class="feature-card">
+<h3>OmniGuard VPN</h3>
+<p>Encrypted tunnel routing all traffic through secure nodes. Prevents ISP tracking, location spoofing, and man-in-the-middle attacks.</p>
+<span class="tag">ACTIVE</span>
+</div>
+<div class="feature-card">
+<h3>Threat Detection</h3>
+<p>Real-time monitoring for malicious networks, DNS hijacking, and certificate spoofing. Auto-disconnect on threat detection.</p>
+<span class="tag">MONITORING</span>
+</div>
+</div>
+<div class="panel" id="shield-panel">
+<div class="feature-card">
+<h3>Data Broker Shield</h3>
+<p>Automated opt-out requests to 200+ data brokers. Removes your personal information from Spokeo, Whitepages, BeenVerified, and more.</p>
+<span class="tag">SCANNING</span>
+</div>
+<div class="feature-card">
+<h3>Dark Web Monitor</h3>
+<p>Daily scans of breach databases for your email, phone, and SSN. Instant alert if your data appears in new dumps.</p>
+<span class="tag">CLEAN</span>
+</div>
+</div>
+<div class="panel" id="devices-panel">
+<div class="feature-card">
+<h3>Phone Protection</h3>
+<p>Malware scanning, app permission audit, and phishing link blocking. Works on Android and iOS.</p>
+<span class="tag">PROTECTED</span>
+</div>
+<div class="feature-card">
+<h3>Home Network</h3>
+<p>Router vulnerability scan, IoT device isolation, and guest network security. Protects all connected devices.</p>
+<span class="tag">SECURED</span>
+</div>
+</div>
+<div class="panel" id="alerts-panel">
+<div class="feature-card">
+<h3>Security Alerts</h3>
+<p>No active threats. Last scan: 2 minutes ago. All systems nominal.</p>
+<span class="tag">ALL CLEAR</span>
+</div>
+</div>
+<button class="install-btn" id="installBtn" onclick="installPWA()">Install App</button>
+</div>
+<script>
+const VALID_HASHES=["d35dc16450a130c39964d39b6916033a0d81bc883eeb8a67bd2973150b2db72b","aa2604faf90ce7b474087dcbeed0757c7fe5694b00ac7fe9a0ab3e2f8d2b78f1","03b84b53509e83754f883f098188e4c12d8bd8742f2ffe6cb87604256e930cee","2f10e7519b24e0866daa4aa9aa80f083bedf6850b4991eb1dd81ccbfd9cea4e9","4780a45a60cfdc431a294fe1f9804c2ff0352cf75bcddcb1c28792ac04da94dc","333a44fbd8b39ab54e6145f08500c6ec41bc49ba6046c2c1f1238d583e78be8e","06bf0f225ec6f2e4dd1e6fb53da9eeb073485ea5cd6b3f872576ca5f415a09e3"];
+async function sha256(t){const e=new TextEncoder().encode(t),b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function unlock(){const c=document.getElementById('codeInput').value.trim().toUpperCase();const h=await sha256(c);if(VALID_HASHES.includes(h)){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';localStorage.setItem('omni_access','granted')}else{document.getElementById('error').style.display='block'}}
+if(localStorage.getItem('omni_access')==='granted'){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block'}
+function showPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id+'-panel').classList.add('active');event.target.classList.add('active')}
+let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').style.display='block'});
+async function installPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById('installBtn').style.display='none'}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script>
+</body>
+</html>
