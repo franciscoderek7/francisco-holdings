@@ -1,1 +1,226 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="theme-color" content="#00A86B"><title>PrimeDox AI HQ</title><link rel="manifest" href="manifest.json"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f0a;color:#00ff88;min-height:100vh}.gate{position:fixed;inset:0;background:#0a0f0a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}.gate h1{font-size:32px;letter-spacing:4px;margin-bottom:8px;color:#FFD700}.gate input{background:#0f1f0f;border:1px solid #00ff88;color:#00ff88;padding:16px;font-size:18px;text-align:center;border-radius:8px;width:100%;max-width:320px;margin-bottom:12px}.gate .btn{background:#00ff88;color:#000;border:none;padding:16px 32px;font-size:16px;font-weight:bold;border-radius:8px;cursor:pointer;width:100%;max-width:320px}.gate .error{color:#ff4444;margin-top:12px;font-size:14px;display:none}.app{display:none}.header{text-align:center;padding:24px 16px;background:linear-gradient(180deg,#0a1f0a 0%,#0a0f0a 100%);border-bottom:1px solid #00ff88}.header h1{font-size:28px;letter-spacing:4px;color:#FFD700}.chat-container{padding:16px;max-width:600px;margin:0 auto}.chat-box{background:#0f1f0f;border:1px solid #003300;border-radius:12px;height:300px;overflow-y:auto;padding:16px;margin-bottom:16px}.message{margin-bottom:12px;padding:12px 16px;border-radius:12px;max-width:80%;font-size:14px;line-height:1.5}.message.bot{background:#003300;color:#00ff88;margin-right:auto;border-bottom-left-radius:4px}.message.user{background:#00ff88;color:#000;margin-left:auto;border-bottom-right-radius:4px}.input-area{display:flex;gap:8px}input{flex:1;background:#0f1f0f;border:1px solid #00ff88;color:#00ff88;padding:14px;font-size:16px;border-radius:8px}.send-btn{background:#00ff88;color:#000;border:none;padding:14px 24px;font-size:16px;font-weight:bold;border-radius:8px;cursor:pointer}.actions{padding:24px 16px;max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:12px}.action-btn{background:#0f1f0f;border:1px solid #00ff88;color:#00ff88;padding:18px;font-size:16px;border-radius:8px;text-align:center;text-decoration:none;display:block}.action-btn.primary{background:#FFD700;border-color:#FFD700;color:#000;font-weight:bold}</style></head><body><div class="gate" id="gate"><h1>PRIMEDOX AI</h1><p>Enter access code</p><input type="text" id="codeInput" placeholder="XXXX-XXXX-XXXX" maxlength="20"><button class="btn" onclick="unlock()">ENTER HQ</button><div class="error" id="error">Invalid code.</div></div><div class="app" id="app"><div class="header"><h1>PrimeDox AI</h1><p>Your AI Concierge</p></div><div class="chat-container"><div class="chat-box" id="chatBox"><div class="message bot">Welcome to PrimeDox AI HQ. I am PRIME.</div></div><div class="input-area"><input type="text" id="userInput" placeholder="Type your request..." onkeypress="if(event.key==='Enter')send()"><button class="send-btn" onclick="send()">Send</button></div></div><div class="actions"><a href="https://franciscoderek7.github.io/francisco-holdings/docs/ccldr-pwa/index.html" class="action-btn primary">Generate Legal Document</a><a href="https://franciscoderek7.github.io/francisco-holdings/docs/omniaguard-pwa/index.html" class="action-btn">Security Scan</a><a href="mailto:franciscoderek7@gmail.com" class="action-btn">Contact Support</a></div></div><script>const VALID=["d35dc16450a130c39964d39b6916033a0d81bc883eeb8a67bd2973150b2db72b","e490a64e68b79d90387359f6f13aaa6fa98256417b1758bf7f28bca36fa27def","f8a11507bf1c4719fc880db35339e770d7fa5c735997e329b3a3193f134a75b9","788b43bbc8b873dce94733817b89ec143711e6ee7484bc3f8bb84100fd01803e","529bf9a5ba0cd18c4cd4a568ae28261a52247a7adc9ae430db1960c2593fc6fc"];async function sha256(t){const e=new TextEncoder().encode(t),b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}async function unlock(){const c=document.getElementById('codeInput').value.trim().toUpperCase();const h=await sha256(c);if(VALID.includes(h)){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';localStorage.setItem('prime_access','granted')}else{document.getElementById('error').style.display='block'}}if(localStorage.getItem('prime_access')==='granted'){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block'}function send(){const i=document.getElementById('userInput');const t=i.value.trim();if(!t)return;const c=document.getElementById('chatBox');c.innerHTML+=`<div class="message user">${t}</div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="message bot">I can route you to CCLDR for legal documents or OmniGuard for security. What do you need?</div>`;c.scrollTop=c.scrollHeight;},600);}if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0a0a">
+<title>PrimeDox AI — Spellbook Killer</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#e0e0e0;min-height:100vh;overflow-x:hidden}
+.gate{position:fixed;inset:0;background:#0a0a0a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.gate h1{font-size:36px;letter-spacing:6px;margin-bottom:8px;color:#FFD700}
+.gate h2{font-size:14px;color:#ff4444;margin-bottom:8px;text-transform:uppercase;letter-spacing:3px}
+.gate p{color:#888;font-size:14px;margin-bottom:24px}
+.gate input{background:#1a1a1a;border:1px solid #FFD700;color:#FFD700;padding:16px;font-size:18px;text-align:center;border-radius:8px;width:100%;max-width:320px;margin-bottom:12px;letter-spacing:2px}
+.gate .btn{background:#FFD700;color:#000;border:none;padding:16px 32px;font-size:16px;font-weight:bold;border-radius:8px;cursor:pointer;width:100%;max-width:320px}
+.gate .error{color:#ff4444;margin-top:12px;font-size:14px;display:none}
+.gate .pay-options{margin-top:24px;padding-top:24px;border-top:1px solid #333;width:100%;max-width:320px}
+.gate .pay-options h3{font-size:16px;margin-bottom:12px;color:#FFD700}
+.gate .pay-btn{display:block;background:transparent;border:1px solid #FFD700;color:#FFD700;padding:12px;margin-bottom:8px;border-radius:6px;text-decoration:none;font-size:14px}
+.gate .pay-btn.gold{background:#FFD700;border-color:#FFD700;color:#000;font-weight:bold}
+.app{display:none}
+.header-top{text-align:center;padding:20px 16px 0}
+.header-top h1{font-size:32px;letter-spacing:4px;color:#FFD700}
+.header-top h1 span{color:#ff4444}
+.header-top .subtitle{font-size:13px;color:#888;margin-top:4px;letter-spacing:2px;text-transform:uppercase}
+.quote{text-align:center;padding:16px 24px;font-size:14px;color:#c9b896;font-style:italic;line-height:1.6;max-width:700px;margin:0 auto}
+.quote .name{color:#FFD700;font-weight:bold;font-style:normal}
+.toolbar{display:flex;justify-content:center;gap:8px;padding:12px 16px;flex-wrap:wrap}
+.toolbar-btn{background:#1a1a1a;border:1px solid #333;color:#ccc;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer}
+.toolbar-btn.active{background:#333;color:#fff}
+.route-btn{display:block;width:calc(100% - 32px);max-width:700px;margin:8px auto;background:#1a1a1a;border:1px solid #333;color:#ccc;padding:12px 16px;border-radius:8px;text-align:left;font-size:14px;cursor:pointer}
+.stats{display:flex;justify-content:center;gap:12px;padding:16px;flex-wrap:wrap;max-width:700px;margin:0 auto}
+.stat-card{background:#111;border:1px solid #222;border-radius:12px;padding:16px;text-align:center;min-width:100px;flex:1}
+.stat-card .num{font-size:28px;font-weight:bold;color:#FFD700}
+.stat-card .label{font-size:11px;color:#888;margin-top:4px;text-transform:uppercase}
+.tabs{display:flex;justify-content:center;gap:8px;padding:16px;flex-wrap:wrap}
+.tab-btn{background:#1a1a1a;border:1px solid #333;color:#ccc;padding:10px 18px;border-radius:8px;font-size:13px;cursor:pointer}
+.tab-btn.active{background:#00d4ff;color:#000;font-weight:bold;border-color:#00d4ff}
+.content{max-width:700px;margin:0 auto;padding:0 16px 40px}
+.section-title{font-size:20px;color:#FFD700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title .icon{font-size:24px}
+.feature-btn{display:block;width:100%;background:#0f1f0f;border:1px solid #00ff88;color:#00ff88;padding:14px 16px;border-radius:10px;text-align:left;font-size:15px;margin-bottom:8px;cursor:pointer}
+.feature-btn .sub{display:block;font-size:12px;color:#66ff99;margin-top:4px;line-height:1.4}
+.feature-btn.primary{border-color:#FFD700;color:#FFD700}
+.feature-btn.primary .sub{color:#c9b896}
+label{display:block;font-size:12px;color:#888;margin:16px 0 8px;text-transform:uppercase;letter-spacing:1px}
+select{width:100%;background:#1a1a1a;border:1px solid #333;color:#e0e0e0;padding:14px;font-size:15px;border-radius:8px}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.action-btn{flex:1;min-width:120px;padding:14px;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;text-align:center}
+.action-btn.gen{background:#FFD700;color:#000}
+.action-btn.sec{background:#333;color:#ccc}
+.action-btn.danger{background:#ff4444;color:#fff}
+.output-panel{background:#fff;color:#000;padding:24px;border-radius:8px;margin-top:20px;display:none;font-family:'Times New Roman',serif;line-height:1.6}
+.output-panel.active{display:block}
+.footer{text-align:center;padding:20px;font-size:11px;color:#555;border-top:1px solid #222;margin-top:20px}
+.footer .warning{color:#ff4444}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+<h1>PRIMEDOX AI</h1>
+<h2>Spellbook Killer</h2>
+<p>The Most Dangerous Legal Document Platform in the World</p>
+<input type="text" id="codeInput" placeholder="XXXX-XXXX-XXXX" maxlength="20">
+<button class="btn" onclick="unlock()">ENTER HQ</button>
+<div class="error" id="error">Invalid code. Purchase below or contact support.</div>
+<div class="pay-options">
+<h3>Get Access</h3>
+<a href="https://www.paypal.com/paypalme/techpetcage/49" class="pay-btn">Starter — $49/mo</a>
+<a href="https://www.paypal.com/paypalme/techpetcage/99" class="pay-btn gold">Pro — $99/mo</a>
+<p style="font-size:11px;color:#555;margin-top:12px">PayPal to: techpetcage@gmail.com<br>Email receipt for instant code</p>
+</div>
+</div>
+
+<div class="app" id="app">
+<div class="header-top">
+<h1>PRIMEDOX <span>AI</span></h1>
+<div class="subtitle">The Most Dangerous Legal Document Platform in the World</div>
+</div>
+<div class="quote">"Hi, I'm <span class="name">PrimeDox AI</span>. Derek Francisco built me after 25 years of winning cases the 'professionals' said were unwinnable. Everything I know comes from his real experience — not textbooks, not theory, not corporate training. I educate you. You make the decisions. You win. That's the system. That's why it works."</div>
+<div class="toolbar">
+<button class="toolbar-btn">Theme</button>
+<button class="toolbar-btn">A-</button>
+<button class="toolbar-btn">A</button>
+<button class="toolbar-btn">A+</button>
+<button class="toolbar-btn">Large Buttons</button>
+</div>
+<button class="route-btn">Route to Empire...</button>
+<div class="stats">
+<div class="stat-card"><div class="num">45+</div><div class="label">Document Templates</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">Legal Categories</div></div>
+<div class="stat-card"><div class="num">100+</div><div class="label">Dynamic Fields</div></div>
+<div class="stat-card"><div class="num">∞</div><div class="label">Offline Capability</div></div>
+</div>
+<div class="tabs">
+<button class="tab-btn" onclick="setTab('tasks')">Tasks</button>
+<button class="tab-btn active" onclick="setTab('docs')">Documents</button>
+<button class="tab-btn" onclick="setTab('profile')">Profile</button>
+<button class="tab-btn" onclick="setTab('preview')">Preview</button>
+<button class="tab-btn" onclick="setTab('damages')">Damages</button>
+</div>
+
+<div class="content" id="tab-docs">
+<div class="section-title"><span class="icon">📄</span> Document Generator</div>
+<button class="feature-btn" onclick="speak()">🎤 Hold to Speak<span class="sub">Press and hold, speak a full sentence, then release — e.g. "Generate a Notice of Motion for my June 29 hearing."</span></button>
+<button class="feature-btn">🎥 Record Video Statement<span class="sub">Records a witness statement / incident report on video (up to 5 minutes). Stored on device only.</span></button>
+<button class="feature-btn">📷 Upload Document Photo<span class="sub">Take or upload a photo of a document. Text is read from the photo and run through field-detection.</span></button>
+
+<label>Select Document Type *</label>
+<select id="docType" onchange="loadDoc()">
+<option value="">-- Choose a document --</option>
+<optgroup label="Civil Procedure (11)">
+<option value="claim">Statement of Claim</option>
+<option value="motion">Notice of Motion</option>
+<option value="affidavit">Affidavit</option>
+<option value="defence">Defence</option>
+<option value="reply">Reply</option>
+<option value="crossclaim">Crossclaim</option>
+<option value="thirdparty">Third Party Claim</option>
+<option value="interrogatories">Interrogatories</option>
+<option value="admissions">Request for Admissions</option>
+<option value="intention">Notice of Intention to Defend</option>
+<option value="service">Certificate of Service</option>
+</optgroup>
+<optgroup label="Criminal (6)">
+<option value="charter">Charter Application (s.24(1))</option>
+<option value="bail">Bail Variation</option>
+<option value="crimappeal">Notice of Appeal (Criminal)</option>
+<option value="sentencing">Sentencing Submission</option>
+<option value="judicial">Judicial Review Application</option>
+<option value="private">Private Information (Laying a Charge - s.504)</option>
+</optgroup>
+<optgroup label="Tribunal (5)">
+<option value="hrto">HRTO Application</option>
+<option value="landlord">Landlord & Tenant Application</option>
+<option value="wsib">WSIB Claim</option>
+<option value="social">Social Benefits Tribunal Appeal</option>
+<option value="license">License Appeal</option>
+</optgroup>
+<optgroup label="Corporate (5)">
+<option value="nda">Non-Disclosure Agreement (NDA)</option>
+<option value="employment">Employment Contract</option>
+<option value="partnership">Partnership Agreement</option>
+<option value="joint">Joint Venture Agreement</option>
+<option value="shareholders">Shareholders Agreement</option>
+</optgroup>
+<optgroup label="Real Estate (4)">
+<option value="lease">Residential Lease Agreement</option>
+<option value="purchase">Agreement of Purchase & Sale</option>
+<option value="mortgage">Mortgage Document</option>
+<option value="eviction">Eviction Notice (N4/N5)</option>
+</optgroup>
+<optgroup label="Demand (5)">
+<option value="demand">Demand Letter</option>
+<option value="statutory">Statutory Demand</option>
+<option value="cease">Cease & Desist Letter</option>
+<option value="default">Notice of Default</option>
+<option value="final">Final Notice Before Action</option>
+</optgroup>
+<optgroup label="Cannabis (5)">
+<option value="cannabislicense">Cannabis License Application</option>
+<option value="compliance">Compliance Notice</option>
+<option value="charterarg">Cannabis Charter Argument</option>
+<option value="medical">Medical Cannabis Document</option>
+<option value="businessplan">Cannabis Business Plan</option>
+</optgroup>
+<optgroup label="General (4)">
+<option value="business">Business Letter</option>
+<option value="invoice">Invoice</option>
+<option value="poa">Power of Attorney</option>
+<option value="will">Last Will & Testament</option>
+</optgroup>
+</select>
+
+<div id="formFields"></div>
+
+<div class="actions">
+<button class="action-btn gen" onclick="generate()">⚡ Generate Preview</button>
+<button class="action-btn sec" onclick="window.print()">🖨️ Print</button>
+<button class="action-btn sec" onclick="saveDoc()">💾 Save</button>
+<button class="action-btn danger" onclick="clearDoc()">🗑️ Clear</button>
+</div>
+<div class="output-panel" id="output"></div>
+</div>
+
+<div class="content" id="tab-tasks" style="display:none">
+<div class="section-title"><span class="icon">⚡</span> Tasks</div>
+<p style="color:#888">No active tasks. Generate a document to create a workflow.</p>
+</div>
+<div class="content" id="tab-profile" style="display:none">
+<div class="section-title"><span class="icon">👤</span> Profile</div>
+<p style="color:#888">Derek Francisco · CEO · Self-Represented Litigant</p>
+</div>
+<div class="content" id="tab-preview" style="display:none">
+<div class="section-title"><span class="icon">👁️</span> Preview</div>
+<p style="color:#888">Select a document and click Generate Preview.</p>
+</div>
+<div class="content" id="tab-damages" style="display:none">
+<div class="section-title"><span class="icon">💰</span> Damages</div>
+<p style="color:#888">Current claim: $3,300,000.00 (CV-26-00000064-0000)</p>
+</div>
+
+<div class="footer">
+<div class="warning">⚠ Educational Content Only — Not Legal Advice</div>
+PrimeDox AI generates draft documents for informational and self-representation purposes only and does not constitute legal advice or create a solicitor-client relationship. Consult a licensed lawyer for advice specific to your situation.
+</div>
+</div>
+
+<script>
+const VALID_HASHES=["d35dc16450a130c39964d39b6916033a0d81bc883eeb8a67bd2973150b2db72b","e490a64e68b79d90387359f6f13aaa6fa98256417b1758bf7f28bca36fa27def","f8a11507bf1c4719fc880db35339e770d7fa5c735997e329b3a3193f134a75b9","788b43bbc8b873dce94733817b89ec143711e6ee7484bc3f8bb84100fd01803e","529bf9a5ba0cd18c4cd4a568ae28261a52247a7adc9ae430db1960c2593fc6fc"];
+async function sha256(t){const e=new TextEncoder().encode(t),b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function unlock(){const c=document.getElementById('codeInput').value.trim().toUpperCase();const h=await sha256(c);if(VALID_HASHES.includes(h)){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';localStorage.setItem('prime_access','granted')}else{document.getElementById('error').style.display='block'}}
+if(localStorage.getItem('prime_access')==='granted'){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block'}
+function setTab(tab){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['tasks','docs','profile','preview','damages'].forEach(t=>document.getElementById('tab-'+t).style.display=t===tab?'block':'none')}
+function speak(){const r=new (window.SpeechRecognition||window.webkitSpeechRecognition)();r.lang='en-CA';r.start();r.onresult=(e)=>{const t=e.results[0][0].transcript;alert('Voice: "'+t+'"\n\nRouting to document generator...');};}
+const docFields={claim:[{n:'court',l:'Court',d:'Ontario Superior Court of Justice'},{n:'file',l:'File No',d:'CV-26-00000064-0000'},{n:'plaintiff',l:'Plaintiff',d:'Derek Francisco'},{n:'defendant',l:'Defendant',d:'Bill Denby, Gwen Denby, et al.'},{n:'relief',l:'Relief Sought',d:'$3,300,000 damages for trespass, conversion, negligence',t:'textarea'},{n:'particulars',l:'Particulars',d:'The defendants unlawfully entered...',t:'textarea'},{n:'date',l:'Date',d:new Date().toISOString().split('T')[0]}],motion:[{n:'court',l:'Court',d:'Ontario Superior Court of Justice'},{n:'file',l:'File No',d:'CV-26-00000064-0000'},{n:'applicant',l:'Applicant',d:'Derek Francisco'},{n:'respondent',l:'Respondent',d:'Bill Denby, Gwen Denby, et al.'},{n:'order',l:'Order Sought',d:'Leave to amend Statement of Claim',t:'textarea'},{n:'grounds',l:'Grounds',d:'Rule 26.02(c) - adding registered owner',t:'textarea'},{n:'date',l:'Date',d:new Date().toISOString().split('T')[0]}],demand:[{n:'from',l:'From',d:'Derek Francisco'},{n:'to',l:'To',d:'Bill Denby / Gwen Denby'},{n:'amount',l:'Amount',d:'$3,300,000.00'},{n:'demand',l:'Demand',d:'Cease trespass, return property, pay damages',t:'textarea'},{n:'deadline',l:'Deadline',d:'14 days from date of letter'},{n:'date',l:'Date',d:new Date().toISOString().split('T')[0]}],charterarg:[{n:'court',l:'Court',d:'Ontario Superior Court of Justice'},{n:'applicant',l:'Applicant',d:'Derek Francisco'},{n:'sections',l:'Charter Sections',d:'Section 7 (life, liberty, security); Section 15 (equality)',t:'textarea'},{n:'argument',l:'Argument',d:'The arbitrary exclusion of cannabis coverage...',t:'textarea'},{n:'date',l:'Date',d:new Date().toISOString().split('T')[0]}],business:[{n:'from',l:'From',d:'Derek Francisco, CEO'},{n:'to',l:'To',d:'Recipient Name'},{n:'re',l:'Re',d:'Business Matter'},{n:'body',l:'Body',d:'This letter concerns...',t:'textarea'},{n:'date',l:'Date',d:new Date().toISOString().split('T')[0]}]};
+function loadDoc(){const t=document.getElementById('docType').value;const f=docFields[t]||[{n:'field1',l:'Field 1',d:'Enter text'},{n:'field2',l:'Field 2',d:'Enter text'}];document.getElementById('formFields').innerHTML=f.map(x=>`<label>${x.l}</label>${x.t==='textarea'?`<textarea id="${x.n}" rows="4" style="width:100%;background:#1a1a1a;border:1px solid #333;color:#e0e0e0;padding:14px;font-size:15px;border-radius:8px;font-family:inherit">${x.d}</textarea>`:`<input type="text" id="${x.n}" value="${x.d}" style="width:100%;background:#1a1a1a;border:1px solid #333;color:#e0e0e0;padding:14px;font-size:15px;border-radius:8px">`}`).join('');}
+function generate(){const t=document.getElementById('docType').value;if(!t){alert('Select a document type first');return}const v={};document.querySelectorAll('#formFields input, #formFields textarea').forEach(el=>v[el.id]=el.value);let h='';if(t==='claim')h=`<h2>STATEMENT OF CLAIM</h2><div style="text-align:center"><strong>IN THE ${v.court.toUpperCase()}</strong><br><strong>Court File No. ${v.file}</strong></div><div><strong>BETWEEN:</strong><br>${v.plaintiff}<br><em>Plaintiff</em><br><br><strong>- and -</strong><br><br>${v.defendant}<br><em>Defendant</em></div><div style="text-align:center"><strong>STATEMENT OF CLAIM</strong></div><div><strong>Relief Sought:</strong><br>${v.relief.replace(/\n/g,'<br>')}</div><div><strong>Particulars:</strong><br>${v.particulars.replace(/\n/g,'<br>')}</div><div><strong>Date:</strong> ${v.date}<br><br>_________________________<br>${v.plaintiff}<br>Self-Represented</div>`;else if(t==='motion')h=`<h2>NOTICE OF MOTION</h2><div style="text-align:center"><strong>IN THE ${v.court.toUpperCase()}</strong><br><strong>Court File No. ${v.file}</strong></div><div><strong>Applicant:</strong> ${v.applicant}<br><strong>Respondent:</strong> ${v.respondent}</div><div><strong>NOTICE OF MOTION</strong><br><br>The applicant will make a motion for:<br>${v.order.replace(/\n/g,'<br>')}</div><div><strong>Grounds:</strong><br>${v.grounds.replace(/\n/g,'<br>')}</div><div><strong>Date:</strong> ${v.date}<br><br>_________________________<br>${v.applicant}<br>Self-Represented</div>`;else if(t==='demand')h=`<h2>DEMAND LETTER</h2><div><strong>From:</strong> ${v.from}<br><strong>To:</strong> ${v.to}<br><strong>Date:</strong> ${v.date}</div><div><strong>Re:</strong> Formal Demand for ${v.amount}</div><div>${v.demand.replace(/\n/g,'<br>')}</div><div><strong>Deadline:</strong> ${v.deadline}</div><div style="margin-top:40px">_________________________<br>${v.from}</div>`;else if(t==='charterarg')h=`<h2>CHARTER ARGUMENT</h2><div><strong>Court:</strong> ${v.court}<br><strong>Applicant:</strong> ${v.applicant}</div><div><strong>Charter Sections:</strong><br>${v.sections.replace(/\n/g,'<br>')}</div><div><strong>Argument:</strong><br>${v.argument.replace(/\n/g,'<br>')}</div><div><strong>Date:</strong> ${v.date}</div>`;else h=`<h2>DOCUMENT</h2><div>${JSON.stringify(v).replace(/,/g,'<br>').replace(/"/g,'').replace(/{/g,'').replace(/}/g,'')}</div>`;const o=document.getElementById('output');o.innerHTML=h;o.classList.add('active');o.scrollIntoView({behavior:'smooth'});document.getElementById('tab-preview').innerHTML='<div class="section-title"><span class="icon">👁️</span> Preview</div><div style="background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:16px;color:#00ff88;font-size:13px">Document generated. Scroll down to view.</div>';}
+function saveDoc(){const o=document.getElementById('output');if(!o.classList.contains('active')){alert('Generate a document first');return}const b=new Blob([`<html><head><title>PrimeDox Document</title><style>body{font-family:Times New Roman;padding:40px}</style></head><body>${o.innerHTML}</body></html>`],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='PrimeDox-Document.html';a.click();}
+function clearDoc(){document.getElementById('output').innerHTML='';document.getElementById('output').classList.remove('active');document.getElementById('docType').value='';document.getElementById('formFields').innerHTML='';}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script>
+</body>
+</html>
