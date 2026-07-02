@@ -1,73 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francisco Holdings Inc — 392 Floor Empire HQ</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d4af37">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#d4af37;font-family:'Courier New',monospace;overflow:hidden;touch-action:none}
-#canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-#ui{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;pointer-events:none}
-#header{position:fixed;top:12px;left:12px;z-index:20}
-#header h1{font-size:14px;letter-spacing:3px;color:#d4af37;text-shadow:0 0 10px rgba(212,175,55,0.5)}
-#header p{font-size:10px;color:#888;margin-top:2px}
-#revenue{position:fixed;top:12px;right:12px;text-align:right;z-index:20}
-#revenue .amt{font-size:20px;color:#0f0;font-weight:bold;text-shadow:0 0 10px rgba(0,255,0,0.5)}
-#revenue p{font-size:9px;color:#666}
-#elevator{position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:20;pointer-events:auto}
-.floor-btn{background:rgba(0,0,0,0.8);border:1px solid #d4af37;color:#d4af37;padding:8px 12px;font-family:inherit;font-size:11px;cursor:pointer;transition:all 0.3s;border-radius:4px;min-width:80px;text-align:center}
-.floor-btn:hover{background:#d4af37;color:#000}
-.floor-btn.active{background:#0f0;color:#000;border-color:#0f0}
-#floor-info{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);border:1px solid #d4af37;padding:15px;min-width:280px;z-index:20;pointer-events:auto;display:none;text-align:center;border-radius:8px}
-#floor-info h3{font-size:14px;margin-bottom:6px;color:#d4af37}
-#floor-info p{font-size:11px;color:#aaa;margin-bottom:10px}
-#floor-info .price{font-size:24px;color:#0f0;font-weight:bold;margin:8px 0}
-#floor-info button{background:#d4af37;color:#000;border:none;padding:10px 20px;font-family:inherit;font-weight:bold;cursor:pointer;font-size:12px;margin:4px;border-radius:4px}
-#floor-info button:hover{background:#ffd700}
-#ceo-panel{position:fixed;bottom:12px;left:12px;background:rgba(0,0,0,0.9);border:1px solid #d4af37;padding:10px;z-index:20;pointer-events:auto;font-size:10px;max-width:200px;border-radius:4px}
-#ceo-panel h4{color:#d4af37;margin-bottom:4px;font-size:11px}
-#soulstack{position:fixed;bottom:12px;right:12px;background:rgba(0,0,0,0.9);border:1px solid #d4af37;padding:10px;z-index:20;font-size:10px;border-radius:4px}
-#soulstack h4{color:#ffd700;margin-bottom:4px}
-#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:200;font-size:16px;flex-direction:column}
-#loading .spinner{width:40px;height:40px;border:3px solid #d4af37;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:15px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:600px){#header h1{font-size:12px}#revenue .amt{font-size:16px}#floor-info{min-width:240px;font-size:10px}#ceo-panel{max-width:150px;font-size:9px}}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="EmpireAudioSystem.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Francisco Holdings — Empire Core</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #05070a; color: #00ff88; }
+    #boot { padding: 20px; font-size: 14px; white-space: pre-wrap; }
+    .ok { color: #00ff88; }
+    .fail { color: #ff3b3b; }
+    .warn { color: #ffcc00; }
+    #dashboard { display: none; padding: 20px; }
+    .panel { border: 1px solid #00ff88; padding: 10px; margin: 10px 0; }
+    button { padding: 10px; margin: 5px; background: #111; color: #00ff88; border: 1px solid #00ff88; cursor: pointer; }
+    button:hover { background: #00ff88; color: #000; }
+  </style>
 </head>
 <body>
-<div id="loading"><div class="spinner"></div>INITIALIZING 392 FLOOR EMPIRE...</div>
-<canvas id="canvas"></canvas>
-<div id="ui">
-<div id="header"><h1>FRANCISCO HOLDINGS INC</h1><p>392 Floor Empire | 45+ Companies</p></div>
-<div id="revenue"><div class="amt" id="rev-amt">$0.00</div><p>TOTAL REVENUE</p></div>
-<div id="elevator"></div>
-<div id="floor-info"><h3 id="fi-name">Floor 1</h3><p id="fi-desc">HQ</p><div class="price" id="fi-price">$0</div><button onclick="enterFloor()">ENTER FLOOR</button><button onclick="subscribe()">SUBSCRIBE</button></div>
-<div id="ceo-panel"><h4>CEO PANEL</h4><div>Active Floors: <span id="active-floors">1</span></div><div>Agents: <span id="agent-count">0</span></div><div>Status: <span style="color:#0f0">ONLINE</span></div></div>
-<div id="soulstack"><h4>SOULSTACK</h4><div id="badges">No badges</div></div>
+<div id="boot">BOOTING EMPIRE...\n</div>
+<div id="dashboard">
+  <h1>EMPIRE COMMAND CENTER</h1>
+  <div class="panel">
+    <h3>FLOORS</h3>
+    <button onclick="go('dashboard')">CEO DASHBOARD (PIN 3921)</button>
+    <button onclick="go('omniaguard')">OmniGuard</button>
+    <button onclick="go('primedox')">PrimeDox</button>
+    <button onclick="go('ccldr')">CCLDR</button>
+    <button onclick="go('techpetcage')">TechPetCage</button>
+    <button onclick="go('vaultvelocity')">Vault Velocity</button>
+    <button onclick="go('vigilax')">Vigilax</button>
+    <button onclick="go('cleanswarm')">CleanSwarm</button>
+    <button onclick="go('kiaros')">Kiaros</button>
+  </div>
+  <div class="panel">
+    <h3>3D STATUS</h3>
+    <div id="threeStatus">checking...</div>
+  </div>
+  <div class="panel">
+    <h3>MODULE STATUS</h3>
+    <div id="moduleStatus"></div>
+  </div>
 </div>
 <script>
-const FLOORS=[{id:1,name:"Francisco Holdings HQ",desc:"Empire Command Center",theme:0xd4af37,price:0,active:true},{id:2,name:"OmniGuard",desc:"Cybersecurity & Threat Intelligence",theme:0x00ffff,price:99},{id:3,name:"PrimeDox AI",desc:"AI Concierge HQ",theme:0x00ff88,price:49},{id:4,name:"CCLDR",desc:"Legal Document Engine",theme:0x228b22,price:99},{id:5,name:"TechPetCage",desc:"Device Protection",theme:0xff6600,price:49},{id:6,name:"Vault Velocity",desc:"Luxury Vehicle Brokerage",theme:0xc0c0c0,price:999},{id:7,name:"Kiaros",desc:"AI Technology Solutions",theme:0x9400d3,price:99},{id:8,name:"CleanSwarm",desc:"AI Cleaning Services",theme:0x00ced1,price:49},{id:9,name:"Vigilax",desc:"Security Intelligence",theme:0xff1493,price:99},{id:10,name:"Neural Graph",desc:"Memory Architecture",theme:0xffd700,price:199}];
-let scene,camera,renderer,floorMeshes=[],currentFloor=1,raycaster=new THREE.Raycaster(),mouse=new THREE.Vector2(),audioSys;
-function init(){const cvs=document.getElementById('canvas');scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0,0.002);camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1e3);renderer=new THREE.WebGLRenderer({canvas:cvs,antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));const amb=new THREE.AmbientLight(0x404040);scene.add(amb);const pt=new THREE.PointLight(0xd4af37,2,200);pt.position.set(20,100,20);scene.add(pt);const geo=new THREE.BoxGeometry(10,2,10);FLOORS.forEach((f,i)=>{const mat=new THREE.MeshStandardMaterial({color:f.theme,emissive:f.theme,emissiveIntensity:0.15,metalness:0.6,roughness:0.4});const mesh=new THREE.Mesh(geo,mat);mesh.position.y=i*3.5;mesh.userData=f;scene.add(mesh);floorMeshes.push(mesh);const label=makeLabel(f.name,i*3.5);scene.add(label)});camera.position.set(18,8,30);camera.lookAt(0,0,0);buildElevator();document.getElementById('loading').style.display='none';animate();window.addEventListener('resize',onResize);window.addEventListener('mousemove',onMouseMove);window.addEventListener('click',onClick);updateUI();initAudio()}
-function makeLabel(text,y){const canvas=document.createElement('canvas');canvas.width=512;canvas.height=64;const ctx=canvas.getContext('2d');ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(0,0,512,64);ctx.fillStyle='#d4af37';ctx.font='bold 20px Arial';ctx.textAlign='center';ctx.fillText(text,256,40);const tex=new THREE.CanvasTexture(canvas);const mat=new THREE.MeshBasicMaterial({map:tex,transparent:true});const mesh=new THREE.Mesh(new THREE.PlaneGeometry(9,1.2),mat);mesh.position.set(0,y+1.5,5.1);return mesh}
-function buildElevator(){const el=document.getElementById('elevator');FLOORS.forEach(f=>{const btn=document.createElement('button');btn.className='floor-btn';btn.textContent=f.id;btn.onclick=()=>goFloor(f.id);if(f.id===1)btn.classList.add('active');el.appendChild(btn)})}
-function goFloor(id){currentFloor=id;const f=FLOORS[id-1];document.querySelectorAll('.floor-btn').forEach((b,i)=>b.classList.toggle('active',i+1===id));document.getElementById('fi-name').textContent='Floor '+id+': '+f.name;document.getElementById('fi-desc').textContent=f.desc;document.getElementById('fi-price').textContent=f.price>0?'$'+f.price+'/month':'FREE';document.getElementById('floor-info').style.display='block';gsap.to(camera.position,{x:15,y:(id-1)*3.5+8,z:22,duration:1.5,ease:'power2.inOut'});if(audioSys)audioSys.playTone('elevator',800,0.3)}
-function onResize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)}
-function onMouseMove(e){mouse.x=e.clientX/innerWidth*2-1;mouse.y=-(e.clientY/innerHeight)*2+1}
-function onClick(){raycaster.setFromCamera(mouse,camera);const hits=raycaster.intersectObjects(floorMeshes);if(hits.length>0)goFloor(hits[0].object.userData.id)}
-function updateUI(){const rev=localStorage.getItem('empire_revenue')||'0';document.getElementById('rev-amt').textContent='$'+parseFloat(rev).toFixed(2);document.getElementById('active-floors').textContent=FLOORS.filter(f=>f.active).length;document.getElementById('agent-count').textContent=Math.floor(Math.random()*5+1)}
-function enterFloor(){const f=FLOORS[currentFloor-1];if(currentFloor===4)window.location.href='/ccldr/';else if(f.price>0)subscribe();else alert('Welcome to '+f.name)}
-function subscribe(){const f=FLOORS[currentFloor-1];if(f.price===0)return;const form=document.createElement('form');form.method='POST';form.action='https://www.paypal.com/cgi-bin/webscr';form.target='_top';const fields={cmd:'_xclick-subscriptions',business:'techpetcage@gmail.com',item_name:f.name+' Subscription',a3:f.price.toFixed(2),p3:'1',t3:'M',src:'1',currency_code:'USD'};for(const[k,v]of Object.entries(fields)){const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;form.appendChild(i)}document.body.appendChild(form);form.submit()}
-function initAudio(){if(typeof EmpireAudioSystem!=='undefined'){audioSys=new EmpireAudioSystem();audioSys.init();audioSys.playAmbient('lobby',0.3)}}
-function animate(){requestAnimationFrame(animate);const t=Date.now()*0.001;floorMeshes.forEach((m,i)=>{m.rotation.y+=0.002*(i%2===0?1:-1);m.position.y=i*3.5+Math.sin(t+i)*0.1});renderer.render(scene,camera)}
-window.onload=init;
+const bootLog = document.getElementById("boot");
+function log(msg, cls="ok") { bootLog.innerHTML += `<span class="${cls}">${msg}</span>\n`; }
+function checkModule(name, testFn) { try { const ok = testFn(); log(`${name}: ${ok ? "OK" : "FAIL"}`, ok ? "ok" : "fail"); return ok; } catch (e) { log(`${name}: ERROR`, "fail"); return false; } }
+function loadScript(src) { return new Promise((resolve) => { const s = document.createElement("script"); s.src = src; s.onload = () => resolve(true); s.onerror = () => resolve(false); document.head.appendChild(s); }); }
+async function boot() {
+  log("Loading core systems...");
+  const core = await loadScript("./core/EventStateManagerV2.js");
+  const dash = await loadScript("./dashboard/EmpireHQDashboardSkeleton.js");
+  const audio = await loadScript("./audio/EmpireAudioSystem.js");
+  const camera = await loadScript("./camera/EmpireCameraSystem.js");
+  log("Verifying runtime objects...");
+  checkModule("EventStateManager", () => typeof window.EventStateManagerV2 !== "undefined");
+  checkModule("Dashboard", () => typeof window.EmpireHQDashboardSkeleton !== "undefined");
+  checkModule("Audio", () => typeof window.EmpireAudioSystem !== "undefined");
+  checkModule("Camera", () => typeof window.EmpireCameraSystem !== "undefined");
+  log("ACCESS GRANTED", "ok");
+  bootLog.style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+  const threeWorking = !!window.THREE;
+  document.getElementById("threeStatus").innerText = threeWorking ? "THREE.JS LOADED" : "THREE.JS NOT DETECTED";
+}
+function go(path) { window.location.href = "/" + path + "/"; }
+boot();
 </script>
-<script src="beacon-patch.js"></script>
 </body>
 </html>
