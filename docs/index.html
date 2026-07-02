@@ -1,70 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Francisco Holdings — Empire Core</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #05070a; color: #00ff88; }
-    #boot { padding: 20px; font-size: 14px; white-space: pre-wrap; }
-    .ok { color: #00ff88; }
-    .fail { color: #ff3b3b; }
-    .warn { color: #ffcc00; }
-    #dashboard { display: none; padding: 20px; }
-    .panel { border: 1px solid #00ff88; padding: 10px; margin: 10px 0; }
-    button { padding: 10px; margin: 5px; background: #111; color: #00ff88; border: 1px solid #00ff88; cursor: pointer; }
-    button:hover { background: #00ff88; color: #000; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Empire Bootstrap v2</title>
+<style>
+body{margin:0;background:#05070d;font-family:Arial,sans-serif;color:white;overflow:hidden}
+#bootlog{position:absolute;top:10px;left:10px;font-size:12px;line-height:1.4;max-width:50%;z-index:10}
+#status{position:absolute;bottom:10px;left:10px;font-size:12px;color:#00ff9d;z-index:10}
+#redcube{position:absolute;top:50%;left:50%;width:40px;height:40px;background:red;transform:translate(-50%,-50%);display:none;z-index:20}
+#app{width:100vw;height:100vh}
+</style>
 </head>
 <body>
-<div id="boot">BOOTING EMPIRE...\n</div>
-<div id="dashboard">
-  <h1>EMPIRE COMMAND CENTER</h1>
-  <div class="panel">
-    <h3>FLOORS</h3>
-    <button onclick="go('dashboard')">CEO DASHBOARD (PIN 3921)</button>
-    <button onclick="go('omniaguard')">OmniGuard</button>
-    <button onclick="go('primedox')">PrimeDox</button>
-    <button onclick="go('ccldr')">CCLDR</button>
-    <button onclick="go('techpetcage')">TechPetCage</button>
-    <button onclick="go('vaultvelocity')">Vault Velocity</button>
-    <button onclick="go('vigilax')">Vigilax</button>
-    <button onclick="go('cleanswarm')">CleanSwarm</button>
-    <button onclick="go('kiaros')">Kiaros</button>
-  </div>
-  <div class="panel">
-    <h3>3D STATUS</h3>
-    <div id="threeStatus">checking...</div>
-  </div>
-  <div class="panel">
-    <h3>MODULE STATUS</h3>
-    <div id="moduleStatus"></div>
-  </div>
-</div>
+<div id="bootlog">BOOT SEQUENCE INITIATED...</div>
+<div id="status">INITIALIZING KERNEL...</div>
+<div id="redcube"></div>
+<div id="app"></div>
 <script>
-const bootLog = document.getElementById("boot");
-function log(msg, cls="ok") { bootLog.innerHTML += `<span class="${cls}">${msg}</span>\n`; }
-function checkModule(name, testFn) { try { const ok = testFn(); log(`${name}: ${ok ? "OK" : "FAIL"}`, ok ? "ok" : "fail"); return ok; } catch (e) { log(`${name}: ERROR`, "fail"); return false; } }
-function loadScript(src) { return new Promise((resolve) => { const s = document.createElement("script"); s.src = src; s.onload = () => resolve(true); s.onerror = () => resolve(false); document.head.appendChild(s); }); }
-async function boot() {
-  log("Loading core systems...");
-  const core = await loadScript("./core/EventStateManagerV2.js");
-  const dash = await loadScript("./dashboard/EmpireHQDashboardSkeleton.js");
-  const audio = await loadScript("./audio/EmpireAudioSystem.js");
-  const camera = await loadScript("./camera/EmpireCameraSystem.js");
-  log("Verifying runtime objects...");
-  checkModule("EventStateManager", () => typeof window.EventStateManagerV2 !== "undefined");
-  checkModule("Dashboard", () => typeof window.EmpireHQDashboardSkeleton !== "undefined");
-  checkModule("Audio", () => typeof window.EmpireAudioSystem !== "undefined");
-  checkModule("Camera", () => typeof window.EmpireCameraSystem !== "undefined");
-  log("ACCESS GRANTED", "ok");
-  bootLog.style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
-  const threeWorking = !!window.THREE;
-  document.getElementById("threeStatus").innerText = threeWorking ? "THREE.JS LOADED" : "THREE.JS NOT DETECTED";
-}
-function go(path) { window.location.href = "/" + path + "/"; }
-boot();
+const log=(msg)=>{const el=document.getElementById("bootlog");el.innerHTML+="<br>"+msg;console.log(msg)};
+window.EmpireKernel={modules:{},register(name,module){this.modules[name]=module;log("REGISTERED: "+name)},get(name){return this.modules[name]},async init(){log("KERNEL INIT START");for(const key in this.modules){const m=this.modules[key];if(m&&typeof m.init==="function"){log("INIT MODULE: "+key);await m.init(this);log("OK: "+key)}}log("KERNEL INIT COMPLETE");window.dispatchEvent(new Event("EMPIRE_READY"))}};
+</script>
+<script src="core/EmpireEventBusV2.js"></script>
+<script src="core/EmpireModuleRegistry.js"></script>
+<script src="render/EmpireRendererPluginV2.js"></script>
+<script>
+function require(name){if(!window[name]){log("FAIL: missing "+name);throw new Error(name+" not loaded")}log("FOUND: "+name)}
+window.addEventListener("DOMContentLoaded",async()=>{
+  log("DOM READY");
+  require("EmpireEventBus");require("EmpireModuleRegistry");require("EmpireRendererPluginV2");
+  log("REGISTERING MODULES");
+  const registry=new EmpireModuleRegistry();
+  registry.register("events",window.EmpireEventBus);
+  registry.register("renderer",new EmpireRendererPluginV2());
+  registry.register("omniaguard",new OmniGuardModule(),["events"]);
+  log("STARTING KERNEL");
+  registry.initAll(registry);
+  const cube=document.getElementById("redcube");cube.style.display="block";
+  log("VISUAL BEACON ACTIVE");
+  document.getElementById("status").innerText="EMPIRE ONLINE — VISUAL VERIFIED";
+});
 </script>
 </body>
 </html>
