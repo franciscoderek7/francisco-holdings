@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Empire Kernel v2 - Hardened Bootstrap</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francisco Holdings Inc — Empire HQ</title>
 <style>
-body{margin:0;background:#05060a;font-family:Arial,sans-serif;overflow:hidden;color:white}
-#bootlog{position:absolute;top:10px;left:10px;font-size:12px;max-width:60%;z-index:10;white-space:pre-line}
-#status{position:absolute;bottom:10px;left:10px;color:#00ff9d;font-size:12px;z-index:10}
-#app{width:100vw;height:100vh}
-#redcube{position:absolute;top:50%;left:50%;width:40px;height:40px;background:red;transform:translate(-50%,-50%);display:none;z-index:20}
-#dashboard{position:absolute;right:10px;top:10px;z-index:15;font-size:12px;background:rgba(0,0,0,0.4);padding:10px;border:1px solid #222}
-button{display:block;margin:5px 0;background:#111;color:white;border:1px solid #333;padding:5px;cursor:pointer}
-button:hover{background:#00ff9d;color:#000}
+  body{margin:0;overflow:hidden;background:#05060a;color:#d4af37;font-family:'Segoe UI',sans-serif}
+  #app{position:fixed;top:0;left:0;width:100%;height:100%}
+  #hud{position:fixed;top:10px;left:10px;z-index:100;background:rgba(0,0,0,0.8);border:1px solid #d4af37;padding:12px;border-radius:6px;min-width:220px}
+  #hud h3{margin:0 0 8px;color:#50c878;font-size:14px}
+  #hud .line{font-size:12px;margin:4px 0;color:#ccc}
+  #hud .badge{display:inline-block;background:#d4af37;color:#000;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:bold;margin-right:4px}
+  #notifications{position:fixed;bottom:10px;right:10px;z-index:100;max-width:300px}
+  .note{background:rgba(0,0,0,0.9);border-left:3px solid #50c878;padding:8px 12px;margin:4px 0;font-size:12px;color:#fff;border-radius:0 4px 4px 0;animation:slideIn 0.3s ease}
+  @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-<div id="bootlog">BOOT SEQUENCE v2 STARTING...</div>
-<div id="status">INITIALIZING REGISTRY...</div>
-<div id="redcube"></div>
-<div id="dashboard">
-<div>EMPIRE COMMAND</div>
-<button onclick="selectFloor(1)">Floor 1</button>
-<button onclick="selectFloor(2)">Floor 2</button>
-<button onclick="selectFloor(3)">Floor 3</button>
-<button onclick="selectFloor(4)">Floor 4</button>
-<button onclick="selectFloor(5)">Floor 5</button>
-</div>
 <div id="app"></div>
+<div id="hud">
+  <h3>FRANCISCO HOLDINGS HQ</h3>
+  <div class="line"><span class="badge">ZENITH</span>System Online</div>
+  <div class="line" id="floor-display">Floor: LOBBY</div>
+  <div class="line" id="revenue-display">Revenue: $0.00</div>
+  <div class="line" id="agent-display">Agents: 10 Active</div>
+</div>
+<div id="notifications"></div>
+
+<script src="core/EmpireKernel.js"></script>
+<script src="core/EmpireStateCoreV1.js"></script>
+<script src="core/EmpireEventWiringV1.js"></script>
+<script src="core/EmpireRevenueLoopV1.js"></script>
+<script src="core/EmpireAgentSwarmV1.js"></script>
+<script src="render/EmpireRendererPluginV2.js"></script>
+
 <script>
-const log=(msg)=>{document.getElementById("bootlog").innerText+="\n"+msg;console.log(msg)};
-window.ModuleRegistry={modules:new Map(),register(name,instance,deps=[]){this.modules.set(name,{instance,deps});log("REGISTER: "+name)},get(name){return this.modules.get(name)?.instance},initOrder(){const resolved=[],visited=new Set();const visit=(name)=>{if(visited.has(name))return;visited.add(name);const mod=this.modules.get(name);if(!mod)return;for(const dep of mod.deps)visit(dep);resolved.push(name)};for(const name of this.modules.keys())visit(name);return resolved},async initAll(){const order=this.initOrder();log("INIT ORDER: "+order.join(" → "));for(const name of order){const mod=this.modules.get(name);if(mod?.instance?.init){log("INIT: "+name);await mod.instance.init(this);log("OK: "+name)}}window.dispatchEvent(new Event("EMPIRE_READY"))}};
-function require(name){if(!window[name]){log("FAIL: "+name);throw new Error(name+" missing")}log("FOUND: "+name)}
-window.selectFloor=(n)=>{const renderer=ModuleRegistry.get("renderer");if(renderer?.goToFloor)renderer.goToFloor(n);log("FLOOR SELECTED: "+n)};
-window.addEventListener("DOMContentLoaded",async()=>{
-  log("DOM READY");
-  require("EmpireModuleRegistry");require("EmpireEventBusV2");require("EmpireRendererPluginV2");require("OmniGuardModule");
-  log("MODULES VERIFIED");
-  ModuleRegistry.register("events",new EmpireEventBusV2());
-  ModuleRegistry.register("renderer",new EmpireRendererPluginV2("app"),["events"]);
-  ModuleRegistry.register("omniaguard",new OmniGuardModule(),["events"]);
-  log("REGISTRY BUILD COMPLETE");
-  await ModuleRegistry.initAll();
-  const cube=document.getElementById("redcube");cube.style.display="block";
-  document.getElementById("status").innerText="EMPIRE v2 ONLINE — HARDENED";
-  log("VISUAL BEACON ACTIVE");
-  window.addEventListener("EMPIRE_READY",()=>{log("HANDOFF → COMMAND CENTER READY")});
+const kernel=new EmpireKernel();
+kernel.register("state",new EmpireStateCoreV1());
+kernel.register("renderer",new EmpireRendererPluginV2("app"));
+kernel.register("wiring",new EmpireEventWiringV1());
+kernel.register("revenue",new EmpireRevenueLoopV1());
+kernel.register("swarm",new EmpireAgentSwarmV1());
+kernel.boot().then(()=>{
+  console.log("EMPIRE ONLINE — 392 FLOORS, 10 AGENTS, REVENUE ARMED");
+  document.getElementById("floor-display").textContent="Floor: LOBBY (1 of 392)";
+});
+
+const events=kernel.get("events");
+events.on("floor:selected",(d)=>{document.getElementById("floor-display").textContent=`Floor: ${d.floor+1} of 392`});
+events.on("paypal:payment",(d)=>{document.getElementById("revenue-display").textContent=`Revenue: $${d.amount.toFixed(2)}`});
+events.on("hq:notify",(d)=>{
+  const n=document.createElement("div");n.className="note";n.innerHTML=`<strong>${d.badge}</strong> ${d.message}`;document.getElementById("notifications").appendChild(n);setTimeout(()=>n.remove(),5000)
 });
 </script>
-<script src="core/EmpireModuleRegistry.js"></script>
-<script src="core/EmpireEventBusV2.js"></script>
-<script src="render/EmpireRendererPluginV2.js"></script>
-<script src="omniaguard/OmniGuardModule.js"></script>
 </body>
 </html>
