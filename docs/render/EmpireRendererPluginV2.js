@@ -1,26 +1,13 @@
-(function(){
-  class RendererPlugin{
-    init(kernel){
-      this.kernel=kernel;
-      const THREE=window.THREE;
-      if(!THREE)throw new Error("THREE not loaded");
-      this.scene=new THREE.Scene();
-      this.camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,1000);
-      this.camera.position.set(8,10,14);
-      this.renderer=new THREE.WebGLRenderer({antialias:true});
-      this.renderer.setSize(innerWidth,innerHeight);
-      document.body.appendChild(this.renderer.domElement);
-      const ambient=new THREE.AmbientLight(0xffffff,0.7);
-      const dir=new THREE.DirectionalLight(0xffffff,1);
-      dir.position.set(10,20,10);
-      this.scene.add(ambient);this.scene.add(dir);
-      const cube=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({color:0xff0000}));
-      cube.position.y=2;this.scene.add(cube);
-      this.animate();
-      window.addEventListener("resize",()=>this.resize())
-    }
-    animate(){requestAnimationFrame(()=>this.animate());this.renderer.render(this.scene,this.camera)}
-    resize(){this.camera.aspect=innerWidth/innerHeight;this.camera.updateProjectionMatrix();this.renderer.setSize(innerWidth,innerHeight)}
-  }
-  window.EmpireRendererPluginV2=RendererPlugin;
-})();
+class EmpireRendererPluginV2{
+  constructor(mountId="app"){this.mountId=mountId;this.scene=null;this.camera=null;this.renderer=null;this.floors=[];this.events=null;this.raycaster=new THREE.Raycaster();this.mouse=new THREE.Vector2();this.FLOOR_HEIGHT=2.5;this.FLOOR_COUNT=392}
+  async init(kernel){this.events=kernel.get("events");this.createScene();this.createCamera();this.createRenderer();this.createLights();this.createFloors();this.bindEvents();this.animate();this.events.emit("renderer:ready",{})}
+  createScene(){this.scene=new THREE.Scene();this.scene.background=new THREE.Color(0x05060a)}
+  createCamera(){this.camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,2000);this.camera.position.set(10,20,30)}
+  createRenderer(){const mount=document.getElementById(this.mountId);this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});this.renderer.setSize(window.innerWidth,window.innerHeight);mount.appendChild(this.renderer.domElement)}
+  createLights(){const ambient=new THREE.AmbientLight(0xffffff,0.6);this.scene.add(ambient);const directional=new THREE.DirectionalLight(0xffffff,1);directional.position.set(10,20,10);this.scene.add(directional)}
+  createFloors(){const geometry=new THREE.BoxGeometry(5,this.FLOOR_HEIGHT,5);for(let i=0;i<this.FLOOR_COUNT;i++){const material=new THREE.MeshStandardMaterial({color:new THREE.Color(`hsl(${(i*8)%360},70%,55%)`),metalness:0.4,roughness:0.6});const mesh=new THREE.Mesh(geometry,material);mesh.position.y=i*this.FLOOR_HEIGHT;mesh.userData.floorIndex=i;this.scene.add(mesh);this.floors.push(mesh)}}
+  bindEvents(){window.addEventListener("resize",()=>{this.camera.aspect=window.innerWidth/window.innerHeight;this.camera.updateProjectionMatrix();this.renderer.setSize(window.innerWidth,window.innerHeight)});window.addEventListener("click",(e)=>{this.mouse.x=(e.clientX/window.innerWidth)*2-1;this.mouse.y=-(e.clientY/window.innerHeight)*2+1;this.raycaster.setFromCamera(this.mouse,this.camera);const hits=this.raycaster.intersectObjects(this.floors);if(hits.length>0){const floor=hits[0].object.userData.floorIndex;this.events.emit("floor:selected",{floor});this.moveCameraToFloor(floor)}})}
+  moveCameraToFloor(floorIndex){const targetY=floorIndex*this.FLOOR_HEIGHT;const targetPosition={x:10,y:targetY+5,z:20};if(window.gsap){gsap.to(this.camera.position,{...targetPosition,duration:1.2,ease:"power2.inOut"})}else{this.camera.position.set(targetPosition.x,targetPosition.y,targetPosition.z)}this.events.emit("camera:moved",{floorIndex})}
+  animate(){requestAnimationFrame(()=>this.animate());this.floors.forEach((f,i)=>{f.rotation.y+=0.001});this.renderer.render(this.scene,this.camera)}
+}
+window.EmpireRendererPluginV2=EmpireRendererPluginV2;
