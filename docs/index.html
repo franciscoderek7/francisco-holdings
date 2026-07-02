@@ -2,58 +2,327 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francisco Holdings Inc — Empire HQ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#FFD700">
+<title>Francisco Holdings Inc — Empire Command Center</title>
+<link rel="manifest" href="manifest.json">
 <style>
-  body{margin:0;overflow:hidden;background:#05060a;color:#d4af37;font-family:'Segoe UI',sans-serif}
-  #app{position:fixed;top:0;left:0;width:100%;height:100%}
-  #hud{position:fixed;top:10px;left:10px;z-index:100;background:rgba(0,0,0,0.8);border:1px solid #d4af37;padding:12px;border-radius:6px;min-width:220px}
-  #hud h3{margin:0 0 8px;color:#50c878;font-size:14px}
-  #hud .line{font-size:12px;margin:4px 0;color:#ccc}
-  #hud .badge{display:inline-block;background:#d4af37;color:#000;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:bold;margin-right:4px}
-  #notifications{position:fixed;bottom:10px;right:10px;z-index:100;max-width:300px}
-  .note{background:rgba(0,0,0,0.9);border-left:3px solid #50c878;padding:8px 12px;margin:4px 0;font-size:12px;color:#fff;border-radius:0 4px 4px 0;animation:slideIn 0.3s ease}
-  @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05060a;color:#d4af37;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;min-height:100vh}
+#canvas-container{position:fixed;inset:0;z-index:1}
+#ui{position:fixed;z-index:10;pointer-events:none;width:100%;height:100%}
+#ui>*{pointer-events:auto}
+.top-bar{position:absolute;top:0;left:0;right:0;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(5,6,10,0.95) 0%,transparent 100%)}
+.logo{font-size:16px;letter-spacing:6px;text-transform:uppercase;font-weight:bold}
+.logo span{color:#50c878}
+.status{display:flex;align-items:center;gap:12px;font-size:12px}
+.status-dot{width:8px;height:8px;background:#50c878;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.command-panel{position:absolute;left:24px;top:80px;bottom:100px;width:280px;background:rgba(5,6,10,0.9);border:1px solid #d4af37;border-radius:16px;padding:20px;overflow-y:auto;backdrop-filter:blur(20px)}
+.command-panel h2{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#d4af37;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #333}
+.floor-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;margin-bottom:8px;cursor:pointer;transition:all 0.3s;border:1px solid transparent}
+.floor-item:hover,.floor-item.active{background:rgba(212,175,55,0.1);border-color:#d4af37}
+.floor-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.floor-info{flex:1}
+.floor-name{font-size:13px;font-weight:bold;color:#fff}
+.floor-status{font-size:11px;color:#888}
+.floor-live{width:8px;height:8px;background:#ff4444;border-radius:50%}
+.floor-live.active{background:#00ff88;animation:pulse 2s infinite}
+.camera-feed{position:absolute;right:24px;top:80px;width:320px;height:200px;background:#000;border:1px solid #d4af37;border-radius:12px;overflow:hidden}
+.camera-feed video{width:100%;height:100%;object-fit:cover}
+.camera-label{position:absolute;bottom:8px;left:12px;font-size:11px;color:#d4af37;background:rgba(0,0,0,0.7);padding:4px 8px;border-radius:4px}
+.audio-control{position:absolute;bottom:24px;left:24px;display:flex;gap:12px}
+.audio-btn{background:rgba(5,6,10,0.9);border:1px solid #d4af37;color:#d4af37;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px}
+.info-overlay{position:absolute;bottom:24px;right:24px;left:320px;background:rgba(5,6,10,0.9);border:1px solid #d4af37;border-radius:16px;padding:20px;backdrop-filter:blur(20px)}
+.info-overlay h3{font-size:18px;color:#FFD700;margin-bottom:8px}
+.info-overlay p{font-size:13px;color:#aaa;line-height:1.6}
+.metrics{display:flex;gap:24px;margin-top:16px}
+.metric{text-align:center}
+.metric .num{font-size:24px;font-weight:bold;color:#fff}
+.metric .label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px}
+#loading{position:fixed;inset:0;background:#05060a;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#loading h1{font-size:28px;letter-spacing:8px;color:#d4af37}
+#loading p{color:#555;font-size:12px;margin-top:12px}
+#loading .bar{width:200px;height:2px;background:#222;margin-top:20px;overflow:hidden}
+#loading .bar::after{content:'';display:block;width:40%;height:100%;background:#d4af37;animation:load 1.5s infinite}
+@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+.install-btn{position:fixed;bottom:24px;right:50%;transform:translateX(50%);background:#FFD700;color:#000;border:none;padding:14px 28px;font-size:14px;font-weight:bold;border-radius:10px;cursor:pointer;z-index:100;display:none}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-<div id="app"></div>
-<div id="hud">
-  <h3>FRANCISCO HOLDINGS HQ</h3>
-  <div class="line"><span class="badge">ZENITH</span>System Online</div>
-  <div class="line" id="floor-display">Floor: LOBBY</div>
-  <div class="line" id="revenue-display">Revenue: $0.00</div>
-  <div class="line" id="agent-display">Agents: 10 Active</div>
+<div id="loading">
+<h1>FRANCISCO HOLDINGS</h1>
+<p>Initializing Empire Command Center...</p>
+<div class="bar"></div>
 </div>
-<div id="notifications"></div>
 
-<script src="core/EmpireKernel.js"></script>
-<script src="core/EmpireStateCoreV1.js"></script>
-<script src="core/EmpireEventWiringV1.js"></script>
-<script src="core/EmpireRevenueLoopV1.js"></script>
-<script src="core/EmpireAgentSwarmV1.js"></script>
-<script src="render/EmpireRendererPluginV2.js"></script>
+<div id="canvas-container"></div>
+
+<div id="ui">
+<div class="top-bar">
+<div class="logo">FRANCISCO <span>HOLDINGS</span></div>
+<div class="status">
+<span class="status-dot"></span>
+<span>EMPIRE ONLINE — 10 FLOORS</span>
+<span style="color:#555">|</span>
+<span id="clock">00:00</span>
+</div>
+</div>
+
+<div class="command-panel">
+<h2>Floor Control</h2>
+<div id="floorList"></div>
+</div>
+
+<div class="camera-feed" id="camFeed">
+<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#333;font-size:12px">Camera Feed</div>
+<div class="camera-label">FLOOR 1 — LOBBY CAM</div>
+</div>
+
+<div class="audio-control">
+<button class="audio-btn" id="audioBtn" onclick="toggleAudio()">🔇</button>
+<button class="audio-btn" onclick="alert('Broadcast mode active')">📢</button>
+</div>
+
+<div class="info-overlay" id="infoOverlay">
+<h3>Floor 1 — Francisco Holdings HQ</h3>
+<p>The empire command center. All operations monitored from this floor. Corporate governance, revenue tracking, and ZENITH oversight active.</p>
+<div class="metrics">
+<div class="metric"><div class="num" id="revMetric">$0</div><div class="label">Revenue</div></div>
+<div class="metric"><div class="num" id="subMetric">0</div><div class="label">Subscribers</div></div>
+<div class="metric"><div class="num" id="threatMetric">0</div><div class="label">Threats</div></div>
+<div class="metric"><div class="num" id="agentMetric">10</div><div class="label">Agents</div></div>
+</div>
+</div>
+
+<button class="install-btn" id="installBtn" onclick="installPWA()">Install Empire App</button>
+</div>
 
 <script>
-const kernel=new EmpireKernel();
-kernel.register("state",new EmpireStateCoreV1());
-kernel.register("renderer",new EmpireRendererPluginV2("app"));
-kernel.register("wiring",new EmpireEventWiringV1());
-kernel.register("revenue",new EmpireRevenueLoopV1());
-kernel.register("swarm",new EmpireAgentSwarmV1());
-kernel.boot().then(()=>{
-  console.log("EMPIRE ONLINE — 392 FLOORS, 10 AGENTS, REVENUE ARMED");
-  document.getElementById("floor-display").textContent="Floor: LOBBY (1 of 392)";
+const FLOORS=[
+{name:"Francisco Holdings HQ",desc:"Empire command center. All operations monitored.",color:"#FFD700",icon:"👑",revenue:0,subs:0,threats:0,agents:10},
+{name:"OmniGuard Cyber Defense",desc:"AI cybersecurity. Threat detection active.",color:"#00d4ff",icon:"🛡️",revenue:0,subs:0,threats:47293,agents:14},
+{name:"PrimeDox AI HQ",desc:"Spellbook Killer. 45+ legal templates.",color:"#00ff88",icon:"⚡",revenue:0,subs:1,threats:0,agents:8},
+{name:"CCLDR Legal Engine",desc:"Constitutional Cannabis Legal Documents.",color:"#d4af37",icon:"⚖️",revenue:0,subs:0,threats:0,agents:5},
+{name:"TechPetCage Devices",desc:"Device protection and warranties.",color:"#FF6B35",icon:"📱",revenue:0,subs:0,threats:0,agents:4},
+{name:"CleanSwarm Operations",desc:"AI cleaning dispatch and scheduling.",color:"#00CED1",icon:"🧹",revenue:0,subs:0,threats:0,agents:6},
+{name:"Vault Velocity Auto",desc:"Luxury vehicle brokerage.",color:"#C0C0C0",icon:"🏎️",revenue:0,subs:0,threats:0,agents:3},
+{name:"VIGILAX Security",desc:"Physical security intelligence.",color:"#8B0000",icon:"🔒",revenue:0,subs:0,threats:0,agents:7},
+{name:"WeedLaw Education",desc:"Cannabis constitutional law.",color:"#228B22",icon:"🌿",revenue:0,subs:0,threats:0,agents:4},
+{name:"BENO-X Cannabis",desc:"Medical marijuana consulting.",color:"#32CD32",icon:"💊",revenue:0,subs:0,threats:0,agents:3}
+];
+
+// Audio
+let audioCtx,osc,gain,isPlaying=false;
+function initAudio(){
+audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+osc=audioCtx.createOscillator();
+gain=audioCtx.createGain();
+osc.type='sine';
+osc.frequency.setValueAtTime(110,audioCtx.currentTime);
+gain.gain.setValueAtTime(0.02,audioCtx.currentTime);
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start();
+isPlaying=true;
+document.getElementById('audioBtn').textContent='🔊';
+}
+function toggleAudio(){
+if(!audioCtx)initAudio();
+else if(isPlaying){gain.gain.setValueAtTime(0,audioCtx.currentTime);isPlaying=false;document.getElementById('audioBtn').textContent='🔇';}
+else{gain.gain.setValueAtTime(0.02,audioCtx.currentTime);isPlaying=true;document.getElementById('audioBtn').textContent='🔊';}
+}
+
+// Three.js Empire Building
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x05060a);
+scene.fog=new THREE.FogExp2(0x05060a,0.015);
+
+const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
+camera.position.set(12,15,25);
+
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.shadowMap.enabled=true;
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+const ambient=new THREE.AmbientLight(0xffffff,0.4);
+scene.add(ambient);
+const dirLight=new THREE.DirectionalLight(0xFFD700,0.8);
+dirLight.position.set(10,30,10);
+dirLight.castShadow=true;
+scene.add(dirLight);
+
+const pointLight=new THREE.PointLight(0xFFD700,1,50);
+pointLight.position.set(0,20,0);
+scene.add(pointLight);
+
+// Empire Building - 10 floors with proper architecture
+const floorMeshes=[];
+const floorGroup=new THREE.Group();
+scene.add(floorGroup);
+
+const FLOOR_HEIGHT=2.5;
+const BUILDING_WIDTH=5;
+const BUILDING_DEPTH=5;
+
+// Base/lobby
+const baseGeo=new THREE.BoxGeometry(BUILDING_WIDTH+2,3,BUILDING_DEPTH+2);
+const baseMat=new THREE.MeshStandardMaterial({color:0x1a1209,metalness:0.8,roughness:0.2});
+const base=new THREE.Mesh(baseGeo,baseMat);
+base.position.y=1.5;
+base.receiveShadow=true;
+floorGroup.add(base);
+
+// Floors
+FLOORS.forEach((f,i)=>{
+const y=3+i*FLOOR_HEIGHT;
+const geo=new THREE.BoxGeometry(BUILDING_WIDTH,FLOOR_HEIGHT-0.1,BUILDING_DEPTH);
+const mat=new THREE.MeshStandardMaterial({
+color:new THREE.Color(f.color),
+metalness:0.7,
+roughness:0.3,
+emissive:new THREE.Color(f.color),
+emissiveIntensity:0.2
+});
+const mesh=new THREE.Mesh(geo,mat);
+mesh.position.y=y;
+mesh.castShadow=true;
+mesh.userData={floorIndex:i,name:f.name};
+floorGroup.add(mesh);
+floorMeshes.push(mesh);
+
+// Window lines
+for(let w=0;w<4;w++){
+const winGeo=new THREE.BoxGeometry(0.3,0.8,0.1);
+const winMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.3});
+const win=new THREE.Mesh(winGeo,winMat);
+win.position.set(-1.5+w*1,y,BUILDING_DEPTH/2+0.05);
+floorGroup.add(win);
+}
+
+// Floor label
+const labelGeo=new THREE.PlaneGeometry(0.8,0.4);
+const canvas=document.createElement('canvas');
+canvas.width=128;canvas.height=64;
+const ctx=canvas.getContext('2d');
+ctx.fillStyle=f.color;
+ctx.fillRect(0,0,128,64);
+ctx.fillStyle='#000';
+ctx.font='bold 40px Arial';
+ctx.textAlign='center';
+ctx.fillText((i+1).toString(),64,48);
+const labelTex=new THREE.CanvasTexture(canvas);
+const labelMat=new THREE.MeshBasicMaterial({map:labelTex});
+const label=new THREE.Mesh(labelGeo,labelMat);
+label.position.set(BUILDING_WIDTH/2+0.1,y,0);
+label.rotation.y=Math.PI/2;
+floorGroup.add(label);
 });
 
-const events=kernel.get("events");
-events.on("floor:selected",(d)=>{document.getElementById("floor-display").textContent=`Floor: ${d.floor+1} of 392`});
-events.on("paypal:payment",(d)=>{document.getElementById("revenue-display").textContent=`Revenue: $${d.amount.toFixed(2)}`});
-events.on("hq:notify",(d)=>{
-  const n=document.createElement("div");n.className="note";n.innerHTML=`<strong>${d.badge}</strong> ${d.message}`;document.getElementById("notifications").appendChild(n);setTimeout(()=>n.remove(),5000)
+// Spire on top
+const spireGeo=new THREE.ConeGeometry(1,4,8);
+const spireMat=new THREE.MeshStandardMaterial({color:0xFFD700,metalness:1,roughness:0.1,emissive:0xFFD700,emissiveIntensity:0.5});
+const spire=new THREE.Mesh(spireGeo,spireMat);
+spire.position.y=3+10*FLOOR_HEIGHT+2;
+floorGroup.add(spire);
+
+// Ground
+const groundGeo=new THREE.CircleGeometry(30,64);
+const groundMat=new THREE.MeshStandardMaterial({color:0x0a0f1a,metalness:0.5,roughness:0.8});
+const ground=new THREE.Mesh(groundGeo,groundMat);
+ground.rotation.x=-Math.PI/2;
+ground.receiveShadow=true;
+scene.add(ground);
+
+// Grid on ground
+const gridHelper=new THREE.GridHelper(60,60,0x222222,0x111111);
+gridHelper.position.y=0.01;
+scene.add(gridHelper);
+
+// Stars
+const starsGeo=new THREE.BufferGeometry();
+const sCount=1500;
+const sPos=new Float32Array(sCount*3);
+for(let i=0;i<sCount*3;i++)sPos[i]=(Math.random()-0.5)*300;
+starsGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+const starsMat=new THREE.PointsMaterial({color:0xffffff,size:0.15,transparent:true,opacity:0.6});
+const stars=new THREE.Points(starsGeo,starsMat);
+scene.add(stars);
+
+// UI Floor List
+const floorList=document.getElementById('floorList');
+FLOORS.forEach((f,i)=>{
+const item=document.createElement('div');
+item.className='floor-item'+(i===0?' active':'');
+item.innerHTML=`<div class="floor-icon" style="background:${f.color}20;color:${f.color}">${f.icon}</div><div class="floor-info"><div class="floor-name">${f.name}</div><div class="floor-status">Floor ${i+1}</div></div><div class="floor-live ${i===0?'active':''}"></div>`;
+item.onclick=()=>selectFloor(i);
+floorList.appendChild(item);
 });
+
+function selectFloor(index){
+document.querySelectorAll('.floor-item').forEach((el,i)=>el.classList.toggle('active',i===index));
+document.querySelectorAll('.floor-live').forEach((el,i)=>el.classList.toggle('active',i===index));
+const f=FLOORS[index];
+document.getElementById('infoOverlay').innerHTML=`<h3>Floor ${index+1} — ${f.name}</h3><p>${f.desc}</p><div class="metrics"><div class="metric"><div class="num">$${f.revenue}</div><div class="label">Revenue</div></div><div class="metric"><div class="num">${f.subs}</div><div class="label">Subscribers</div></div><div class="metric"><div class="num">${f.threats}</div><div class="label">Threats</div></div><div class="metric"><div class="num">${f.agents}</div><div class="label">Agents</div></div></div>`;
+
+const targetY=3+index*FLOOR_HEIGHT;
+gsap.to(camera.position,{y:targetY+5,z:15,x:8,duration:1.5,ease:"power2.inOut"});
+gsap.to(camera.lookAt,{y:targetY,duration:1.5});
+
+document.querySelector('.camera-label').textContent=`FLOOR ${index+1} — ${f.name.toUpperCase()} CAM`;
+}
+
+// Raycaster
+const raycaster=new THREE.Raycaster();
+const mouse=new THREE.Vector2();
+window.addEventListener('click',(e)=>{
+if(e.target.closest('#ui'))return;
+mouse.x=(e.clientX/window.innerWidth)*2-1;
+mouse.y=-(e.clientY/window.innerHeight)*2+1;
+raycaster.setFromCamera(mouse,camera);
+const hits=raycaster.intersectObjects(floorMeshes);
+if(hits.length>0)selectFloor(hits[0].object.userData.floorIndex);
+});
+
+window.addEventListener('resize',()=>{
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth,window.innerHeight);
+});
+
+// Clock
+setInterval(()=>{
+const now=new Date();
+document.getElementById('clock').textContent=now.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'});
+},1000);
+
+// Animation
+function animate(){
+requestAnimationFrame(animate);
+floorGroup.rotation.y+=0.001;
+floorMeshes.forEach((m,i)=>{
+m.material.emissiveIntensity=0.2+Math.sin(Date.now()*0.001+i)*0.1;
+});
+spire.rotation.y+=0.005;
+stars.rotation.y+=0.0002;
+renderer.render(scene,camera);
+}
+
+// PWA
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').style.display='block'});
+async function installPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById('installBtn').style.display='none'}
+
+setTimeout(()=>{
+document.getElementById('loading').style.display='none';
+selectFloor(0);
+animate();
+},2000);
 </script>
 </body>
 </html>
