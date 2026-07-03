@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#000000">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OmniGuard Device Protection</title>
+<title>OmniGuard | Device Protection</title>
 <link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -28,31 +28,43 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
 .brand span{color:#00ff00}
 .soulstack{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);color:#ffd700;padding:8px 16px;border-radius:20px;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
 
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px}
-.eyebrow{font-size:.85rem;font-weight:500;letter-spacing:8px;color:#00ff00;text-transform:uppercase;margin-bottom:20px}
-.headline{font-size:clamp(2.5rem,10vw,5rem);font-weight:200;letter-spacing:12px;line-height:1.05;background:linear-gradient(180deg,#fff 40%,#888 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.accent{color:#00ff00;font-weight:300;display:block;margin-top:12px;font-size:clamp(1.8rem,8vw,3.5rem);letter-spacing:8px}
-.tagline{font-size:1rem;font-weight:400;letter-spacing:4px;color:#888;margin-top:24px;max-width:600px;line-height:1.6}
+.hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 40px;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:150px;background:linear-gradient(to bottom,transparent,#000);pointer-events:none}
+.eyebrow{font-size:.9rem;font-weight:600;letter-spacing:6px;color:#00ff00;text-transform:uppercase;margin-bottom:16px;text-shadow:0 0 40px rgba(0,255,0,.1)}
+.headline{font-size:clamp(2.8rem,10vw,5.5rem);font-weight:800;letter-spacing:8px;line-height:1;color:#fff;text-shadow:0 0 60px rgba(0,255,0,.1),0 4px 20px rgba(0,0,0,.8)}
+.accent{color:#00ff00;font-weight:700;display:block;margin-top:8px;font-size:clamp(2rem,8vw,3.5rem);letter-spacing:6px;text-shadow:0 0 40px rgba(0,255,0,.1)}
+.tagline{font-size:1rem;font-weight:400;letter-spacing:3px;color:#aaa;margin-top:20px;max-width:600px;line-height:1.6;text-shadow:0 2px 10px rgba(0,0,0,.9)}
 
-.section{padding:80px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;width:100%}
-.section-title{font-size:clamp(1.5rem,5vw,2.2rem);font-weight:300;letter-spacing:6px;margin-bottom:16px;text-align:center}
-.section-subtitle{font-size:1rem;color:#666;letter-spacing:3px;margin-bottom:50px;text-align:center}
+.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s infinite}
+.scroll-indicator span{font-size:.6rem;letter-spacing:4px;color:#666}
+.scroll-indicator .arrow{width:1px;height:30px;background:linear-gradient(to bottom,#00ff00,transparent)}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
 
-.glass-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:32px;backdrop-filter:blur(40px);transition:all .4s;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;max-width:380px}
-.glass-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.glass-card.featured{border-color:rgba(0,255,0,.3);background:rgba(255,255,255,.05);box-shadow:0 0 60px rgba(0,255,0,.06)}
+.section{padding:40px 24px 80px;text-align:center;display:flex;flex-direction:column;align-items:center;width:100%;background:#000}
+.section-title{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:6px;margin-bottom:16px;text-align:center;color:#fff}
+.section-subtitle{font-size:1rem;color:#888;letter-spacing:3px;margin-bottom:50px;text-align:center}
+
+.glass-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:32px;backdrop-filter:blur(40px);transition:all .4s;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;max-width:380px}
+.glass-card:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.glass-card.featured{border-color:rgba(0,255,0,.4);background:rgba(255,255,255,.08);box-shadow:0 0 60px rgba(0,255,0,.1)}
+
+.product-icon{font-size:2.5rem;margin-bottom:12px}
+.product-name{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+.product-desc{font-size:.85rem;color:#888;line-height:1.4;margin-bottom:12px;max-width:280px}
+.product-price{font-size:1.6rem;font-weight:200}
+.product-price .was{color:#555;text-decoration:line-through;font-size:.9rem;margin-left:6px}
 
 .price-label{font-size:.85rem;font-weight:700;letter-spacing:4px;color:#888;text-transform:uppercase}
-.price-amount{font-size:3.5rem;font-weight:200;color:#fff;line-height:1;margin-top:8px}
+.price-amount{font-size:3.5rem;font-weight:800;color:#fff;line-height:1;margin-top:8px}
 .price-period{font-size:1rem;color:#666;margin-top:4px}
 .price-features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:24px;width:100%;text-align:left;padding:0 8px}
-.price-features li{font-size:.95rem;color:#bbb;display:flex;align-items:flex-start;gap:12px;line-height:1.4}
+.price-features li{font-size:.95rem;color:#ccc;display:flex;align-items:flex-start;gap:12px;line-height:1.4}
 .price-features li::before{content:"›";color:#00ff00;font-weight:bold;font-size:1.4rem;flex-shrink:0}
 .price-divider{width:50px;height:1px;background:linear-gradient(90deg,transparent,#00ff00,transparent);margin:16px auto}
 
 .btn-primary{background:linear-gradient(135deg,#00ff00,#005ea6);color:#fff;border:none;padding:18px 40px;border-radius:30px;font-size:.9rem;font-weight:700;letter-spacing:3px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 30px rgba(0,112,186,.3);transition:all .3s;border:none;width:100%;margin-top:16px;min-height:56px}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 50px rgba(0,112,186,.5)}
-.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15);padding:18px 40px;border-radius:30px;font-size:.9rem;font-weight:700;letter-spacing:3px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;width:100%;margin-top:16px;min-height:56px}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:18px 40px;border-radius:30px;font-size:.9rem;font-weight:700;letter-spacing:3px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;width:100%;margin-top:16px;min-height:56px}
 .btn-outline:hover{border-color:#00ff00;color:#00ff00}
 
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto;width:92%;justify-items:center}
@@ -74,23 +86,25 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
 .pwa-banner button{background:#00ff00;color:#000;border:none;padding:12px 28px;border-radius:24px;font-size:.85rem;font-weight:700;cursor:pointer}
 
 @media(max-width:768px){
-  .headline{font-size:clamp(2.2rem,9vw,3rem);letter-spacing:6px}
-  .accent{font-size:clamp(1.6rem,7vw,2.5rem);letter-spacing:4px}
-  .eyebrow{font-size:.75rem;letter-spacing:4px}
-  .tagline{font-size:.9rem;letter-spacing:2px}
+  .hero{min-height:50vh;padding:120px 20px 30px}
+  .headline{font-size:clamp(2.4rem,9vw,3.2rem);letter-spacing:4px}
+  .accent{font-size:clamp(1.8rem,7vw,2.2rem);letter-spacing:3px}
+  .eyebrow{font-size:.75rem;letter-spacing:3px}
+  .tagline{font-size:.85rem;letter-spacing:2px}
   .grid-3,.grid-2{grid-template-columns:1fr;gap:20px}
   .glass-card{padding:28px;max-width:100%}
   .price-amount{font-size:3rem}
   .price-features li{font-size:.9rem}
   .btn-primary,.btn-outline{padding:16px 32px;font-size:.85rem}
-  .section{padding:60px 16px}
+  .section{padding:30px 16px 60px}
   .nav-pills{gap:8px;margin-top:40px}
   .nav-pills a{font-size:.65rem;padding:8px 14px}
   .brand{font-size:.65rem;letter-spacing:3px}
+  .scroll-indicator{bottom:20px}
 }
 @media(max-width:380px){
-  .headline{font-size:2rem;letter-spacing:4px}
-  .accent{font-size:1.5rem;letter-spacing:3px}
+  .headline{font-size:2.2rem;letter-spacing:3px}
+  .accent{font-size:1.6rem;letter-spacing:2px}
   .eyebrow{font-size:.65rem}
   .tagline{font-size:.8rem}
   .price-features li{font-size:.85rem}
@@ -112,51 +126,54 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
     <div class="eyebrow reveal">World's First Agentic AI</div>
     <div class="headline reveal">Device<span class="accent">Protection</span></div>
     <div class="tagline reveal">iOS • Android • Laptop • Tablet • Home Computer • Full Coverage</div>
+    <div class="scroll-indicator reveal">
+      <span>SCROLL</span>
+      <div class="arrow"></div>
+    </div>
   </div>
 
   <div class="section">
-    
     <div class="section-title reveal" style="margin-top:40px">FEATURED PRODUCTS</div><div class="grid-2 reveal">
       <div class="glass-card featured">
-        <div class="product-icon" style="font-size:2.5rem">📱</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">iOS Shield</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Complete protection for iPhone and iPad. Real-time threat monitoring, encrypted backups, remote wipe.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$15 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$29.99</span></div>
+        <div class="product-icon">📱</div>
+        <div class="product-name">iOS Shield</div>
+        <div class="product-desc">Complete protection for iPhone and iPad. Real-time threat monitoring, encrypted backups, remote wipe.</div>
+        <div class="product-price">$15 <span class="was">$29.99</span></div>
         <a href="https://paypal.me/franciscoderek7/15" class="btn-primary" target="_blank" rel="noopener noreferrer">PROTECT iOS</a>
       </div>
       <div class="glass-card ">
-        <div class="product-icon" style="font-size:2.5rem">🤖</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">Android Shield</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Advanced security for Android phones and tablets. Malware blocking, app scanning, privacy guard.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$15 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$29.99</span></div>
+        <div class="product-icon">🤖</div>
+        <div class="product-name">Android Shield</div>
+        <div class="product-desc">Advanced security for Android phones and tablets. Malware blocking, app scanning, privacy guard.</div>
+        <div class="product-price">$15 <span class="was">$29.99</span></div>
         <a href="https://paypal.me/franciscoderek7/15" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT ANDROID</a>
       </div>
       <div class="glass-card ">
-        <div class="product-icon" style="font-size:2.5rem">💻</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">Laptop Shield</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Enterprise-grade protection for Windows and Mac. Ransomware defense, firewall, VPN included.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$20 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$39.99</span></div>
+        <div class="product-icon">💻</div>
+        <div class="product-name">Laptop Shield</div>
+        <div class="product-desc">Enterprise-grade protection for Windows and Mac. Ransomware defense, firewall, VPN included.</div>
+        <div class="product-price">$20 <span class="was">$39.99</span></div>
         <a href="https://paypal.me/franciscoderek7/20" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT LAPTOP</a>
       </div>
       <div class="glass-card ">
-        <div class="product-icon" style="font-size:2.5rem">📲</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">Tablet Shield</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Dedicated tablet security with parental controls, content filtering, anti-theft tracking.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$10 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$19.99</span></div>
+        <div class="product-icon">📲</div>
+        <div class="product-name">Tablet Shield</div>
+        <div class="product-desc">Dedicated tablet security with parental controls, content filtering, anti-theft tracking.</div>
+        <div class="product-price">$10 <span class="was">$19.99</span></div>
         <a href="https://paypal.me/franciscoderek7/10" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT TABLET</a>
       </div>
       <div class="glass-card ">
-        <div class="product-icon" style="font-size:2.5rem">🖥️</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">Home Computer</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Complete desktop protection. Network monitoring, identity theft prevention, 24/7 agent swarm.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$25 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$49.99</span></div>
+        <div class="product-icon">🖥️</div>
+        <div class="product-name">Home Computer</div>
+        <div class="product-desc">Complete desktop protection. Network monitoring, identity theft prevention, 24/7 agent swarm.</div>
+        <div class="product-price">$25 <span class="was">$49.99</span></div>
         <a href="https://paypal.me/franciscoderek7/25" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT DESKTOP</a>
       </div>
       <div class="glass-card ">
-        <div class="product-icon" style="font-size:2.5rem">🏠</div>
-        <div class="product-name" style="font-size:1.1rem;font-weight:600">Family Shield</div>
-        <div class="product-desc" style="font-size:.85rem;color:#888;line-height:1.4;margin:8px 0">Protect every device in your household. Unlimited devices, family dashboard, priority response.</div>
-        <div class="product-price" style="font-size:1.6rem;font-weight:200">$50 <span style="color:#555;text-decoration:line-through;font-size:.9rem">$99.99</span></div>
+        <div class="product-icon">🏠</div>
+        <div class="product-name">Family Shield</div>
+        <div class="product-desc">Protect every device in your household. Unlimited devices, family dashboard, priority response.</div>
+        <div class="product-price">$50 <span class="was">$99.99</span></div>
         <a href="https://paypal.me/franciscoderek7/50" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT FAMILY</a>
       </div></div>
     <div class="section-title reveal" style="margin-top:60px">SUBSCRIPTION TIERS</div><div class="grid-3 reveal">
@@ -192,7 +209,7 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
       </div></div>
     
     <div class="nav-pills reveal">
-      <a href="../">HQ</a><a href="../primedox/">PRIMEDOX</a><a href="../vaultvelocityauto/">VAULT</a><a href="../techpetcage/">TECHPETCAGE</a><a href="../ccldr/">CCLDR</a><a href="../weedlaw/">WEEDLAW</a><a href="../canlegaldef/">CAN DEF</a><a href="../canconsult/">CAN CONSULT</a><a href="../kiaros/">KIAROS</a><a href="../vigilax/">VIGILAX</a><a href="../techpackcage/">TECHPACK</a>
+      <a href="..">HQ</a><a href="primedox/">PRIMEDOX</a><a href="vaultvelocityauto/">VAULT</a><a href="techpetcage/">TECHPETCAGE</a><a href="ccldr/">CCLDR</a><a href="weedlaw/">WEEDLAW</a><a href="canlegaldef/">CAN DEF</a><a href="canconsult/">CAN CONSULT</a><a href="kiaros/">KIAROS</a><a href="vigilax/">VIGILAX</a><a href="techpackcage/">TECHPACKCAGE</a>
     </div>
   </div>
 
@@ -218,14 +235,13 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();
   deferredPrompt=e;
-  const b=document.getElementById('pwaBanner');
-  if(b)b.classList.add('show');
+  document.getElementById('pwaBanner').classList.add('show');
 });
 function installPWA(){
   if(!deferredPrompt){alert('Use browser menu > Add to Home Screen');return;}
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(o=>{
-    if(o.outcome==='accepted'){const b=document.getElementById('pwaBanner');if(b)b.classList.remove('show');}
+    if(o.outcome==='accepted')document.getElementById('pwaBanner').classList.remove('show');
     deferredPrompt=null;
   });
 }
@@ -234,7 +250,6 @@ const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isI
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 setTimeout(()=>{const l=document.getElementById('loading');if(l){l.style.opacity='0';setTimeout(()=>l.remove(),1000);}},2000);
-
 
 
 const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x000000,.002);
