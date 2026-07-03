@@ -7,29 +7,35 @@
 <title>Francisco Holdings Inc. | Global Empire HQ</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#000;overflow:hidden;font-family:'Inter','Segoe UI',system-ui,sans-serif}
 #c{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
 #ui{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;pointer-events:none}
 #ui *{pointer-events:auto}
-h1{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:2.8rem;font-weight:200;letter-spacing:12px;text-transform:uppercase;background:linear-gradient(135deg,#00ff88,#ffd700,#00ff88);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s ease infinite}
+h1{position:absolute;top:24px;left:50%;transform:translateX(-50%);font-size:2.8rem;font-weight:300;letter-spacing:14px;text-transform:uppercase;background:linear-gradient(135deg,#00ff88,#ffd700,#00ff88);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s ease infinite;text-shadow:0 0 80px rgba(0,255,136,0.3)}
 @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-p.sub{position:absolute;top:72px;left:50%;transform:translateX(-50%);color:#888;font-size:.75rem;letter-spacing:6px;text-transform:uppercase}
-.agent-tag{position:absolute;top:110px;left:50%;transform:translateX(-50%);color:#00ff88;font-size:.65rem;letter-spacing:4px;border:1px solid rgba(0,255,136,.3);padding:4px 16px;border-radius:12px;background:rgba(0,255,136,.05)}
-.badge{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,215,0,.4);padding:12px 32px;border-radius:30px;color:#ffd700;font-size:.8rem;letter-spacing:3px;backdrop-filter:blur(10px)}
-.pp{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0070ba,#005ea6);color:#fff;padding:16px 48px;border-radius:30px;text-decoration:none;font-size:.9rem;letter-spacing:3px;font-weight:600;box-shadow:0 0 40px rgba(0,112,186,.4);transition:all .3s;border:none;cursor:pointer}
-.pp:hover{transform:translateX(-50%) scale(1.08);box-shadow:0 0 60px rgba(0,112,186,.7)}
-.ss{position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#ffd700,#ff8800);color:#000;padding:8px 18px;border-radius:20px;font-size:.7rem;font-weight:800;letter-spacing:1px;box-shadow:0 0 20px rgba(255,215,0,.3)}
-.nav{position:absolute;bottom:180px;left:50%;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:90%}
-.nav a{color:#888;text-decoration:none;font-size:.6rem;letter-spacing:2px;border:1px solid #333;padding:4px 10px;border-radius:8px;transition:all .3s}
-.nav a:hover{color:#00ff88;border-color:#00ff88}
+p.sub{position:absolute;top:72px;left:50%;transform:translateX(-50%);color:#888;font-size:.7rem;letter-spacing:6px;text-transform:uppercase}
+.tag{position:absolute;top:105px;left:50%;transform:translateX(-50%);color:#00ff88;font-size:.55rem;letter-spacing:3px;border:1px solid rgba(0,255,136,.2);padding:5px 16px;border-radius:20px;background:rgba(0,255,136,.03);backdrop-filter:blur(10px)}
+.badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,215,0,.3);padding:10px 28px;border-radius:30px;color:#ffd700;font-size:.75rem;letter-spacing:3px;backdrop-filter:blur(15px)}
+.pp{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0070ba,#005ea6);color:#fff;padding:16px 48px;border-radius:30px;text-decoration:none;font-size:.9rem;letter-spacing:3px;font-weight:700;box-shadow:0 0 50px rgba(0,112,186,.5);transition:all .3s;border:none;cursor:pointer}
+.pp:hover{transform:translateX(-50%) scale(1.06);box-shadow:0 0 80px rgba(0,112,186,.8)}
+.ss{position:absolute;top:24px;right:24px;background:linear-gradient(135deg,#ffd700,#ff8800);color:#000;padding:8px 18px;border-radius:20px;font-size:.65rem;font-weight:800;letter-spacing:1px;box-shadow:0 0 30px rgba(255,215,0,.3)}
+.nav{position:absolute;bottom:170px;left:50%;transform:translateX(-50%);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:90%}
+.nav a{color:#666;text-decoration:none;font-size:.5rem;letter-spacing:1px;border:1px solid rgba(255,255,255,.1);padding:4px 10px;border-radius:8px;backdrop-filter:blur(5px);transition:all .3s}
+.nav a:hover{color:#00ff88;border-color:rgba(0,255,136,.4);background:rgba(0,255,136,.05)}
+.loading{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s}
+.loading-text{color:#00ff88;font-size:.8rem;letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.loading-bar{width:200px;height:2px;background:#111;border-radius:2px;overflow:hidden}
+.loading-fill{height:100%;width:0%;background:linear-gradient(90deg,#00ff88,#ffd700);animation:load 2s ease forwards}
+@keyframes load{0%{width:0%}100%{width:100%}}
 </style></head>
 <body>
+<div class="loading" id="loading"><div class="loading-text">INITIALIZING EMPIRE</div><div class="loading-bar"><div class="loading-fill"></div></div></div>
 <div id="c"></div>
 <div id="ui">
 <div class="ss">SOULSTACK VERIFIED</div>
 <h1>Francisco Holdings Inc.</h1>
 <p class="sub">392-Floor Global Empire Command Center</p>
-<div class="agent-tag">AGENT SWARM ACTIVE • OMNI WATCHING • PRIMEDOX ONLINE</div>
+<div class="tag">AGENT SWARM ACTIVE • OMNI WATCHING • PRIMEDOX ONLINE</div>
 <div class="nav">
 <a href="omniaguard/">F2</a><a href="primedox/">F3</a><a href="vaultvelocityauto/">F4</a><a href="techpetcage/">F5</a>
 <a href="ccldr/">F6</a><a href="weedlaw/">F7</a><a href="beno-x/">F8</a><a href="cleanswarm/">F9</a>
@@ -40,364 +46,119 @@ p.sub{position:absolute;top:72px;left:50%;transform:translateX(-50%);color:#888;
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));
+
 const scene=new THREE.Scene();
 scene.fog=new THREE.FogExp2(0x000000,.001);
 
-const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,5e3);
-camera.position.set(40,35,120);
+const camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,.1,5e3);
+camera.position.set(50,40,140);
 
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
 renderer.setSize(innerWidth,innerHeight);
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.2;
+renderer.toneMappingExposure=1.4;
 document.getElementById("c").appendChild(renderer.domElement);
 
-// Premium lighting
-const amb=new THREE.AmbientLight(0x001a0a,.3);
-scene.add(amb);
-const hemi=new THREE.HemisphereLight(0x00ff88,0x000000,.4);
+scene.add(new THREE.AmbientLight(0x001a0a,.3));
+const hemi=new THREE.HemisphereLight(0x00ff88,0x000000,.5);
 scene.add(hemi);
-const moon=new THREE.DirectionalLight(0x00ff88,1.2);
-moon.position.set(80,200,60);
-moon.castShadow=true;
-moon.shadow.mapSize.width=2048;
-moon.shadow.mapSize.height=2048;
-moon.shadow.camera.near=1;
-moon.shadow.camera.far=500;
-moon.shadow.camera.left=-100;
-moon.shadow.camera.right=100;
-moon.shadow.camera.top=100;
-moon.shadow.camera.bottom=-100;
+const moon=new THREE.DirectionalLight(0x00ff88,1.5);
+moon.position.set(100,250,80);moon.castShadow=true;
+moon.shadow.mapSize.width=2048;moon.shadow.mapSize.height=2048;
 scene.add(moon);
-const goldLight=new THREE.PointLight(0xffd700,2,300);
-goldLight.position.set(-40,80,40);
-scene.add(goldLight);
-const rimLight=new THREE.SpotLight(0x0088ff,1.5,400,Math.PI/6,.5,1);
-rimLight.position.set(60,100,-40);
-scene.add(rimLight);
+const goldLight=new THREE.PointLight(0xffd700,3,400);
+goldLight.position.set(-50,100,50);scene.add(goldLight);
+const blueRim=new THREE.SpotLight(0x0088ff,2,500,Math.PI/6,.3,1);
+blueRim.position.set(80,120,-60);scene.add(blueRim);
 
-// Reflective marble floor
-const floorGeo=new THREE.PlaneGeometry(1e3,1e3);
-const floorMat=new THREE.MeshStandardMaterial({
-  color:0x0a0a0a,
-  roughness:.02,
-  metalness:.98,
-  envMapIntensity:1
-});
-const floor=new THREE.Mesh(floorGeo,floorMat);
-floor.rotation.x=-Math.PI/2;
-floor.receiveShadow=true;
-scene.add(floor);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(2e3,2e3),new THREE.MeshStandardMaterial({color:0x050505,roughness:.02,metalness:.98}));
+floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
 
-// Environment map for reflections (procedural cube)
-const cubeRenderTarget=new THREE.WebGLCubeRenderTarget(256);
-const cubeCamera=new THREE.CubeCamera(.1,1e3,cubeRenderTarget);
-scene.add(cubeCamera);
-
-// Skyscraper group
 const tower=new THREE.Group();
+const glassMat=new THREE.MeshPhysicalMaterial({color:0x020202,roughness:.05,metalness:.95,transmission:.4,thickness:3,transparent:true,opacity:.9,clearcoat:1,clearcoatRoughness:.05});
+const lobbyMat=new THREE.MeshPhysicalMaterial({color:0x0a1a0a,roughness:.05,metalness:.95,transmission:.5,thickness:4,transparent:true,opacity:.95,emissive:0x00ff88,emissiveIntensity:.2,clearcoat:1});
+const goldMat=new THREE.MeshStandardMaterial({color:0xffd700,roughness:.05,metalness:1,emissive:0xffd700,emissiveIntensity:.6});
 
-// Main shaft - realistic glass
-const glassMat=new THREE.MeshPhysicalMaterial({
-  color:0x050505,
-  roughness:.05,
-  metalness:.9,
-  transmission:.3,
-  thickness:2,
-  transparent:true,
-  opacity:.85,
-  envMapIntensity:2,
-  clearcoat:1,
-  clearcoatRoughness:.1
-});
-
-const lobbyGlass=new THREE.MeshPhysicalMaterial({
-  color:0x0a1a0a,
-  roughness:.05,
-  metalness:.9,
-  transmission:.4,
-  thickness:3,
-  transparent:true,
-  opacity:.9,
-  emissive:0x00ff88,
-  emissiveIntensity:.15,
-  envMapIntensity:2,
-  clearcoat:1
-});
-
-const goldTrimMat=new THREE.MeshStandardMaterial({
-  color:0xffd700,
-  roughness:.1,
-  metalness:1,
-  emissive:0xffd700,
-  emissiveIntensity:.4
-});
-
-// Build floors
 for(let fl=0;fl<39;fl++){
-  const y=fl*5+2.5;
-  const isLobby=fl<3;
-  const w=isLobby?28:22;
-  const mat=isLobby?lobbyGlass:glassMat;
-  
+  const y=fl*5+2.5;const isLobby=fl<3;const w=isLobby?28:22;const mat=isLobby?lobbyMat:glassMat;
   const box=new THREE.Mesh(new THREE.BoxGeometry(w,4.8,w),mat);
-  box.position.y=y;
-  box.castShadow=true;
-  box.receiveShadow=true;
-  tower.add(box);
-  
-  // Window strips with emission
-  if(!isLobby){
-    for(let side=0;side<4;side++){
-      const winGeo=new THREE.PlaneGeometry(w*.75,3.8);
-      const winMat=new THREE.MeshBasicMaterial({
-        color:0x00ff88,
-        transparent:true,
-        opacity:.08,
-        blending:THREE.AdditiveBlending
-      });
-      const win=new THREE.Mesh(winGeo,winMat);
-      const a=side*Math.PI/2;
-      win.position.set(Math.sin(a)*(w/2+.05),y,Math.cos(a)*(w/2+.05));
-      win.rotation.y=a+Math.PI;
-      tower.add(win);
-    }
+  box.position.y=y;box.castShadow=true;box.receiveShadow=true;tower.add(box);
+  if(!isLobby)for(let side=0;side<4;side++){
+    const win=new THREE.Mesh(new THREE.PlaneGeometry(w*.7,3.8),new THREE.MeshBasicMaterial({color:0x00ff88,transparent:true,opacity:.1,blending:THREE.AdditiveBlending}));
+    const a=side*Math.PI/2;
+    win.position.set(Math.sin(a)*(w/2+.05),y,Math.cos(a)*(w/2+.05));
+    win.rotation.y=a+Math.PI;tower.add(win);
   }
-  
-  // Gold trim every 10 floors
   if(fl%10==0&&fl>0){
-    const trim=new THREE.Mesh(new THREE.BoxGeometry(w+.6,.4,w+.6),goldTrimMat);
-    trim.position.y=y+2.5;
-    tower.add(trim);
+    const trim=new THREE.Mesh(new THREE.BoxGeometry(w+.6,.3,w+.6),goldMat);
+    trim.position.y=y+2.5;tower.add(trim);
   }
 }
 
-// Grand lobby entrance
 const lobby=new THREE.Group();
-const lobbyFloor=new THREE.Mesh(new THREE.BoxGeometry(32,.5,32),new THREE.MeshStandardMaterial({color:0x111,roughness:.1,metalness:.9}));
-lobbyFloor.position.y=.25;lobby.add(lobbyFloor);
-
-// Gold pillars
 const pillarGeo=new THREE.CylinderGeometry(1.2,1.5,14,16);
 for(let i=0;i<4;i++){
   const a=(i/4)*Math.PI*2;
-  const pillar=new THREE.Mesh(pillarGeo,goldTrimMat);
-  pillar.position.set(Math.cos(a)*12,7,Math.sin(a)*12);
-  pillar.castShadow=true;
-  lobby.add(pillar);
+  const pillar=new THREE.Mesh(pillarGeo,goldMat);
+  pillar.position.set(Math.cos(a)*12,7,Math.sin(a)*12);pillar.castShadow=true;lobby.add(pillar);
 }
-
-// Lobby ceiling
-const ceil=new THREE.Mesh(new THREE.BoxGeometry(30,.3,30),goldTrimMat);
-ceil.position.y=14;lobby.add(ceil);
-
-// Entrance arch
-const archGlow=new THREE.Mesh(new THREE.PlaneGeometry(16,10),new THREE.MeshBasicMaterial({
-  color:0x00ff88,
-  transparent:true,
-  opacity:.2,
-  blending:THREE.AdditiveBlending
-}));
+const ceil=new THREE.Mesh(new THREE.BoxGeometry(30,.3,30),goldMat);ceil.position.y=14;lobby.add(ceil);
+const archGlow=new THREE.Mesh(new THREE.PlaneGeometry(16,10),new THREE.MeshBasicMaterial({color:0x00ff88,transparent:true,opacity:.3,blending:THREE.AdditiveBlending}));
 archGlow.position.set(0,5,16);lobby.add(archGlow);
+const frameTop=new THREE.Mesh(new THREE.BoxGeometry(18,1,1),goldMat);frameTop.position.set(0,10.5,16);lobby.add(frameTop);
+const frameL=new THREE.Mesh(new THREE.BoxGeometry(1,10,1),goldMat);frameL.position.set(-8.5,5,16);lobby.add(frameL);
+const frameR=new THREE.Mesh(new THREE.BoxGeometry(1,10,1),goldMat);frameR.position.set(8.5,5,16);lobby.add(frameR);
+tower.add(lobby);scene.add(tower);
 
-// Entrance frame
-const frameTop=new THREE.Mesh(new THREE.BoxGeometry(18,1,1),goldTrimMat);
-frameTop.position.set(0,10.5,16);lobby.add(frameTop);
-const frameL=new THREE.Mesh(new THREE.BoxGeometry(1,10,1),goldTrimMat);
-frameL.position.set(-8.5,5,16);lobby.add(frameL);
-const frameR=new THREE.Mesh(new THREE.BoxGeometry(1,10,1),goldTrimMat);
-frameR.position.set(8.5,5,16);lobby.add(frameR);
-
-tower.add(lobby);
-scene.add(tower);
-
-// City skyline background
-const cityGroup=new THREE.Group();
-for(let i=0;i<40;i++){
-  const h=25+Math.random()*100;
-  const w=8+Math.random()*15;
-  const d=8+Math.random()*15;
-  const bldMat=new THREE.MeshStandardMaterial({
-    color:0x080808,
-    roughness:.3,
-    metalness:.8,
-    emissive:0x001100,
-    emissiveIntensity:.05
-  });
-  const bld=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),bldMat);
-  const ang=(i/40)*Math.PI*2;
-  const dist=180+Math.random()*120;
+for(let i=0;i<50;i++){
+  const h=20+Math.random()*120;
+  const bld=new THREE.Mesh(new THREE.BoxGeometry(6+Math.random()*14,h,6+Math.random()*14),new THREE.MeshStandardMaterial({color:0x060606,roughness:.3,metalness:.8,emissive:0x001100,emissiveIntensity:.03}));
+  const ang=(i/50)*Math.PI*2;
+  const dist=200+Math.random()*150;
   bld.position.set(Math.cos(ang)*dist,h/2,Math.sin(ang)*dist);
-  bld.castShadow=true;
-  cityGroup.add(bld);
-  
-  // Building lights
-  if(i%3==0){
-    const light=new THREE.PointLight(0x00ff88,.3,50);
-    light.position.set(Math.cos(ang)*dist,h,Math.sin(ang)*dist);
-    cityGroup.add(light);
-  }
+  bld.castShadow=true;scene.add(bld);
 }
-scene.add(cityGroup);
 
-// Emerald fountain particles
-const fGeo=new THREE.BufferGeometry();
-const fCount=3e3;
-const fPos=new Float32Array(fCount*3);
-const fVel=new Float32Array(fCount);
-for(let i=0;i<fCount;i++){
-  fPos[i*3]=(Math.random()-.5)*80;
-  fPos[i*3+1]=Math.random()*100;
-  fPos[i*3+2]=(Math.random()-.5)*80;
-  fVel[i]=.2+Math.random()*.8;
-}
+const fGeo=new THREE.BufferGeometry(),fCount=4e3,fPos=new Float32Array(fCount*3);
+for(let i=0;i<fCount;i++){fPos[i*3]=(Math.random()-.5)*100;fPos[i*3+1]=Math.random()*120;fPos[i*3+2]=(Math.random()-.5)*100;}
 fGeo.setAttribute("position",new THREE.BufferAttribute(fPos,3));
-const fMat=new THREE.PointsMaterial({
-  size:.8,
-  color:0x00ff88,
-  transparent:true,
-  opacity:.5,
-  blending:THREE.AdditiveBlending
-});
-const fountain=new THREE.Points(fGeo,fMat);
-scene.add(fountain);
+const fMat=new THREE.PointsMaterial({size:1,color:0x00ff88,transparent:true,opacity:.6,blending:THREE.AdditiveBlending});
+const fountain=new THREE.Points(fGeo,fMat);scene.add(fountain);
 
-// Gold dust
-const gGeo=new THREE.BufferGeometry();
-const gCount=2e3;
-const gPos=new Float32Array(gCount*3);
-for(let i=0;i<gCount;i++){
-  gPos[i*3]=(Math.random()-.5)*250;
-  gPos[i*3+1]=Math.random()*150;
-  gPos[i*3+2]=(Math.random()-.5)*250;
-}
+const gGeo=new THREE.BufferGeometry(),gCount=2e3,gPos=new Float32Array(gCount*3);
+for(let i=0;i<gCount;i++){gPos[i*3]=(Math.random()-.5)*300;gPos[i*3+1]=Math.random()*200;gPos[i*3+2]=(Math.random()-.5)*300;}
 gGeo.setAttribute("position",new THREE.BufferAttribute(gPos,3));
-const gMat=new THREE.PointsMaterial({
-  size:.5,
-  color:0xffd700,
-  transparent:true,
-  opacity:.35,
-  blending:THREE.AdditiveBlending
-});
-const goldDust=new THREE.Points(gGeo,gMat);
-scene.add(goldDust);
+const gMat=new THREE.PointsMaterial({size:.6,color:0xffd700,transparent:true,opacity:.4,blending:THREE.AdditiveBlending});
+const goldDust=new THREE.Points(gGeo,gMat);scene.add(goldDust);
 
-// Agent swarm orbs
 const swarm=[];
-const orbGeo=new THREE.SphereGeometry(.5,16,16);
-const orbMat=new THREE.MeshBasicMaterial({color:0x00ffff});
 for(let i=0;i<12;i++){
-  const orb=new THREE.Mesh(orbGeo,orbMat);
-  const trailGeo=new THREE.BufferGeometry();
-  const trailCount=20;
-  const trailPos=new Float32Array(trailCount*3);
-  trailGeo.setAttribute("position",new THREE.BufferAttribute(trailPos,3));
-  const trailMat=new THREE.PointsMaterial({
-    size:.3,
-    color:0x00ffff,
-    transparent:true,
-    opacity:.6,
-    blending:THREE.AdditiveBlending
-  });
-  const trail=new THREE.Points(trailGeo,trailMat);
-  scene.add(trail);
-  swarm.push({
-    mesh:orb,
-    trail:trail,
-    trailPos:trailPos,
-    angle:i/12*Math.PI*2,
-    radius:15+Math.random()*12,
-    speed:.4+Math.random()*1.2,
-    y:8+Math.random()*25,
-    trailIndex:0
-  });
+  const orb=new THREE.Mesh(new THREE.SphereGeometry(.4,16,16),new THREE.MeshBasicMaterial({color:0x00ffff}));
+  swarm.push({mesh:orb,angle:i/12*Math.PI*2,radius:15+Math.random()*12,speed:.4+Math.random()*1.2,y:8+Math.random()*25});
   scene.add(orb);
 }
 
-// Starfield
-const sGeo=new THREE.BufferGeometry();
-const sCount=5e3;
-const sPos=new Float32Array(sCount*3);
-for(let i=0;i<sCount;i++){
-  sPos[i*3]=(Math.random()-.5)*2e3;
-  sPos[i*3+1]=Math.random()*800;
-  sPos[i*3+2]=(Math.random()-.5)*2e3;
-}
-sGeo.setAttribute("position",new THREE.BufferAttribute(sPos,3));
-const sMat=new THREE.PointsMaterial({
-  size:.6,
-  color:0xffffff,
-  transparent:true,
-  opacity:.6
-});
-const stars=new THREE.Points(sGeo,sMat);
-scene.add(stars);
-
-// Update environment map
-cubeCamera.position.set(0,20,0);
-cubeCamera.update(renderer,scene);
-floorMat.envMap=cubeRenderTarget.texture;
-
-let mouseX=0,mouseY=0,targetY=35,time=0;
-document.addEventListener("mousemove",e=>{
-  mouseX=(e.clientX/innerWidth)*2-1;
-  mouseY=(e.clientY/innerHeight)*2-1;
-});
-addEventListener("wheel",e=>{
-  targetY+=e.deltaY*.1;
-  targetY=Math.max(15,Math.min(targetY,200));
-});
+let mx=0,my=0,ty=40,time=0;
+document.addEventListener("mousemove",e=>{mx=(e.clientX/innerWidth)*2-1;my=(e.clientY/innerHeight)*2-1});
+addEventListener("wheel",e=>{ty+=e.deltaY*.1;ty=Math.max(20,Math.min(ty,180))});
 
 function animate(){
-  requestAnimationFrame(animate);
-  time+=.005;
-  
-  tower.rotation.y=Math.sin(time*.1)*.008;
-  cityGroup.rotation.y=Math.sin(time*.02)*.002;
-  
-  // Fountain animation
+  requestAnimationFrame(animate);time+=.005;
+  tower.rotation.y=Math.sin(time*.08)*.01;
   fountain.rotation.y+=.0002;
   const fp=fountain.geometry.attributes.position.array;
-  for(let i=0;i<fCount;i++){
-    fp[i*3+1]+=fVel[i]*.01;
-    if(fp[i*3+1]>100){
-      fp[i*3+1]=0;
-      fp[i*3]=(Math.random()-.5)*80;
-      fp[i*3+2]=(Math.random()-.5)*80;
-    }
-  }
+  for(let i=0;i<fCount;i++){fp[i*3+1]+=.02;if(fp[i*3+1]>120)fp[i*3+1]=0;}
   fountain.geometry.attributes.position.needsUpdate=true;
-  
   goldDust.rotation.y-=.0001;
-  
-  // Swarm animation with trails
-  swarm.forEach(o=>{
-    o.angle+=o.speed*.008;
-    const x=Math.cos(o.angle)*o.radius;
-    const z=Math.sin(o.angle)*o.radius;
-    const y=o.y+Math.sin(time*2+o.angle)*3;
-    o.mesh.position.set(x,y,z);
-    
-    // Update trail
-    const tp=o.trailPos;
-    for(let i=o.trailCount-1;i>0;i--){
-      tp[i*3]=tp[(i-1)*3];
-      tp[i*3+1]=tp[(i-1)*3+1];
-      tp[i*3+2]=tp[(i-1)*3+2];
-    }
-    tp[0]=x;tp[1]=y;tp[2]=z;
-    o.trail.geometry.attributes.position.needsUpdate=true;
-  });
-  
-  // Camera
-  camera.position.x+=(mouseX*30-camera.position.x)*.015;
-  camera.position.y+=(targetY-camera.position.y)*.03;
-  camera.position.z=120+Math.sin(time*.3)*5;
-  camera.lookAt(0,targetY*.3,0);
-  
+  swarm.forEach(o=>{o.angle+=o.speed*.008;o.mesh.position.set(Math.cos(o.angle)*o.radius,o.y+Math.sin(time*2+o.angle)*2,Math.sin(o.angle)*o.radius)});
+  camera.position.x+=(mx*30-camera.position.x)*.015;
+  camera.position.y+=(ty-camera.position.y)*.04;
+  camera.position.z=140+Math.sin(time*.2)*4;
+  camera.lookAt(0,ty*.3,0);
   renderer.render(scene,camera);
 }
 animate();
@@ -407,4 +168,9 @@ addEventListener("resize",()=>{
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth,innerHeight);
 });
+
+setTimeout(()=>{
+  document.getElementById("loading").style.opacity="0";
+  setTimeout(()=>document.getElementById("loading").remove(),1000);
+},2500);
 </script></body></html>
