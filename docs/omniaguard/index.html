@@ -2,88 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#000000">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>OmniGuard | Cybersecurity | Floor 2</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>OmniGuard | Device Protection</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 #canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-#ui{position:relative;z-index:10;pointer-events:none;min-height:100vh;display:flex;flex-direction:column}
-#ui>*{pointer-events:auto}
+#ui{position:relative;z-index:10;pointer-events:none;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+#ui>*{pointer-events:auto;width:100%}
 
 .loading{position:fixed;inset:0;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
-.loading-logo{font-size:1rem;font-weight:200;letter-spacing:16px;color:#555;margin-bottom:24px;opacity:0;animation:fadeIn 1s ease forwards}
+.loading-logo{font-size:1rem;font-weight:200;letter-spacing:14px;color:#555;margin-bottom:24px;opacity:0;animation:fadeIn 1s ease forwards}
 .loading-sub{font-size:.6rem;color:#333;letter-spacing:4px;margin-top:12px;opacity:0;animation:fadeIn 1s ease .5s forwards}
-.loading-bar{width:120px;height:1px;background:#111;position:relative;overflow:hidden;margin-top:20px;opacity:0;animation:fadeIn 1s ease .3s forwards}
+.loading-bar{width:120px;height:1px;background:#111;position:relative;overflow:hidden;margin-top:16px;opacity:0;animation:fadeIn 1s ease .3s forwards}
 .loading-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0%;background:linear-gradient(90deg,transparent,#00ff00,transparent);animation:load 2.5s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes load{0%{width:0%;left:0}50%{width:100%;left:0}100%{width:0%;left:100%}}
 @keyframes fadeIn{to{opacity:1}}
 
-.brand{font-size:.65rem;font-weight:600;letter-spacing:4px;color:#555;text-transform:uppercase}
+.top-bar{position:fixed;top:0;left:0;right:0;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);backdrop-filter:blur(10px)}
+.brand{font-size:.6rem;font-weight:600;letter-spacing:3px;color:#555;text-transform:uppercase}
 .brand span{color:#00ff00}
-.eyebrow{font-size:.7rem;font-weight:400;letter-spacing:8px;color:#666;text-transform:uppercase;margin-bottom:16px}
-.headline{font-size:clamp(2.2rem,7vw,4rem);font-weight:200;letter-spacing:8px;line-height:1.05;background:linear-gradient(180deg,#fff 40%,#777 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.accent{color:#00ff00;font-weight:300;display:block;margin-top:8px}
-.tagline{font-size:.65rem;font-weight:400;letter-spacing:3px;color:#00ff00;opacity:.6;margin-top:16px}
+.soulstack{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);color:#ffd700;padding:6px 14px;border-radius:20px;font-size:.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
 
-.glass-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:40px;backdrop-filter:blur(40px) saturate(180%);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.eyebrow{font-size:.6rem;font-weight:400;letter-spacing:6px;color:#666;text-transform:uppercase;margin-bottom:12px;text-align:center}
+.headline{font-size:clamp(1.8rem,7vw,3.5rem);font-weight:200;letter-spacing:6px;line-height:1.05;background:linear-gradient(180deg,#fff 40%,#777 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.accent{color:#00ff00;font-weight:300;display:block;margin-top:6px}
+.tagline{font-size:.6rem;font-weight:400;letter-spacing:2px;color:#00ff00;opacity:.5;margin-top:12px;text-align:center}
+
+.section{padding:120px 20px 80px;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;width:100%}
+.section-title{font-size:1.6rem;font-weight:200;letter-spacing:5px;margin-bottom:16px;text-align:center}
+.section-subtitle{font-size:.7rem;color:#555;letter-spacing:2px;margin-bottom:50px;text-align:center}
+
+.glass-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:32px;backdrop-filter:blur(40px) saturate(180%);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
 .glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,0,.25),transparent);opacity:0;transition:opacity .4s}
-.glass-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.glass-card:hover::before{opacity:.5}
-.glass-card.featured{border-color:rgba(0,255,0,.25);background:rgba(255,255,255,.05);box-shadow:0 0 80px rgba(0,255,0,.08)}
+.glass-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateY(-6px);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.glass-card:hover::before{opacity:.4}
+.glass-card.featured{border-color:rgba(0,255,0,.3);background:rgba(255,255,255,.05);box-shadow:0 0 60px rgba(0,255,0,.08)}
 .glass-card.featured::before{opacity:.3}
 
-.price-tier{display:flex;flex-direction:column;gap:12px;align-items:center}
-.price-label{font-size:.7rem;font-weight:600;letter-spacing:3px;color:#888;text-transform:uppercase}
-.price-amount{font-size:3rem;font-weight:200;color:#fff;line-height:1}
-.price-period{font-size:.75rem;color:#555;margin-top:-4px}
-.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px;width:100%}
-.price-features li{font-size:.8rem;color:#aaa;display:flex;align-items:center;gap:10px}
-.price-features li::before{content:"›";color:#00ff00;font-weight:bold;font-size:1.2rem}
-.price-divider{width:30px;height:1px;background:linear-gradient(90deg,transparent,#00ff00,transparent);margin:16px auto}
+.product-icon{font-size:3rem;margin-bottom:16px}
+.product-name{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:8px}
+.product-desc{font-size:.75rem;color:#888;line-height:1.5;margin-bottom:16px;max-width:280px}
+.product-price{font-size:1.8rem;font-weight:200;color:#fff}
+.product-price .was{color:#555;text-decoration:line-through;font-size:1rem;margin-left:8px}
 
-.btn-primary{background:linear-gradient(135deg,#00ff00,#005ea6);color:#fff;border:none;padding:16px 40px;border-radius:30px;font-size:.8rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 30px rgba(0,112,186,.3);transition:all .3s;text-align:center;position:relative;overflow:hidden}
+.price-tier{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%}
+.price-label{font-size:.65rem;font-weight:600;letter-spacing:3px;color:#888;text-transform:uppercase}
+.price-amount{font-size:2.8rem;font-weight:200;color:#fff;line-height:1}
+.price-period{font-size:.7rem;color:#555;margin-top:-2px}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:20px;width:100%;text-align:left;padding:0 8px}
+.price-features li{font-size:.78rem;color:#aaa;display:flex;align-items:center;gap:10px}
+.price-features li::before{content:"›";color:#00ff00;font-weight:bold;font-size:1.1rem}
+.price-divider{width:40px;height:1px;background:linear-gradient(90deg,transparent,#00ff00,transparent);margin:14px auto}
+
+.btn-primary{background:linear-gradient(135deg,#00ff00,#005ea6);color:#fff;border:none;padding:16px 36px;border-radius:30px;font-size:.75rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 30px rgba(0,112,186,.3);transition:all .3s;text-align:center;position:relative;overflow:hidden;min-height:48px}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 50px rgba(0,112,186,.5)}
 .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
 .btn-primary:hover::after{left:100%}
-.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15);padding:16px 40px;border-radius:30px;font-size:.8rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;text-align:center}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15);padding:16px 36px;border-radius:30px;font-size:.75rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;text-align:center;min-height:48px}
 .btn-outline:hover{border-color:#00ff00;color:#00ff00;box-shadow:0 0 30px rgba(0,255,0,.08)}
 
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto;width:92%}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1000px;margin:0 auto;width:92%}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto;width:92%;justify-items:center}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1000px;margin:0 auto;width:92%;justify-items:center}
 
-.section{padding:100px 20px;text-align:center;position:relative}
-.section-title{font-size:1.8rem;font-weight:200;letter-spacing:6px;margin-bottom:16px}
-.section-subtitle{font-size:.75rem;color:#555;letter-spacing:3px;margin-bottom:60px}
-
-.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.4,0,.2,1)}
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.4,0,.2,1)}
 .reveal.active{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
-.top-bar{position:fixed;top:0;left:0;right:0;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);backdrop-filter:blur(10px)}
-.soulstack{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);color:#ffd700;padding:6px 16px;border-radius:20px;font-size:.55rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:60px;max-width:800px;margin-left:auto;margin-right:auto;padding:0 16px}
+.nav-pills a{color:#444;text-decoration:none;font-size:.5rem;letter-spacing:2px;padding:8px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.06);transition:all .3s;background:rgba(255,255,255,.02);white-space:nowrap}
+.nav-pills a:hover{color:#00ff00;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04);transform:translateY(-2px)}
 
-.nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:60px;max-width:800px;margin-left:auto;margin-right:auto}
-.nav-pills a{color:#444;text-decoration:none;font-size:.55rem;letter-spacing:2px;padding:8px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.06);transition:all .3s;background:rgba(255,255,255,.02)}
-.nav-pills a:hover{color:#00ff00;border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04);transform:translateY(-2px)}
-
-.footer{text-align:center;padding:60px 20px 40px;color:#333;font-size:.6rem;letter-spacing:3px}
+.footer{text-align:center;padding:60px 20px 40px;color:#333;font-size:.6rem;letter-spacing:3px;width:100%}
 .status-dot{width:6px;height:6px;background:#00ff00;border-radius:50%;box-shadow:0 0 10px #00ff00;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-::-webkit-scrollbar{width:6px}
+.pwa-install{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#00ff00,#005ea6);color:#fff;padding:14px 28px;border-radius:30px;font-size:.75rem;font-weight:600;letter-spacing:2px;cursor:pointer;border:none;box-shadow:0 8px 40px rgba(0,255,0,.3);z-index:200;display:none;animation:slideUp .5s ease}
+.pwa-install.show{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:#000}
-::-webkit-scrollbar-thumb{background:#222;border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:#333}
+::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
 
 @media(max-width:768px){
-  .headline{letter-spacing:4px}
-  .grid-3,.grid-2{grid-template-columns:1fr}
-  .section{padding:60px 16px}
+  .headline{font-size:clamp(1.6rem,8vw,2.2rem);letter-spacing:3px}
+  .grid-3,.grid-2{grid-template-columns:1fr;gap:16px}
+  .glass-card{padding:24px;width:100%;max-width:380px}
+  .section{padding:100px 16px 60px}
+  .btn-primary,.btn-outline{padding:14px 28px;width:100%;max-width:280px}
   .top-bar{padding:16px 20px}
+  .nav-pills{gap:6px;margin-top:40px}
+  .nav-pills a{font-size:.45rem;padding:6px 10px}
+}
+@media(max-width:380px){
+  .headline{font-size:1.4rem;letter-spacing:2px}
+  .glass-card{padding:20px;border-radius:20px}
+  .price-features li{font-size:.7rem}
 }
 </style>
 </head>
@@ -91,7 +111,7 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
 <div class="loading" id="loading">
   <div class="loading-logo">OMNIGUARD</div>
   <div class="loading-bar"></div>
-  <div class="loading-sub">TRILLION DOLLAR SYSTEM INITIALIZING</div>
+  <div class="loading-sub">DEVICE PROTECTION INITIALIZING</div>
 </div>
 <div id="canvas"></div>
 
@@ -103,43 +123,118 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
 
   <div class="section" style="padding-top:140px">
     <div class="eyebrow reveal d1">World's First Agentic AI</div>
-    <div class="headline reveal d2">Omni<span class="accent">Guard</span></div>
-    <div class="tagline reveal d3">Agent Swarm Active • Sentinel Watching • Full Automation</div>
+    <div class="headline reveal d2">Device<span class="accent">Protection</span></div>
+    <div class="tagline reveal d3">iOS • Android • Laptop • Tablet • Home Computer • Full Coverage</div>
     
-    <div class="grid-3 reveal d4" style="margin-top:80px">
-      <div class="glass-card ">
+    <div class="section-title reveal d4" style="margin-top:60px">PROTECT YOUR DEVICES</div>
+    <div class="grid-2 reveal d4">
+      <div class="glass-card featured">
+        <div class="product-icon">📱</div>
+        <div class="product-name">iOS Shield</div>
+        <div class="product-desc">Complete protection for iPhone and iPad. Real-time threat monitoring, encrypted backups, and remote wipe.</div>
+        <div class="product-price">$14.99 <span class="was">$29.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/14.99" class="btn-primary" target="_blank" rel="noopener noreferrer">PROTECT iOS</a>
+      </div>
+      <div class="glass-card">
+        <div class="product-icon">🤖</div>
+        <div class="product-name">Android Shield</div>
+        <div class="product-desc">Advanced security for Android phones and tablets. Malware blocking, app scanning, privacy guard.</div>
+        <div class="product-price">$14.99 <span class="was">$29.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/14.99" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT ANDROID</a>
+      </div>
+      <div class="glass-card">
+        <div class="product-icon">💻</div>
+        <div class="product-name">Laptop Shield</div>
+        <div class="product-desc">Enterprise-grade protection for Windows and Mac. Ransomware defense, firewall, and VPN included.</div>
+        <div class="product-price">$19.99 <span class="was">$39.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/19.99" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT LAPTOP</a>
+      </div>
+      <div class="glass-card">
+        <div class="product-icon">📲</div>
+        <div class="product-name">Tablet Shield</div>
+        <div class="product-desc">Dedicated tablet security with parental controls, content filtering, and anti-theft tracking.</div>
+        <div class="product-price">$9.99 <span class="was">$19.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/9.99" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT TABLET</a>
+      </div>
+      <div class="glass-card">
+        <div class="product-icon">🖥️</div>
+        <div class="product-name">Home Computer</div>
+        <div class="product-desc">Complete desktop protection. Network monitoring, identity theft prevention, 24/7 agent swarm defense.</div>
+        <div class="product-price">$24.99 <span class="was">$49.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/24.99" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT DESKTOP</a>
+      </div>
+      <div class="glass-card">
+        <div class="product-icon">🏠</div>
+        <div class="product-name">Family Shield</div>
+        <div class="product-desc">Protect every device in your household. Unlimited devices, family dashboard, priority response team.</div>
+        <div class="product-price">$49.99 <span class="was">$99.99</span></div>
+        <a href="https://paypal.me/franciscoderek7/49.99" class="btn-outline" target="_blank" rel="noopener noreferrer">PROTECT FAMILY</a>
+      </div>
+    </div>
+    
+    <div class="section-title reveal d5" style="margin-top:100px">SUBSCRIPTION TIERS</div>
+    <div class="grid-3 reveal d5">
+      <div class="glass-card">
         <div class="price-tier">
-          <div class="price-label" style="color:#888">BASIC</div>
+          <div class="price-label" style="color:#888">INDIVIDUAL</div>
           <div class="price-amount">$29</div>
           <div class="price-period">per month</div>
           <div class="price-divider"></div>
-          <ul class="price-features"><li>Device Monitoring</li><li>Threat Detection</li><li>Weekly Reports</li><li>1 Device</li></ul>
-          <a href="https://paypal.me/franciscoderek7/29" class="btn-outline" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">PROTECT DEVICE</a>
+          <ul class="price-features">
+            <li>1 Device</li>
+            <li>Basic Monitoring</li>
+            <li>Email Support</li>
+            <li>Weekly Reports</li>
+          </ul>
+          <a href="https://paypal.me/franciscoderek7/29" class="btn-outline" target="_blank" rel="noopener noreferrer">START PROTECTION</a>
         </div>
       </div>
       <div class="glass-card featured">
         <div class="price-tier">
-          <div class="price-label" style="color:#00ff00">PRO</div>
+          <div class="price-label" style="color:#00ff00">FAMILY</div>
           <div class="price-amount">$99</div>
           <div class="price-period">per month</div>
           <div class="price-divider"></div>
-          <ul class="price-features"><li>Real-Time Protection</li><li>AI Threat Neutralization</li><li>24/7 Swarm Monitoring</li><li>5 Devices</li><li>Ransomware Shield</li></ul>
-          <a href="https://paypal.me/franciscoderek7/99" class="btn-primary" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">SECURE EMPIRE</a>
+          <ul class="price-features">
+            <li>Unlimited Devices</li>
+            <li>Real-Time AI Defense</li>
+            <li>24/7 Swarm Monitoring</li>
+            <li>VPN Included</li>
+            <li>Ransomware Shield</li>
+          </ul>
+          <a href="https://paypal.me/franciscoderek7/99" class="btn-primary" target="_blank" rel="noopener noreferrer">SECURE FAMILY</a>
         </div>
       </div>
-      <div class="glass-card ">
+      <div class="glass-card">
         <div class="price-tier">
           <div class="price-label" style="color:#888">ENTERPRISE</div>
           <div class="price-amount">$299</div>
           <div class="price-period">per month</div>
           <div class="price-divider"></div>
-          <ul class="price-features"><li>Unlimited Devices</li><li>Custom AI Agents</li><li>Physical Security Integration</li><li>Zero-Day Protection</li><li>Dedicated Response Team</li></ul>
-          <a href="https://paypal.me/franciscoderek7/299" class="btn-outline" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">TOTAL DEFENSE</a>
+          <ul class="price-features">
+            <li>Unlimited Devices + Network</li>
+            <li>Custom AI Agents</li>
+            <li>Physical Security Integration</li>
+            <li>Zero-Day Protection</li>
+            <li>Dedicated Response Team</li>
+          </ul>
+          <a href="https://paypal.me/franciscoderek7/299" class="btn-outline" target="_blank" rel="noopener noreferrer">TOTAL DEFENSE</a>
         </div>
-      </div></div>
+      </div>
+    </div>
     
     <div class="nav-pills reveal d5">
-      <a href="../">HQ</a><a href="../primedox/">F3</a><a href="../vaultvelocityauto/">F4</a><a href="../techpetcage/">F5</a><a href="../ccldr/">F6</a><a href="../weedlaw/">F7</a><a href="../beno-x/">F8</a><a href="../cleanswarm/">F9</a><a href="../kiaros/">F10</a><a href="../vigilax/">F11</a><a href="../techpackcage/">F12</a>
+      <a href="../">HQ</a>
+      <a href="../primedox/">F3</a>
+      <a href="../vaultvelocityauto/">F4</a>
+      <a href="../techpetcage/">F5</a>
+      <a href="../ccldr/">F6</a>
+      <a href="../weedlaw/">F7</a>
+      <a href="../canlegaldef/">F8</a>
+      <a href="../canconsult/">F9</a>
+      <a href="../kiaros/">F10</a>
+      <a href="../vigilax/">F11</a>
+      <a href="../techpackcage/">F12</a>
     </div>
   </div>
 
@@ -148,15 +243,17 @@ body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
       <div class="status-dot"></div>
       <div>FLOOR 2 OF 392</div>
     </div>
-    <div>2026 Francisco Holdings Inc. | Agent Swarm Technology | All Rights Reserved</div>
+    <div>2026 OmniGuard | Francisco Holdings Inc. | Agent Swarm Technology</div>
   </div>
 </div>
 
+<button class="pwa-install" id="pwaInstall">INSTALL OMNIGUARD APP</button>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));
-try{localStorage.clear();sessionStorage.clear();}catch(e){}
-
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(r=>console.log('SW registered')).catch(e=>console.log('SW failed',e));
+}
 
 const scene=new THREE.Scene();
 scene.fog=new THREE.FogExp2(0x000000,.002);
@@ -180,22 +277,18 @@ ground.rotation.x=-Math.PI/2;ground.position.y=-5;scene.add(ground);
 
 const shield=new THREE.Group();
 const coreMat=new THREE.MeshPhysicalMaterial({color:0x001100,roughness:.05,metalness:.9,transmission:.2,thickness:1,clearcoat:1,emissive:0x001100,emissiveIntensity:.2});
-const wireMat=new THREE.MeshBasicMaterial({color:0x00ff00,wireframe:true,transparent:true,opacity:.15});
-
+const wireMat=new THREE.MeshBasicMaterial({color:0x00ff00,wireframe:true,transparent:true,opacity:.12});
 const core=new THREE.Mesh(new THREE.IcosahedronGeometry(3,2),coreMat);shield.add(core);
-const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(3.2,1),wireMat);shield.add(wire);
-
+const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(3.3,1),wireMat);shield.add(wire);
 const ringGroup=new THREE.Group();
 const ringMat=new THREE.MeshBasicMaterial({color:0x00ff00,transparent:true,opacity:.1,blending:THREE.AdditiveBlending,side:THREE.DoubleSide});
 for(let i=0;i<3;i++){const ring=new THREE.Mesh(new THREE.RingGeometry(4+i,4.2+i,64),ringMat);ring.rotation.x=Math.PI/2+i*.3;ring.position.y=i;ringGroup.add(ring);}
 shield.add(ringGroup);
-
-const pGeo=new THREE.BufferGeometry(),pCount=600,pPos=new Float32Array(pCount*3);
+const pGeo=new THREE.BufferGeometry(),pCount=500,pPos=new Float32Array(pCount*3);
 for(let i=0;i<pCount;i++){pPos[i*3]=(Math.random()-.5)*20;pPos[i*3+1]=Math.random()*20-5;pPos[i*3+2]=(Math.random()-.5)*20;}
 pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
 const pMat=new THREE.PointsMaterial({size:.08,color:0x00ff00,transparent:true,opacity:.5,blending:THREE.AdditiveBlending});
 const particles=new THREE.Points(pGeo,pMat);shield.add(particles);
-
 scene.add(shield);
 
 let mx=0,my=0,time=0;
@@ -204,11 +297,14 @@ function animate(){requestAnimationFrame(animate);time+=.003;core.rotation.y+=.0
 animate();
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 
-
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active');});},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 setTimeout(()=>{document.getElementById('loading').style.opacity='0';setTimeout(()=>document.getElementById('loading').remove(),1200);},2500);
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('pwaInstall').classList.add('show');});
+document.getElementById('pwaInstall').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted'){document.getElementById('pwaInstall').classList.remove('show');}deferredPrompt=null;}});
 </script>
 </body>
 </html>
