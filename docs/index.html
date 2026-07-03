@@ -4,324 +4,213 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Francisco Holdings Inc.</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;800&display=swap" rel="stylesheet">
+<title>Francisco Holdings | Global Empire HQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:#fff}
+html{scroll-behavior:smooth}
+body{background:#000;overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
 #canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-
-/* Loading */
-.loading{position:fixed;inset:0;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
-.loading-logo{font-size:1rem;font-weight:300;letter-spacing:12px;color:#888;margin-bottom:24px}
-.loading-bar{width:120px;height:1px;background:#111;position:relative;overflow:hidden}
-.loading-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0%;background:linear-gradient(90deg,transparent,#00ff88,transparent);animation:load 2s ease forwards}
-@keyframes load{0%{width:0%;left:0}50%{width:100%;left:0}100%{width:0%;left:100%}}
-
-/* UI Layer */
-#ui{position:fixed;inset:0;z-index:10;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:40px 24px}
+#ui{position:relative;z-index:10;pointer-events:none;min-height:100vh;display:flex;flex-direction:column}
 #ui>*{pointer-events:auto}
 
-/* Top bar */
-.top-bar{display:flex;justify-content:space-between;align-items:center;width:100%}
-.logo{font-size:.65rem;font-weight:600;letter-spacing:4px;color:#888;text-transform:uppercase}
-.logo span{color:#00ff88}
-.soulstack{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);color:#ffd700;padding:6px 14px;border-radius:20px;font-size:.55rem;font-weight:700;letter-spacing:1px;backdrop-filter:blur(20px)}
+.loading{position:fixed;inset:0;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
+.loading-logo{font-size:1rem;font-weight:200;letter-spacing:16px;color:#555;margin-bottom:24px;opacity:0;animation:fadeIn 1s ease forwards}
+.loading-sub{font-size:.6rem;color:#333;letter-spacing:4px;margin-top:12px;opacity:0;animation:fadeIn 1s ease .5s forwards}
+.loading-bar{width:120px;height:1px;background:#111;position:relative;overflow:hidden;margin-top:20px;opacity:0;animation:fadeIn 1s ease .3s forwards}
+.loading-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0%;background:linear-gradient(90deg,transparent,#00ff88,transparent);animation:load 2.5s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes load{0%{width:0%;left:0}50%{width:100%;left:0}100%{width:0%;left:100%}}
+@keyframes fadeIn{to{opacity:1}}
 
-/* Center content */
-.center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:90%;max-width:600px}
-.title{font-size:clamp(2rem,8vw,4rem);font-weight:200;letter-spacing:8px;line-height:1.1;margin-bottom:16px}
-.title .line{display:block}
-.title .line1{background:linear-gradient(180deg,#fff 0%,#888 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.title .line2{background:linear-gradient(135deg,#00ff88,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:300}
-.subtitle{font-size:.75rem;font-weight:300;letter-spacing:6px;color:#666;text-transform:uppercase;margin-bottom:8px}
-.tagline{font-size:.65rem;font-weight:400;letter-spacing:3px;color:#00ff88;margin-bottom:40px;opacity:.8}
+.brand{font-size:.65rem;font-weight:600;letter-spacing:4px;color:#555;text-transform:uppercase}
+.brand span{color:#00ff88}
+.eyebrow{font-size:.7rem;font-weight:400;letter-spacing:8px;color:#666;text-transform:uppercase;margin-bottom:16px}
+.headline{font-size:clamp(2.2rem,7vw,4rem);font-weight:200;letter-spacing:8px;line-height:1.05;background:linear-gradient(180deg,#fff 40%,#777 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.accent{color:#00ff88;font-weight:300;display:block;margin-top:8px}
+.tagline{font-size:.65rem;font-weight:400;letter-spacing:3px;color:#00ff88;opacity:.6;margin-top:16px}
 
-/* CTA */
-.cta-group{display:flex;flex-direction:column;align-items:center;gap:16px}
-.cta-btn{background:linear-gradient(135deg,#0070ba,#005ea6);color:#fff;border:none;padding:16px 48px;border-radius:30px;font-size:.85rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all .3s;box-shadow:0 4px 30px rgba(0,112,186,.3);text-decoration:none;display:inline-block}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,112,186,.5)}
-.cta-note{font-size:.55rem;color:#444;letter-spacing:1px}
+.glass-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:40px;backdrop-filter:blur(40px) saturate(180%);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.25),transparent);opacity:0;transition:opacity .4s}
+.glass-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.glass-card:hover::before{opacity:.5}
+.glass-card.featured{border-color:rgba(0,255,136,.25);background:rgba(255,255,255,.05);box-shadow:0 0 80px rgba(0,255,136,.08)}
+.glass-card.featured::before{opacity:.3}
 
-/* Floor badge */
-.floor-badge{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px}
-.floor-dot{width:6px;height:6px;background:#00ff88;border-radius:50%;box-shadow:0 0 10px #00ff88}
-.floor-text{font-size:.65rem;letter-spacing:4px;color:#888;font-weight:300}
+.price-tier{display:flex;flex-direction:column;gap:12px;align-items:center}
+.price-label{font-size:.7rem;font-weight:600;letter-spacing:3px;color:#888;text-transform:uppercase}
+.price-amount{font-size:3rem;font-weight:200;color:#fff;line-height:1}
+.price-period{font-size:.75rem;color:#555;margin-top:-4px}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px;width:100%}
+.price-features li{font-size:.8rem;color:#aaa;display:flex;align-items:center;gap:10px}
+.price-features li::before{content:"›";color:#00ff88;font-weight:bold;font-size:1.2rem}
+.price-divider{width:30px;height:1px;background:linear-gradient(90deg,transparent,#00ff88,transparent);margin:16px auto}
 
-/* Nav pills */
-.nav-pills{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:90%}
-.nav-pills a{color:#555;text-decoration:none;font-size:.5rem;letter-spacing:1px;padding:6px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.06);transition:all .3s;background:rgba(255,255,255,.02)}
-.nav-pills a:hover{color:#00ff88;border-color:rgba(0,255,136,.2);background:rgba(0,255,136,.04)}
+.btn-primary{background:linear-gradient(135deg,#00ff88,#005ea6);color:#fff;border:none;padding:16px 40px;border-radius:30px;font-size:.8rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 30px rgba(0,112,186,.3);transition:all .3s;text-align:center;position:relative;overflow:hidden}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 50px rgba(0,112,186,.5)}
+.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
+.btn-primary:hover::after{left:100%}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15);padding:16px 40px;border-radius:30px;font-size:.8rem;font-weight:600;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;text-align:center}
+.btn-outline:hover{border-color:#00ff88;color:#00ff88;box-shadow:0 0 30px rgba(0,255,136,.08)}
 
-/* Entrance animations */
-.fade-up{opacity:0;transform:translateY(30px);animation:fadeUp 1s cubic-bezier(.4,0,.2,1) forwards}
-.delay-1{animation-delay:.5s}
-.delay-2{animation-delay:.7s}
-.delay-3{animation-delay:.9s}
-.delay-4{animation-delay:1.1s}
-.delay-5{animation-delay:1.3s}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-</style></head>
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto;width:92%}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1000px;margin:0 auto;width:92%}
+
+.section{padding:100px 20px;text-align:center;position:relative}
+.section-title{font-size:1.8rem;font-weight:200;letter-spacing:6px;margin-bottom:16px}
+.section-subtitle{font-size:.75rem;color:#555;letter-spacing:3px;margin-bottom:60px}
+
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.4,0,.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+.top-bar{position:fixed;top:0;left:0;right:0;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);backdrop-filter:blur(10px)}
+.soulstack{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);color:#ffd700;padding:6px 16px;border-radius:20px;font-size:.55rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+
+.nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:60px;max-width:800px;margin-left:auto;margin-right:auto}
+.nav-pills a{color:#444;text-decoration:none;font-size:.55rem;letter-spacing:2px;padding:8px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.06);transition:all .3s;background:rgba(255,255,255,.02)}
+.nav-pills a:hover{color:#00ff88;border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04);transform:translateY(-2px)}
+
+.footer{text-align:center;padding:60px 20px 40px;color:#333;font-size:.6rem;letter-spacing:3px}
+.status-dot{width:6px;height:6px;background:#00ff88;border-radius:50%;box-shadow:0 0 10px #00ff88;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:#222;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#333}
+
+@media(max-width:768px){
+  .headline{letter-spacing:4px}
+  .grid-3,.grid-2{grid-template-columns:1fr}
+  .section{padding:60px 16px}
+  .top-bar{padding:16px 20px}
+}
+</style>
+</head>
 <body>
-
 <div class="loading" id="loading">
   <div class="loading-logo">FRANCISCO HOLDINGS</div>
   <div class="loading-bar"></div>
+  <div class="loading-sub">TRILLION DOLLAR SYSTEM INITIALIZING</div>
 </div>
-
 <div id="canvas"></div>
 
 <div id="ui">
-  <div class="top-bar fade-up delay-1">
-    <div class="logo">FRANCISCO <span>HOLDINGS</span></div>
-    <div class="soulstack">SOULSTACK</div>
+  <div class="top-bar">
+    <div class="brand">FRANCISCO <span>HOLDINGS</span></div>
+    <div class="soulstack">SOULSTACK VERIFIED</div>
   </div>
 
-  <div class="center">
-    <div class="subtitle fade-up delay-2">392-FLOOR GLOBAL EMPIRE</div>
-    <div class="title fade-up delay-3">
-      <span class="line line1">Command</span>
-      <span class="line line2">Center</span>
-    </div>
-    <div class="tagline fade-up delay-4">AGENT SWARM ACTIVE • OMNI WATCHING • PRIMEDOX ONLINE</div>
+  <div class="section" style="padding-top:140px">
+    <div class="eyebrow reveal d1">392-FLOOR GLOBAL EMPIRE</div>
+    <div class="headline reveal d2">Command<span class="accent">Center</span></div>
+    <div class="tagline reveal d3">Agent Swarm Active • Omni Watching • PrimeDox Online</div>
     
-    <div class="cta-group fade-up delay-5">
-      <a href="https://paypal.me/franciscoderek7/49" class="cta-btn" onclick="window.open(this.href,'_blank');return false;">ENTER THE EMPIRE — $49</a>
-      <div class="cta-note">Secure payment via PayPal</div>
+    <div class="grid-3 reveal d4" style="margin-top:80px">
+      <div class="glass-card ">
+        <div class="price-tier">
+          <div class="price-label" style="color:#888">STARTER</div>
+          <div class="price-amount">$49</div>
+          <div class="price-period">per month</div>
+          <div class="price-divider"></div>
+          <ul class="price-features"><li>Empire Access</li><li>Basic Agent Swarm</li><li>Email Support</li><li>1 Floor Access</li></ul>
+          <a href="https://paypal.me/franciscoderek7/49" class="btn-outline" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">GET STARTED</a>
+        </div>
+      </div>
+      <div class="glass-card featured">
+        <div class="price-tier">
+          <div class="price-label" style="color:#00ff88">EMPIRE BUILDER</div>
+          <div class="price-amount">$199</div>
+          <div class="price-period">per month</div>
+          <div class="price-divider"></div>
+          <ul class="price-features"><li>All Empire Floors</li><li>Full Agent Swarm</li><li>Priority Support</li><li>Document Generation</li><li>Security Monitoring</li></ul>
+          <a href="https://paypal.me/franciscoderek7/199" class="btn-primary" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">ENTER EMPIRE</a>
+        </div>
+      </div>
+      <div class="glass-card ">
+        <div class="price-tier">
+          <div class="price-label" style="color:#888">SOVEREIGN</div>
+          <div class="price-amount">$999</div>
+          <div class="price-period">per month</div>
+          <div class="price-divider"></div>
+          <ul class="price-features"><li>Everything in Builder</li><li>White-Glove Concierge</li><li>Dedicated Agent Team</li><li>Custom Integrations</li><li>24/7 Direct Line</li></ul>
+          <a href="https://paypal.me/franciscoderek7/999" class="btn-outline" target="_blank" rel="noopener noreferrer" style="margin-top:24px;display:inline-flex">CONTACT US</a>
+        </div>
+      </div></div>
+    
+    <div class="nav-pills reveal d5">
+      <a href="omniaguard/">F2</a><a href="primedox/">F3</a><a href="vaultvelocityauto/">F4</a><a href="techpetcage/">F5</a><a href="ccldr/">F6</a><a href="weedlaw/">F7</a><a href="beno-x/">F8</a><a href="cleanswarm/">F9</a><a href="kiaros/">F10</a><a href="vigilax/">F11</a><a href="techpackcage/">F12</a>
     </div>
   </div>
 
-  <div class="nav-pills fade-up delay-5">
-    <a href="omniaguard/">OmniGuard</a>
-    <a href="primedox/">PrimeDox</a>
-    <a href="vaultvelocityauto/">Vault</a>
-    <a href="techpetcage/">TechPet</a>
-    <a href="ccldr/">CCLDR</a>
-    <a href="weedlaw/">WeedLaw</a>
-    <a href="beno-x/">BENO-X</a>
-    <a href="cleanswarm/">CleanSwarm</a>
-    <a href="kiaros/">Kiaros</a>
-    <a href="vigilax/">Vigilax</a>
-    <a href="techpackcage/">TechPack</a>
-  </div>
-
-  <div class="floor-badge fade-up delay-5">
-    <div class="floor-dot"></div>
-    <div class="floor-text">FLOOR 1 OF 392</div>
+  <div class="footer reveal d5">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px">
+      <div class="status-dot"></div>
+      <div>FLOOR 1 OF 392</div>
+    </div>
+    <div>2026 Francisco Holdings Inc. | Agent Swarm Technology | All Rights Reserved</div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// Scene setup
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x000000, 0.0015);
+if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));
+try{localStorage.clear();sessionStorage.clear();}catch(e){}
 
-const camera = new THREE.PerspectiveCamera(35, innerWidth/innerHeight, 0.1, 3000);
-camera.position.set(0, 8, 45);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.3;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x000000,.002);
+const camera=new THREE.PerspectiveCamera(35,innerWidth/innerHeight,.1,3000);
+camera.position.set(0,6,40);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.3;
 document.getElementById('canvas').appendChild(renderer.domElement);
 
-// Lighting
-scene.add(new THREE.AmbientLight(0x001a0a, 0.4));
-const hemi = new THREE.HemisphereLight(0x00ff88, 0x000000, 0.3);
+scene.add(new THREE.AmbientLight(0x001a0a,.4));
+const hemi=new THREE.HemisphereLight(0x00ff88,0x000000,.3);
 scene.add(hemi);
+const key=new THREE.DirectionalLight(0xffffff,.8);key.position.set(10,20,10);scene.add(key);
+const rim=new THREE.DirectionalLight(0x00ff88,.4);rim.position.set(-10,5,-10);scene.add(rim);
 
-const keyLight = new THREE.DirectionalLight(0xffffff, 0.8);
-keyLight.position.set(10, 20, 10);
-scene.add(keyLight);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0x030303,roughness:.1,metalness:.9}));
+ground.rotation.x=-Math.PI/2;ground.position.y=-5;scene.add(ground);
 
-const rimLight = new THREE.DirectionalLight(0x00ff88, 0.5);
-rimLight.position.set(-10, 5, -10);
-scene.add(rimLight);
+const tower=new THREE.Group();
+const glassMat=new THREE.MeshPhysicalMaterial({color:0x050505,roughness:.02,metalness:.98,transmission:.4,thickness:3,clearcoat:1,clearcoatRoughness:.02,emissive:0x001100,emissiveIntensity:.06});
+const goldMat=new THREE.MeshStandardMaterial({color:0xffd700,roughness:.02,metalness:1,emissive:0xffd700,emissiveIntensity:.5});
 
-const goldLight = new THREE.PointLight(0xffd700, 1, 100);
-goldLight.position.set(0, 15, 5);
-scene.add(goldLight);
-
-// Ground - subtle reflective plane
-const ground = new THREE.Mesh(
-  new THREE.PlaneGeometry(200, 200),
-  new THREE.MeshStandardMaterial({ color: 0x030303, roughness: 0.1, metalness: 0.9 })
-);
-ground.rotation.x = -Math.PI/2;
-ground.position.y = -8;
-scene.add(ground);
-
-// The Skyscraper - sleek, premium design
-const tower = new THREE.Group();
-
-// Main shaft - very slender, like a real luxury tower
-const shaftGeo = new THREE.BoxGeometry(2.5, 35, 2.5);
-const shaftMat = new THREE.MeshPhysicalMaterial({
-  color: 0x0a0a0a,
-  roughness: 0.05,
-  metalness: 0.95,
-  transmission: 0.2,
-  thickness: 2,
-  clearcoat: 1,
-  clearcoatRoughness: 0.05,
-  emissive: 0x001100,
-  emissiveIntensity: 0.1
-});
-const shaft = new THREE.Mesh(shaftGeo, shaftMat);
-shaft.position.y = 10;
-shaft.castShadow = true;
-tower.add(shaft);
-
-// Window strips - vertical glowing lines
-const windowMat = new THREE.MeshBasicMaterial({ 
-  color: 0x00ff88, 
-  transparent: true, 
-  opacity: 0.08,
-  blending: THREE.AdditiveBlending
-});
-for(let i = 0; i < 4; i++) {
-  const win = new THREE.Mesh(new THREE.BoxGeometry(0.08, 34, 2.55), windowMat);
-  win.position.set((i-1.5)*0.6, 10, 0);
-  tower.add(win);
-}
-
-// Gold spire
-const spireGeo = new THREE.ConeGeometry(0.5, 4, 4);
-const spireMat = new THREE.MeshStandardMaterial({ 
-  color: 0xffd700, 
-  metalness: 1, 
-  roughness: 0.1,
-  emissive: 0xffd700,
-  emissiveIntensity: 0.3
-});
-const spire = new THREE.Mesh(spireGeo, spireMat);
-spire.position.y = 29.5;
-tower.add(spire);
-
-// Base platform
-const baseGeo = new THREE.CylinderGeometry(4, 5, 1, 6);
-const baseMat = new THREE.MeshStandardMaterial({ 
-  color: 0x111, 
-  metalness: 0.9, 
-  roughness: 0.1,
-  emissive: 0x00ff88,
-  emissiveIntensity: 0.05
-});
-const base = new THREE.Mesh(baseGeo, baseMat);
-base.position.y = -7.5;
-tower.add(base);
-
-// Entrance glow
-const entrance = new THREE.Mesh(
-  new THREE.PlaneGeometry(1.5, 2.5),
-  new THREE.MeshBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending })
-);
-entrance.position.set(0, -6.5, 1.3);
-tower.add(entrance);
-
+const shaft=new THREE.Mesh(new THREE.BoxGeometry(2.5,40,2.5),glassMat);shaft.position.y=15;shaft.castShadow=true;tower.add(shaft);
+for(let i=0;i<6;i++){const win=new THREE.Mesh(new THREE.PlaneGeometry(.04,38),new THREE.MeshBasicMaterial({color:0x00ff88,transparent:true,opacity:.05,blending:THREE.AdditiveBlending}));win.position.set((i-2.5)*.4,15,1.26);tower.add(win);}
+const spire=new THREE.Mesh(new THREE.ConeGeometry(.3,5,4),goldMat);spire.position.y=37.5;tower.add(spire);
+const base=new THREE.Mesh(new THREE.CylinderGeometry(3.5,4.5,1,8),new THREE.MeshStandardMaterial({color:0x0a0a0a,metalness:.95,roughness:.05,emissive:0x001100,emissiveIntensity:.04}));base.position.y=-4.5;tower.add(base);
+const entrance=new THREE.Mesh(new THREE.PlaneGeometry(1.5,2.5),new THREE.MeshBasicMaterial({color:0x00ff88,transparent:true,opacity:.2,blending:THREE.AdditiveBlending}));entrance.position.set(0,-3.5,1.26);tower.add(entrance);
 scene.add(tower);
 
-// Floating rings (elegant, not cluttered)
-const ringGroup = new THREE.Group();
-const ringMat = new THREE.MeshBasicMaterial({ 
-  color: 0x00ff88, 
-  transparent: true, 
-  opacity: 0.15,
-  blending: THREE.AdditiveBlending,
-  side: THREE.DoubleSide
-});
-for(let i = 0; i < 3; i++) {
-  const ring = new THREE.Mesh(new THREE.RingGeometry(3 + i*1.5, 3.1 + i*1.5, 64), ringMat);
-  ring.rotation.x = Math.PI/2;
-  ring.position.y = 8 + i*2;
-  ringGroup.add(ring);
-}
+const ringGroup=new THREE.Group();
+const ringMat=new THREE.MeshBasicMaterial({color:0x00ff88,transparent:true,opacity:.08,blending:THREE.AdditiveBlending,side:THREE.DoubleSide});
+for(let i=0;i<4;i++){const ring=new THREE.Mesh(new THREE.RingGeometry(3+i,3.1+i,64),ringMat);ring.rotation.x=Math.PI/2;ring.position.y=10+i*3;ringGroup.add(ring);}
 scene.add(ringGroup);
 
-// Minimal particles - high quality, not noise
-const pGeo = new THREE.BufferGeometry();
-const pCount = 800;
-const pPos = new Float32Array(pCount * 3);
-for(let i = 0; i < pCount; i++) {
-  pPos[i*3] = (Math.random() - 0.5) * 60;
-  pPos[i*3+1] = Math.random() * 40 - 5;
-  pPos[i*3+2] = (Math.random() - 0.5) * 60;
-}
-pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-const pMat = new THREE.PointsMaterial({ 
-  size: 0.15, 
-  color: 0x00ff88, 
-  transparent: true, 
-  opacity: 0.6,
-  blending: THREE.AdditiveBlending
-});
-const particles = new THREE.Points(pGeo, pMat);
-scene.add(particles);
+const pGeo=new THREE.BufferGeometry(),pCount=800,pPos=new Float32Array(pCount*3);
+for(let i=0;i<pCount;i++){pPos[i*3]=(Math.random()-.5)*60;pPos[i*3+1]=Math.random()*40-2;pPos[i*3+2]=(Math.random()-.5)*60;}
+pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+const pMat=new THREE.PointsMaterial({size:.1,color:0x00ff88,transparent:true,opacity:.4,blending:THREE.AdditiveBlending});
+const particles=new THREE.Points(pGeo,pMat);scene.add(particles);
 
-// Gold dust - very subtle
-const gGeo = new THREE.BufferGeometry();
-const gCount = 200;
-const gPos = new Float32Array(gCount * 3);
-for(let i = 0; i < gCount; i++) {
-  gPos[i*3] = (Math.random() - 0.5) * 80;
-  gPos[i*3+1] = Math.random() * 30;
-  gPos[i*3+2] = (Math.random() - 0.5) * 80;
-}
-gGeo.setAttribute('position', new THREE.BufferAttribute(gPos, 3));
-const gMat = new THREE.PointsMaterial({ 
-  size: 0.2, 
-  color: 0xffd700, 
-  transparent: true, 
-  opacity: 0.4,
-  blending: THREE.AdditiveBlending
-});
-const goldDust = new THREE.Points(gGeo, gMat);
-scene.add(goldDust);
-
-// Animation
-let mouseX = 0, mouseY = 0, time = 0;
-document.addEventListener('mousemove', (e) => {
-  mouseX = (e.clientX / innerWidth) * 2 - 1;
-  mouseY = (e.clientY / innerHeight) * 2 - 1;
-});
-
-function animate() {
-  requestAnimationFrame(animate);
-  time += 0.003;
-
-  tower.rotation.y = Math.sin(time * 0.5) * 0.05;
-  
-  ringGroup.rotation.y += 0.002;
-  ringGroup.children.forEach((ring, i) => {
-    ring.rotation.x = Math.PI/2 + Math.sin(time + i) * 0.1;
-  });
-
-  particles.rotation.y += 0.0002;
-  goldDust.rotation.y -= 0.0001;
-
-  // Smooth camera
-  camera.position.x += (mouseX * 3 - camera.position.x) * 0.02;
-  camera.position.y += (8 + mouseY * 2 - camera.position.y) * 0.02;
-  camera.lookAt(0, 8, 0);
-
-  renderer.render(scene, camera);
-}
+let mx=0,my=0,time=0;
+document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth)*2-1;my=(e.clientY/innerHeight)*2-1});
+function animate(){requestAnimationFrame(animate);time+=.003;tower.rotation.y=Math.sin(time*.3)*.02;ringGroup.rotation.y+=.001;particles.rotation.y+=.0001;camera.position.x+=(mx*3-camera.position.x)*.015;camera.position.y+=(6+my*2-camera.position.y)*.015;camera.lookAt(0,10,0);renderer.render(scene,camera);}
 animate();
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 
-// Resize
-window.addEventListener('resize', () => {
-  camera.aspect = innerWidth / innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-});
 
-// Remove loading
-setTimeout(() => {
-  document.getElementById('loading').style.opacity = '0';
-  setTimeout(() => document.getElementById('loading').remove(), 1200);
-}, 2000);
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+setTimeout(()=>{document.getElementById('loading').style.opacity='0';setTimeout(()=>document.getElementById('loading').remove(),1200);},2500);
 </script>
 </body>
 </html>
