@@ -1,10 +1,10 @@
-const CACHE_NAME = 'omniaguard-v2';
+const CACHE_NAME = 'primedox-v2';
 const urlsToCache = [
-  '/omniaguard/',
-  '/omniaguard/index.html',
-  '/omniaguard/manifest.json',
-  '/omniaguard/icon-192.png',
-  '/omniaguard/icon-512.png'
+  '/primedox/',
+  '/primedox/index.html',
+  '/primedox/manifest.json',
+  '/primedox/icon-192.png',
+  '/primedox/icon-512.png'
 ];
 
 self.addEventListener('install', e => {
