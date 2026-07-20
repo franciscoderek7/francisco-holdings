@@ -1,5 +1,14 @@
+
+cd ~/francisco-holdings && git add docs/primedox-hq/index.html && git commit -m "Fix PayPal SDK button rendering - now uses dynamic amount" && git push origin main
+
 <!DOCTYPE html>
-<html lang="en">
+<ano ~/francisco-holdings/docs/primedox-hq/index.html
+
+nano ~/francisco-holdings/docs/primedox-hq/index.html
+
+Ctrl+W
+
+html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -118,6 +127,7 @@ function loadPayPalScript() {
     document.head.appendChild(script);
   });
 }
+
 function renderPayPalButton(amount) {
   if (!window.paypal) {
     document.getElementById("paypal-button-container").innerHTML = "<p style=color:red>Payment system unavailable.</p>";
@@ -127,6 +137,35 @@ function renderPayPalButton(amount) {
   document.getElementById("paypal-button-container").innerHTML = "<a href=https://paypal.me/techpetcage/49 target=_blank style=display:inline-block;padding:15px 30px;background:#d4af37;color:#000;text-decoration:none;border-radius:8px;font-weight:bold;font-size:18px;>Pay $49 with PayPal →</a>";
 }
 function pay(amount) {
+function renderPayPalButton(amount) {
+    if (!window.paypal) {
+        document.getElementById("paypal-button-container").innerHTML = "<p style=color:red>Payment system unavailable.</p>";
+        return;
+    }
+    document.getElementById("paypal-button-container").innerHTML = "";
+    paypal.Buttons({
+        style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { value: amount.toString(), currency_code: "USD" },
+                    description: "PrimeDox AI - " + amount + " USD"
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert("Payment successful! Transaction ID: " + details.id);
+                PhoenixCRM.addLead({name: details.payer.name.given_name + " " + details.payer.name.surname, email: details.payer.email_address, amount: amount, status: "paid", transactionId: details.id});
+            });
+        },
+        onError: function(err) {
+            console.error("PayPal error:", err);
+            document.getElementById("paypal-button-container").innerHTML = "<p style=color:red>Payment failed. Please try again.</p>";
+        }
+    }).render("#paypal-button-container");
+}
+
   window.selectedAmount = amount;
   var container = document.getElementById("paypal-button-container");
   container.style.display = "block";
