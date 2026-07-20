@@ -1,1 +1,166 @@
-<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes"><meta name=theme-color content=#0a0a0a><title>Francisco Holdings Inc</title><link rel=manifest href=manifest.json><link rel=apple-touch-icon href=icon-192.png><style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:24px}body{background:#0a0a0a;color:#fff;font-family:system-ui,sans-serif;min-height:100vh;text-align:center;padding:100px 20px 40px}.badge{position:fixed;top:12px;right:12px;z-index:9999;background:linear-gradient(135deg,#ffd700,#ffed4e);color:#000;padding:14px 20px;border-radius:8px;font-weight:900;font-size:1.3rem;text-decoration:none;border:2px solid #fff;box-shadow:0 0 20px rgba(255,215,0,.5)}.name{font-size:clamp(4rem,16vw,9rem);font-weight:900;text-transform:uppercase;background:linear-gradient(135deg,#ffd700,#fff,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(255,215,0,.4));line-height:1.1;margin-bottom:20px}.sub{font-size:clamp(1.5rem,5vw,2.5rem);font-weight:700;color:#d4af37;letter-spacing:.3em;text-transform:uppercase;margin-bottom:30px}.cc{background:rgba(255,255,255,.06);border:2px solid rgba(212,175,55,.4);border-radius:16px;padding:30px;max-width:90vw;width:700px;margin:0 auto 30px}.cc h2{font-size:clamp(2rem,6vw,2.8rem);font-weight:900;color:#ffd700;margin-bottom:20px;text-transform:uppercase;letter-spacing:.1em}.sg{display:grid;grid-template-columns:1fr 1fr;gap:15px}.si{background:rgba(0,0,0,.3);border-radius:10px;padding:18px;font-size:clamp(1.2rem,3vw,1.4rem);font-weight:700;display:flex;align-items:center;gap:10px}.sd{width:14px;height:14px;border-radius:50%;background:#00ff88;box-shadow:0 0 12px #00ff88;flex-shrink:0}.pp{display:inline-block;background:linear-gradient(135deg,#0070ba,#005ea6);color:#fff;padding:22px 50px;border-radius:50px;font-size:clamp(1.3rem,4vw,1.5rem);font-weight:800;text-decoration:none;margin-top:30px;box-shadow:0 0 30px rgba(0,112,186,.4)}.ft{margin-top:50px;padding:20px;font-size:1rem;color:#888;font-weight:600}</style></head><body><a href=https://soulstack.com class=badge target=_blank rel=noopener>🛡️ SOULSTACK</a><div class=name>FRANCISCO HOLDINGS INC</div><div class=sub>392-Floor Global Empire</div><div class=cc><h2>⚡ COMMAND CENTER</h2><div class=sg><div class=si><span class=sd></span>Agent Swarm Active</div><div class=si><span class=sd></span>OmniGuard Online</div><div class=si><span class=sd></span>PrimeDox Ready</div><div class=si><span class=sd style=background:#ffcc00;box-shadow:0 0 12px #ffcc00></span>45 Companies Operational</div></div></div><a href=https://www.paypal.com/paypalme/franciscoderek7 class=pp target=_blank>💳 INVEST IN THE EMPIRE</a><div class=ft>© 2026 Francisco Holdings Inc.<br>Phoenix Dominion Global Domination</div><script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js')</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Francisco Holdings Inc. — 392-Floor Empire</title>
+  <link rel="manifest" href="/manifest-fhinc.json">
+  <meta name="theme-color" content="#d4af37">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow: hidden; font-family: 'Georgia', serif; color: #d4af37; }
+    #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #d4af37; font-size: 24px; z-index: 100; text-align: center; }
+    #loading .spinner { width: 50px; height: 50px; border: 3px solid #d4af37; border-top: 3px solid #00d4ff; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #ui-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+    .floor-label { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); border: 1px solid #d4af37; padding: 20px 40px; text-align: center; pointer-events: auto; }
+    .floor-label h1 { font-size: 24px; color: #d4af37; margin-bottom: 10px; }
+    .floor-label p { color: #00d4ff; font-size: 14px; }
+    .soulstack { position: fixed; bottom: 20px; left: 20px; font-size: 12px; color: #d4af37; letter-spacing: 3px; z-index: 100; }
+    .online { position: fixed; top: 20px; right: 20px; color: #00ff88; font-size: 12px; z-index: 100; }
+    .online::before { content: "●"; margin-right: 5px; }
+    #paypal-cta { position: fixed; bottom: 160px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #d4af37, #b8941f); color: #000; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 4px; pointer-events: auto; display: none; }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div>Francisco Holdings Inc.</div>
+    <div class="spinner"></div>
+    <div style="font-size: 14px; color: #00d4ff; margin-top: 10px;">Loading Empire...</div>
+  </div>
+  <div id="canvas-container"></div>
+  <div id="ui-layer">
+    <div class="online">ONLINE</div>
+    <div class="soulstack">SOULSTACK</div>
+    <div class="floor-label" id="floor-info">
+      <h1>Francisco Holdings HQ</h1>
+      <p>Luxury corporate ecosystem</p>
+    </div>
+    <div id="paypal-cta">Start Your Empire — $49/mo</div>
+  </div>
+
+  <script type="module">
+    import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js";
+    import { gsap } from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
+    
+    // Empire systems
+    const eb = { events: {}, on(e, cb) { (this.events[e] = this.events[e] || []).push(cb); }, emit(e, d) { (this.events[e] || []).forEach(cb => cb(d)); } };
+    
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 2000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    document.getElementById("canvas-container").appendChild(renderer.domElement);
+    
+    // Lighting
+    const ambient = new THREE.AmbientLight(0x404040, 2);
+    scene.add(ambient);
+    const point = new THREE.PointLight(0xd4af37, 2, 100);
+    point.position.set(10, 20, 10);
+    scene.add(point);
+    
+    // Floor 1: Phantom Lounge (Gold)
+    const floor1Geo = new THREE.BoxGeometry(8, 8, 8);
+    const floor1Mat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2, emissive: 0x332200, emissiveIntensity: 0.3 });
+    const floor1 = new THREE.Mesh(floor1Geo, floor1Mat);
+    floor1.position.y = 0;
+    floor1.name = "Floor_1";
+    scene.add(floor1);
+    
+    // Floor 2: OmniGuard (Green)
+    const floor2Geo = new THREE.BoxGeometry(7, 7, 7);
+    const floor2Mat = new THREE.MeshStandardMaterial({ color: 0x00ff88, metalness: 0.7, roughness: 0.3, emissive: 0x002200, emissiveIntensity: 0.3 });
+    const floor2 = new THREE.Mesh(floor2Geo, floor2Mat);
+    floor2.position.y = 12;
+    floor2.name = "Floor_2";
+    scene.add(floor2);
+    
+    // Floor 3: PrimeDox (Red/Orange)
+    const floor3Geo = new THREE.BoxGeometry(6, 6, 6);
+    const floor3Mat = new THREE.MeshStandardMaterial({ color: 0xff4400, metalness: 0.7, roughness: 0.3, emissive: 0x331100, emissiveIntensity: 0.3 });
+    const floor3 = new THREE.Mesh(floor3Geo, floor3Mat);
+    floor3.position.y = 24;
+    floor3.name = "Floor_3";
+    scene.add(floor3);
+    
+    // Stars
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 1500;
+    const pos = new Float32Array(starsCount * 3);
+    for (let i = 0; i < starsCount * 3; i++) pos[i] = (Math.random() - 0.5) * 1000;
+    starsGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true, opacity: 0.8 });
+    const stars = new THREE.Points(starsGeo, starsMat);
+    scene.add(stars);
+    
+    // Camera position
+    camera.position.set(15, 20, 30);
+    camera.lookAt(0, 10, 0);
+    
+    // Animation
+    let time = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.001;
+      stars.rotation.y += 0.0002;
+      floor1.rotation.y += 0.005;
+      floor2.rotation.y += 0.003;
+      floor3.rotation.y += 0.002;
+      renderer.render(scene, camera);
+    }
+    animate();
+    
+    // Floor selector
+    const floorInfo = document.getElementById("floor-info");
+    const floors = [
+      { id: 1, name: "Francisco Holdings HQ", desc: "Luxury corporate ecosystem", color: "#d4af37" },
+      { id: 2, name: "OmniGuard Security", desc: "CyberGuard threat detection", color: "#00ff88" },
+      { id: 3, name: "PrimeDox AI", desc: "Document generation engine", color: "#ff4400" }
+    ];
+    
+    let currentFloor = 1;
+    function showFloor(floorId) {
+      const f = floors.find(x => x.id === floorId);
+      if (!f) return;
+      floorInfo.innerHTML = `<h1 style="color: ${f.color}">${f.name}</h1><p>${f.desc}</p>`;
+      gsap.to(camera.position, { y: f.id * 12 + 10, duration: 1.5, ease: "power2.inOut" });
+      eb.emit("FLOOR_SELECTED", { floor: f.id });
+    }
+    
+    // Click to change floor
+    floorInfo.addEventListener("click", () => {
+      currentFloor = currentFloor >= 3 ? 1 : currentFloor + 1;
+      showFloor(currentFloor);
+    });
+    
+    // Hide loading
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("paypal-cta").style.display = "block";
+    }, 2000);
+    
+    // PayPal CTA
+    document.getElementById("paypal-cta").addEventListener("click", () => {
+      window.open("https://paypal.me/TechPetCage/49CAD", "_blank");
+    });
+    
+    // Resize
+    window.addEventListener("resize", () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+    
+    // PWA install prompt
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log("PWA install ready");
+    });
+  </script>
+</body>
+</html>
