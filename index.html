@@ -133,7 +133,7 @@
     // Click to change floor
     floorInfo.addEventListener("click", () => {
       currentFloor = currentFloor >= 3 ? 1 : currentFloor + 1;
-      showFloor(currentFloor);
+      showFloor(currentFloor); if(typeof empire !== "undefined") empire.enterFloor(currentFloor);
     });
     
     // Hide loading
@@ -162,5 +162,6 @@
       console.log("PWA install ready");
     });
   </script>
-</body>
-</html>
+  <script src="docs/core/EmpireCore.js"></script>
+  <script src="docs/floors/floor1/Floor1HQ.js"></script>
+  <script src="docs/floors/floor2/Floor2OmniGuard.js"></script>
