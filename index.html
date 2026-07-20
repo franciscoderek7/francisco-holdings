@@ -37,7 +37,7 @@
       <h1>Francisco Holdings HQ</h1>
       <p>Luxury corporate ecosystem</p>
     </div>
-    <div id="paypal-cta">Start Your Empire — $49/mo</div>
+    <div id="paypal-cta-container" style="display:flex;gap:10px;position:fixed;bottom:160px;left:50%;transform:translateX(-50%);z-index:1000;"><div class="paypal-btn" data-url="https://paypal.me/TechPetCage/49CAD" style="background:linear-gradient(135deg,#10b981,#047857);color:#fff;padding:15px 25px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">🌱 Pro $49/mo</div><div class="paypal-btn" data-url="https://paypal.me/TechPetCage/997CAD" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;padding:15px 25px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">💎 Elite $997/yr</div><div class="paypal-btn" data-url="https://paypal.me/TechPetCage/2497CAD" style="background:linear-gradient(135deg,#0070ba,#005ea6);color:#fff;padding:15px 25px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">🏢 Enterprise $2,497/yr</div></div>
   </div>
 
   <script type="module">
@@ -139,11 +139,11 @@
     // Hide loading
     setTimeout(() => {
       document.getElementById("loading").style.display = "none";
-      document.getElementById("paypal-cta").style.display = "block";
+      document.getElementById("paypal-cta-container").style.display = "flex";
     }, 2000);
     
     // PayPal CTA
-    document.getElementById("paypal-cta").addEventListener("click", () => {
+    document.querySelectorAll(".paypal-btn").forEach(btn => { btn.addEventListener("click", () => { window.open(btn.getAttribute("data-url"), "_blank"); }); }); // Old handler removed
       window.open("https://paypal.me/TechPetCage/49CAD", "_blank");
     });
     
