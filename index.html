@@ -1,389 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francisco Holdings Inc — 3D Skyscraper</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; background: #0A0A0A; color: #EAEAEA; }
-  
-  #three-container { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; }
-  
-  .carbon-overlay { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.75)); }
-  
-  .topbar { position: fixed; top: 0; width: 100%; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; z-index: 20; background: rgba(10,10,10,0.65); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(201,162,39,0.18); }
-  .logo { font-size: 13px; letter-spacing: 2px; }
-  .logo .gold { color: #C9A227; }
-  .status { display: flex; gap: 8px; font-size: 11px; color: #aaa; align-items: center; }
-  .indicator { width: 7px; height: 7px; border-radius: 50%; background: #C9A227; box-shadow: 0 0 12px #C9A227; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-  
-  #elevatorPanel { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); width: 130px; padding: 14px; background: rgba(12,12,12,0.75); border: 1px solid rgba(201,162,39,0.22); border-radius: 10px; z-index: 30; backdrop-filter: blur(16px); }
-  .floorButtons { display: flex; flex-direction: column; gap: 10px; }
-  .floor-btn { background: #111; color: #bbb; border: 1px solid rgba(255,255,255,0.06); padding: 9px; font-size: 11px; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
-  .floor-btn:hover { border-color: #C9A227; color: #C9A227; }
-  .floor-btn.active { background: #C9A227; color: #0A0A0A; }
-  
-  #floorInfo { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 30; text-align: center; pointer-events: none; }
-  #floorInfo .card { background: rgba(18,18,18,0.85); border: 1px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 20px 30px; backdrop-filter: blur(20px); }
-  #floorInfo h2 { color: #C9A227; font-size: 18px; margin-bottom: 6px; }
-  #floorInfo p { color: #aaa; font-size: 12px; }
-  
-  #soulstackBadge { position: fixed; bottom: 14px; left: 14px; font-size: 10px; color: #C9A227; z-index: 30; letter-spacing: 2px; }
-  
-  #debugOverlay { position: fixed; top: 60px; left: 14px; z-index: 40; font-size: 10px; color: #0f0; font-family: monospace; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 6px; display: none; }
-  #debugOverlay.visible { display: block; }
-  
-  @media (max-width: 768px) {
-    #elevatorPanel { width: 100px; right: 10px; padding: 10px; }
-    .floor-btn { padding: 7px; font-size: 10px; }
-    #floorInfo { bottom: 60px; width: 90%; }
-  }
-</style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Francisco Holdings Inc. — 392-Floor Empire</title>
+  <link rel="manifest" href="/manifest-fhinc.json">
+  <meta name="theme-color" content="#d4af37">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow: hidden; font-family: 'Georgia', serif; color: #d4af37; }
+    #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #d4af37; font-size: 24px; z-index: 100; text-align: center; }
+    #loading .spinner { width: 50px; height: 50px; border: 3px solid #d4af37; border-top: 3px solid #00d4ff; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #ui-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+    .floor-label { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); border: 1px solid #d4af37; padding: 20px 40px; text-align: center; pointer-events: auto; }
+    .floor-label h1 { font-size: 24px; color: #d4af37; margin-bottom: 10px; }
+    .floor-label p { color: #00d4ff; font-size: 14px; }
+    .soulstack { position: fixed; bottom: 20px; left: 20px; font-size: 12px; color: #d4af37; letter-spacing: 3px; z-index: 100; }
+    .online { position: fixed; top: 20px; right: 20px; color: #00ff88; font-size: 12px; z-index: 100; }
+    .online::before { content: "●"; margin-right: 5px; }
+    #paypal-cta { position: fixed; bottom: 160px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #d4af37, #b8941f); color: #000; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 4px; pointer-events: auto; display: none; }
+  </style>
 </head>
-
 <body>
-
-<div id="three-container"></div>
-<div class="carbon-overlay"></div>
-
-<div class="topbar">
-  <div class="logo"><span class="gold">FRANCISCO</span> HOLDINGS</div>
-  <div class="status"><div class="indicator"></div> ONLINE</div>
-</div>
-
-<div id="elevatorPanel">
-  <div class="floorButtons" id="floorButtons"></div>
-</div>
-
-<div id="floorInfo">
-  <div class="card">
-    <h2 id="floorName">Francisco Holdings HQ</h2>
-    <p id="floorDesc">Corporate core</p>
+  <div id="loading">
+    <div>Francisco Holdings Inc.</div>
+    <div class="spinner"></div>
+    <div style="font-size: 14px; color: #00d4ff; margin-top: 10px;">Loading Empire...</div>
   </div>
-</div>
+  <div id="canvas-container"></div>
+  <div id="ui-layer">
+    <div class="online">ONLINE</div>
+    <div class="soulstack">SOULSTACK</div>
+    <div class="floor-label" id="floor-info">
+      <h1>Francisco Holdings HQ</h1>
+      <p>Luxury corporate ecosystem</p>
+    </div>
+    <div id="paypal-cta">Start Your Empire — $49/mo</div>
+  </div>
 
-<div id="soulstackBadge">SOULSTACK</div>
-
-<div id="debugOverlay">
-  <div id="debugFPS">FPS: --</div>
-  <div id="debugFloor">Floor: --</div>
-  <div id="debugRay">Ray: --</div>
-</div>
-
-<script>
-// ============================================
-// INITIALIZATION ORDER (STRICT — DO NOT REORDER)
-// ============================================
-// 1. DOMContentLoaded
-// 2. engineEvents
-// 3. Three.js scene
-// 4. Create floors
-// 5. Attach UI listeners
-// 6. Start animation loop
-// ============================================
-
-window.addEventListener("DOMContentLoaded", () => {
-  
-  // ============================================
-  // STEP 2: ENGINE EVENT SYSTEM
-  // ============================================
-  window.engineEvents = {
-    listeners: {},
-    emit(event, data) {
-      if (this.listeners[event]) {
-        this.listeners[event].forEach(fn => {
-          try { fn(data); } catch(e) { /* silent fail */ }
-        });
-      }
-    },
-    on(event, fn) {
-      if (!this.listeners[event]) this.listeners[event] = [];
-      this.listeners[event].push(fn);
+  <script type="module">
+    import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js";
+    import { gsap } from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
+    
+    // Empire systems
+    const eb = { events: {}, on(e, cb) { (this.events[e] = this.events[e] || []).push(cb); }, emit(e, d) { (this.events[e] || []).forEach(cb => cb(d)); } };
+    
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 2000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    document.getElementById("canvas-container").appendChild(renderer.domElement);
+    
+    // Lighting
+    const ambient = new THREE.AmbientLight(0x404040, 2);
+    scene.add(ambient);
+    const point = new THREE.PointLight(0xd4af37, 2, 100);
+    point.position.set(10, 20, 10);
+    scene.add(point);
+    
+    // Floor 1: Phantom Lounge (Gold)
+    const floor1Geo = new THREE.BoxGeometry(8, 8, 8);
+    const floor1Mat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2, emissive: 0x332200, emissiveIntensity: 0.3 });
+    const floor1 = new THREE.Mesh(floor1Geo, floor1Mat);
+    floor1.position.y = 0;
+    floor1.name = "Floor_1";
+    scene.add(floor1);
+    
+    // Floor 2: OmniGuard (Green)
+    const floor2Geo = new THREE.BoxGeometry(7, 7, 7);
+    const floor2Mat = new THREE.MeshStandardMaterial({ color: 0x00ff88, metalness: 0.7, roughness: 0.3, emissive: 0x002200, emissiveIntensity: 0.3 });
+    const floor2 = new THREE.Mesh(floor2Geo, floor2Mat);
+    floor2.position.y = 12;
+    floor2.name = "Floor_2";
+    scene.add(floor2);
+    
+    // Floor 3: PrimeDox (Red/Orange)
+    const floor3Geo = new THREE.BoxGeometry(6, 6, 6);
+    const floor3Mat = new THREE.MeshStandardMaterial({ color: 0xff4400, metalness: 0.7, roughness: 0.3, emissive: 0x331100, emissiveIntensity: 0.3 });
+    const floor3 = new THREE.Mesh(floor3Geo, floor3Mat);
+    floor3.position.y = 24;
+    floor3.name = "Floor_3";
+    scene.add(floor3);
+    
+    // Stars
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 1500;
+    const pos = new Float32Array(starsCount * 3);
+    for (let i = 0; i < starsCount * 3; i++) pos[i] = (Math.random() - 0.5) * 1000;
+    starsGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true, opacity: 0.8 });
+    const stars = new THREE.Points(starsGeo, starsMat);
+    scene.add(stars);
+    
+    // Camera position
+    camera.position.set(15, 20, 30);
+    camera.lookAt(0, 10, 0);
+    
+    // Animation
+    let time = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.001;
+      stars.rotation.y += 0.0002;
+      floor1.rotation.y += 0.005;
+      floor2.rotation.y += 0.003;
+      floor3.rotation.y += 0.002;
+      renderer.render(scene, camera);
     }
-  };
-  
-  // ============================================
-  // DATA MODEL (ONLY SOURCE OF TRUTH)
-  // ============================================
-  const FLOORS = [
-    { id: 1, name: "Francisco Holdings HQ", description: "Luxury corporate ecosystem", color: 0xC9A227, access: "public" },
-    { id: 2, name: "OmniGuard", description: "Cybersecurity division", color: 0x1E90FF, access: "public" },
-    { id: 3, name: "PrimeDox AI", description: "AI document systems", color: 0x00C853, access: "public" },
-    { id: 4, name: "CCLDR", description: "Legal education platform", color: 0xFFFFFF, access: "public" },
-    { id: 5, name: "Template", description: "Future expansion", color: 0xB0B0B0, access: "public" }
-  ];
-  
-  // ============================================
-  // STEP 3: THREE.JS SCENE
-  // ============================================
-  const container = document.getElementById("three-container");
-  container.style.width = "100vw";
-  container.style.height = "100vh";
-  
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0a0a0a);
-  
-  const camera = new THREE.PerspectiveCamera(
-    60,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  // CRITICAL: Camera positioned to see ALL floors at start
-  camera.position.set(12, 18, 20);
-  camera.lookAt(0, 8, 0);
-  
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-  
-  // ============================================
-  // RENDER GUARANTEE: LIGHTING
-  // ============================================
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-  scene.add(ambientLight);
-  
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
-  dirLight.position.set(10, 20, 10);
-  scene.add(dirLight);
-  
-  const pointLight = new THREE.PointLight(0xC9A227, 0.5, 50);
-  pointLight.position.set(0, 15, 5);
-  scene.add(pointLight);
-  
-  // ============================================
-  // STEP 4: CREATE FLOORS
-  // ============================================
-  const building = [];
-  const FLOOR_HEIGHT = 5;
-  const FLOOR_WIDTH = 6;
-  const FLOOR_DEPTH = 6;
-  
-  // Ground reflection plane
-  const groundGeo = new THREE.PlaneGeometry(100, 100);
-  const groundMat = new THREE.MeshStandardMaterial({ 
-    color: 0x111111, 
-    metalness: 0.8, 
-    roughness: 0.2 
-  });
-  const ground = new THREE.Mesh(groundGeo, groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.5;
-  scene.add(ground);
-  
-  // Create floors
-  FLOORS.forEach((floorData, index) => {
-    const geometry = new THREE.BoxGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_DEPTH);
-    const material = new THREE.MeshStandardMaterial({
-      color: floorData.color,
-      metalness: 0.6,
-      roughness: 0.3,
-      emissive: floorData.color,
-      emissiveIntensity: 0.1
+    animate();
+    
+    // Floor selector
+    const floorInfo = document.getElementById("floor-info");
+    const floors = [
+      { id: 1, name: "Francisco Holdings HQ", desc: "Luxury corporate ecosystem", color: "#d4af37" },
+      { id: 2, name: "OmniGuard Security", desc: "CyberGuard threat detection", color: "#00ff88" },
+      { id: 3, name: "PrimeDox AI", desc: "Document generation engine", color: "#ff4400" }
+    ];
+    
+    let currentFloor = 1;
+    function showFloor(floorId) {
+      const f = floors.find(x => x.id === floorId);
+      if (!f) return;
+      floorInfo.innerHTML = `<h1 style="color: ${f.color}">${f.name}</h1><p>${f.desc}</p>`;
+      gsap.to(camera.position, { y: f.id * 12 + 10, duration: 1.5, ease: "power2.inOut" });
+      eb.emit("FLOOR_SELECTED", { floor: f.id });
+    }
+    
+    // Click to change floor
+    floorInfo.addEventListener("click", () => {
+      currentFloor = currentFloor >= 3 ? 1 : currentFloor + 1;
+      showFloor(currentFloor);
     });
     
-    const floor = new THREE.Mesh(geometry, material);
-    floor.position.y = index * FLOOR_HEIGHT + FLOOR_HEIGHT / 2;
-    floor.userData = { id: floorData.id, name: floorData.name };
+    // Hide loading
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("paypal-cta").style.display = "block";
+    }, 2000);
     
-    // Glow edges
-    const edges = new THREE.EdgesGeometry(geometry);
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xC9A227, transparent: true, opacity: 0.3 });
-    const wireframe = new THREE.LineSegments(edges, lineMaterial);
-    floor.add(wireframe);
-    
-    scene.add(floor);
-    building.push(floor);
-  });
-  
-  // ============================================
-  // DEBUG: RED TEST CUBE (MUST BE VISIBLE)
-  // ============================================
-  const testCube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: 0xff0000 })
-  );
-  testCube.position.set(0, 0.5, 0);
-  scene.add(testCube);
-  console.log("RED TEST CUBE ADDED — MUST BE VISIBLE");
-  
-  // Stars background
-  const starsGeometry = new THREE.BufferGeometry();
-  const starsCount = 1000;
-  const posArray = new Float32Array(starsCount * 3);
-  for (let i = 0; i < starsCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 200;
-  }
-  starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const starsMaterial = new THREE.PointsMaterial({ size: 0.2, color: 0xffffff, transparent: true, opacity: 0.6 });
-  const stars = new THREE.Points(starsGeometry, starsMaterial);
-  scene.add(stars);
-  
-  // ============================================
-  // STEP 5: ATTACH UI LISTENERS
-  // ============================================
-  const floorButtons = document.getElementById("floorButtons");
-  const floorNameEl = document.getElementById("floorName");
-  const floorDescEl = document.getElementById("floorDesc");
-  let activeFloor = 1;
-  
-  // Generate buttons from FLOORS array
-  FLOORS.forEach(floor => {
-    const btn = document.createElement("button");
-    btn.className = "floor-btn" + (floor.id === 1 ? " active" : "");
-    btn.textContent = floor.id;
-    btn.dataset.floor = floor.id;
-    btn.addEventListener("click", () => goToFloor(floor.id));
-    floorButtons.appendChild(btn);
-  });
-  
-  // Listen to engine events
-  engineEvents.on("floorSelected", (data) => {
-    activeFloor = data.floorId;
-    const floorData = FLOORS.find(f => f.id === data.floorId);
-    if (floorData) {
-      floorNameEl.textContent = floorData.name;
-      floorDescEl.textContent = floorData.description;
-      
-      // Update button states
-      document.querySelectorAll(".floor-btn").forEach(btn => {
-        btn.classList.toggle("active", parseInt(btn.dataset.floor) === data.floorId);
-      });
-    }
-  });
-  
-  // ============================================
-  // CAMERA NAVIGATION
-  // ============================================
-  function goToFloor(floorId) {
-    const targetY = (floorId - 1) * FLOOR_HEIGHT + FLOOR_HEIGHT / 2;
-    
-    gsap.to(camera.position, {
-      y: targetY + 5,
-      x: 8,
-      z: 12,
-      duration: 1.5,
-      ease: "power3.inOut",
-      onComplete: () => {
-        engineEvents.emit("floorSelected", { floorId: floorId });
-      }
+    // PayPal CTA
+    document.getElementById("paypal-cta").addEventListener("click", () => {
+      window.open("https://paypal.me/TechPetCage/49CAD", "_blank");
     });
     
-    gsap.to(camera, {
-      duration: 1.5,
-      onUpdate: () => camera.lookAt(0, targetY, 0)
-    });
-  }
-  
-  // ============================================
-  // CLICK / RAYCASTING
-  // ============================================
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2();
-  
-  window.addEventListener("click", (e) => {
-    // Ignore clicks on UI
-    if (e.target.closest("#elevatorPanel") || e.target.closest("#floorInfo")) return;
-    
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(building);
-    
-    if (hits.length > 0) {
-      const floorId = hits[0].object.userData.id;
-      goToFloor(floorId);
-      console.log("CLICKED FLOOR:", floorId);
-    }
-  });
-  
-  // Touch support
-  let touchStartY = 0;
-  window.addEventListener("touchstart", (e) => {
-    touchStartY = e.touches[0].clientY;
-  });
-  window.addEventListener("touchend", (e) => {
-    const diff = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && activeFloor < FLOORS.length) goToFloor(activeFloor + 1);
-      if (diff < 0 && activeFloor > 1) goToFloor(activeFloor - 1);
-    }
-  });
-  
-  // ============================================
-  // STEP 6: ANIMATION LOOP
-  // ============================================
-  let lastTime = performance.now();
-  let frameCount = 0;
-  const debugFPS = document.getElementById("debugFPS");
-  const debugFloor = document.getElementById("debugFloor");
-  const debugRay = document.getElementById("debugRay");
-  
-  function animate() {
-    requestAnimationFrame(animate);
-    
-    const now = performance.now();
-    frameCount++;
-    if (now - lastTime >= 1000) {
-      if (debugFPS) debugFPS.textContent = "FPS: " + frameCount;
-      frameCount = 0;
-      lastTime = now;
-    }
-    
-    // Rotate building slowly
-    building.forEach((floor, i) => {
-      floor.rotation.y += 0.001 * (i + 1);
+    // Resize
+    window.addEventListener("resize", () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
     });
     
-    // Rotate stars
-    stars.rotation.y += 0.0002;
-    
-    // Pulse test cube
-    testCube.rotation.y += 0.02;
-    testCube.rotation.x += 0.01;
-    
-    renderer.render(scene, camera);
-  }
-  
-  animate();
-  
-  // ============================================
-  // RESIZE HANDLER
-  // ============================================
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-  
-  // ============================================
-  // DEBUG: SHOW OVERLAY ON KONAMI CODE
-  // ============================================
-  let konamiCode = [];
-  const konamiSequence = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
-  window.addEventListener("keydown", (e) => {
-    konamiCode.push(e.key);
-    if (konamiCode.length > 10) konamiCode.shift();
-    if (konamiCode.join(",").includes(konamiSequence.join(","))) {
-      document.getElementById("debugOverlay").classList.toggle("visible");
-    }
-  });
-  
-  // Initial floor selection
-  engineEvents.emit("floorSelected", { floorId: 1 });
-  
-  console.log("BUILDING LOADED:", building.length, "floors");
-  console.log("SYSTEM READY — Francisco Holdings 3D Skyscraper");
-  
-});
-</script>
-
+    // PWA install prompt
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log("PWA install ready");
+    });
+  </script>
 </body>
 </html>
