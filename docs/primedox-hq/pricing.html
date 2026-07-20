@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeDox AI — Pricing</title>
+<meta name="description" content="PrimeDox AI pricing — Free Trial, Basic, Pro, and Enterprise tiers. Discounts for seniors, veterans, and fixed income. Apply a referral code for extra savings.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zprimedoxaihq.com/pricing.html">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e17;
+    --bg-panel: #0f1420;
+    --card: #0d1320;
+    --border: #1c2433;
+    --green: #39ff14;
+    --green-dim: #1f7a0c;
+    --gold: #d4af37;
+    --gold-dim: #8a7322;
+    --text: #e8f0e4;
+    --muted: #7a8a9a;
+    --dim: #3a4452;
+    --red: #ff4444;
+    --mono: 'Space Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+    background-size: 36px 36px;
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  a { color: var(--green); }
+
+  /* ===== NAV (matches site header pattern) ===== */
+  nav {
+    padding: 16px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-panel);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 10px rgba(57,255,20,0.4);
+  }
+  .nav-logo span { color: var(--gold); text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+  .nav-back {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color .2s;
+  }
+  .nav-back:hover { color: var(--green); }
+
+  /* ===== HERO ===== */
+  .hero { text-align: center; padding: 64px 5% 40px; max-width: 800px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .hero-eyebrow::before { content: '$ '; color: var(--green); }
+  .hero-eyebrow .cursor { display: inline-block; width: 8px; height: 12px; background: var(--green); margin-left: 4px; animation: blink-cursor 1s steps(1) infinite; vertical-align: -1px; }
+  @keyframes blink-cursor { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+  .hero h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .hero h1 .accent { color: var(--green); text-shadow: 0 0 16px rgba(57,255,20,0.45); }
+  .hero-sub { font-size: 1rem; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* ===== DISCOUNT PANEL ===== */
+  .discount-panel {
+    max-width: 900px; margin: 0 auto 36px; padding: 0 5%;
+  }
+  .term-window {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(57,255,20,0.04);
+  }
+  .term-titlebar {
+    background: #131a28;
+    border-bottom: 1px solid var(--border);
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .term-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .term-dot.r { background: #ff5f56; }
+  .term-dot.y { background: #ffbd2e; }
+  .term-dot.g { background: #27c93f; }
+  .term-titlebar-label {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    margin-left: 6px; letter-spacing: 1px;
+  }
+  .term-body { padding: 22px 24px 24px; }
+  .term-section-label {
+    font-family: var(--mono); font-size: 11px; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .discount-options {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px;
+  }
+  .discount-option {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 9px 14px; cursor: pointer; transition: border-color .15s, background .15s;
+    font-family: var(--mono); font-size: 12px; color: var(--text);
+  }
+  .discount-option:hover { border-color: var(--gold-dim); }
+  .discount-option input { accent-color: var(--green); cursor: pointer; width: 14px; height: 14px; }
+  .discount-option.checked { border-color: var(--green); background: rgba(57,255,20,0.06); }
+
+  .referral-row {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch;
+  }
+  .referral-input {
+    flex: 1; min-width: 180px;
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 11px 14px; color: var(--text); font-family: var(--mono); font-size: 13px;
+    outline: none; letter-spacing: 1px;
+  }
+  .referral-input:focus { border-color: var(--green); box-shadow: 0 0 0 2px rgba(57,255,20,0.12); }
+  .referral-apply-btn {
+    font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: 1px;
+    background: transparent; color: var(--green); border: 1px solid var(--green);
+    border-radius: 6px; padding: 11px 20px; cursor: pointer; text-transform: uppercase;
+    transition: background .15s, color .15s;
+  }
+  .referral-apply-btn:hover { background: var(--green); color: #06140a; }
+  .referral-msg {
+    font-family: var(--mono); font-size: 12px; margin-top: 10px; min-height: 16px; display: none;
+  }
+  .referral-msg.ok { color: var(--green); display: block; }
+  .referral-msg.err { color: var(--red); display: block; }
+
+  .total-discount-line {
+    margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border);
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+  }
+  .total-discount-line strong { color: var(--gold); }
+
+  /* ===== PRICING GRID ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5% 70px;
+  }
+
+  .price-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+  }
+  .price-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 24px rgba(57,255,20,0.18), 0 0 0 1px rgba(57,255,20,0.25) inset;
+    transform: translateY(-3px);
+  }
+  .price-card.featured { border-color: var(--gold); }
+  .price-card.featured:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 26px rgba(212,175,55,0.25), 0 0 0 1px rgba(212,175,55,0.3) inset;
+  }
+
+  .card-titlebar {
+    background: #131a28;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .card-titlebar .term-dot { width: 9px; height: 9px; }
+  .card-titlebar-label {
+    font-family: var(--mono); font-size: 10px; color: var(--muted);
+    margin-left: 4px; letter-spacing: 0.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .featured-tag {
+    position: absolute; top: 10px; right: -1px;
+    background: var(--gold); color: #1a1404;
+    font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 10px 4px 14px; text-transform: uppercase;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .card-body { padding: 24px 22px 26px; }
+  .card-tier {
+    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 3px;
+    color: var(--green); text-transform: uppercase; margin-bottom: 18px;
+  }
+  .price-card.featured .card-tier { color: var(--gold); }
+
+  .price-row { margin-bottom: 18px; min-height: 54px; }
+  .price-original {
+    font-family: var(--mono); font-size: 1rem; color: var(--muted);
+    text-decoration: line-through; margin-right: 8px; display: inline-block;
+  }
+  .price-current {
+    font-family: var(--mono); font-size: 2.3rem; font-weight: 700;
+    letter-spacing: -1px; color: var(--text); line-height: 1;
+  }
+  .price-current .unit { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+  .price-savings { font-family: var(--mono); font-size: 11px; color: var(--green); margin-top: 4px; }
+
+  .card-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+
+  .card-features { list-style: none; margin-bottom: 24px; }
+  .card-features li {
+    font-size: 12.5px; color: rgba(232,240,228,0.8); padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: flex-start; gap: 9px; line-height: 1.4;
+    font-family: var(--mono);
+  }
+  .card-features li::before { content: '>'; color: var(--green); flex-shrink: 0; }
+  .price-card.featured .card-features li::before { color: var(--gold); }
+  .card-features li:last-child { border-bottom: none; }
+
+  .pay-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 13px; border-radius: 6px;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-decoration: none; border: 1px solid var(--green); cursor: pointer;
+    transition: background .2s, color .2s; text-transform: uppercase;
+    background: transparent; color: var(--green); position: relative;
+  }
+  .pay-btn::after {
+    content: ''; display: inline-block; width: 7px; height: 13px; background: currentColor;
+    animation: blink-cursor 1s steps(1) infinite; margin-left: 2px;
+  }
+  .pay-btn:hover { background: var(--green); color: #06140a; }
+  .price-card.featured .pay-btn { border-color: var(--gold); color: var(--gold); }
+  .price-card.featured .pay-btn:hover { background: var(--gold); color: #1a1404; }
+
+  /* ===== TERMINAL NOTE ===== */
+  .terminal-note {
+    max-width: 900px; margin: 0 auto 60px; padding: 0 5%;
+    font-family: var(--mono); font-size: 11px; color: var(--dim); text-align: center;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 28px 5%; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--dim); line-height: 1.8;
+    font-family: var(--mono);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--green); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 14px; }
+    nav { padding: 14px 4%; }
+    .nav-logo { font-size: 15px; }
+    .hero { padding: 40px 5% 28px; }
+    .hero h1 { font-size: 1.7rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .pricing-grid { grid-template-columns: 1fr; padding: 0 5% 50px; gap: 14px; }
+    .price-current { font-size: 1.9rem; }
+    .discount-panel { padding: 0 4%; }
+    .term-body { padding: 18px 16px 20px; }
+    .discount-options { flex-direction: column; }
+    .referral-row { flex-direction: column; }
+    .referral-apply-btn { width: 100%; }
+    .featured-tag { font-size: 8px; padding: 3px 8px 3px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Prime<span>Dox</span> AI</a>
+  <a href="index.html" class="nav-back">&larr; back to home</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">primedox@ai:~/pricing<span class="cursor"></span></div>
+  <h1>Pick your <span class="accent">access tier</span></h1>
+  <p class="hero-sub">Transparent monthly pricing. Stack a category discount with a referral code — savings update live, capped at 35% off.</p>
+</div>
+
+<div class="discount-panel">
+  <div class="term-window">
+    <div class="term-titlebar">
+      <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+      <span class="term-titlebar-label">discount-engine.sh</span>
+    </div>
+    <div class="term-body">
+      <div class="term-section-label"># select category discount</div>
+      <div class="discount-options" id="discount-options">
+        <label class="discount-option checked">
+          <input type="radio" name="discount" value="0" checked>
+          None
+        </label>
+        <label class="discount-option">
+          <input type="radio" name="discount" value="10">
+          Senior (10%)
+        </label>
+        <label class="discount-option">
+          <input type="radio" name="discount" value="15">
+          Veteran (15%)
+        </label>
+        <label class="discount-option">
+          <input type="radio" name="discount" value="10">
+          Fixed Income (10%)
+        </label>
+      </div>
+
+      <div class="term-section-label"># apply referral code</div>
+      <div class="referral-row">
+        <input type="text" class="referral-input" id="referral-input" placeholder="e.g. FRIEND25" maxlength="12">
+        <button class="referral-apply-btn" id="referral-apply-btn" type="button">Apply</button>
+      </div>
+      <div class="referral-msg" id="referral-msg"></div>
+
+      <div class="total-discount-line">
+        total discount: <strong id="total-discount-display">0%</strong> &nbsp;(category + referral, max 35%)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pricing-grid" id="pricing-grid">
+
+  <!-- FREE TRIAL -->
+  <div class="price-card" data-tier="free-trial" data-base-price="0">
+    <div class="card-titlebar">
+      <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+      <span class="card-titlebar-label">free-trial.cfg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tier">Free Trial</div>
+      <div class="price-row">
+        <div class="price-current" data-price-display>$0<span class="unit">/mo</span></div>
+        <div class="price-savings" data-savings-display style="display:none;"></div>
+      </div>
+      <div class="card-desc">Try the platform with no commitment before upgrading.</div>
+      <ul class="card-features">
+        <li>Core AI assistant access</li>
+        <li>1 active project</li>
+        <li>Standard response speed</li>
+        <li>Email support</li>
+      </ul>
+      <a href="mailto:franciscoderek7@gmail.com?subject=PrimeDox%20AI%20Free%20Trial%20Request" class="pay-btn pay-paypal" data-tier="free-trial" data-base-price="0" target="_blank" rel="noopener">&#9889; Start Free Trial</a>
+    </div>
+  </div>
+
+  <!-- BASIC -->
+  <div class="price-card featured" data-tier="basic" data-base-price="49">
+    <div class="featured-tag">Most Used</div>
+    <div class="card-titlebar">
+      <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+      <span class="card-titlebar-label">basic.cfg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tier">Basic</div>
+      <div class="price-row">
+        <div class="price-current" data-price-display>$49<span class="unit">/mo</span></div>
+        <div class="price-savings" data-savings-display style="display:none;"></div>
+      </div>
+      <div class="card-desc">Full-speed access for professionals running real workloads.</div>
+      <ul class="card-features">
+        <li>Everything in Free Trial</li>
+        <li>5 active projects</li>
+        <li>Priority response speed</li>
+        <li>API access</li>
+        <li>Priority email support</li>
+      </ul>
+      <!-- DEREK: paste your PayPal.me link or PayPal button code here -->
+      <a href="#PASTE-PAYPAL-LINK-HERE" class="pay-btn pay-paypal" data-tier="basic" data-base-price="49" target="_blank" rel="noopener">&#x1F17F;&#xFE0F; Pay with PayPal</a>
+    </div>
+  </div>
+
+  <!-- PRO -->
+  <div class="price-card" data-tier="pro" data-base-price="149">
+    <div class="card-titlebar">
+      <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+      <span class="card-titlebar-label">pro.cfg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tier">Pro</div>
+      <div class="price-row">
+        <div class="price-current" data-price-display>$149<span class="unit">/mo</span></div>
+        <div class="price-savings" data-savings-display style="display:none;"></div>
+      </div>
+      <div class="card-desc">Scaled access for teams and organizations.</div>
+      <ul class="card-features">
+        <li>Everything in Basic</li>
+        <li>Unlimited active projects</li>
+        <li>Highest response priority</li>
+        <li>Team seats included</li>
+        <li>Dedicated onboarding</li>
+      </ul>
+      <!-- DEREK: paste your PayPal.me link or PayPal button code here -->
+      <a href="#PASTE-PAYPAL-LINK-HERE" class="pay-btn pay-paypal" data-tier="pro" data-base-price="149" target="_blank" rel="noopener">&#x1F17F;&#xFE0F; Pay with PayPal</a>
+    </div>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="price-card" data-tier="enterprise" data-base-price="499">
+    <div class="card-titlebar">
+      <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+      <span class="card-titlebar-label">enterprise.cfg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-tier">Enterprise</div>
+      <div class="price-row">
+        <div class="price-current" data-price-display>$499<span class="unit">/mo</span></div>
+        <div class="price-savings" data-savings-display style="display:none;"></div>
+      </div>
+      <div class="card-desc">Custom-built access for complex or high-volume needs.</div>
+      <ul class="card-features">
+        <li>Everything in Pro</li>
+        <li>Custom integrations</li>
+        <li>Dedicated infrastructure</li>
+        <li>SLA-backed support</li>
+        <li>Quarterly strategy review</li>
+      </ul>
+      <!-- DEREK: paste your PayPal.me link or PayPal button code here -->
+      <a href="#PASTE-PAYPAL-LINK-HERE" class="pay-btn pay-paypal" data-tier="enterprise" data-base-price="499" target="_blank" rel="noopener">&#x1F17F;&#xFE0F; Pay with PayPal</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="terminal-note"># prices shown in USD/month &middot; discounts recalculate live &middot; max combined discount 35%</div>
+
+<footer>
+  PrimeDox AI &middot; <a href="index.html">Back to Home</a> &middot; Worried about phishing or device security? <a href="https://omniaguard.com" target="_blank" rel="noopener">Protect yourself with OMNIAGUARD</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var REFERRAL_REGEX = /^[A-Za-z0-9]{4,12}$/;
+  var categoryDiscount = 0;
+  var referralDiscount = 0;
+
+  function getTotalDiscount() {
+    return Math.min(categoryDiscount + referralDiscount, 35);
+  }
+
+  function formatPrice(n) {
+    // round to nearest cent, strip trailing .00
+    var rounded = Math.round(n * 100) / 100;
+    return (rounded % 1 === 0) ? String(rounded) : rounded.toFixed(2);
+  }
+
+  function renderPrices() {
+    var total = getTotalDiscount();
+    document.getElementById('total-discount-display').textContent = total + '%';
+
+    var cards = document.querySelectorAll('.price-card[data-base-price]');
+    cards.forEach(function (card) {
+      var base = parseFloat(card.getAttribute('data-base-price'));
+      var priceEl = card.querySelector('[data-price-display]');
+      var savingsEl = card.querySelector('[data-savings-display]');
+      var payBtn = card.querySelector('.pay-paypal');
+      if (!priceEl) return;
+      var finalAmount = base;
+      if (total > 0) {
+        var discounted = base * (1 - total / 100);
+        finalAmount = discounted;
+        priceEl.innerHTML =
+          '<span class="price-original">$' + formatPrice(base) + '</span>' +
+          '$' + formatPrice(discounted) + '<span class="unit">/mo</span>';
+        if (savingsEl) {
+          savingsEl.style.display = 'block';
+          savingsEl.textContent = 'you save $' + formatPrice(base - discounted) + '/mo (' + total + '%)';
+        }
+      } else {
+        priceEl.innerHTML = '$' + formatPrice(base) + '<span class="unit">/mo</span>';
+        if (savingsEl) { savingsEl.style.display = 'none'; savingsEl.textContent = ''; }
+      }
+      if (payBtn) payBtn.href = 'https://paypal.me/techpetcage';
+    });
+  }
+
+  function refreshOptionStyles() {
+    document.querySelectorAll('.discount-option').forEach(function (label) {
+      var input = label.querySelector('input[type="radio"]');
+      if (input && input.checked) {
+        label.classList.add('checked');
+      } else {
+        label.classList.remove('checked');
+      }
+    });
+  }
+
+  // ── DISCOUNT RADIO LISTENERS ────────────────────────────────────────────
+  document.querySelectorAll('input[name="discount"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      categoryDiscount = parseFloat(this.value) || 0;
+      refreshOptionStyles();
+      renderPrices();
+    });
+  });
+
+  // ── REFERRAL CODE ────────────────────────────────────────────────────────
+  function applyReferral() {
+    var input = document.getElementById('referral-input');
+    var msg = document.getElementById('referral-msg');
+    var code = input.value.trim();
+
+    if (REFERRAL_REGEX.test(code)) {
+      referralDiscount = 5;
+      msg.className = 'referral-msg ok';
+      msg.textContent = 'Referral code applied: -5%';
+      try { localStorage.setItem('referralCode', code); } catch (e) {}
+    } else {
+      referralDiscount = 0;
+      msg.className = 'referral-msg err';
+      msg.textContent = 'Invalid referral code format (4-12 letters/numbers)';
+    }
+    renderPrices();
+  }
+
+  document.getElementById('referral-apply-btn').addEventListener('click', applyReferral);
+  document.getElementById('referral-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      applyReferral();
+    }
+  });
+
+  // ── INIT: restore any previously saved referral code (display only) ──────
+  try {
+    var saved = localStorage.getItem('referralCode');
+    if (saved && REFERRAL_REGEX.test(saved)) {
+      document.getElementById('referral-input').value = saved;
+    }
+  } catch (e) {}
+
+  refreshOptionStyles();
+  renderPrices();
+
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+</body>
+</html>
