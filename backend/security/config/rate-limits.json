@@ -1,0 +1,5 @@
+{
+"apiRequestsPerMinute":100,
+"loginAttempts":5,
+"webhookRetries":3
+}

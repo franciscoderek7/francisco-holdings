@@ -1,0 +1,5 @@
+{
+"method":"JWT",
+"session":"secure",
+"status":"development"
+}
