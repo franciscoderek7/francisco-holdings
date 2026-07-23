@@ -1,0 +1,7 @@
+{
+"/health":"health check",
+"/products":"product catalog",
+"/customers":"customer management",
+"/payments":"payment verification",
+"/dashboard":"business metrics"
+}
