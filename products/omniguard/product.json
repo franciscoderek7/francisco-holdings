@@ -1,0 +1,9 @@
+{
+"name":"OmniGuard",
+"description":"AI cybersecurity protection systems",
+"tiers":[
+"$9.99",
+"$49.99"
+],
+"payment":"https://paypal.me/techpetcage"
+}

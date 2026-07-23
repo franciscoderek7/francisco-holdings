@@ -1,0 +1,19 @@
+{
+"name":"PrimeDox AI",
+"description":"AI-powered document systems and legal education tools",
+"payment":"https://paypal.me/techpetcage",
+"tiers":[
+{
+"name":"Free",
+"price":0
+},
+{
+"name":"Pro",
+"price":49
+},
+{
+"name":"Enterprise",
+"price":199
+}
+]
+}
