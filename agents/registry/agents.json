@@ -1,0 +1,27 @@
+[
+{
+"name":"Jarvis",
+"role":"Empire Coordinator",
+"status":"active"
+},
+{
+"name":"PrimeDox Agent",
+"role":"Document Automation",
+"status":"active"
+},
+{
+"name":"OmniGuard Agent",
+"role":"Security Monitoring",
+"status":"active"
+},
+{
+"name":"Marketing Agent",
+"role":"Content and Outreach",
+"status":"active"
+},
+{
+"name":"Sales Agent",
+"role":"Lead Management",
+"status":"active"
+}
+]

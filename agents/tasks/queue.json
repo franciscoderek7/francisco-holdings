@@ -1,0 +1,14 @@
+[
+{
+"id":1,
+"task":"Generate leads",
+"assigned":"Sales Agent",
+"status":"pending"
+},
+{
+"id":2,
+"task":"Publish SEO content",
+"assigned":"Marketing Agent",
+"status":"pending"
+}
+]
