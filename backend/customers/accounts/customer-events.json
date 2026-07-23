@@ -1,0 +1,6 @@
+[
+"account.created",
+"payment.completed",
+"access.granted",
+"subscription.cancelled"
+]

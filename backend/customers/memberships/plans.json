@@ -1,0 +1,20 @@
+[
+{
+"name":"PrimeDox Basic",
+"access":[
+"documents"
+]
+},
+{
+"name":"OmniGuard Pro",
+"access":[
+"security_reports"
+]
+},
+{
+"name":"Empire All Access",
+"access":[
+"all_products"
+]
+}
+]

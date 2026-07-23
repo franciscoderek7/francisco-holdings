@@ -1,14 +1,15 @@
-const entitlements =
-require("./product-entitlements.json");
+const permissions =
+require("./permissions.json");
 
 function checkAccess(product){
 
-const found =
-entitlements.find(
-item=>item.product===product
-);
-
-return found || null;
+return {
+product,
+available:
+Object.values(permissions)
+.flat()
+.includes(product)
+};
 
 }
 
