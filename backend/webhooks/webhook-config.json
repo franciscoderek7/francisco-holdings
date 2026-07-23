@@ -1,0 +1,6 @@
+{
+"provider":"PayPal",
+"endpoint":"/webhooks/payment",
+"verification":"required",
+"status":"development"
+}

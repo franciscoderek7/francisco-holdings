@@ -1,0 +1,14 @@
+[
+{
+"event":"payment.completed",
+"action":"create_customer"
+},
+{
+"event":"payment.completed",
+"action":"activate_product"
+},
+{
+"event":"customer.created",
+"action":"notify_dashboard"
+}
+]
