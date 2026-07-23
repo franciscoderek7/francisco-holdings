@@ -1,0 +1,28 @@
+{
+  "revenue": {
+    "monthlyGoal": 100000,
+    "revenue": 0,
+    "transactions": 0,
+    "averageSale": 0
+  },
+  "customers": {
+    "totalCustomers": 0,
+    "activeCustomers": 0,
+    "newCustomers": 0
+  },
+  "products": [
+    {
+      "name": "PrimeDox AI",
+      "sales": 0
+    },
+    {
+      "name": "OmniGuard",
+      "sales": 0
+    },
+    {
+      "name": "Consultation",
+      "sales": 0
+    }
+  ],
+  "generated": "2026-07-23T05:46:43.206Z"
+}
