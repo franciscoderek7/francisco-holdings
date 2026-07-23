@@ -1,0 +1,38 @@
+EMPIRE ENGINE CONNECTION MAP
+Thu Jul 23 01:44:17 EDT 2026
+
+FLOOR DATA:
+./dashboard/floor-revenue.json
+./empire-core/floors/floor-template.json
+./empire-core/data/floors.json
+./empire-core/data/future-floors.json
+./empire-core/floor-generator.js
+./empire-core/floor-api.js
+./src/tower/floor-data.js
+./src/tower/core/floor-renderer.js
+./src/landing/config/floor-navigation.json
+
+TOWER:
+./src/tower/debug/webgl-check.js
+./src/tower/debug/renderer-check.js
+./src/tower/debug/avatar-check.js
+./src/tower/config/tower-config.js
+./src/tower/floor-data.js
+./src/tower/core/tower-state.js
+./src/tower/core/floor-renderer.js
+./src/tower/core/tower-shell.js
+./src/tower/core/camera-setup.js
+./src/tower/core/light-setup.js
+./src/tower/components/avatar-anchor.js
+./src/landing/components/tower-mount.js
+./diagnostics/tower-audit/report.txt
+
+SCENE:
+
+MESH CREATION:
+./src/tower/core/floor-renderer.js:16:new THREE.MeshStandardMaterial();
+./src/tower/core/floor-renderer.js:19:new THREE.Mesh(
+./src/tower/core/tower-shell.js:11:new THREE.MeshStandardMaterial();
+./src/tower/core/tower-shell.js:14:new THREE.Mesh(
+./diagnostics/webgl-test/minimal-render-test.js:39:new THREE.MeshBasicMaterial({
+./diagnostics/webgl-test/minimal-render-test.js:44:new THREE.Mesh(
