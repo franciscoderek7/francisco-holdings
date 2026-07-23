@@ -1,0 +1,38 @@
+[
+{
+"floor":1,
+"name":"Francisco Holdings Inc HQ",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+},
+{
+"floor":2,
+"name":"OmniGuard SOC",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+},
+{
+"floor":3,
+"name":"PrimeDox AI",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+},
+{
+"floor":4,
+"name":"CCLDR",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+},
+{
+"floor":5,
+"name":"TechPetCage",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+},
+{
+"floor":6,
+"name":"Vault Velocity Auto",
+"status":"active",
+"cta":"https://paypal.me/techpetcage"
+}
+]
