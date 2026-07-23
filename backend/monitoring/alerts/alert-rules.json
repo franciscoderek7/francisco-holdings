@@ -1,0 +1,14 @@
+[
+{
+"event":"payment.failed",
+"priority":"high"
+},
+{
+"event":"api.down",
+"priority":"high"
+},
+{
+"event":"render.failed",
+"priority":"medium"
+}
+]

@@ -1,0 +1,22 @@
+[
+{
+"name":"API",
+"status":"checking"
+},
+{
+"name":"Database",
+"status":"checking"
+},
+{
+"name":"Payments",
+"status":"checking"
+},
+{
+"name":"AI Agents",
+"status":"checking"
+},
+{
+"name":"Three.js Frontend",
+"status":"checking"
+}
+]
