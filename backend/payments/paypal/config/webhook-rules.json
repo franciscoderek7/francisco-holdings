@@ -1,0 +1,9 @@
+{
+"requiredChecks":[
+"signature",
+"transaction_id",
+"amount",
+"currency",
+"duplicate_check"
+]
+}

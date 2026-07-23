@@ -1,0 +1,8 @@
+{
+"provider":"PayPal",
+"environment":"sandbox",
+"clientId":"ADD_PAYPAL_CLIENT_ID",
+"secret":"ADD_PAYPAL_SECRET",
+"webhook":"ADD_WEBHOOK_ID",
+"status":"waiting_credentials"
+}

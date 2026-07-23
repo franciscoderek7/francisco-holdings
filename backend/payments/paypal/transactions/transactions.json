@@ -1,0 +1,8 @@
+[
+  {
+    "id": "TEST_TRANSACTION",
+    "amount": 499,
+    "status": "pending_verification",
+    "time": "2026-07-23T05:46:00.689Z"
+  }
+]

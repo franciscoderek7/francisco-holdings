@@ -1,0 +1,14 @@
+[
+{
+"product":"PrimeDox AI",
+"trigger":"payment.completed"
+},
+{
+"product":"OmniGuard",
+"trigger":"payment.completed"
+},
+{
+"product":"Consultation",
+"trigger":"payment.completed"
+}
+]
