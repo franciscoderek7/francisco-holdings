@@ -1,0 +1,18 @@
+LAUNCH BLOCKER REPORT
+Thu Jul 23 01:53:41 EDT 2026
+
+TODO/FIXME:
+./.git/hooks/sendemail-validate.sample:22:# Replace the TODO placeholders with appropriate checks according to your
+./.git/hooks/sendemail-validate.sample:27:	# TODO: Replace with appropriate checks (e.g. spell checking).
+./.git/hooks/sendemail-validate.sample:35:	# TODO: Replace with appropriate checks for this patch
+./.git/hooks/sendemail-validate.sample:41:	# TODO: Replace with appropriate checks for the whole series
+
+Console Errors:
+./src/tower/debug/webgl-check.js:14:console.error("WEBGL FAILED");
+./src/tower/debug/renderer-check.js:5:console.error(
+./src/tower/debug/avatar-check.js:12:console.error(
+./src/landing/components/tower-mount.js:5:console.error(
+./diagnostics/threejs/visibility-test.js:5:console.error(
+./repair/patches/render-test.js:4:console.error("Renderer missing");
+./repair/patches/render-test.js:9:console.error("Scene missing");
+./repair/patches/render-test.js:14:console.error("Camera missing");
