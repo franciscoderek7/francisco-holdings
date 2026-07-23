@@ -1,0 +1,9 @@
+[
+"page.view",
+"lead.created",
+"customer.created",
+"payment.completed",
+"product.accessed",
+"subscription.started",
+"subscription.cancelled"
+]
