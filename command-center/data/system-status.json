@@ -1,7 +1,10 @@
 {
-"company":"Francisco Holdings Inc",
-"platform":"Empire V5",
-"status":"development",
-"deployment":"pending",
-"health":"checking"
+"empire":"Francisco Holdings Inc",
+"status":"building",
+"frontend":"unknown",
+"backend":"unknown",
+"payments":"unknown",
+"database":"unknown",
+"ai":"unknown",
+"tower":"unknown"
 }
