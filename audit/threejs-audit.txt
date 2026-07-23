@@ -1,0 +1,39 @@
+FRANCISCO HOLDINGS INC THREE.JS AUDIT
+Thu Jul 23 01:41:01 EDT 2026
+
+THREE FILES:
+./src/tower/debug/renderer-check.js
+./src/tower/core/floor-renderer.js
+./audit/threejs-audit.txt
+
+GSAP:
+
+RENDERER:
+
+FLOOR SYSTEM:
+./dashboard/floor-revenue.json
+./products/product-registry.json
+./empire-core/floors/floor-template.json
+./empire-core/data/floors.json
+./empire-core/data/future-floors.json
+./empire-core/data/company-registry.json
+./empire-core/floor-generator.js
+./empire-core/floor-api.js
+./agents/registry/agents.json
+./src/tower/debug/webgl-check.js
+./src/tower/debug/renderer-check.js
+./src/tower/debug/avatar-check.js
+./src/tower/config/tower-config.js
+./src/tower/floor-data.js
+./src/tower/core/tower-state.js
+./src/tower/core/floor-renderer.js
+./src/tower/core/tower-shell.js
+./src/tower/core/camera-setup.js
+./src/tower/core/light-setup.js
+./src/tower/components/avatar-anchor.js
+./src/landing/components/tower-mount.js
+./src/landing/config/floor-navigation.json
+./backend-automation/config/automation-registry.json
+./ai-agents/agents/registry.json
+./monitoring-system/service-registry.json
+./empire-os/core/system-registry.json
