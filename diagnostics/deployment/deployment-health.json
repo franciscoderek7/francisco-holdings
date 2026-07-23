@@ -1,0 +1,7 @@
+{
+"https":"required",
+"pwa":"checking",
+"serviceWorker":"checking",
+"webgl":"checking",
+"status":"audit"
+}
