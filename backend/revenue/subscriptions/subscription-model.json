@@ -1,0 +1,13 @@
+{
+"plans":[
+{
+"name":"Basic",
+"price":0
+},
+{
+"name":"Premium",
+"price":0
+}
+],
+"activeSubscriptions":0
+}
