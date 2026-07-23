@@ -1,0 +1,9 @@
+{
+"type":"PerspectiveCamera",
+"position":{
+"x":0,
+"y":50,
+"z":150
+},
+"status":"ready"
+}

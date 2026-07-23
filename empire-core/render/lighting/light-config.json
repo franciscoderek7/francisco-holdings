@@ -1,0 +1,8 @@
+{
+"environment":"HDR",
+"lights":[
+"ambient",
+"directional"
+],
+"status":"ready"
+}
