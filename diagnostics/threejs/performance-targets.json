@@ -1,0 +1,6 @@
+{
+"targetFPS":60,
+"mobileTargetFPS":30,
+"visibleFloors":10,
+"maxDrawCalls":"optimized"
+}
