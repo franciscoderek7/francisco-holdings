@@ -1,0 +1,6 @@
+{
+"name":"OmniGuard",
+"service":"security-monitoring",
+"scans":0,
+"status":"waiting-for-connection"
+}

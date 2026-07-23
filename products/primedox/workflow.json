@@ -1,0 +1,9 @@
+{
+"steps":[
+"Receive request",
+"Select template",
+"Generate document",
+"Review",
+"Deliver"
+]
+}
