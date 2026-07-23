@@ -1,0 +1,42 @@
+[
+{
+"name":"Francisco Holdings Inc.",
+"floor":1,
+"category":"AI Business Empire",
+"offer":"Business automation consultation",
+"price":499,
+"payment":"https://paypal.me/techpetcage"
+},
+{
+"name":"OmniGuard",
+"floor":2,
+"category":"Cybersecurity",
+"offer":"Security assessment",
+"price":499,
+"payment":"https://paypal.me/techpetcage"
+},
+{
+"name":"PrimeDox AI",
+"floor":3,
+"category":"AI Documents",
+"offer":"AI document systems",
+"price":"49-199",
+"payment":"https://paypal.me/techpetcage"
+},
+{
+"name":"CCLDR",
+"floor":4,
+"category":"Compliance Education",
+"offer":"Consulting",
+"price":499,
+"payment":"https://paypal.me/techpetcage"
+},
+{
+"name":"TechPetCage",
+"floor":5,
+"category":"AI Websites",
+"offer":"AI website package",
+"price":499,
+"payment":"https://paypal.me/techpetcage"
+}
+]
