@@ -1,0 +1,55 @@
+FRANCISCO HOLDINGS INC LANDING V5 AUDIT
+Thu Jul 23 01:42:19 EDT 2026
+
+INDEX FILES:
+
+PAYPAL:
+./offer.md:13:paypal.me/techpetcage
+./dashboard/floor-revenue.json:5:"payment":"https://paypal.me/techpetcage"
+./products/primedox/product.json:4:"payment":"https://paypal.me/techpetcage",
+./products/primedox/pricing.md:18:paypal.me/techpetcage
+./products/primedox/cta.js:10:payment:"https://paypal.me/techpetcage"
+./products/primedox/cta.js:16:payment:"https://paypal.me/techpetcage"
+./products/omniguard/product.json:8:"payment":"https://paypal.me/techpetcage"
+./products/ccldr/product.json:5:"payment":"https://paypal.me/techpetcage"
+./products/index.md:9:paypal.me/techpetcage
+./empire-core/floors/floor-template.json:7:"cta":"https://paypal.me/techpetcage",
+./empire-core/config/empire.json:5:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:6:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:12:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:18:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:24:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:30:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:36:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:8:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:16:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:24:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:32:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:40:"payment":"https://paypal.me/techpetcage"
+./empire-core/integrations/cta-router.js:5:url:"https://paypal.me/techpetcage"
+./command-center/reports/deployments.md:10:paypal.me/techpetcage
+./sales-pipeline/data/consultation-flow.md:12:paypal.me/techpetcage
+./automation/scripts/health-check.js:5:payment:"https://paypal.me/techpetcage",
+./automation/scripts/daily-briefing.js:11:"https://paypal.me/techpetcage"
+./automation/scripts/payment-check.js:3:link:"https://paypal.me/techpetcage",
+./automation/reports/health.json:3:  "payment": "https://paypal.me/techpetcage",
+./automation/reports/daily-briefing.json:8:  "payment": "https://paypal.me/techpetcage"
+./src/config/payment.js:2:"https://paypal.me/techpetcage";
+./src/landing/components/payment-button.js:7:"https://paypal.me/techpetcage";
+./src/landing/config/hero-config.js:20:"https://paypal.me/techpetcage"
+./docs/payment-verification.md:7:https://paypal.me/techpetcage
+./backend-automation/jobs/payment-monitor.js:3:link:"https://paypal.me/techpetcage",
+./backend-automation/config/environment.example:5:PAYMENT_LINK=https://paypal.me/techpetcage
+./customer-system/data/payment-ledger.json:4:    "link": "https://paypal.me/techpetcage",
+./customer-system/process-payment.js:34:link:"https://paypal.me/techpetcage",
+./services/config/env.example:8:PAYPAL_LINK=https://paypal.me/techpetcage
+./payments/paypal-config.example.json:3:"link":"https://paypal.me/techpetcage",
+./sales-engine/crm/offers.json:5:"payment":"https://paypal.me/techpetcage",
+./revenue-engine/offers/primary-offer.json:5:"payment":"https://paypal.me/techpetcage",
+
+CANVAS:
+./src/tower/debug/webgl-check.js:3:const canvas=document.createElement("canvas");
+./src/tower/debug/webgl-check.js:6:canvas.getContext("webgl") ||
+./src/tower/debug/webgl-check.js:7:canvas.getContext("experimental-webgl");
+
+ROOT MOUNT:
