@@ -1,0 +1,17 @@
+[
+{
+"id":"daily-briefing",
+"schedule":"daily",
+"task":"generate_ceo_summary"
+},
+{
+"id":"system-health",
+"schedule":"hourly",
+"task":"check_services"
+},
+{
+"id":"revenue-review",
+"schedule":"daily",
+"task":"analyze_sales"
+}
+]
