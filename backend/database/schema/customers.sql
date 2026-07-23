@@ -1,0 +1,7 @@
+CREATE TABLE customers (
+id SERIAL PRIMARY KEY,
+user_id INTEGER,
+name TEXT,
+status TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

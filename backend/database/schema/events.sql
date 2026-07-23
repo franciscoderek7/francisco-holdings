@@ -1,0 +1,6 @@
+CREATE TABLE events (
+id SERIAL PRIMARY KEY,
+event_type TEXT,
+payload JSONB,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
