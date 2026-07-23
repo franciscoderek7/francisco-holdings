@@ -1,0 +1,60 @@
+EMPIRE V5 392 FLOOR AUDIT
+Thu Jul 23 01:42:01 EDT 2026
+
+FLOOR FILES:
+./dashboard/floor-revenue.json
+./products/product-registry.json
+./empire-core/floors/floor-template.json
+./empire-core/data/floors.json
+./empire-core/data/future-floors.json
+./empire-core/data/company-registry.json
+./empire-core/floor-generator.js
+./empire-core/floor-api.js
+./agents/registry/agents.json
+./src/tower/floor-data.js
+./src/tower/core/floor-renderer.js
+./src/landing/config/floor-navigation.json
+./backend-automation/config/automation-registry.json
+./ai-agents/agents/registry.json
+./monitoring-system/service-registry.json
+./empire-os/core/system-registry.json
+
+392 REFERENCES:
+./.git/logs/HEAD:5:1c40cf77e251942871f4c09da0adadee2c73653d 2f328642014dba4e6f114fc8088b2176a3f23ec6 Derek Francisco <franciscoderek7@gmail.com> 1784776716 -0400	commit: Create Empire Core 392 floor directory engine
+./.git/logs/HEAD:13:ba8f829646fd0042a2951266e0674e0aab90654d 0efca36f04083928eea47ed893f2a7459544108c Derek Francisco <franciscoderek7@gmail.com> 1784776873 -0400	commit: Build Empire AI Agent Foundation V1
+./.git/logs/HEAD:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./.git/logs/HEAD:16:58fc4caf3b055abf2858779792888caa0b430cfa 370104359484c47ca4cbb2ce78998e04b6bf9d3b Derek Francisco <franciscoderek7@gmail.com> 1784777020 -0400	commit: Create 392 floor tower rendering layer
+./.git/logs/refs/heads/master:5:1c40cf77e251942871f4c09da0adadee2c73653d 2f328642014dba4e6f114fc8088b2176a3f23ec6 Derek Francisco <franciscoderek7@gmail.com> 1784776716 -0400	commit: Create Empire Core 392 floor directory engine
+./.git/logs/refs/heads/master:13:ba8f829646fd0042a2951266e0674e0aab90654d 0efca36f04083928eea47ed893f2a7459544108c Derek Francisco <franciscoderek7@gmail.com> 1784776873 -0400	commit: Build Empire AI Agent Foundation V1
+./.git/logs/refs/heads/master:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./.git/logs/refs/heads/master:16:58fc4caf3b055abf2858779792888caa0b430cfa 370104359484c47ca4cbb2ce78998e04b6bf9d3b Derek Francisco <franciscoderek7@gmail.com> 1784777020 -0400	commit: Create 392 floor tower rendering layer
+./empire-core/config/empire.json:4:"floors":392,
+./empire-core/data/future-floors.json:2:"totalFloors":392,
+./src/tower/config/tower-config.js:5:floors:392,
+./src/tower/floor-data.js:5:for(let i=1;i<=392;i++){
+./src/tower/core/tower-state.js:5:floors:392,
+./src/tower/core/floor-renderer.js:6:for(let i=0;i<392;i++){
+./src/landing/config/hero-config.js:7:"Explore the 392-Floor AI Empire Tower",
+
+TOWER REFERENCES:
+./src/tower/config/tower-config.js:1:export const TOWER_CONFIG = {
+./src/tower/config/tower-config.js:3:name:"Francisco Holdings Inc Empire Tower",
+./src/tower/core/tower-state.js:1:export const towerState = {
+./src/tower/core/tower-shell.js:1:export function createTowerShell(THREE){
+./src/tower/core/tower-shell.js:13:const tower =
+./src/tower/core/tower-shell.js:19:return tower;
+./src/landing/components/tower-mount.js:1:export function mountTower(container){
+./src/landing/components/tower-mount.js:6:"Tower container missing"
+./src/landing/components/tower-mount.js:13:container.dataset.tower="active";
+./src/landing/components/tower-mount.js:16:"Empire Tower mounted"
+./src/landing/config/hero-config.js:7:"Explore the 392-Floor AI Empire Tower",
+./src/landing/config/hero-config.js:13:label:"Enter Empire Tower",
+./src/landing/config/hero-config.js:14:action:"tower"
+
+AVATAR REFERENCES:
+./src/tower/debug/avatar-check.js:1:export function avatarLoaded(name){
+./src/tower/debug/avatar-check.js:4:"Avatar loaded:",
+./src/tower/debug/avatar-check.js:10:export function avatarFailed(name,error){
+./src/tower/debug/avatar-check.js:13:"Avatar failed:",
+./src/tower/core/tower-state.js:11:avatars:[]
+./src/tower/components/avatar-anchor.js:1:export function createAvatarAnchor(floor){
