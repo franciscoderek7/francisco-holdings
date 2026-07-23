@@ -1,0 +1,7 @@
+{
+"frontend":"Three.js Empire",
+"backend":"API Server",
+"payments":"PayPal/Webhooks",
+"ai":"PrimeDox + Agents",
+"security":"OmniGuard"
+}

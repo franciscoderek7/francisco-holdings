@@ -1,0 +1,7 @@
+{
+"engine":"offline",
+"renderer":"offline",
+"backend":"offline",
+"payments":"pending",
+"dashboard":"offline"
+}
