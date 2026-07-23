@@ -3,654 +3,900 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title> Francisco Holdings Inc. — Trillion Dollar Empire</title>
+<title>Francisco Holdings Inc. — Phantom Intelligence Empire </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --emerald: #00d4aa;
-    --gold: #ffd700;
-    --dark: #0a0a0f;
-    --panel: #12121a;
-    --border: #1e1e2e;
-    --text: #e8e8f0;
-    --muted: #8a8aa0;
-    --danger: #ff4757;
-    --warning: #ffa502;
-    --positive: #2ed573;
-    --accent: #00d4aa;
-  }
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: var(--dark);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    background: radial-gradient(ellipse at 50% 0%, #1a1a2e 0%, var(--dark) 60%);
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60L60 0' stroke='%2300d4aa' stroke-width='0.3' opacity='0.08'/%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    border: 1px solid var(--emerald);
-    border-radius: 20px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--emerald);
-    margin-bottom: 24px;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
-  .hero h1 {
-    font-size: clamp(36px, 8vw, 80px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
-  }
-  .hero h1 span { color: var(--gold); }
-  .hero-sub {
-    font-size: clamp(16px, 3vw, 22px);
-    color: var(--muted);
-    max-width: 600px;
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .btn {
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--emerald), #00a884);
-    color: #000;
-    border: none;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,170,0.3); }
-  .btn-secondary {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-secondary:hover { border-color: var(--emerald); color: var(--emerald); }
-
-  /* ===== SKYSCRAPER PREVIEW ===== */
-  .skyscraper-section {
-    padding: 80px 24px;
-    text-align: center;
-    background: linear-gradient(180deg, var(--dark), #0d0d14);
-  }
-  .skyscraper-section h2 {
-    font-size: clamp(28px, 5vw, 48px);
-    margin-bottom: 12px;
-  }
-  .skyscraper-section p { color: var(--muted); font-size: 17px; margin-bottom: 40px; }
-  .tower-preview {
-    max-width: 400px;
-    margin: 0 auto;
-    position: relative;
-    height: 500px;
-    perspective: 800px;
-  }
-  .tower {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    transform-style: preserve-3d;
-    animation: towerFloat 6s ease-in-out infinite;
-  }
-  @keyframes towerFloat { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-10px)} }
-  .floor {
-    width: 100%;
-    height: 8px;
-    margin: 1px 0;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--emerald), var(--gold));
-    opacity: 0.6;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-  .floor:hover { opacity: 1; transform: scaleX(1.1); }
-  .floor:nth-child(1) { width: 30px; }
-  .floor:nth-child(2) { width: 40px; }
-  .floor:nth-child(3) { width: 50px; }
-  .floor:nth-child(4) { width: 60px; }
-  .floor:nth-child(5) { width: 70px; }
-  .floor:nth-child(n+6) { width: 80px; }
-  .floor-label {
-    position: absolute;
-    right: -160px;
-    font-size: 11px;
-    color: var(--muted);
-    opacity: 0;
-    transition: opacity 0.3s;
-    white-space: nowrap;
-  }
-  .floor:hover .floor-label { opacity: 1; }
-  .floor-1 { background: linear-gradient(90deg, #ff6b6b, #ff8e53) !important; }
-  .floor-2 { background: linear-gradient(90deg, #4ecdc4, #44a3aa) !important; }
-  .floor-3 { background: linear-gradient(90deg, #a855f7, #6366f1) !important; }
-
-  /* ===== COMMAND CENTER ===== */
-  .command-section {
-    padding: 80px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .command-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .command-header h2 { font-size: 28px; }
-  .tab-bar {
-    display: flex;
-    gap: 4px;
-    background: var(--panel);
-    padding: 4px;
-    border-radius: 10px;
-  }
-  .tab-bar button {
-    padding: 10px 20px;
-    border: none;
-    background: none;
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .tab-bar button.active { background: var(--emerald); color: #000; }
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* Cards & tables */
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 10px;
-  }
-  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .card-title { font-size: 15px; font-weight: 600; }
-  .badge {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-weight: 600;
-  }
-  .badge-danger { background: rgba(255,71,87,0.15); color: var(--danger); }
-  .badge-warning { background: rgba(255,165,2,0.15); color: var(--warning); }
-  .badge-positive { background: rgba(46,213,115,0.15); color: var(--positive); }
-  .badge-neutral { background: rgba(138,138,160,0.15); color: var(--muted); }
-  .meta { font-size: 13px; color: var(--muted); margin-top: 6px; }
-  .meta span { margin-right: 16px; }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-weight: 500; font-size: 12px; }
-  td { padding: 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  .amount { font-weight: 600; font-variant-numeric: tabular-nums; }
-
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .metric-box {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-  }
-  .metric-value { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .metric-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
-
-  .domain-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .domain-item {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .domain-name { font-size: 14px; font-weight: 600; }
-  .domain-desc { font-size: 12px; color: var(--muted); }
-
-  .agent-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 8px;
-  }
-  .agent-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .agent-dot.active { background: var(--positive); box-shadow: 0 0 8px var(--positive); }
-  .agent-dot.idle { background: var(--warning); }
-  .agent-name { font-weight: 600; flex: 1; }
-  .agent-task { font-size: 12px; color: var(--muted); }
-
-  .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 8px; }
-  .progress-fill { height: 100%; border-radius: 3px; }
-
-  .paypal-box {
-    background: linear-gradient(135deg, #003087, #009cde);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-  }
-  .paypal-box .domain-name { color: #fff; }
-  .paypal-box .domain-desc { color: rgba(255,255,255,0.7); }
-
-  /* ===== FOOTER ===== */
-  .footer {
-    padding: 40px 24px;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 13px;
-  }
-  .footer a { color: var(--emerald); text-decoration: none; }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .grid-3, .grid-2, .domain-list { grid-template-columns: 1fr; }
-    .command-header { flex-direction: column; align-items: flex-start; }
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --phantom-black: #050505;
+  --phantom-deep: #080808;
+  --phantom-carbon: #111111;
+  --phantom-graphite: #1a1a1a;
+  --gold: #C9A84C;
+  --gold-bright: #E8C547;
+  --gold-dim: #8a7028;
+  --platinum: #E5E4E2;
+  --platinum-dim: #999999;
+  --white: #ffffff;
+  --red: #8B0000;
+  --green: #2d8a3e;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--phantom-black);
+  color: var(--platinum);
+  overflow-x: hidden;
+  cursor: none;
+}
+.cursor {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100001;
+  transform: translate(-50%, -50%);
+}
+.cursor.hover { width: 56px; height: 56px; border-color: var(--gold-bright); }
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--phantom-black);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.5s;
+}
+.loader-screen.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-phantom { width: 140px; height: 140px; position: relative; }
+.loader-phantom-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  animation: ringPulse 2.5s ease-in-out infinite;
+}
+.loader-phantom-ring:nth-child(2) { inset: 15px; border-color: rgba(201,168,76,0.4); animation-delay: 0.3s; }
+.loader-phantom-ring:nth-child(3) { inset: 30px; border-color: rgba(201,168,76,0.2); animation-delay: 0.6s; }
+@keyframes ringPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.7; } }
+.loader-phantom-core {
+  position: absolute;
+  inset: 45px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--phantom-black);
+  letter-spacing: 2px;
+  animation: coreGlow 2s ease-in-out infinite;
+}
+@keyframes coreGlow { 0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.4); } 50% { box-shadow: 0 0 60px rgba(201,168,76,0.8); } }
+.loader-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 10px;
+  color: var(--gold-dim);
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+.loader-bar { width: 220px; height: 1px; background: var(--phantom-graphite); margin-top: 25px; position: relative; overflow: hidden; }
+.loader-bar-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright), var(--gold-dim)); animation: loadFill 3s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+@keyframes loadFill { to { width: 100%; } }
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 90000;
+  padding: 22px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.nav.scrolled { background: rgba(5,5,5,0.95); backdrop-filter: blur(30px); padding: 14px 50px; border-bottom: 1px solid rgba(201,168,76,0.08); }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-mark { width: 38px; height: 38px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 800; color: var(--gold); }
+.nav-logo-text { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; color: var(--platinum); letter-spacing: 4px; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--platinum-dim); text-decoration: none; position: relative; padding: 6px 0; transition: color 0.4s; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--phantom-black); background: var(--gold); padding: 13px 28px; border: none; cursor: none; position: relative; overflow: hidden; transition: all 0.4s; }
+.nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--gold-bright); transform: translateX(-101%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+.nav-cta:hover::before { transform: translateX(0); }
+.nav-cta span { position: relative; z-index: 1; }
+.hero { position: relative; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+#hero-canvas { position: absolute; inset: 0; z-index: 1; }
+.hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 0%, rgba(5,5,5,0.3) 50%, rgba(5,5,5,0.9) 100%); z-index: 2; }
+.hero-content { position: relative; z-index: 3; text-align: center; max-width: 1100px; padding: 0 40px; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; border: 1px solid rgba(201,168,76,0.25); padding: 10px 26px; margin-bottom: 45px; opacity: 0; }
+.hero-eyebrow-dot { width: 5px; height: 5px; background: var(--gold-bright); border-radius: 50%; animation: livePulse 2s ease-in-out infinite; }
+.hero-eyebrow-text { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-dim); }
+@keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(232,197,71,0.4); } 50% { opacity: 0.6; transform: scale(1.3); box-shadow: 0 0 0 8px rgba(232,197,71,0); } }
+.hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 7vw, 6.5rem); font-weight: 400; line-height: 1.05; color: var(--white); margin-bottom: 8px; opacity: 0; transform: translateY(50px); }
+.hero-title span { display: block; font-weight: 700; background: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--platinum), var(--gold)); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: goldShift 5s ease-in-out infinite; }
+@keyframes goldShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.hero-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 400; font-style: italic; color: var(--platinum-dim); margin-bottom: 20px; opacity: 0; transform: translateY(40px); }
+.hero-tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 55px; opacity: 0; transform: translateY(30px); }
+.hero-cta-group { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(30px); }
+.hero-cta-primary { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--phantom-black); background: var(--gold); padding: 20px 50px; border: none; cursor: none; position: relative; overflow: hidden; transition: all 0.4s; }
+.hero-cta-primary::before { content: ''; position: absolute; inset: 0; background: var(--gold-bright); transform: translateX(-101%); transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.hero-cta-primary:hover::before { transform: translateX(0); }
+.hero-cta-primary span { position: relative; z-index: 1; }
+.hero-cta-secondary { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); background: transparent; padding: 20px 50px; border: 1px solid rgba(201,168,76,0.35); cursor: none; position: relative; overflow: hidden; transition: all 0.4s; }
+.hero-cta-secondary::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateY(101%); transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.hero-cta-secondary:hover { color: var(--phantom-black); border-color: var(--gold); }
+.hero-cta-secondary:hover::before { transform: translateY(0); }
+.hero-cta-secondary span { position: relative; z-index: 1; }
+.hero-scroll { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; }
+.hero-scroll-text { font-family: 'Inter', sans-serif; font-size: 0.55rem; letter-spacing: 5px; text-transform: uppercase; color: var(--platinum-dim); }
+.hero-scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 50.1% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.stats-bar { position: relative; z-index: 10; background: var(--phantom-deep); border-top: 1px solid rgba(201,168,76,0.08); border-bottom: 1px solid rgba(201,168,76,0.08); padding: 35px 50px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 30px; }
+.stat-item { text-align: center; padding: 18px; position: relative; }
+.stat-item:not(:last-child)::after { content: ''; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); width: 1px; height: 40%; background: rgba(201,168,76,0.1); }
+.stat-number { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+.stat-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--platinum-dim); }
+.section { position: relative; padding: 130px 50px; overflow: hidden; }
+.section-header { text-align: center; margin-bottom: 70px; }
+.section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 18px; display: inline-block; border: 1px solid rgba(201,168,76,0.15); padding: 8px 18px; }
+.section-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 18px; }
+.section-title span { color: var(--gold); font-weight: 700; }
+.section-desc { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 300; color: var(--platinum-dim); max-width: 580px; margin: 0 auto; line-height: 1.8; }
+.command-section { background: var(--phantom-black); position: relative; }
+.command-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.command-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 30px; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+.command-panel { background: rgba(8,8,8,0.8); border: 1px solid rgba(201,168,76,0.1); padding: 35px; position: relative; overflow: hidden; }
+.command-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.5; }
+.command-panel-title { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+.command-panel-title::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: livePulse 2s ease-in-out infinite; }
+.status-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(201,168,76,0.05); }
+.status-row:last-child { border-bottom: none; }
+.status-name { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 400; color: var(--platinum-dim); }
+.status-value { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; }
+.status-online { color: var(--green); }
+.status-active { color: var(--gold); }
+.status-running { color: var(--gold-bright); }
+.command-core { background: rgba(8,8,8,0.9); border: 1px solid rgba(201,168,76,0.15); padding: 45px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.command-core::before { content: ''; position: absolute; inset: 15px; border: 1px solid rgba(201,168,76,0.08); pointer-events: none; }
+.command-core-ring { width: 100px; height: 100px; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; position: relative; animation: coreSpin 20s linear infinite; }
+.command-core-ring::before { content: ''; position: absolute; inset: -10px; border: 1px solid rgba(201,168,76,0.2); border-radius: 50%; animation: coreSpin 15s linear infinite reverse; }
+@keyframes coreSpin { to { transform: rotate(360deg); } }
+.command-core-icon { font-size: 2rem; animation: coreSpin 20s linear infinite reverse; }
+.command-core-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+.command-core-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 400; letter-spacing: 4px; color: var(--platinum-dim); text-transform: uppercase; }
+.avatars-section { background: var(--phantom-deep); }
+.avatars-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 25px; max-width: 1400px; margin: 0 auto; }
+.avatar-card { background: rgba(8,8,8,0.7); border: 1px solid rgba(201,168,76,0.08); padding: 45px 25px; text-align: center; position: relative; overflow: hidden; transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1); cursor: none; }
+.avatar-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.05); }
+.avatar-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.avatar-card:hover::after { width: 100%; }
+.avatar-orb { width: 80px; height: 80px; margin: 0 auto 22px; border-radius: 50%; border: 2px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; position: relative; transition: all 0.6s; }
+.avatar-card:hover .avatar-orb { border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,76,0.2); }
+.avatar-orb::before { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 1px solid transparent; border-top-color: var(--gold-bright); animation: spin 6s linear infinite; }
+.avatar-name { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+.avatar-role { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 15px; }
+.avatar-functions { list-style: none; text-align: left; padding: 0 10px; }
+.avatar-functions li { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 300; color: var(--platinum-dim); padding: 5px 0; border-bottom: 1px solid rgba(201,168,76,0.05); display: flex; align-items: center; gap: 8px; }
+.avatar-functions li::before { content: '>'; color: var(--gold); font-weight: 700; }
+.empire-section { background: var(--phantom-black); position: relative; }
+.empire-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+#empire-canvas { width: 100%; height: 70vh; position: relative; }
+.empire-floors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: -80px; position: relative; z-index: 5; max-width: 1400px; margin-left: auto; margin-right: auto; }
+.floor-card { background: rgba(8,8,8,0.95); border: 1px solid rgba(201,168,76,0.08); padding: 35px 25px; position: relative; overflow: hidden; transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1); cursor: none; }
+.floor-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.floor-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.floor-card:hover::before { height: 100%; }
+.floor-number { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 500; letter-spacing: 3px; color: var(--gold-dim); margin-bottom: 12px; }
+.floor-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+.floor-desc { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--platinum-dim); line-height: 1.7; margin-bottom: 18px; }
+.floor-status { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dim); }
+.floor-status-dot { width: 5px; height: 5px; background: var(--gold-bright); border-radius: 50%; animation: livePulse 2s ease-in-out infinite; }
+.workflow-section { background: var(--phantom-deep); }
+.workflow-diagram { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0; }
+.workflow-node { background: rgba(8,8,8,0.8); border: 1px solid rgba(201,168,76,0.15); padding: 25px 50px; text-align: center; min-width: 320px; position: relative; transition: all 0.4s; cursor: none; }
+.workflow-node:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,76,0.1); }
+.workflow-node-title { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+.workflow-node-desc { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 300; color: var(--platinum-dim); }
+.workflow-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), var(--gold-dim)); position: relative; }
+.workflow-arrow::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gold-dim); }
+.gaphunter-section { background: var(--phantom-black); position: relative; }
+.gaphunter-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.gaphunter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1200px; margin: 0 auto; background: rgba(201,168,76,0.03); }
+.gaphunter-card { background: rgba(8,8,8,0.7); padding: 50px 35px; text-align: center; position: relative; overflow: hidden; transition: all 0.5s; cursor: none; }
+.gaphunter-card:hover { background: rgba(17,17,17,0.9); }
+.gaphunter-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0; background: linear-gradient(to top, rgba(201,168,76,0.06), transparent); transition: height 0.5s; }
+.gaphunter-card:hover::after { height: 100%; }
+.gaphunter-icon { font-size: 2.5rem; margin-bottom: 20px; position: relative; z-index: 1; }
+.gaphunter-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 12px; position: relative; z-index: 1; }
+.gaphunter-desc { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--platinum-dim); line-height: 1.7; position: relative; z-index: 1; }
+.revenue-section { background: var(--phantom-deep); text-align: center; }
+.revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 50px auto 0; background: rgba(201,168,76,0.03); }
+.revenue-card { background: rgba(8,8,8,0.7); padding: 45px 30px; position: relative; overflow: hidden; transition: all 0.5s; cursor: none; }
+.revenue-card:hover { border-color: rgba(201,168,76,0.3); }
+.revenue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.5s; }
+.revenue-card:hover::before { width: 100%; }
+.revenue-card-title { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+.revenue-card-price { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 700; color: var(--gold); margin-bottom: 15px; }
+.revenue-card-price span { font-size: 0.7rem; font-weight: 400; color: var(--platinum-dim); }
+.revenue-card-desc { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--platinum-dim); line-height: 1.7; }
+.cta-section { background: var(--phantom-black); text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; border: 1px solid rgba(201,168,76,0.04); border-radius: 50%; pointer-events: none; }
+.cta-section::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; border: 1px solid rgba(201,168,76,0.06); border-radius: 50%; pointer-events: none; }
+.cta-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 400; color: var(--white); margin-bottom: 18px; position: relative; z-index: 1; }
+.cta-title span { color: var(--gold); font-weight: 700; }
+.cta-desc { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 300; color: var(--platinum-dim); max-width: 500px; margin: 0 auto 45px; line-height: 1.8; position: relative; z-index: 1; }
+.cta-button { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--phantom-black); background: var(--gold); padding: 22px 55px; border: none; cursor: none; position: relative; overflow: hidden; transition: all 0.4s; display: inline-block; text-decoration: none; z-index: 1; }
+.cta-button::before { content: ''; position: absolute; inset: 0; background: var(--gold-bright); transform: translateX(-101%); transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1); }
+.cta-button:hover::before { transform: translateX(0); }
+.cta-button span { position: relative; z-index: 1; }
+.footer { background: var(--phantom-black); border-top: 1px solid rgba(201,168,76,0.06); padding: 70px 50px 35px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+.footer-brand { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 4px; margin-bottom: 15px; }
+.footer-tagline { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--platinum-dim); line-height: 1.8; max-width: 280px; }
+.footer-heading { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 20px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--platinum-dim); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(201,168,76,0.05); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+.footer-copyright { font-family: 'Inter', sans-serif; font-size: 0.65rem; color: var(--platinum-dim); letter-spacing: 1px; }
+.footer-legal { font-family: 'Inter', sans-serif; font-size: 0.6rem; color: var(--platinum-dim); max-width: 450px; text-align: right; line-height: 1.6; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (max-width: 1200px) {
+  .avatars-grid { grid-template-columns: repeat(3, 1fr); }
+  .command-grid { grid-template-columns: 1fr; }
+  .command-panel, .command-core { max-width: 600px; margin: 0 auto; }
+}
+@media (max-width: 1024px) {
+  .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  .stat-item:nth-child(3)::after { display: none; }
+  .empire-floors { grid-template-columns: repeat(2, 1fr); }
+  .gaphunter-grid { grid-template-columns: 1fr; }
+  .revenue-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 18px 25px; }
+  .nav-links { display: none; }
+  .section { padding: 80px 25px; }
+  .stats-bar { grid-template-columns: 1fr 1fr; padding: 25px; }
+  .stat-item::after { display: none; }
+  .avatars-grid { grid-template-columns: 1fr; }
+  .empire-floors { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 35px; }
+  .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+  .footer-legal { text-align: center; }
+}
 </style>
 </head>
 <body>
+<!-- Custom Cursor -->
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero-badge">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    EmpireOS v1.0 — Unified Platform
+<!-- Loader -->
+<div class="loader-screen" id="loader">
+  <div class="loader-phantom">
+    <div class="loader-phantom-ring"></div>
+    <div class="loader-phantom-ring"></div>
+    <div class="loader-phantom-ring"></div>
+    <div class="loader-phantom-core">FHI</div>
   </div>
-  <h1>Francisco Holdings Inc.<br><span>Trillion Dollar Empire</span></h1>
-  <p class="hero-sub">One platform. 45+ companies. 392 floors. Agent swarm automation. Zero manual work.</p>
-  <div class="hero-cta">
-    <a href="https://paypal.me/techpetcage" class="btn btn-primary" target="_blank">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-      Enter the Empire
-    </a>
-    <a href="#command" class="btn btn-secondary">Command Center</a>
+  <div class="loader-text">Initializing Phantom Intelligence</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">F</div>
+    <span class="nav-logo-text">Francisco Holdings</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#command">Command</a></li>
+    <li><a href="#avatars">Agents</a></li>
+    <li><a href="#empire">Empire</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta"><span>Enter HQ</span></button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span class="hero-eyebrow-text">Phantom Intelligence Empire</span>
+    </div>
+    <h1 class="hero-title">
+      Francisco Holdings Inc.
+      <span>The Phantom Intelligence Empire</span>
+    </h1>
+    <p class="hero-subtitle">Agentic AI. Autonomous Workflows. Digital Companies Built By Intelligence.</p>
+    <p class="hero-tagline">392 Floors. 45+ Companies. One Command Center.</p>
+    <div class="hero-cta-group">
+      <button class="hero-cta-primary"><span>Enter Phantom HQ</span></button>
+      <button class="hero-cta-secondary"><span>Activate AI Concierge</span></button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-text">Scroll</span>
+    <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<!-- ===== SKYSCRAPER ===== -->
-<section class="skyscraper-section">
-  <h2>392-Floor Skyscraper</h2>
-  <p>Every floor is a company. Every company is autonomous. First in the world.</p>
-  <div class="tower-preview">
-    <div class="tower" id="tower">
-      <!-- Floors generated by JS -->
-    </div>
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number" data-count="392">0</div>
+    <div class="stat-label">Empire Floors</div>
   </div>
-  <div style="margin-top: 24px;">
-    <span class="badge badge-positive" style="margin-right:8px">Floor 1: Francisco Holdings HQ</span>
-    <span class="badge badge-positive" style="margin-right:8px">Floor 2: OmniGuard</span>
-    <span class="badge badge-positive">Floor 3: PrimeDox AI</span>
+  <div class="stat-item">
+    <div class="stat-number" data-count="45">0</div>
+    <div class="stat-label">AI Companies</div>
   </div>
-</section>
-
-<!-- ===== COMMAND CENTER ===== -->
-<section class="command-section" id="command">
-  <div class="command-header">
-    <h2>EmpireOS Command Center</h2>
-    <div class="tab-bar">
-      <button class="active" onclick="switchTab('cases')">Case tracker</button>
-      <button onclick="switchTab('empire')">Empire map</button>
-      <button onclick="switchTab('agents')">Agent swarm</button>
-      <button onclick="switchTab('revenue')">Revenue</button>
-    </div>
+  <div class="stat-item">
+    <div class="stat-number" data-count="5">0</div>
+    <div class="stat-label">Core Agents</div>
   </div>
-
-  <!-- CASES -->
-  <div id="panel-cases" class="panel active">
-    <div class="grid-3">
-      <div class="metric-box">
-        <div class="metric-value" style="color: var(--emerald)">$38.3M</div>
-        <div class="metric-label">Total active claims</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color: var(--positive)">4</div>
-        <div class="metric-label">Active cases</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color: var(--warning)">July 14</div>
-        <div class="metric-label">Next critical date</div>
-      </div>
-    </div>
-
-    <div style="overflow-x: auto;">
-      <table>
-        <thead>
-          <tr><th>Case</th><th>Defendants</th><th>Amount</th><th>Status</th><th>Next date</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>CV-26-00000064-0000</b><br><span style="font-size:12px;color:var(--muted)">Francisco v. Denby et al.</span></td>
-            <td>Bill Denby, Gwen Denby, Treasure Island Resort Inc., Treasure Island Cycle's & ATV's, 2413319 Ontario Inc.</td>
-            <td class="amount" style="color:var(--emerald)">$3.3M</td>
-            <td><span class="badge badge-warning">Leave motion</span></td>
-            <td>July 14, 2026<br><span style="font-size:12px;color:var(--muted)">Lindsay</span></td>
-          </tr>
-          <tr>
-            <td><b>CV-26-00000063-0000</b><br><span style="font-size:12px;color:var(--muted)">Constitutional claim</span></td>
-            <td>Attorney General of Canada, Health Canada</td>
-            <td class="amount" style="color:var(--emerald)">$35M</td>
-            <td><span class="badge badge-danger">Active</span></td>
-            <td>TBD</td>
-          </tr>
-          <tr>
-            <td><b>Francisco v. CIBC/Kudos/Telus</b><br><span style="font-size:12px;color:var(--muted)">Consumer fraud</span></td>
-            <td>CIBC, Kudos, Telus, Andrew Slopianka (#5420), Assim (AK-****)</td>
-            <td class="amount" style="color:var(--emerald)">$331,313.21</td>
-            <td><span class="badge badge-danger">Demand issued</span></td>
-            <td>Awaiting compliance</td>
-          </tr>
-          <tr>
-            <td><b>ODSP Cannabis Appeal</b><br><span style="font-size:12px;color:var(--muted)">Charter s.7/s.15</span></td>
-            <td>ODSP / MCSS</td>
-            <td class="amount">—</td>
-            <td><span class="badge badge-warning">Internal review</span></td>
-            <td>Pending</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 style="margin: 28px 0 12px; font-size: 18px;">Case timeline</h3>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">April 24, 2026 — Gwen Denby served (Form 16B filed May 1)</span>
-        <span class="badge badge-positive">Complete</span>
-      </div>
-      <div class="meta"><span>By: Pamela Shorey</span><span>File: CV-26-00000064-0000</span></div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">April 24, 2026 — Bill Denby served on tractor (unsworn)</span>
-        <span class="badge badge-warning">Unsworn</span>
-      </div>
-      <div class="meta">Needs affidavit confirmation</div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">June 16, 2026 — Notice of Motion filed (leave to add Defendant 6)</span>
-        <span class="badge badge-positive">Filed</span>
-      </div>
-      <div class="meta"><span>Rule 26.02(c) leave required</span><span>2413319 Ontario Inc. to be added</span></div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">June 29–30, 2026 — Motion hearing (Lindsay, 9:30 AM)</span>
-        <span class="badge badge-warning">Upcoming</span>
-      </div>
-      <div class="meta"><span>Zoom available</span><span>Pintea accommodation requested</span></div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">July 14, 2026 — Main hearing date</span>
-        <span class="badge badge-danger">Critical</span>
-      </div>
-      <div class="meta"><span>Lindsay courthouse</span><span>$3.3M damages at stake</span></div>
-    </div>
+  <div class="stat-item">
+    <div class="stat-number" data-count="1000000" data-prefix="$" data-suffix="+">$0+</div>
+    <div class="stat-label">Revenue Target</div>
   </div>
-
-  <!-- EMPIRE MAP -->
-  <div id="panel-empire" class="panel">
-    <div class="grid-2">
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--positive)">12</div>
-        <div class="metric-label">Domains deployed</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--accent)">45+</div>
-        <div class="metric-label">Subsidiary companies</div>
-      </div>
-    </div>
-
-    <h3 style="margin: 24px 0 12px; font-size: 18px;">Domain architecture</h3>
-    <div class="domain-list">
-      <div class="domain-item">
-        <div><div class="domain-name">franciscoholdingsinc.com</div><div class="domain-desc">HQ — 392-floor skyscraper</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">zprimedoxaihq.com</div><div class="domain-desc">PrimeDox AI HQ — concierge</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">ccldr.net</div><div class="domain-desc">Legal education platform</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">omniaguard.com</div><div class="domain-desc">Cybersecurity (Floor 2)</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">primedoxai.com</div><div class="domain-desc">Document generation AI</div></div>
-        <span class="badge badge-warning">Deploying</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">vaultvelocityauto.com</div><div class="domain-desc">Luxury vehicle brokerage</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">vigilax.com</div><div class="domain-desc">Security / monitoring</div></div>
-        <span class="badge badge-neutral">Planned</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">cleanswarm.com</div><div class="domain-desc">Automation services</div></div>
-        <span class="badge badge-neutral">Planned</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">kiaros.com</div><div class="domain-desc">AI scheduling / ops</div></div>
-        <span class="badge badge-neutral">Planned</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">techpetcage.com</div><div class="domain-desc">Device protection / PayPal hub</div></div>
-        <span class="badge badge-positive">Live</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">techpackcage.com</div><div class="domain-desc">Packaging / logistics</div></div>
-        <span class="badge badge-neutral">Planned</span>
-      </div>
-      <div class="domain-item">
-        <div><div class="domain-name">ccldr.ca</div><div class="domain-desc">Canadian legal education</div></div>
-        <span class="badge badge-warning">Building</span>
-      </div>
-    </div>
-
-    <h3 style="margin: 24px 0 12px; font-size: 18px;">Subsidiary mapping</h3>
-    <div class="card">
-      <div class="card-title">.ca companies → 3D skyscraper floors</div>
-      <div class="meta" style="margin-top:8px">
-        <span>CCC (20 yrs)</span>
-        <span>COMPACT (2008)</span>
-        <span>Francisco Holdings Inc.</span>
-        <span>2413319 Ontario Inc.</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">.com / .net → "The Net" overlay</div>
-      <div class="meta" style="margin-top:8px">
-        <span>All 12 domains</span>
-        <span>Double-exposure visual treatment</span>
-      </div>
-    </div>
+  <div class="stat-item">
+    <div class="stat-number" data-count="20" data-suffix="+">0+</div>
+    <div class="stat-label">Years Experience</div>
   </div>
+</div>
 
-  <!-- AGENTS -->
-  <div id="panel-agents" class="panel">
-    <h3 style="margin-bottom: 16px; font-size: 18px;">Jarvis 1000x — Autonomous agent swarm</h3>
-    <div class="agent-row">
-      <div class="agent-dot active"></div>
-      <div class="agent-name">Jarvis Core</div>
-      <div class="agent-task">Email, YouTube, social media, marketing, advertising, merchandise</div>
-      <span class="badge badge-positive">Running</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot active"></div>
-      <div class="agent-name">PrimeDox AI</div>
-      <div class="agent-task">Document generation, legal drafting, court filings</div>
-      <span class="badge badge-positive">Running</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot active"></div>
-      <div class="agent-name">OmniGuard</div>
-      <div class="agent-task">Cybersecurity, threat detection, device protection</div>
-      <span class="badge badge-positive">Running</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot active"></div>
-      <div class="agent-name">Gap Hunter</div>
-      <div class="agent-task">Market analysis, opportunity detection, competitor tracking</div>
-      <span class="badge badge-positive">Running</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot idle"></div>
-      <div class="agent-name">Phoenix Core</div>
-      <div class="agent-task">Command center integration, dashboard orchestration</div>
-      <span class="badge badge-warning">Booting</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot idle"></div>
-      <div class="agent-name">Vault Velocity</div>
-      <div class="agent-task">Luxury vehicle sourcing, brokerage, financing</div>
-      <span class="badge badge-warning">Standby</span>
-    </div>
-    <div class="agent-row">
-      <div class="agent-dot active"></div>
-      <div class="agent-name">Kimi Monitor</div>
-      <div class="agent-task">Direct reporting to Derek, agent oversight across all 45+ companies</div>
-      <span class="badge badge-positive">Active</span>
-    </div>
-
-    <h3 style="margin: 24px 0 12px; font-size: 18px;">Swarm orchestration</h3>
-    <div class="card">
-      <div class="card-title">Gemma 31B integration</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:65%; background:linear-gradient(90deg,var(--emerald),var(--gold))"></div></div>
-      <div class="meta"><span>65% complete</span><span>Agent swarm scaling</span></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Neural Graph deployment</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:40%; background:linear-gradient(90deg,var(--warning),var(--gold))"></div></div>
-      <div class="meta"><span>40% complete</span><span>Cross-site intelligence</span></div>
-    </div>
+<!-- Command Center -->
+<section class="section command-section" id="command">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Phantom Core</span>
+    <h2 class="section-title">Command <span>Center</span></h2>
+    <p class="section-desc">The neural heart of the empire. Five autonomous agents orchestrating every workflow, every decision, every dollar.</p>
   </div>
-
-  <!-- REVENUE -->
-  <div id="panel-revenue" class="panel">
-    <div class="grid-2">
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--positive)">$49</div>
-        <div class="metric-label">PrimeDox AI monthly</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--accent)">$99K–$999K</div>
-        <div class="metric-label">Vault Velocity retainers/year</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--text)">5–10%</div>
-        <div class="metric-label">Luxury brokerage commission</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-value" style="color:var(--warning)">$50K–$500K</div>
-        <div class="metric-label">Sourcing fees per deal</div>
-      </div>
+  <div class="command-grid">
+    <div class="command-panel reveal">
+      <div class="command-panel-title">System Status</div>
+      <div class="status-row"><span class="status-name">Gemma 31B Core</span><span class="status-value status-online">ONLINE</span></div>
+      <div class="status-row"><span class="status-name">Agent Swarm</span><span class="status-value status-active">ACTIVE</span></div>
+      <div class="status-row"><span class="status-name">Neural Memory</span><span class="status-value status-online">ONLINE</span></div>
+      <div class="status-row"><span class="status-name">Security Layer</span><span class="status-value status-active">ACTIVE</span></div>
+      <div class="status-row"><span class="status-name">Automation</span><span class="status-value status-running">RUNNING</span></div>
+      <div class="status-row"><span class="status-name">Revenue Engine</span><span class="status-value status-running">RUNNING</span></div>
     </div>
-
-    <h3 style="margin: 24px 0 12px; font-size: 18px;">PayPal configuration</h3>
-    <div class="paypal-box">
-      <div class="domain-name" style="font-size:18px; margin-bottom:4px">PayPal.me/techpetcage</div>
-      <div class="domain-desc">All empire payments route here — verified, active</div>
+    <div class="command-core reveal">
+      <div class="command-core-ring"><div class="command-core-icon">⚡</div></div>
+      <div class="command-core-title">PHANTOM CORE</div>
+      <div class="command-core-subtitle">Gemma 31B Intelligence Engine</div>
     </div>
-    <div class="card" style="margin-top:16px">
-      <div class="card-header">
-        <span class="card-title">PrimeDox "Start Free Trial" fix status</span>
-        <span class="badge badge-danger">Critical</span>
-      </div>
-      <div class="meta" style="margin-top:8px">Previously wired to charge Derek's PayPal instead of customer. Must verify all PayPal links across empire charge CUSTOMER not Derek.</div>
+    <div class="command-panel reveal">
+      <div class="command-panel-title">Live Metrics</div>
+      <div class="status-row"><span class="status-name">Active Agents</span><span class="status-value status-active">5</span></div>
+      <div class="status-row"><span class="status-name">Workflows Today</span><span class="status-value status-running">847</span></div>
+      <div class="status-row"><span class="status-name">Companies Live</span><span class="status-value status-online">45+</span></div>
+      <div class="status-row"><span class="status-name">Uptime</span><span class="status-value status-online">99.9%</span></div>
+      <div class="status-row"><span class="status-name">Threats Blocked</span><span class="status-value status-active">12,403</span></div>
+      <div class="status-row"><span class="status-name">Revenue MTD</span><span class="status-value status-running">$0</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- AI Avatars -->
+<section class="section avatars-section" id="avatars">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">The Architects</span>
+    <h2 class="section-title">AI Agent <span>Network</span></h2>
+    <p class="section-desc">Five autonomous intelligence agents. Each with absolute domain mastery. Together, they are the Phantom Empire.</p>
+  </div>
+  <div class="avatars-grid">
+    <div class="avatar-card reveal">
+      <div class="avatar-orb">👑</div>
+      <h3 class="avatar-name">Jarvis</h3>
+      <p class="avatar-role">CEO Intelligence</p>
+      <ul class="avatar-functions"><li>Strategy</li><li>Planning</li><li>Business Routing</li><li>Decision Support</li></ul>
+    </div>
+    <div class="avatar-card reveal">
+      <div class="avatar-orb">🛡️</div>
+      <h3 class="avatar-name">OmniGuard</h3>
+      <p class="avatar-role">Cybersecurity AI</p>
+      <ul class="avatar-functions"><li>Vulnerability Scans</li><li>Threat Monitoring</li><li>Empire Protection</li><li>Access Control</li></ul>
+    </div>
+    <div class="avatar-card reveal">
+      <div class="avatar-orb">⚡</div>
+      <h3 class="avatar-name">PrimeDox AI</h3>
+      <p class="avatar-role">Document Intelligence</p>
+      <ul class="avatar-functions"><li>Document Creation</li><li>Workflow Automation</li><li>Knowledge Systems</li><li>Legal Templates</li></ul>
+    </div>
+    <div class="avatar-card reveal">
+      <div class="avatar-orb">🔍</div>
+      <h3 class="avatar-name">Gap Hunter</h3>
+      <p class="avatar-role">Market Intelligence</p>
+      <ul class="avatar-functions"><li>Industry Scanning</li><li>Problem Discovery</li><li>Solution Creation</li><li>Revenue Mapping</li></ul>
+    </div>
+    <div class="avatar-card reveal">
+      <div class="avatar-orb">💰</div>
+      <h3 class="avatar-name">Revenue Agent</h3>
+      <p class="avatar-role">Sales Automation</p>
+      <ul class="avatar-functions"><li>Lead Qualification</li><li>Proposal Generation</li><li>Follow-up Sequences</li><li>Customer Journeys</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- Empire Tower -->
+<section class="section empire-section" id="empire">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">The Architecture</span>
+    <h2 class="section-title">392-Floor <span>Digital Empire</span></h2>
+    <p class="section-desc">Every floor is a sovereign company. Each with its own AI agent, dashboard, revenue stream, and digital portal.</p>
+  </div>
+  <canvas id="empire-canvas"></canvas>
+  <div class="empire-floors">
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 001</div>
+      <div class="floor-name">Francisco Holdings HQ</div>
+      <div class="floor-desc">Command center. Strategic oversight, corporate governance, and empire orchestration.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Operational</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 002</div>
+      <div class="floor-name">OmniGuard SOC</div>
+      <div class="floor-desc">World's first agentic AI cybersecurity. Autonomous threat detection and neutralization.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Live</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 003</div>
+      <div class="floor-name">PrimeDox AI</div>
+      <div class="floor-desc">The Bugatti of document generation. AI concierge routing to all empire specialists.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Active</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 004</div>
+      <div class="floor-name">Vault Velocity Auto</div>
+      <div class="floor-desc">Luxury brokerage for supercars, jets, yachts, helicopters. White-glove concierge.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Launching</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 005</div>
+      <div class="floor-name">CCLDR</div>
+      <div class="floor-desc">The most dangerous legal education platform in the world. Cannabis constitutional law.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Live</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 006</div>
+      <div class="floor-name">TechPetCage</div>
+      <div class="floor-desc">AI-powered pet care and device protection. Smart monitoring and automation.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Active</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 007</div>
+      <div class="floor-name">CleanSwarm</div>
+      <div class="floor-desc">Autonomous cleaning and maintenance AI. Smart scheduling and quality control.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Building</div>
+    </div>
+    <div class="floor-card reveal">
+      <div class="floor-number">FLOOR 008</div>
+      <div class="floor-name">VIGILAX</div>
+      <div class="floor-desc">Advanced surveillance and monitoring systems. Real-time intelligence gathering.</div>
+      <div class="floor-status"><div class="floor-status-dot"></div>Building</div>
+    </div>
+  </div>
+</section>
+
+<!-- Workflow Engine -->
+<section class="section workflow-section" id="workflow">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Automation</span>
+    <h2 class="section-title">Agent Swarm <span>Workflow Engine</span></h2>
+    <p class="section-desc">From request to deliverable. Autonomous. Seamless. Intelligent.</p>
+  </div>
+  <div class="workflow-diagram">
+    <div class="workflow-node reveal"><div class="workflow-node-title">Customer Request</div><div class="workflow-node-desc">Mission received and parsed</div></div>
+    <div class="workflow-arrow"></div>
+    <div class="workflow-node reveal"><div class="workflow-node-title">Jarvis Router</div><div class="workflow-node-desc">Intelligence routes to specialist agent</div></div>
+    <div class="workflow-arrow"></div>
+    <div class="workflow-node reveal"><div class="workflow-node-title">Specialized AI Agent</div><div class="workflow-node-desc">Domain expert executes workflow</div></div>
+    <div class="workflow-arrow"></div>
+    <div class="workflow-node reveal"><div class="workflow-node-title">Automation Workflow</div><div class="workflow-node-desc">APIs and systems orchestrated</div></div>
+    <div class="workflow-arrow"></div>
+    <div class="workflow-node reveal"><div class="workflow-node-title">Deliverable</div><div class="workflow-node-desc">Product, service, or solution delivered</div></div>
+    <div class="workflow-arrow"></div>
+    <div class="workflow-node reveal"><div class="workflow-node-title">Payment / Contract</div><div class="workflow-node-desc">Revenue captured. Empire grows.</div></div>
+  </div>
+</section>
+
+<!-- Gap Hunter -->
+<section class="section gaphunter-section" id="gaphunter">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Intelligence Platform</span>
+    <h2 class="section-title">Gap <span>Hunter</span></h2>
+    <p class="section-desc">Scanning the global market for inefficiencies, missing services, and lost revenue. Then building AI solutions to capture them.</p>
+  </div>
+  <div class="gaphunter-grid">
+    <div class="gaphunter-card reveal">
+      <div class="gaphunter-icon">🔍</div>
+      <h3 class="gaphunter-title">Scanning</h3>
+      <p class="gaphunter-desc">1,000+ companies. 100+ industries. Millions of data points analyzed in real-time by the Gap Hunter intelligence engine.</p>
+    </div>
+    <div class="gaphunter-card reveal">
+      <div class="gaphunter-icon">❌</div>
+      <h3 class="gaphunter-title">Finding</h3>
+      <p class="gaphunter-desc">Inefficiencies. Missing services. Lost revenue. Broken workflows. Every gap is an opportunity for the Phantom Empire.</p>
+    </div>
+    <div class="gaphunter-card reveal">
+      <div class="gaphunter-icon">✅</div>
+      <h3 class="gaphunter-title">Creating</h3>
+      <p class="gaphunter-desc">AI solutions. Websites. Automation systems. New companies. The gap becomes the next floor of the empire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Revenue Center -->
+<section class="section revenue-section" id="revenue">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Revenue Engine</span>
+    <h2 class="section-title">Phantom <span>Revenue Center</span></h2>
+    <p class="section-desc">From zero to empire. Every service is a revenue stream. Every agent is a profit center.</p>
+  </div>
+  <div class="revenue-grid">
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">AI Website Creation</div>
+      <div class="revenue-card-price">$2,500<span>/site</span></div>
+      <div class="revenue-card-desc">Full AI-powered website with agent integration, 3D elements, and autonomous functionality.</div>
+    </div>
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">AI Automation</div>
+      <div class="revenue-card-price">$5,000<span>/workflow</span></div>
+      <div class="revenue-card-desc">Custom automation workflows with API integrations and agent swarm orchestration.</div>
+    </div>
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">Cybersecurity</div>
+      <div class="revenue-card-price">$1,500<span>/month</span></div>
+      <div class="revenue-card-desc">OmniGuard agentic AI protection. Threat monitoring, vulnerability scans, active defense.</div>
+    </div>
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">Document Intelligence</div>
+      <div class="revenue-card-price">$500<span>/document</span></div>
+      <div class="revenue-card-desc">PrimeDox AI document generation. Legal, business, creative — any format, any complexity.</div>
+    </div>
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">Business Transformation</div>
+      <div class="revenue-card-price">$25,000<span>/project</span></div>
+      <div class="revenue-card-desc">Full digital transformation. AI integration, automation, new revenue streams, empire scaling.</div>
+    </div>
+    <div class="revenue-card reveal">
+      <div class="revenue-card-title">Empire Membership</div>
+      <div class="revenue-card-price">$49<span>/month</span></div>
+      <div class="revenue-card-desc">Full access to Phantom HQ. All agents. All tools. All floors. Build your own empire.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="contact">
+  <div class="reveal">
+    <h2 class="cta-title">Ready to Build Your <span>Empire</span>?</h2>
+    <p class="cta-desc">Join the Phantom Intelligence Empire. 392 floors. 45+ companies. Five autonomous agents. One command center. Your empire starts here.</p>
+    <a href="https://www.paypal.com/paypalme/franciscoholdings" class="cta-button" target="_blank"><span>Start Your Empire — $49/mo</span></a>
+  </div>
+</section>
+
+<!-- Footer -->
 <footer class="footer">
-  <p>Francisco Holdings Inc. — Legal educator, not a lawyer. No legal representation. No lawyer-client relationship.</p>
-  <p style="margin-top:8px">EmpireOS v1.0 | <a href="mailto:franciscoderek7@gmail.com">franciscoderek7@gmail.com</a></p>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Francisco Holdings Inc.</div>
+      <p class="footer-tagline">Phantom Intelligence Empire. Agentic AI. Autonomous Workflows. Digital Companies Built By Intelligence.</p>
+    </div>
+    <div>
+      <h4 class="footer-heading">Empire</h4>
+      <ul class="footer-links">
+        <li><a href="#command">Command Center</a></li>
+        <li><a href="#avatars">AI Agents</a></li>
+        <li><a href="#empire">392 Floors</a></li>
+        <li><a href="#workflow">Workflows</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-heading">Companies</h4>
+      <ul class="footer-links">
+        <li><a href="https://omniaguard.com">OmniGuard</a></li>
+        <li><a href="https://primedoxai.com">PrimeDox AI</a></li>
+        <li><a href="https://ccldr.net">CCLDR</a></li>
+        <li><a href="https://vaultvelocityauto.com">Vault Velocity</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-heading">Legal</h4>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copyright">&copy; 2026 Francisco Holdings Inc. All rights reserved.</p>
+    <p class="footer-legal">Derek Francisco is a legal educator, not a lawyer. No legal representation, no lawyer-client relationship. Knowledge, education, and personal experience only.</p>
+  </div>
 </footer>
-
 <script>
-  // Generate tower floors
-  const tower = document.getElementById('tower');
-  const floorLabels = ['Francisco Holdings HQ','OmniGuard','PrimeDox AI','Vault Velocity','CCLDR','CCC','COMPACT','Vigilax','CleanSwarm','Kiaros'];
-  for (let i = 392; i >= 1; i--) {
-    const f = document.createElement('div');
-    f.className = 'floor' + (i<=3 ? ' floor-'+i : '');
-    const label = floorLabels[392-i] || 'Floor ' + i;
-    f.innerHTML = '<span class="floor-label">' + label + '</span>';
-    f.title = label;
-    tower.appendChild(f);
-  }
+// ===== CUSTOM CURSOR =====
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px'; cursorDot.style.top = mouseY + 'px';
+});
+function animateCursor() {
+  cursorX += (mouseX - cursorX) * 0.15;
+  cursorY += (mouseY - cursorY) * 0.15;
+  cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a, button, .floor-card, .service-card, .avatar-card, .workflow-node, .revenue-card, .gaphunter-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
 
-  // Tab switching
-  function switchTab(name) {
-    document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById('panel-' + name).classList.add('active');
+// ===== LOADER =====
+setTimeout(() => { document.getElementById('loader').classList.add('done'); }, 3000);
+
+// ===== NAV SCROLL =====
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 100); });
+
+// ===== HERO 3D CANVAS =====
+const heroCanvas = document.getElementById('hero-canvas');
+const heroScene = new THREE.Scene();
+const heroCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+const heroRenderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
+heroRenderer.setSize(window.innerWidth, window.innerHeight);
+heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+heroScene.fog = new THREE.FogExp2(0x050505, 0.0015);
+heroCamera.position.set(0, 30, 120);
+heroCamera.lookAt(0, 0, 0);
+
+const ambientLight = new THREE.AmbientLight(0xc9a84c, 0.3);
+heroScene.add(ambientLight);
+const pointLight1 = new THREE.PointLight(0xc9a84c, 1, 300);
+pointLight1.position.set(50, 80, 50);
+heroScene.add(pointLight1);
+const pointLight2 = new THREE.PointLight(0xffffff, 0.5, 300);
+pointLight2.position.set(-50, 60, -50);
+heroScene.add(pointLight2);
+const pointLight3 = new THREE.PointLight(0xe8c547, 0.8, 200);
+pointLight3.position.set(0, 100, 0);
+heroScene.add(pointLight3);
+
+const skyscraperGroup = new THREE.Group();
+heroScene.add(skyscraperGroup);
+
+const goldMaterial = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.1, emissive: 0xc9a84c, emissiveIntensity: 0.1 });
+const platinumMaterial = new THREE.MeshStandardMaterial({ color: 0xe5e4e2, metalness: 0.95, roughness: 0.05 });
+const blackMaterial = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.2 });
+const glassMaterial = new THREE.MeshPhysicalMaterial({ color: 0xc9a84c, metalness: 0.1, roughness: 0.0, transmission: 0.9, transparent: true, opacity: 0.3, emissive: 0xc9a84c, emissiveIntensity: 0.2 });
+
+const coreGeometry = new THREE.BoxGeometry(12, 200, 12);
+const coreMesh = new THREE.Mesh(coreGeometry, blackMaterial);
+coreMesh.position.y = 100;
+skyscraperGroup.add(coreMesh);
+
+const floorCount = 50;
+for (let i = 0; i < floorCount; i++) {
+  const y = i * 3.8;
+  const scale = 1 - (i / floorCount) * 0.3;
+  const slabGeo = new THREE.BoxGeometry(14 * scale, 0.15, 14 * scale);
+  const slab = new THREE.Mesh(slabGeo, goldMaterial);
+  slab.position.y = y;
+  skyscraperGroup.add(slab);
+  if (i % 2 === 0) {
+    const windowGeo = new THREE.BoxGeometry(13 * scale, 0.8, 13.2 * scale);
+    const windowMesh = new THREE.Mesh(windowGeo, glassMaterial);
+    windowMesh.position.y = y + 1.5;
+    skyscraperGroup.add(windowMesh);
   }
+  const cornerGeo = new THREE.CylinderGeometry(0.3 * scale, 0.3 * scale, 3.5, 8);
+  const corner1 = new THREE.Mesh(cornerGeo, platinumMaterial);
+  corner1.position.set(6.5 * scale, y + 1.75, 6.5 * scale);
+  skyscraperGroup.add(corner1);
+  const corner2 = new THREE.Mesh(cornerGeo, platinumMaterial);
+  corner2.position.set(-6.5 * scale, y + 1.75, 6.5 * scale);
+  skyscraperGroup.add(corner2);
+  const corner3 = new THREE.Mesh(cornerGeo, platinumMaterial);
+  corner3.position.set(6.5 * scale, y + 1.75, -6.5 * scale);
+  skyscraperGroup.add(corner3);
+  const corner4 = new THREE.Mesh(cornerGeo, platinumMaterial);
+  corner4.position.set(-6.5 * scale, y + 1.75, -6.5 * scale);
+  skyscraperGroup.add(corner4);
+}
+
+const spireGeo = new THREE.ConeGeometry(2, 30, 8);
+const spire = new THREE.Mesh(spireGeo, goldMaterial);
+spire.position.y = 215;
+skyscraperGroup.add(spire);
+
+const crownGeo = new THREE.TorusGeometry(8, 0.5, 8, 32);
+const crown = new THREE.Mesh(crownGeo, goldMaterial);
+crown.position.y = 205;
+crown.rotation.x = Math.PI / 2;
+skyscraperGroup.add(crown);
+
+const particleCount = 800;
+const particlesGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const velocities = [];
+for (let i = 0; i < particleCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 300;
+  positions[i * 3 + 1] = Math.random() * 250;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+  velocities.push({ x: (Math.random() - 0.5) * 0.02, y: Math.random() * 0.05 + 0.01, z: (Math.random() - 0.5) * 0.02 });
+}
+particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const particleMaterial = new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.8, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
+const particles = new THREE.Points(particlesGeo, particleMaterial);
+heroScene.add(particles);
+
+const groundGeo = new THREE.PlaneGeometry(500, 500);
+const groundMat = new THREE.MeshStandardMaterial({ color: 0x050505, metalness: 0.9, roughness: 0.1 });
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -2;
+heroScene.add(ground);
+
+const gridHelper = new THREE.GridHelper(400, 80, 0xc9a84c, 0x1a1a1a);
+gridHelper.position.y = -1.9;
+heroScene.add(gridHelper);
+
+let heroTime = 0;
+function animateHero() {
+  requestAnimationFrame(animateHero);
+  heroTime += 0.003;
+  skyscraperGroup.rotation.y = Math.sin(heroTime * 0.5) * 0.1;
+  heroCamera.position.x = Math.sin(heroTime * 0.3) * 120;
+  heroCamera.position.z = Math.cos(heroTime * 0.3) * 120;
+  heroCamera.lookAt(0, 80, 0);
+  const posArray = particles.geometry.attributes.position.array;
+  for (let i = 0; i < particleCount; i++) {
+    posArray[i * 3] += velocities[i].x;
+    posArray[i * 3 + 1] += velocities[i].y;
+    posArray[i * 3 + 2] += velocities[i].z;
+    if (posArray[i * 3 + 1] > 250) {
+      posArray[i * 3 + 1] = 0;
+      posArray[i * 3] = (Math.random() - 0.5) * 300;
+      posArray[i * 3 + 2] = (Math.random() - 0.5) * 300;
+    }
+  }
+  particles.geometry.attributes.position.needsUpdate = true;
+  pointLight1.intensity = 1 + Math.sin(heroTime * 2) * 0.3;
+  pointLight3.intensity = 0.8 + Math.sin(heroTime * 1.5) * 0.2;
+  heroRenderer.render(heroScene, heroCamera);
+}
+animateHero();
+
+// ===== EMPIRE CANVAS =====
+const empireCanvas = document.getElementById('empire-canvas');
+if (empireCanvas) {
+  const eScene = new THREE.Scene();
+  const eCamera = new THREE.PerspectiveCamera(45, empireCanvas.offsetWidth / empireCanvas.offsetHeight, 0.1, 1000);
+  const eRenderer = new THREE.WebGLRenderer({ canvas: empireCanvas, antialias: true, alpha: true });
+  eRenderer.setSize(empireCanvas.offsetWidth, empireCanvas.offsetHeight);
+  eRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  eScene.fog = new THREE.FogExp2(0x050505, 0.003);
+  const eLight = new THREE.AmbientLight(0xc9a84c, 0.4);
+  eScene.add(eLight);
+  const ePoint = new THREE.PointLight(0xc9a84c, 1, 200);
+  ePoint.position.set(30, 50, 30);
+  eScene.add(ePoint);
+  const eGroup = new THREE.Group();
+  eScene.add(eGroup);
+  for (let i = 0; i < 30; i++) {
+    const scale = 1 - (i / 30) * 0.4;
+    const slab = new THREE.Mesh(
+      new THREE.BoxGeometry(10 * scale, 0.2, 10 * scale),
+      new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.1 })
+    );
+    slab.position.y = i * 2.5;
+    eGroup.add(slab);
+  }
+  eCamera.position.set(40, 40, 60);
+  eCamera.lookAt(0, 30, 0);
+  let eTime = 0;
+  function animateEmpire() {
+    requestAnimationFrame(animateEmpire);
+    eTime += 0.005;
+    eGroup.rotation.y = eTime * 0.5;
+    eCamera.position.x = Math.sin(eTime * 0.3) * 50;
+    eCamera.position.z = Math.cos(eTime * 0.3) * 50;
+    eCamera.lookAt(0, 30, 0);
+    eRenderer.render(eScene, eCamera);
+  }
+  animateEmpire();
+}
+
+// ===== GSAP ANIMATIONS =====
+gsap.registerPlugin(ScrollTrigger);
+
+const heroTl = gsap.timeline({ delay: 2.8 });
+heroTl.to('.hero-eyebrow', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+  .to('.hero-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, '-=0.6')
+  .to('.hero-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.8')
+  .to('.hero-tagline', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
+  .to('.hero-cta-group', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
+  .to('.hero-scroll', { opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.4');
+
+const reveals = document.querySelectorAll('.reveal');
+reveals.forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
+  });
+});
+
+const statNumbers = document.querySelectorAll('.stat-number');
+statNumbers.forEach(stat => {
+  const target = parseInt(stat.dataset.count);
+  const prefix = stat.dataset.prefix || '';
+  const suffix = stat.dataset.suffix || '';
+  gsap.to(stat, {
+    scrollTrigger: { trigger: stat, start: 'top 90%', toggleActions: 'play none none none' },
+    innerHTML: target, duration: 2.5, ease: 'power2.out', snap: { innerHTML: 1 },
+    onUpdate: function() {
+      const val = Math.round(this.targets()[0].innerHTML);
+      if (target >= 1000000) { stat.innerHTML = prefix + (val / 1000000).toFixed(0) + 'M' + suffix; }
+      else { stat.innerHTML = prefix + val.toLocaleString() + suffix; }
+    }
+  });
+});
+
+gsap.to('.hero-content', {
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+  y: -100, opacity: 0
+});
+
+window.addEventListener('resize', () => {
+  heroCamera.aspect = window.innerWidth / window.innerHeight;
+  heroCamera.updateProjectionMatrix();
+  heroRenderer.setSize(window.innerWidth, window.innerHeight);
+  if (empireCanvas) {
+    eCamera.aspect = empireCanvas.offsetWidth / empireCanvas.offsetHeight;
+    eCamera.updateProjectionMatrix();
+    eRenderer.setSize(empireCanvas.offsetWidth, empireCanvas.offsetHeight);
+  }
+});
 </script>
 </body>
 </html>
