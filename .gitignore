@@ -6,3 +6,30 @@
 secrets/
 credentials/
 
+
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Logs
+*.log
+
+# Environment secrets
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated reports
+reports/generated/
+
