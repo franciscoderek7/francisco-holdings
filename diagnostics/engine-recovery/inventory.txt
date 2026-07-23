@@ -1,0 +1,28 @@
+EMPIRE V5 ENGINE INVENTORY
+Thu Jul 23 01:41:43 EDT 2026
+
+SCENE:
+
+RENDERER:
+
+FLOORS:
+./dashboard/floor-revenue.json
+./products/product-registry.json
+./empire-core/floors/floor-template.json
+./empire-core/data/floors.json
+./empire-core/data/future-floors.json
+./empire-core/data/company-registry.json
+./empire-core/floor-generator.js
+./empire-core/floor-api.js
+./agents/registry/agents.json
+./src/tower/floor-data.js
+./src/tower/core/floor-renderer.js
+./src/landing/config/floor-navigation.json
+./backend-automation/config/automation-registry.json
+./ai-agents/agents/registry.json
+./monitoring-system/service-registry.json
+./empire-os/core/system-registry.json
+
+ASSETS:
+./src/tower/debug/avatar-check.js
+./src/tower/components/avatar-anchor.js
