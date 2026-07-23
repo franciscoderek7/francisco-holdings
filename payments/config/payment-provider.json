@@ -1,0 +1,6 @@
+{
+"provider":"PayPal",
+"environment":"sandbox_or_production",
+"merchantVerified":false,
+"webhooksVerified":false
+}

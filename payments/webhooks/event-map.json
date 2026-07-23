@@ -1,0 +1,11 @@
+{
+"payment.completed":{
+"action":"activate_customer"
+},
+"payment.failed":{
+"action":"notify_admin"
+},
+"refund.completed":{
+"action":"update_account"
+}
+}
