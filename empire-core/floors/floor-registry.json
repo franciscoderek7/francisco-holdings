@@ -1,0 +1,20 @@
+{
+"totalFloors":392,
+"floors":[
+{
+"id":1,
+"name":"Francisco Holdings Inc HQ",
+"type":"command-center"
+},
+{
+"id":2,
+"name":"OmniGuard",
+"type":"security"
+},
+{
+"id":3,
+"name":"PrimeDox AI",
+"type":"ai-platform"
+}
+]
+}

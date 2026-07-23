@@ -1,0 +1,33 @@
+392 FLOOR INTEGRATION REPORT
+Thu Jul 23 01:47:33 EDT 2026
+
+Registry:
+{
+"totalFloors":392,
+"floors":[
+{
+"id":1,
+"name":"Francisco Holdings Inc HQ",
+"type":"command-center"
+},
+{
+"id":2,
+"name":"OmniGuard",
+"type":"security"
+},
+{
+"id":3,
+"name":"PrimeDox AI",
+"type":"ai-platform"
+}
+]
+}
+
+Three files:
+./src/tower/debug/renderer-check.js
+./src/tower/core/floor-renderer.js
+./audit/threejs-audit.txt
+./diagnostics/threejs/render-checklist.md
+./diagnostics/threejs/debug-helper.js
+./diagnostics/threejs/visibility-test.js
+./diagnostics/threejs/deployment-notes.md
