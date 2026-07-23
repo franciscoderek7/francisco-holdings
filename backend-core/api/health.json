@@ -1,0 +1,9 @@
+{
+"service":"Francisco Holdings Empire API",
+"status":"starting",
+"checks":{
+"api":false,
+"database":false,
+"payments":false
+}
+}

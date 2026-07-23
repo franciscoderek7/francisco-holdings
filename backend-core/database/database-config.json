@@ -1,0 +1,6 @@
+{
+"type":"postgresql",
+"provider":"configure",
+"connection":"environment_variable_required",
+"backup":"enabled"
+}
