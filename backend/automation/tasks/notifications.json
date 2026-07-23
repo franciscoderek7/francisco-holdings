@@ -1,0 +1,6 @@
+[
+"payment_received",
+"new_customer",
+"failed_payment",
+"system_alert"
+]

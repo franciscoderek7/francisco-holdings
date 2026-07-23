@@ -1,0 +1,17 @@
+[
+{
+"id":"payment-to-customer",
+"trigger":"payment.completed",
+"action":"create_customer_access"
+},
+{
+"id":"lead-followup",
+"trigger":"lead.created",
+"action":"start_followup"
+},
+{
+"id":"security-report",
+"trigger":"scan.completed",
+"action":"deliver_report"
+}
+]

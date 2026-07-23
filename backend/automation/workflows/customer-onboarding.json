@@ -1,0 +1,8 @@
+{
+"steps":[
+"create_account",
+"send_welcome",
+"grant_product_access",
+"record_event"
+]
+}
