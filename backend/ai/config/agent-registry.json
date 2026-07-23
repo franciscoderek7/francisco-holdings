@@ -1,0 +1,26 @@
+[
+{
+"id":"jarvis",
+"name":"Jarvis Core",
+"department":"Command Center",
+"status":"offline"
+},
+{
+"id":"primedox-agent",
+"name":"PrimeDox Agent",
+"department":"Documents",
+"status":"offline"
+},
+{
+"id":"omniguard-agent",
+"name":"OmniGuard Agent",
+"department":"Security",
+"status":"offline"
+},
+{
+"id":"gap-hunter-agent",
+"name":"Gap Hunter Agent",
+"department":"Audits",
+"status":"offline"
+}
+]

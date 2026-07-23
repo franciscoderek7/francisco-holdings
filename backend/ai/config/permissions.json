@@ -1,0 +1,16 @@
+{
+"Jarvis":[
+"dashboard",
+"reports",
+"automation"
+],
+"PrimeDox":[
+"documents"
+],
+"OmniGuard":[
+"security-reports"
+],
+"GapHunter":[
+"audit-reports"
+]
+}

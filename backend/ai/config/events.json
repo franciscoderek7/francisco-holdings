@@ -1,0 +1,7 @@
+[
+"agent.started",
+"task.created",
+"task.completed",
+"report.generated",
+"alert.created"
+]
