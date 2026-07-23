@@ -1,0 +1,7 @@
+{
+"provider":"PayPal",
+"link":"https://paypal.me/techpetcage",
+"webhook":"configure",
+"client_id":"environment_variable",
+"secret":"environment_variable"
+}
