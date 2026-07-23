@@ -1,0 +1,9 @@
+{
+"provider":"configure",
+"session":"enabled",
+"roles":[
+"admin",
+"customer",
+"operator"
+]
+}
