@@ -1,0 +1,109 @@
+./offer.md:13:paypal.me/techpetcage
+./dashboard/floor-revenue.json:5:"payment":"https://paypal.me/techpetcage"
+./.git/logs/HEAD:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./.git/logs/HEAD:28:0d63183274795011d259f9d1cd08b74e259b2ebd fe936cd0cdc757e644116a6bae43ce36bff04fea Derek Francisco <franciscoderek7@gmail.com> 1784785029 -0400	commit: Create PayPal event processing and revenue automation layer
+./.git/logs/refs/heads/master:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./.git/logs/refs/heads/master:28:0d63183274795011d259f9d1cd08b74e259b2ebd fe936cd0cdc757e644116a6bae43ce36bff04fea Derek Francisco <franciscoderek7@gmail.com> 1784785029 -0400	commit: Create PayPal event processing and revenue automation layer
+./products/primedox/product.json:4:"payment":"https://paypal.me/techpetcage",
+./products/primedox/pricing.md:18:paypal.me/techpetcage
+./products/primedox/cta.js:10:payment:"https://paypal.me/techpetcage"
+./products/primedox/cta.js:16:payment:"https://paypal.me/techpetcage"
+./products/omniguard/product.json:8:"payment":"https://paypal.me/techpetcage"
+./products/ccldr/product.json:5:"payment":"https://paypal.me/techpetcage"
+./products/index.md:9:paypal.me/techpetcage
+./empire-core/floors/floor-template.json:7:"cta":"https://paypal.me/techpetcage",
+./empire-core/config/empire.json:5:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:6:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:12:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:18:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:24:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:30:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/floors.json:36:"cta":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:8:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:16:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:24:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:32:"payment":"https://paypal.me/techpetcage"
+./empire-core/data/company-registry.json:40:"payment":"https://paypal.me/techpetcage"
+./empire-core/integrations/cta-router.js:5:url:"https://paypal.me/techpetcage"
+./production-readiness.md:9:[ ] PayPal tested
+./command-center/reports/deployments.md:10:paypal.me/techpetcage
+./sales-pipeline/data/consultation-flow.md:12:paypal.me/techpetcage
+./automation/scripts/health-check.js:5:payment:"https://paypal.me/techpetcage",
+./automation/scripts/daily-briefing.js:11:"https://paypal.me/techpetcage"
+./automation/scripts/payment-check.js:2:provider:"PayPal",
+./automation/scripts/payment-check.js:3:link:"https://paypal.me/techpetcage",
+./automation/reports/health.json:3:  "payment": "https://paypal.me/techpetcage",
+./automation/reports/daily-briefing.json:8:  "payment": "https://paypal.me/techpetcage"
+./src/config/payment.js:2:"https://paypal.me/techpetcage";
+./src/landing/components/payment-button.js:7:"https://paypal.me/techpetcage";
+./src/landing/config/hero-config.js:20:"https://paypal.me/techpetcage"
+./docs/payment-verification.md:4:PayPal
+./docs/payment-verification.md:7:https://paypal.me/techpetcage
+./docs/payment-verification.md:11:[ ] Button opens PayPal
+./docs/launch-test.md:14:[ ] PayPal button works
+./backend-automation/jobs/payment-monitor.js:2:provider:"PayPal",
+./backend-automation/jobs/payment-monitor.js:3:link:"https://paypal.me/techpetcage",
+./backend-automation/config/environment.example:4:PAYMENT_PROVIDER=paypal
+./backend-automation/config/environment.example:5:PAYMENT_LINK=https://paypal.me/techpetcage
+./customer-system/data/payment-ledger.json:3:    "provider": "PayPal",
+./customer-system/data/payment-ledger.json:4:    "link": "https://paypal.me/techpetcage",
+./customer-system/process-payment.js:33:provider:"PayPal",
+./customer-system/process-payment.js:34:link:"https://paypal.me/techpetcage",
+./database/schema/payments.sql:7:provider TEXT DEFAULT 'PayPal',
+./services/config/env.example:7:# PayPal
+./services/config/env.example:8:PAYPAL_LINK=https://paypal.me/techpetcage
+./payments/events/payment-queue.json:3:    "provider": "PayPal",
+./payments/events/payment-processor.js:35:provider:"PayPal",
+./payments/reports/payment-report.md:4:PayPal
+./payments/reports/payment-report.md:10:PayPal Link
+./payments/paypal-config.example.json:2:"provider":"PayPal",
+./payments/paypal-config.example.json:3:"link":"https://paypal.me/techpetcage",
+./sales-engine/crm/offers.json:5:"payment":"https://paypal.me/techpetcage",
+./empire-os/tasks/task-board.json:8:"task":"Verify PayPal transaction",
+./revenue-engine/offers/primary-offer.json:5:"payment":"https://paypal.me/techpetcage",
+./diagnostics/tower-audit/report.txt:25:./.git/logs/HEAD:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./diagnostics/tower-audit/report.txt:29:./.git/logs/refs/heads/master:14:0efca36f04083928eea47ed893f2a7459544108c 4aaa5ae6c91ea5a2460ade8d88599c27a425c0ab Derek Francisco <franciscoderek7@gmail.com> 1784776965 -0400	commit: Centralize PayPal payment system V5
+./diagnostics/landing-v5/report.txt:6:PAYPAL:
+./diagnostics/landing-v5/report.txt:7:./offer.md:13:paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:8:./dashboard/floor-revenue.json:5:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:9:./products/primedox/product.json:4:"payment":"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:10:./products/primedox/pricing.md:18:paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:11:./products/primedox/cta.js:10:payment:"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:12:./products/primedox/cta.js:16:payment:"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:13:./products/omniguard/product.json:8:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:14:./products/ccldr/product.json:5:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:15:./products/index.md:9:paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:16:./empire-core/floors/floor-template.json:7:"cta":"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:17:./empire-core/config/empire.json:5:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:18:./empire-core/data/floors.json:6:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:19:./empire-core/data/floors.json:12:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:20:./empire-core/data/floors.json:18:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:21:./empire-core/data/floors.json:24:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:22:./empire-core/data/floors.json:30:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:23:./empire-core/data/floors.json:36:"cta":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:24:./empire-core/data/company-registry.json:8:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:25:./empire-core/data/company-registry.json:16:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:26:./empire-core/data/company-registry.json:24:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:27:./empire-core/data/company-registry.json:32:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:28:./empire-core/data/company-registry.json:40:"payment":"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:29:./empire-core/integrations/cta-router.js:5:url:"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:30:./command-center/reports/deployments.md:10:paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:31:./sales-pipeline/data/consultation-flow.md:12:paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:32:./automation/scripts/health-check.js:5:payment:"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:33:./automation/scripts/daily-briefing.js:11:"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:34:./automation/scripts/payment-check.js:3:link:"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:35:./automation/reports/health.json:3:  "payment": "https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:36:./automation/reports/daily-briefing.json:8:  "payment": "https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:37:./src/config/payment.js:2:"https://paypal.me/techpetcage";
+./diagnostics/landing-v5/report.txt:38:./src/landing/components/payment-button.js:7:"https://paypal.me/techpetcage";
+./diagnostics/landing-v5/report.txt:39:./src/landing/config/hero-config.js:20:"https://paypal.me/techpetcage"
+./diagnostics/landing-v5/report.txt:40:./docs/payment-verification.md:7:https://paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:41:./backend-automation/jobs/payment-monitor.js:3:link:"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:42:./backend-automation/config/environment.example:5:PAYMENT_LINK=https://paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:43:./customer-system/data/payment-ledger.json:4:    "link": "https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:44:./customer-system/process-payment.js:34:link:"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:45:./services/config/env.example:8:PAYPAL_LINK=https://paypal.me/techpetcage
+./diagnostics/landing-v5/report.txt:46:./payments/paypal-config.example.json:3:"link":"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:47:./sales-engine/crm/offers.json:5:"payment":"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/report.txt:48:./revenue-engine/offers/primary-offer.json:5:"payment":"https://paypal.me/techpetcage",
+./diagnostics/landing-v5/launch-checklist.md:11:[ ] PayPal opens correct account
