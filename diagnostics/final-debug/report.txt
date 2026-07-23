@@ -1,0 +1,85 @@
+EMPIRE V5 FINAL DEBUG REPORT
+Thu Jul 23 01:43:20 EDT 2026
+
+NODE:
+v26.3.1
+
+PACKAGE:
+
+ENTRY FILES:
+./outreach.js
+./pipeline.js
+./products/primedox/cta.js
+./empire-core/floor-generator.js
+./empire-core/floor-api.js
+./empire-core/integrations/company-loader.js
+./empire-core/integrations/cta-router.js
+./empire-core/events/revenue-events.js
+./command-center/generate-report.js
+./sales-pipeline/scripts/lead-score.js
+./sales-pipeline/scripts/daily-report.js
+./analytics-v2/scripts/event-tracker.js
+./analytics-v2/scripts/revenue-dashboard.js
+./automation/scripts/health-check.js
+./automation/scripts/daily-briefing.js
+./automation/scripts/deployment-check.js
+./automation/scripts/payment-check.js
+./automation/scripts/logger.js
+./agents/agent-loader.js
+./agents/task-router.js
+./src/config/payment.js
+./src/utils/paymentCTA.js
+./src/tower/floor-data.js
+./pwa/cache-version.js
+./pwa/cleanup-worker.js
+./backend-automation/jobs/logger.js
+./backend-automation/jobs/health-monitor.js
+./backend-automation/jobs/payment-monitor.js
+./backend-automation/jobs/daily-report.js
+./backend-core/webhooks/webhook-validator.js
+./backend-core/backups/backup.js
+./customer-system/orders/fulfillment.js
+./customer-system/process-payment.js
+./ai-agents/task-router.js
+./api-v1/logs/event-logger.js
+./command-center-live/api/revenue-feed.js
+./command-center-live/reports/generate-dashboard.js
+./services/database/database-client.js
+./services/database/database-health.js
+./payments/events/payment-processor.js
+./payments/reports/revenue-calculator.js
+./sales-engine/leads/lead-capture.js
+./sales-engine/reports/sales-summary.js
+./monitoring-system/checks/health-check.js
+./empire-os/core/orchestrator.js
+./diagnostics/threejs/debug-helper.js
+./diagnostics/threejs/visibility-test.js
+
+THREE REFERENCES:
+./automation/scripts/deployment-check.js:6:threejs:"check required"
+./src/tower/debug/renderer-check.js:6:"THREE RENDERER NOT FOUND"
+./src/tower/debug/renderer-check.js:14:"THREE RENDERER ACTIVE"
+./src/tower/core/floor-renderer.js:1:export function createFloorStack(THREE){
+./src/tower/core/floor-renderer.js:4:new THREE.Group();
+./src/tower/core/floor-renderer.js:9:new THREE.BoxGeometry(
+./src/tower/core/floor-renderer.js:16:new THREE.MeshStandardMaterial();
+./src/tower/core/floor-renderer.js:19:new THREE.Mesh(
+./src/tower/core/tower-shell.js:1:export function createTowerShell(THREE){
+./src/tower/core/tower-shell.js:4:new THREE.BoxGeometry(
+./src/tower/core/tower-shell.js:11:new THREE.MeshStandardMaterial();
+./src/tower/core/tower-shell.js:14:new THREE.Mesh(
+./src/tower/core/camera-setup.js:1:export function setupCamera(THREE){
+./src/tower/core/camera-setup.js:4:new THREE.PerspectiveCamera(
+./src/tower/core/light-setup.js:1:export function setupLights(THREE){
+./src/tower/core/light-setup.js:4:new THREE.DirectionalLight(
+./diagnostics/threejs/debug-helper.js:1:export function debugThree(scene,camera,renderer){
+./diagnostics/threejs/debug-helper.js:4:"THREE DEBUG",
+
+ERROR REFERENCES:
+./src/tower/debug/webgl-check.js:14:console.error("WEBGL FAILED");
+./src/tower/debug/renderer-check.js:5:console.error(
+./src/tower/debug/avatar-check.js:10:export function avatarFailed(name,error){
+./src/tower/debug/avatar-check.js:12:console.error(
+./src/tower/debug/avatar-check.js:15:error
+./src/landing/components/tower-mount.js:5:console.error(
+./diagnostics/threejs/visibility-test.js:5:console.error(
