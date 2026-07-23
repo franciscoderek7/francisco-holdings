@@ -1,0 +1,37 @@
+./.git/hooks/pre-commit.sample:31:	test $(git diff-index --cached --name-only --diff-filter=A -z $against |
+./.git/hooks/pre-commit.sample:49:exec git diff-index --check --cached $against --
+./.git/hooks/prepare-commit-msg.sample:32:#       print "\n" . `git diff --cached --name-status -r`
+./.git/hooks/push-to-checkout.sample:70:if ! git diff-index --quiet --cached --ignore-submodules $head --
+./.git/logs/HEAD:18:0059a194018b32edcee2f41c0e67c58e08523a9b 2278f31a6c79439ecf0b3b9a5b331e7e23f83a18 Derek Francisco <franciscoderek7@gmail.com> 1784777055 -0400	commit: Harden Empire V5 PWA cache system
+./.git/logs/HEAD:40:ea09fb9f0d20b9faff856cf67c9dadc5bc390bc2 8dc0c487953b76390cfa9619f43c79952f234b76 Derek Francisco <franciscoderek7@gmail.com> 1784785359 -0400	commit: Audit GitHub Pages deployment and cache issues
+./.git/logs/refs/heads/master:18:0059a194018b32edcee2f41c0e67c58e08523a9b 2278f31a6c79439ecf0b3b9a5b331e7e23f83a18 Derek Francisco <franciscoderek7@gmail.com> 1784777055 -0400	commit: Harden Empire V5 PWA cache system
+./.git/logs/refs/heads/master:40:ea09fb9f0d20b9faff856cf67c9dadc5bc390bc2 8dc0c487953b76390cfa9619f43c79952f234b76 Derek Francisco <franciscoderek7@gmail.com> 1784785359 -0400	commit: Audit GitHub Pages deployment and cache issues
+./production-readiness.md:14:[ ] Cache cleared
+./pwa/cache-version.js:1:export const CACHE_VERSION =
+./pwa/cache-version.js:4:export const CACHE_NAME =
+./pwa/cache-version.js:5:`francisco-empire-${CACHE_VERSION}`;
+./pwa/cleanup-worker.js:7:caches.keys()
+./pwa/cleanup-worker.js:12:key=>caches.delete(key)
+./archive/javascript-inventory.txt:35:./pwa/cache-version.js
+./diagnostics/github-pages/cache-reset-plan.md:1:# Cache Reset Plan
+./diagnostics/github-pages/cache-reset-plan.md:7:2. Update service worker cache name
+./diagnostics/pwa/pwa-audit.txt:1:PWA CACHE AUDIT
+./diagnostics/pwa/pwa-audit.txt:6:CACHE REFERENCES:
+./diagnostics/pwa/pwa-audit.txt:7:./pwa/cache-version.js:1:export const CACHE_VERSION =
+./diagnostics/pwa/pwa-audit.txt:8:./pwa/cache-version.js:4:export const CACHE_NAME =
+./diagnostics/pwa/pwa-audit.txt:9:./pwa/cache-version.js:5:`francisco-empire-${CACHE_VERSION}`;
+./diagnostics/pwa/pwa-audit.txt:10:./pwa/cleanup-worker.js:7:caches.keys()
+./diagnostics/pwa/pwa-audit.txt:11:./pwa/cleanup-worker.js:12:key=>caches.delete(key)
+./diagnostics/pwa/cache-policy.md:1:# Empire PWA Cache Policy
+./diagnostics/pwa/cache-policy.md:5:- Version every cache
+./diagnostics/pwa/cache-policy.md:6:- Remove old caches
+./diagnostics/pwa/pwa-checklist.md:9:[ ] Cache version updated
+./diagnostics/pwa/cache-version.json:2:"currentCache":"empire-v1",
+./diagnostics/pwa/cache-version.json:4:"oldCachesRemoved":false
+./diagnostics/pwa/service-worker-audit.md:9:[ ] Cache versioning
+./diagnostics/pwa/service-worker-audit.md:11:[ ] Old cache deletion
+./diagnostics/final-debug/report.txt:33:./pwa/cache-version.js
+./diagnostics/deployment/cache-policy.md:1:# Empire Cache Policy
+./diagnostics/deployment/cache-policy.md:13:- Clear old caches during releases
+./diagnostics/deployment/deployment-health.json:4:"serviceWorker":"checking",
+./deployment/rollback-plan.md:7:3. Clear browser cache

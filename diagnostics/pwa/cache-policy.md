@@ -1,10 +1,10 @@
-# Empire V5 Cache Policy
+# Empire PWA Cache Policy
 
 Rules:
 
-- Every release gets a new cache version
-- Old caches must be removed
-- Service worker updates must activate quickly
-- Never cache broken builds
-- Test with cleared browser storage
+- Version every cache
+- Remove old caches
+- Avoid caching broken builds
+- Refresh critical assets
+- Keep offline fallback
 
