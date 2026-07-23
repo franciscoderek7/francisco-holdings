@@ -1,0 +1,13 @@
+PWA CACHE AUDIT
+Thu Jul 23 01:42:59 EDT 2026
+
+SERVICE WORKERS:
+
+CACHE REFERENCES:
+./pwa/cache-version.js:1:export const CACHE_VERSION =
+./pwa/cache-version.js:4:export const CACHE_NAME =
+./pwa/cache-version.js:5:`francisco-empire-${CACHE_VERSION}`;
+./pwa/cleanup-worker.js:7:caches.keys()
+./pwa/cleanup-worker.js:12:key=>caches.delete(key)
+
+MANIFEST:
