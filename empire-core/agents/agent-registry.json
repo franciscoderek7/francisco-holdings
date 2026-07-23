@@ -1,0 +1,17 @@
+[
+{
+"id":"jarvis",
+"department":"Command Center",
+"status":"offline"
+},
+{
+"id":"omniguard-agent",
+"department":"Cybersecurity",
+"status":"offline"
+},
+{
+"id":"primedox-agent",
+"department":"Documents",
+"status":"offline"
+}
+]

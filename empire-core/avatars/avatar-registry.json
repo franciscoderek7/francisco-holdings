@@ -1,0 +1,20 @@
+[
+{
+"id":"hq-avatar",
+"name":"Empire Commander",
+"floor":1,
+"role":"CEO Dashboard Assistant"
+},
+{
+"id":"security-avatar",
+"name":"OmniGuard Sentinel",
+"floor":2,
+"role":"Security Operations"
+},
+{
+"id":"dox-avatar",
+"name":"PrimeDox Assistant",
+"floor":3,
+"role":"Document Automation"
+}
+]
