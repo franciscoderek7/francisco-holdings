@@ -1,0 +1,17 @@
+{
+"monthlyTarget":100000,
+"offers":[
+{
+"name":"$499 Consultation",
+"customersNeeded":201
+},
+{
+"name":"$49 PrimeDox",
+"customersNeeded":2041
+},
+{
+"name":"Enterprise",
+"customersNeeded":503
+}
+]
+}
