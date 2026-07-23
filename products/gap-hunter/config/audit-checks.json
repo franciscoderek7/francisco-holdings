@@ -1,0 +1,18 @@
+[
+{
+"category":"Security",
+"checks":["SSL","Headers"]
+},
+{
+"category":"Performance",
+"checks":["Speed","Assets"]
+},
+{
+"category":"SEO",
+"checks":["Metadata","Structure"]
+},
+{
+"category":"Conversion",
+"checks":["CTA","Contact Flow"]
+}
+]
