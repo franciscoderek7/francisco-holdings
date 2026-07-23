@@ -1,0 +1,8 @@
+{
+"code":"required",
+"database":"required",
+"customers":"required",
+"payments":"required",
+"configs":"required",
+"lastBackup":""
+}

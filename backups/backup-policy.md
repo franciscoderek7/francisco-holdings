@@ -1,14 +1,20 @@
-# Empire Backup Policy
+# Francisco Holdings Empire Backup Policy
 
-Backup:
+Backup Targets:
 
+- Source code
 - Database
 - Customer records
 - Payment records
-- Configuration
-- Deployment versions
+- Product configuration
+- AI agent settings
+- Deployment settings
 
-Frequency:
+Schedule:
 
 Daily minimum
+
+Critical data:
+
+Before every major deployment
 
