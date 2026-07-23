@@ -1,0 +1,38 @@
+{
+  "generated": "2026-07-23T05:36:10.400Z",
+  "revenue": {
+    "company": "Francisco Holdings Inc.",
+    "version": "V1",
+    "metrics": {
+      "revenue": 0,
+      "customers": 0,
+      "leads": 0,
+      "activeAgents": 0
+    },
+    "status": "initializing"
+  },
+  "leads": {
+    "newLeads": 0,
+    "contacted": 0,
+    "qualified": 0,
+    "converted": 0
+  },
+  "agents": [
+    {
+      "name": "Jarvis",
+      "status": "active"
+    },
+    {
+      "name": "Sales Agent",
+      "status": "ready"
+    },
+    {
+      "name": "Marketing Agent",
+      "status": "ready"
+    },
+    {
+      "name": "OmniGuard Agent",
+      "status": "monitoring"
+    }
+  ]
+}

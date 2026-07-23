@@ -1,0 +1,11 @@
+{
+"company":"Francisco Holdings Inc.",
+"version":"V1",
+"metrics":{
+"revenue":0,
+"customers":0,
+"leads":0,
+"activeAgents":0
+},
+"status":"initializing"
+}
