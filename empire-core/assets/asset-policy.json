@@ -1,0 +1,6 @@
+{
+"textures":"compressed",
+"models":"lazy-loaded",
+"audio":"streamed",
+"unusedAssets":"released"
+}

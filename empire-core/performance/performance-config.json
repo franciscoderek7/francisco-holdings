@@ -1,0 +1,7 @@
+{
+"renderer":"WebGL",
+"quality":"adaptive",
+"maxVisibleFloors":10,
+"lazyLoading":true,
+"mobileMode":true
+}

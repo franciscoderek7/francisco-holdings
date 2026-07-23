@@ -1,0 +1,6 @@
+{
+"loadRadius":5,
+"unloadDistance":8,
+"priority":"nearest_floor",
+"status":"ready"
+}
