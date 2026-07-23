@@ -1,0 +1,10 @@
+{
+"systems":[
+"Frontend",
+"API",
+"Database",
+"Payments",
+"AI Agents",
+"Command Center"
+]
+}
