@@ -1,0 +1,34 @@
+{
+  "system": {
+    "company": "Francisco Holdings Inc",
+    "platform": "Empire V5",
+    "status": "development",
+    "deployment": "pending",
+    "health": "checking"
+  },
+  "revenue": {
+    "monthlyGoal": 100000,
+    "currentRevenue": 0,
+    "customers": 0,
+    "primaryPayment": "paypal.me/techpetcage"
+  },
+  "products": [
+    {
+      "name": "PrimeDox AI",
+      "status": "integration"
+    },
+    {
+      "name": "OmniGuard",
+      "status": "integration"
+    },
+    {
+      "name": "Gap Hunter",
+      "status": "planning"
+    }
+  ],
+  "floors": {
+    "totalFloors": 392,
+    "activeFloors": 3,
+    "renderStatus": "testing"
+  }
+}
