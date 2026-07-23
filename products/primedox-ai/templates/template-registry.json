@@ -1,0 +1,17 @@
+[
+{
+"id":"demand-letter",
+"name":"Demand Letter",
+"status":"ready"
+},
+{
+"id":"affidavit",
+"name":"Affidavit",
+"status":"ready"
+},
+{
+"id":"statement-of-claim",
+"name":"Statement of Claim",
+"status":"ready"
+}
+]
