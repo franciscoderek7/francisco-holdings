@@ -1,0 +1,9 @@
+APP_NAME=Francisco_Holdings_Empire
+ENVIRONMENT=production
+
+PAYMENT_PROVIDER=paypal
+PAYMENT_LINK=https://paypal.me/techpetcage
+
+DATABASE_STATUS=configure
+API_STATUS=configure
+

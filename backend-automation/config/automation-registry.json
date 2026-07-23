@@ -1,0 +1,22 @@
+[
+{
+"name":"Payment Monitor",
+"status":"active",
+"frequency":"daily"
+},
+{
+"name":"Lead Processor",
+"status":"active",
+"frequency":"hourly"
+},
+{
+"name":"Revenue Report",
+"status":"active",
+"frequency":"daily"
+},
+{
+"name":"System Health Check",
+"status":"active",
+"frequency":"hourly"
+}
+]
