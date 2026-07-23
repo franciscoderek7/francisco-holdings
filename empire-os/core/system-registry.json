@@ -1,0 +1,32 @@
+[
+{
+"name":"Francisco Holdings Inc",
+"type":"HQ",
+"status":"active"
+},
+{
+"name":"Command Center",
+"type":"Operations",
+"status":"active"
+},
+{
+"name":"PrimeDox AI",
+"type":"Product",
+"status":"integration"
+},
+{
+"name":"OmniGuard",
+"type":"Product",
+"status":"integration"
+},
+{
+"name":"Payment System",
+"type":"Revenue",
+"status":"integration"
+},
+{
+"name":"Sales Engine",
+"type":"Growth",
+"status":"active"
+}
+]

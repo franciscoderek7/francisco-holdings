@@ -1,0 +1,17 @@
+[
+{
+"task":"Connect production database",
+"priority":"high",
+"status":"pending"
+},
+{
+"task":"Verify PayPal transaction",
+"priority":"high",
+"status":"pending"
+},
+{
+"task":"Deploy Command Center",
+"priority":"high",
+"status":"pending"
+}
+]
