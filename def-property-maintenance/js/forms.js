@@ -141,9 +141,56 @@
     });
   }
 
+  // Hand-off from the Demo AI Concierge (js/concierge.js): if it linked here
+  // with answers in the URL's query string, prefill the matching fields on
+  // this page. This is same-site navigation only — nothing is fetched or
+  // posted anywhere, and nothing is written to storage.
+  function prefillFromConciergeHandoff() {
+    var params;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch (e) {
+      return;
+    }
+    if (!params || Array.from(params.keys()).length === 0) {
+      return;
+    }
+
+    var fieldIds = ["full-name", "email", "phone", "address", "category", "notes"];
+    var filledAny = false;
+    fieldIds.forEach(function (id) {
+      if (!params.has(id)) {
+        return;
+      }
+      var field = document.getElementById(id);
+      if (field) {
+        field.value = params.get(id);
+        filledAny = true;
+      }
+    });
+
+    if (!filledAny) {
+      return;
+    }
+
+    var formCard = document.querySelector(".form-card");
+    if (formCard && formCard.parentNode) {
+      var note = document.createElement("div");
+      note.className = "notice notice-accent";
+      note.style.marginBottom = "1.5rem";
+      note.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v5" /><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none" /></svg>' +
+        '<p style="margin:0;">These details were carried over from the <strong>Demo AI Concierge</strong> ' +
+        "conversation. Review and edit anything below before submitting — this is still a demo form and " +
+        "nothing will be sent.</p>";
+      formCard.parentNode.insertBefore(note, formCard);
+    }
+  }
+
   function init() {
     var forms = document.querySelectorAll("[data-demo-form]");
     forms.forEach(initDemoForm);
+    prefillFromConciergeHandoff();
   }
 
   if (document.readyState === "loading") {

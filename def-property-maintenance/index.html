@@ -63,7 +63,8 @@
           activated, and scheduled — without committing to anything that isn't confirmed yet.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="request-service.html">Try the Request Service demo</a>
+          <a class="btn btn-primary" href="request-service.html">Request a Quote</a>
+          <a class="btn btn-ghost" href="contact.html">Contact Us</a>
           <a class="btn btn-ghost" href="services.html">View proposed services</a>
         </div>
       </div>
@@ -88,6 +89,124 @@
             All forms are demo-only — nothing is sent or stored
           </li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ai-concierge-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">AI-Guided Intake (Demo)</span>
+        <h2>Try the Demo AI Concierge</h2>
+        <p>
+          A scripted, chat-style guide to what an AI-assisted intake could feel like on this site. It is
+          <strong>not connected to a real AI service</strong> — every reply is pre-written, and it will always
+          tell you the truth about a category's current status rather than pretend anything is active.
+        </p>
+      </div>
+
+      <div class="concierge" data-concierge aria-label="Demo AI Concierge chat"></div>
+      <noscript>
+        <p class="hint">This interactive demo requires JavaScript. You can still browse
+        <a href="services.html">proposed services</a> or use the <a href="request-service.html">Request Service
+        form</a> directly.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why an AI Concierge</span>
+        <h2>Traditional website vs. AI-powered website</h2>
+        <p>
+          This contrast is illustrative — a way of explaining the idea behind the concierge above, not a claim
+          about how any real visitor will behave.
+        </p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col compare-old">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            Traditional pattern
+          </h3>
+          <ol class="compare-steps">
+            <li><span class="compare-num" aria-hidden="true">1</span> Visitor lands on the site</li>
+            <li><span class="compare-num" aria-hidden="true">2</span> Visitor searches and clicks through several pages</li>
+            <li><span class="compare-num" aria-hidden="true">3</span> Visitor reads service descriptions, trying to guess what applies to them</li>
+            <li><span class="compare-num" aria-hidden="true">4</span> Visitor hunts for a phone number or email address</li>
+            <li><span class="compare-num" aria-hidden="true">5</span> Visitor calls or emails and waits to hear back</li>
+          </ol>
+        </div>
+
+        <div class="compare-vs" aria-hidden="true">vs</div>
+
+        <div class="compare-col compare-new">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z" /></svg>
+            This site's pattern (demo)
+          </h3>
+          <ol class="compare-steps">
+            <li><span class="compare-num" aria-hidden="true">1</span> Visitor arrives</li>
+            <li><span class="compare-num" aria-hidden="true">2</span> The Demo AI Concierge asks a few quick questions</li>
+            <li><span class="compare-num" aria-hidden="true">3</span> It honestly reflects each category's real status — never pretending something is active</li>
+            <li><span class="compare-num" aria-hidden="true">4</span> Visitor is guided straight to the right service category</li>
+            <li><span class="compare-num" aria-hidden="true">5</span> Details are captured as a lead</li>
+            <li><span class="compare-num" aria-hidden="true">6</span> The conversation routes into the Quote Request form</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Lead-Capture Architecture</span>
+        <h2>How a lead could move through this site</h2>
+        <p>
+          A simplified map of the flow behind the demo above — a proposed structure for feedback. Nothing here
+          is wired to a real backend.
+        </p>
+      </div>
+
+      <div class="leadflow" aria-label="Lead-capture flow: Visitor, Website, AI Concierge, Service Interest, Quote Request, Lead Form, Confirmation">
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c1.3-3.8 4.2-5.5 7-5.5s5.7 1.7 7 5.5" /></svg></span>
+          <span class="leadflow-label">Visitor</span>
+          <span class="leadflow-desc">Arrives on the site</span>
+        </div>
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.2 2.3 3.4 5.3 3.4 8.5s-1.2 6.2-3.4 8.5c-2.2-2.3-3.4-5.3-3.4-8.5S9.8 5.8 12 3.5Z" /></svg></span>
+          <span class="leadflow-label">Website</span>
+          <span class="leadflow-desc">Static prototype pages</span>
+        </div>
+        <div class="leadflow-step is-ai">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="12" rx="3" /><path d="M9 10h.01M15 10h.01" /><path d="M8 17v2M16 17v2" /></svg></span>
+          <span class="leadflow-label">AI Concierge</span>
+          <span class="leadflow-desc">Demo, scripted only</span>
+        </div>
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l3 3v13H6Z" /><path d="M15 4v3h3" /><path d="M9 13h6M9 16h6" /></svg></span>
+          <span class="leadflow-label">Service Interest</span>
+          <span class="leadflow-desc">Category identified honestly</span>
+        </div>
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h11M11 6l6 6-6 6" /><path d="M5 6v12" /></svg></span>
+          <span class="leadflow-label">Quote Request</span>
+          <span class="leadflow-desc">Hands off to intake</span>
+        </div>
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2" /><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" /><path d="M9 11h6M9 15h6M9 19h3" /></svg></span>
+          <span class="leadflow-label">Lead Form</span>
+          <span class="leadflow-desc">Details captured</span>
+        </div>
+        <div class="leadflow-step">
+          <span class="leadflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="m8 12.5 2.5 2.5L16 9.5" /></svg></span>
+          <span class="leadflow-label">Confirmation</span>
+          <span class="leadflow-desc">Demo success screen</span>
+        </div>
       </div>
     </div>
   </section>
@@ -294,8 +413,9 @@
           Request Service demo below shows the intended flow without sending or storing any information.
         </p>
       </div>
-      <div class="mt-lg text-center">
-        <a class="btn btn-primary" href="request-service.html">Try the Request Service demo</a>
+      <div class="mt-lg text-center" style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="request-service.html">Request a Quote</a>
+        <a class="btn btn-outline" href="contact.html">Contact Us</a>
       </div>
     </div>
   </section>
@@ -339,5 +459,6 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script src="js/concierge.js"></script>
 </body>
 </html>

@@ -70,6 +70,25 @@
   <section class="section">
     <div class="container">
       <div class="section-head">
+        <span class="eyebrow">Try it conversationally</span>
+        <h2>Demo AI Concierge</h2>
+        <p>
+          Prefer a guided conversation instead of the form below? Try the scripted demo concierge — it walks
+          through the same information and hands off into the form when you're done. Or
+          <a href="#request-form">skip straight to the form</a>.
+        </p>
+      </div>
+
+      <div class="concierge" data-concierge aria-label="Demo AI Concierge chat"></div>
+      <noscript>
+        <p class="hint">This interactive demo requires JavaScript. You can still fill in the form below.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
         <span class="eyebrow">The full journey</span>
         <h2>Where this step fits</h2>
         <p>Submitting the demo form below advances the illustration to show what happens conceptually next.</p>
@@ -115,7 +134,7 @@
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt" id="request-form">
     <div class="container" style="max-width:720px;">
 
       <div class="notice notice-accent" style="margin-bottom:1.5rem;">
@@ -254,6 +273,7 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script src="js/concierge.js"></script>
 <script src="js/forms.js"></script>
 </body>
 </html>
