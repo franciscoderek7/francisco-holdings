@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Northforge Blinds — Consultation (Prototype Demo)</title>
-<meta name="description" content="Demo-only consultation form for the Northforge Blinds concept site. Nothing entered here is sent or stored anywhere.">
+<title>Northern Forge Blinds — Consultation (Prototype Demo)</title>
+<meta name="description" content="Demo-only consultation form for the Northern Forge Blinds concept site. Nothing entered here is sent or stored anywhere.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<div class="demo-banner"><strong>Prototype / Demo</strong> — a concept site for Northforge Blinds, built for internal review. Not a live business or a real website.</div>
+<div class="demo-banner"><strong>Prototype / Demo</strong> — a concept site for Northern Forge Blinds, built for internal review. Not a live business or a real website.</div>
 
 <header class="site-header">
   <div class="container">
@@ -22,7 +22,7 @@
           <path d="M12 28V12h4l8 12V12h4v16h-4l-8-12v12z" fill="#c1652f"></path>
         </svg>
       </span>
-      <span class="brand__word">North<span class="accent">forge</span></span>
+      <span class="brand__word">Northern <span class="accent">Forge</span></span>
     </a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">
       <span class="visually-hidden">Menu</span>
@@ -53,8 +53,87 @@
 
   <div class="divider divider--to-paper" aria-hidden="true"></div>
 
+  <section class="section section--paper" id="ai-concierge" aria-labelledby="concierge-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Try it first</p>
+        <h2 id="concierge-heading">AI Blinds Concierge</h2>
+        <p class="lede">A guided, chat-style way to think through your project before — or instead of — filling out the full form below.</p>
+      </div>
+
+      <div class="concierge" data-concierge>
+        <div class="concierge__header">
+          <span class="concierge__badge">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"></path></svg>
+            Demo AI Concierge
+          </span>
+          <p class="concierge__disclaimer">Simulated for this prototype — not connected to a live AI service. It does not quote real prices, promise installation dates, or confirm product availability.</p>
+        </div>
+        <div class="concierge__body">
+          <div class="concierge__log" id="concierge-log" role="log" aria-live="polite" aria-label="Concierge conversation"></div>
+
+          <div id="concierge-active">
+            <p class="concierge__progress" id="concierge-progress"></p>
+            <p class="concierge__question" id="concierge-question"></p>
+            <div class="concierge__options" id="concierge-options" role="group" aria-labelledby="concierge-question"></div>
+            <div class="concierge__actions">
+              <button type="button" class="btn btn--ghost" id="concierge-back" hidden>&larr; Back</button>
+            </div>
+          </div>
+
+          <div class="concierge__summary" id="concierge-summary" hidden>
+            <div class="concierge__disclaimer-box">
+              <strong>Demo recommendation only.</strong> This is a simulated suggestion for this prototype — not a real quote, price, product-availability confirmation, or installation-date commitment.
+            </div>
+            <h3>Your demo recommendation</h3>
+            <dl id="concierge-summary-list"></dl>
+            <div class="concierge__actions">
+              <a class="btn btn--primary" href="#consultation-form" id="concierge-book">Book a Consultation</a>
+              <a class="btn btn--secondary" href="contact.html">Request a Quote</a>
+              <button type="button" class="btn btn--ghost" id="concierge-restart">Start Over</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="concierge__note">Demo only — every answer stays in your browser for this visit. Nothing is sent, stored, or analyzed by a real AI service.</p>
+    </div>
+  </section>
+
+  <div class="divider divider--to-band" aria-hidden="true"></div>
+
+  <section class="section section--band" id="lead-architecture" aria-labelledby="architecture-heading">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Concept architecture</p>
+        <h2 id="architecture-heading">How a lead moves through this concept</h2>
+        <p class="lede">A simplified view of the path from a first visit to a real follow-up. The AI Concierge step is fully simulated here — nothing on this page connects to a live backend.</p>
+      </div>
+      <ol class="arch-flow" aria-label="Lead-capture flow, seven steps">
+        <li class="arch-flow__step"><span class="arch-flow__num">1</span><span class="arch-flow__label">Visitor</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">2</span><span class="arch-flow__label">Website</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">3</span><span class="arch-flow__label">AI Concierge</span><span class="arch-flow__sub">(demo)</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">4</span><span class="arch-flow__label">Product Interest</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">5</span><span class="arch-flow__label">Consultation / Quote</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">6</span><span class="arch-flow__label">Lead Form</span></li>
+        <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
+        <li class="arch-flow__step"><span class="arch-flow__num">7</span><span class="arch-flow__label">Confirmation</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider divider--to-paper" aria-hidden="true"></div>
+
   <section class="section section--paper">
     <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Prefer a standard form?</p>
+        <h2>Or fill out the full consultation form</h2>
+      </div>
       <div class="placeholder" style="max-width:44rem; margin-bottom:var(--space-5);">
         <strong>Demo only:</strong> this form uses client-side JavaScript to validate and show a success message. It does not use <code>fetch</code>, <code>XHR</code>, email, or any backend — no data leaves your browser.
       </div>
@@ -144,7 +223,7 @@
       <div id="consultation-success" class="success-panel" hidden style="max-width:44rem;">
         <svg class="success-panel__icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
         <h2>Demo submission received</h2>
-        <p>In a real version of this site, Northforge would follow up using the details below. Nothing has actually been sent — this is a prototype confirmation screen only.</p>
+        <p>In a real version of this site, Northern Forge would follow up using the details below. Nothing has actually been sent — this is a prototype confirmation screen only.</p>
         <dl id="consultation-summary" style="text-align:left; max-width:28rem; margin:var(--space-4) auto; display:grid; grid-template-columns:auto 1fr; gap:0.3rem 1rem;"></dl>
         <button type="button" id="consultation-restart" class="btn btn--secondary">Start Over</button>
       </div>
@@ -164,7 +243,7 @@
               <path d="M12 28V12h4l8 12V12h4v16h-4l-8-12v12z" fill="#c1652f"></path>
             </svg>
           </span>
-          <span class="brand__word">North<span class="accent">forge</span></span>
+          <span class="brand__word">Northern <span class="accent">Forge</span></span>
         </a>
         <p class="footer-lede">A concept for an independent window-coverings business — blinds, shades, shutters, and motorization — planned around straightforward advice and durable installs.</p>
       </div>
@@ -185,13 +264,14 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Northforge Blinds — concept for review purposes only.</p>
+      <p>&copy; 2026 Northern Forge Blinds — concept for review purposes only.</p>
       <p class="prototype-note"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Prototype / Demo — not a live site</p>
     </div>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/concierge.js"></script>
 <script src="js/consultation.js"></script>
 </body>
 </html>

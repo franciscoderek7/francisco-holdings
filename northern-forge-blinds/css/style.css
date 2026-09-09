@@ -1,5 +1,5 @@
 /* =========================================================================
-   Northforge Blinds — Prototype Design System
+   Northern Forge Blinds — Prototype Design System
    Plain CSS, no build step, no external requests.
    ========================================================================= */
 
@@ -734,3 +734,248 @@ legend{ font-family:var(--font-display); font-weight:700; padding-inline:0.3rem;
 .stack{ display:flex; flex-direction:column; gap:var(--space-3); }
 .text-muted{ color:var(--ink-500); }
 .section--ink .text-muted{ color:var(--ink-300); }
+
+/* -------------------------------------------------------------------------
+   16. AI Concierge widget (demo — scripted client-side only, no network calls)
+   ------------------------------------------------------------------------- */
+.concierge{
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-lg);
+  background:var(--paper-000);
+  box-shadow:var(--shadow-md);
+  overflow:hidden;
+  max-width:44rem;
+}
+.concierge__header{
+  background:var(--ink-900);
+  color:var(--paper-100);
+  padding:var(--space-4);
+}
+.concierge__badge{
+  display:inline-flex; align-items:center; gap:0.5em;
+  background:var(--copper-500);
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:var(--step--1);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  padding:0.35rem 0.8rem;
+  border-radius:999px;
+  margin-bottom:var(--space-2);
+}
+.concierge__badge svg{ width:1em; height:1em; stroke:#fff; fill:none; stroke-width:2; }
+.concierge__disclaimer{
+  margin:0;
+  font-size:var(--step--1);
+  color:var(--ink-100);
+  max-width:36rem;
+}
+.concierge__body{ padding:var(--space-4); }
+.concierge__log{
+  display:flex; flex-direction:column; gap:var(--space-2);
+  max-height:22rem; overflow-y:auto;
+  padding-right:0.25rem;
+  margin-bottom:var(--space-3);
+  scroll-behavior:smooth;
+}
+.concierge__log:empty{ display:none; margin-bottom:0; }
+.concierge__bubble{
+  max-width:85%;
+  padding:0.65rem 0.9rem;
+  border-radius:var(--radius-md);
+  font-size:var(--step--1);
+  line-height:1.5;
+}
+.concierge__bubble--bot{
+  align-self:flex-start;
+  background:var(--paper-100);
+  border:1px solid var(--line);
+  color:var(--ink-800);
+  border-bottom-left-radius:2px;
+}
+.concierge__bubble--user{
+  align-self:flex-end;
+  background:var(--copper-500);
+  color:#fff;
+  border-bottom-right-radius:2px;
+}
+.concierge__progress{
+  font-size:var(--step--1);
+  color:var(--ink-500);
+  font-family:var(--font-display);
+  font-weight:700;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  margin:0 0 var(--space-2);
+}
+.concierge__question{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:var(--step-0);
+  color:var(--ink-900);
+  margin:0 0 var(--space-3);
+}
+.concierge__options{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0.6rem;
+}
+@media (min-width:36em){
+  .concierge__options{ grid-template-columns:repeat(2,1fr); }
+}
+.concierge__option{
+  text-align:left;
+  border:1.5px solid var(--line);
+  background:var(--paper-000);
+  border-radius:var(--radius-md);
+  padding:0.75rem 1rem;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:var(--step--1);
+  color:var(--ink-800);
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, transform .1s ease;
+}
+.concierge__option:hover{ border-color:var(--copper-500); background:var(--copper-100); }
+.concierge__option:active{ transform:translateY(1px); }
+.concierge__actions{
+  display:flex; flex-wrap:wrap; gap:var(--space-2);
+  margin-top:var(--space-3);
+}
+.concierge__note{
+  font-size:var(--step--1);
+  color:var(--ink-500);
+  margin-top:var(--space-3);
+}
+.concierge__summary{
+  border-top:1.5px dashed var(--line);
+  padding:var(--space-4);
+  background:var(--paper-100);
+}
+.concierge__summary h3{ margin-bottom:var(--space-2); }
+.concierge__summary dl{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0.35rem 1rem;
+  margin:0 0 var(--space-3);
+  font-size:var(--step--1);
+}
+.concierge__summary dt{ font-weight:700; color:var(--ink-700); }
+.concierge__summary dd{ margin:0; color:var(--ink-800); }
+.concierge__disclaimer-box{
+  border:1.5px dashed var(--copper-500);
+  background:var(--copper-100);
+  color:var(--copper-700);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
+  font-size:var(--step--1);
+  margin-bottom:var(--space-3);
+}
+
+/* -------------------------------------------------------------------------
+   17. Lead-capture architecture flow diagram
+   ------------------------------------------------------------------------- */
+.arch-flow{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap;
+  align-items:center; justify-content:center;
+  gap:var(--space-2) var(--space-1);
+}
+.arch-flow__step{
+  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+  width:8rem; text-align:center;
+}
+.arch-flow__num{
+  width:2.75rem; height:2.75rem; border-radius:50%;
+  background:var(--ink-900);
+  color:var(--copper-400);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:800; font-size:var(--step-0);
+  border:2px solid var(--copper-500);
+}
+.arch-flow__label{
+  font-family:var(--font-display); font-weight:700; font-size:var(--step--1);
+  color:var(--ink-800);
+}
+.arch-flow__sub{
+  font-size:var(--step--1); color:var(--ink-500);
+}
+.arch-flow__arrow{
+  color:var(--copper-500);
+  font-size:1.5rem;
+  line-height:1;
+  flex:none;
+}
+
+/* -------------------------------------------------------------------------
+   18. Traditional vs. AI-powered compare section
+   ------------------------------------------------------------------------- */
+.compare-grid{
+  display:grid;
+  gap:var(--space-5);
+  margin-top:var(--space-2);
+  align-items:stretch;
+}
+@media (min-width:56em){
+  .compare-grid{ grid-template-columns:1fr auto 1fr; align-items:center; }
+}
+.compare-card{
+  border-radius:var(--radius-lg);
+  padding:var(--space-5);
+  height:100%;
+}
+.compare-card--old{
+  background:var(--paper-000);
+  border:1.5px solid var(--line);
+}
+.compare-card--new{
+  background:var(--ink-900);
+  color:var(--paper-100);
+  border:1.5px solid var(--ink-700);
+  box-shadow:var(--shadow-md);
+}
+.compare-card--new h3{ color:var(--paper-000); }
+.compare-tag{
+  display:inline-block;
+  font-family:var(--font-display); font-weight:800; font-size:var(--step--1);
+  text-transform:uppercase; letter-spacing:0.05em;
+  color:var(--ink-500);
+  margin-bottom:var(--space-2);
+}
+.compare-card--new .compare-tag{ color:var(--copper-400); }
+.compare-steps{
+  list-style:none; margin:var(--space-3) 0 0; padding:0;
+  display:flex; flex-direction:column; gap:var(--space-3);
+}
+.compare-steps li{
+  display:flex; align-items:flex-start; gap:0.75rem;
+  font-size:var(--step--1);
+}
+.compare-steps__num{
+  flex:none;
+  width:1.75rem; height:1.75rem; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:800; font-size:0.8rem;
+  background:var(--ink-100); color:var(--ink-700);
+}
+.compare-card--new .compare-steps__num{
+  background:var(--copper-500); color:#fff;
+}
+.compare-vs{
+  display:flex; align-items:center; justify-content:center;
+  width:3.5rem; height:3.5rem;
+  border-radius:50%;
+  background:var(--copper-500);
+  color:#fff;
+  font-family:var(--font-display); font-weight:800; font-size:var(--step--1);
+  margin-inline:auto;
+  box-shadow:var(--shadow-sm);
+}
+
+/* -------------------------------------------------------------------------
+   19. Two-word wordmark: keep it from crowding the header on very narrow screens
+   ------------------------------------------------------------------------- */
+@media (max-width:24em){
+  .brand__word{ font-size:0.98rem; letter-spacing:0.01em; }
+}

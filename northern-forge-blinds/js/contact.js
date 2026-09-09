@@ -1,5 +1,5 @@
 /*
- * Northforge Blinds — prototype site
+ * Northern Forge Blinds — prototype site
  * contact.js: demo-only contact form.
  * IMPORTANT: This never sends data anywhere. No fetch/XHR. It only
  * validates in the browser and swaps in a success state, for
