@@ -1,0 +1,393 @@
+<title>Free Consultation — Lindsay Blinds</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Guided consultation prototype for Lindsay Blinds — no data is submitted or stored, demo only." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="css/style.css" />
+
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">LB</span>
+      <span class="brand-text">Lindsay Blinds</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+      <span class="visually-hidden">Menu</span>
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="consultation.html" aria-current="page">Consultation</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-call" href="tel:7058083022">
+          <span aria-hidden="true">&#9742;</span> Call Marc: 705-808-3022
+        </a>
+        <a class="btn btn-primary" href="consultation.html">Free Consultation</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding-block:clamp(2rem,5vw,3.5rem);">
+    <div class="container">
+      <p class="eyebrow">Free consultation</p>
+      <h1>Tell us about your project</h1>
+      <p class="lead max-w-prose">
+        Answer a few quick questions and Marc will follow up personally. This is a
+        prototype: the form below does not send email, submit to a server, or store
+        anything — it only demonstrates the flow.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="ai-widget-heading">
+    <div class="container">
+      <div class="ai-widget" id="aiWidget">
+        <div class="ai-widget-header">
+          <span class="ai-avatar" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M9 12h.01M15 12h.01M9 18v2M15 18v2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <h2 id="ai-widget-heading">AI Consultation Assistant</h2>
+            <p>A scripted demo — helps gather project info before Marc follows up personally.</p>
+          </div>
+        </div>
+        <div class="ai-disclaimer">
+          <strong>What this assistant is (and isn't):</strong> it only asks basic
+          questions to help organize your request. It is <strong>not</strong> Marc,
+          cannot quote prices, cannot promise installation dates, cannot confirm
+          product availability, and cannot make any business commitments. Marc
+          reviews every request personally before anything is finalized. This is a
+          scripted demo, not a live AI service — nothing you type here is sent
+          anywhere.
+        </div>
+        <div class="ai-chat" id="aiChat" aria-live="polite">
+          <div class="chat-msg bot">
+            Hi! I'm the Lindsay Blinds AI Consultation Assistant. I help collect a
+            few basic details before Marc follows up personally — I can't quote
+            prices or confirm dates, just questions for now. What are you working on?
+          </div>
+        </div>
+        <div class="chat-quick-replies" id="chatQuickReplies">
+          <button type="button" data-reply="Blinds" data-need="blinds">Blinds</button>
+          <button type="button" data-reply="Shades" data-need="shades">Shades</button>
+          <button type="button" data-reply="Shutters" data-need="shutters">Shutters</button>
+          <button type="button" data-reply="Motorization" data-need="motorized">Motorization</button>
+          <button type="button" data-reply="Not sure yet" data-need="unsure">Not sure yet</button>
+        </div>
+        <div class="ai-widget-footer">
+          Prototype / demo assistant — scripted responses only, no live AI call, no data leaves your browser.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt" aria-labelledby="wizard-heading">
+    <div class="container">
+      <h2 id="wizard-heading" class="visually-hidden">Guided consultation form</h2>
+      <div class="wizard" id="wizard">
+        <ol class="progress" id="progressList">
+          <li class="is-active" data-step="1">
+            <span class="bar"><span></span></span>
+            What you need
+          </li>
+          <li data-step="2">
+            <span class="bar"><span></span></span>
+            Project details
+          </li>
+          <li data-step="3">
+            <span class="bar"><span></span></span>
+            Contact info
+          </li>
+          <li data-step="4">
+            <span class="bar"><span></span></span>
+            Photos &amp; review
+          </li>
+        </ol>
+
+        <form id="consultForm" novalidate>
+          <!-- Step 1 -->
+          <div class="wizard-step is-active" data-step="1" role="group" aria-labelledby="step1-heading">
+            <h3 id="step1-heading">What do you need?</h3>
+            <p>Pick the option that best matches your project.</p>
+            <div class="option-grid" id="needOptions">
+              <div class="option-card">
+                <input type="radio" name="need" id="need-blinds" value="blinds" />
+                <label for="need-blinds">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16M4 9h16M4 14h16M4 19h10" stroke-linecap="round"/></svg>
+                  </span>
+                  <strong>Blinds</strong>
+                  <span class="opt-desc">Horizontal or vertical blinds</span>
+                </label>
+              </div>
+              <div class="option-card">
+                <input type="radio" name="need" id="need-shades" value="shades" />
+                <label for="need-shades">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4z" stroke-linejoin="round"/><path d="M4 10c4 3 12 3 16 0" stroke-linecap="round"/></svg>
+                  </span>
+                  <strong>Shades</strong>
+                  <span class="opt-desc">Roller, cellular or roman</span>
+                </label>
+              </div>
+              <div class="option-card">
+                <input type="radio" name="need" id="need-shutters" value="shutters" />
+                <label for="need-shutters">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M12 4v16M4 9h16M4 15h16" /></svg>
+                  </span>
+                  <strong>Shutters</strong>
+                  <span class="opt-desc">Interior plantation-style</span>
+                </label>
+              </div>
+              <div class="option-card">
+                <input type="radio" name="need" id="need-motorized" value="motorized" />
+                <label for="need-motorized">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke-linecap="round"/></svg>
+                  </span>
+                  <strong>Motorized coverings</strong>
+                  <span class="opt-desc">Remote or app-controlled</span>
+                </label>
+              </div>
+              <div class="option-card">
+                <input type="radio" name="need" id="need-repair" value="repair" />
+                <label for="need-repair">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a3 3 0 1 1-4.2 4.2L4 17v3h3l6.5-6.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                  </span>
+                  <strong>Repair / service</strong>
+                  <span class="opt-desc">Fix something already installed</span>
+                </label>
+              </div>
+              <div class="option-card">
+                <input type="radio" name="need" id="need-unsure" value="unsure" />
+                <label for="need-unsure">
+                  <span class="opt-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.5 8.5 0 0 1-3.8-.9L3 20l1-5.8a8.4 8.4 0 1 1 17-2.7Z" stroke-linejoin="round"/></svg>
+                  </span>
+                  <strong>Not sure</strong>
+                  <span class="opt-desc">Help me choose</span>
+                </label>
+              </div>
+            </div>
+            <p class="error-msg" id="err-need" role="alert">Please choose one option to continue.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="wizard-step" data-step="2" role="group" aria-labelledby="step2-heading">
+            <h3 id="step2-heading">Project details</h3>
+            <div class="form-grid cols-2">
+              <div class="field" id="field-windows">
+                <label for="numWindows">Approximate number of windows</label>
+                <input type="number" id="numWindows" name="numWindows" min="1" max="99" inputmode="numeric" aria-describedby="err-windows" />
+                <p class="error-msg" id="err-windows" role="alert">Enter a number of 1 or more.</p>
+              </div>
+              <div class="field" id="field-timeframe">
+                <label for="timeframe">Preferred timeframe</label>
+                <select id="timeframe" name="timeframe" aria-describedby="err-timeframe">
+                  <option value="">Select one…</option>
+                  <option value="asap">As soon as possible</option>
+                  <option value="1-3-months">1–3 months</option>
+                  <option value="3-6-months">3–6 months</option>
+                  <option value="exploring">Just exploring options</option>
+                </select>
+                <p class="error-msg" id="err-timeframe" role="alert">Please select a timeframe.</p>
+              </div>
+            </div>
+
+            <div class="field" id="field-property" style="margin-bottom:1.1rem;">
+              <label id="property-type-label">Property type</label>
+              <div class="radio-row" role="radiogroup" aria-labelledby="property-type-label" aria-describedby="err-property">
+                <span class="radio-chip">
+                  <input type="radio" name="propertyType" id="prop-home" value="home" />
+                  <label for="prop-home">Home</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="propertyType" id="prop-cottage" value="cottage" />
+                  <label for="prop-cottage">Cottage</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="propertyType" id="prop-business" value="business" />
+                  <label for="prop-business">Business</label>
+                </span>
+              </div>
+              <p class="error-msg" id="err-property" role="alert">Please select a property type.</p>
+            </div>
+
+            <div class="field" id="field-projecttype">
+              <label id="project-type-label">Project type</label>
+              <div class="radio-row" role="radiogroup" aria-labelledby="project-type-label" aria-describedby="err-projecttype">
+                <span class="radio-chip">
+                  <input type="radio" name="projectType" id="proj-new" value="new-construction" />
+                  <label for="proj-new">New construction</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="projectType" id="proj-reno" value="renovation" />
+                  <label for="proj-reno">Renovation</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="projectType" id="proj-replace" value="replacement" />
+                  <label for="proj-replace">Replacement</label>
+                </span>
+              </div>
+              <p class="error-msg" id="err-projecttype" role="alert">Please select a project type.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="wizard-step" data-step="3" role="group" aria-labelledby="step3-heading">
+            <h3 id="step3-heading">Contact information</h3>
+            <div class="form-grid cols-2">
+              <div class="field" id="field-name">
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" name="fullName" autocomplete="name" aria-describedby="err-name" />
+                <p class="error-msg" id="err-name" role="alert">Please enter your name.</p>
+              </div>
+              <div class="field" id="field-phone">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="705-555-0123" aria-describedby="err-phone" />
+                <p class="error-msg" id="err-phone" role="alert">Please enter a valid phone number.</p>
+              </div>
+            </div>
+            <div class="form-grid cols-2">
+              <div class="field" id="field-email">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" autocomplete="email" aria-describedby="err-email" />
+                <p class="error-msg" id="err-email" role="alert">Please enter a valid email address.</p>
+              </div>
+              <div class="field" id="field-location">
+                <label for="location">Location / community</label>
+                <input type="text" id="location" name="location" placeholder="e.g. Lindsay, Fenelon Falls, Bobcaygeon…" aria-describedby="err-location" />
+                <p class="error-msg" id="err-location" role="alert">Please enter your community or town.</p>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:1.1rem;">
+              <label id="contact-method-label">Preferred contact method</label>
+              <div class="radio-row" role="radiogroup" aria-labelledby="contact-method-label" aria-describedby="err-contactmethod">
+                <span class="radio-chip">
+                  <input type="radio" name="contactMethod" id="cm-phone" value="phone" />
+                  <label for="cm-phone">Phone call</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="contactMethod" id="cm-text" value="text" />
+                  <label for="cm-text">Text message</label>
+                </span>
+                <span class="radio-chip">
+                  <input type="radio" name="contactMethod" id="cm-email" value="email" />
+                  <label for="cm-email">Email</label>
+                </span>
+              </div>
+              <p class="error-msg" id="err-contactmethod" role="alert">Please choose a preferred contact method.</p>
+            </div>
+
+            <div class="field" id="field-preftime">
+              <label for="prefTime">Preferred consultation time</label>
+              <select id="prefTime" name="prefTime" aria-describedby="err-preftime">
+                <option value="">Select one…</option>
+                <option value="morning">Weekday mornings</option>
+                <option value="afternoon">Weekday afternoons</option>
+                <option value="evening">Weekday evenings</option>
+                <option value="weekend">Weekends</option>
+              </select>
+              <p class="error-msg" id="err-preftime" role="alert">Please select a preferred time.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="wizard-step" data-step="4" role="group" aria-labelledby="step4-heading">
+            <h3 id="step4-heading">Photos &amp; review</h3>
+            <p>
+              Optional: add a few photos of your windows or space. Files stay in
+              your browser for this preview only — nothing is uploaded anywhere.
+            </p>
+            <div class="upload-box">
+              <label for="photoUpload"><strong>Add photos (optional)</strong></label>
+              <p class="hint">JPG or PNG, a few files is plenty.</p>
+              <input type="file" id="photoUpload" name="photoUpload" accept="image/*" multiple />
+              <div class="upload-preview" id="uploadPreview"></div>
+            </div>
+
+            <h3 style="margin-top:2rem;">Review your details</h3>
+            <dl class="summary-list" id="summaryList"></dl>
+
+            <div class="prototype-alert">
+              <strong>Before you submit:</strong> this is a prototype. Clicking
+              "Submit request" below will not send an email, will not save to a
+              database, and will not notify Marc. It only shows you what a
+              confirmation screen could look like.
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button type="button" class="btn btn-outline" id="btnBack" disabled>← Back</button>
+            <button type="button" class="btn btn-primary" id="btnNext">Next →</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit" hidden>Submit request</button>
+          </div>
+        </form>
+
+        <div class="success-screen" id="successScreen" hidden aria-live="polite">
+          <div class="success-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2 tabindex="-1">Request received (demo only)</h2>
+          <p class="max-w-prose mx-auto">
+            In a real version of this site, Marc would now have your details and
+            follow up personally by your preferred contact method.
+          </p>
+          <div class="prototype-alert mx-auto" style="max-width:34rem;">
+            <strong>This is a prototype / demo.</strong> No data was actually sent,
+            submitted, uploaded or stored anywhere — nothing left your browser.
+            To reach Marc for real, please call
+            <a href="tel:7058083022">705-808-3022</a>.
+          </div>
+          <div class="cta-row" style="justify-content:center;margin-top:1.5rem;">
+            <a class="btn btn-call" href="tel:7058083022">
+              <span aria-hidden="true">&#9742;</span> Call Marc: 705-808-3022
+            </a>
+            <button type="button" class="btn btn-outline" id="btnStartOver">Start a new demo request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="brand-text">Lindsay Blinds</p>
+      <p>Blinds · Shades · Shutters · Motorization · Repair — Kawartha Lakes area.</p>
+    </div>
+    <div class="footer-contact">
+      <p><strong>Call Marc:</strong> <a href="tel:7058083022">705-808-3022</a></p>
+      <p>Email: <span class="placeholder">[Placeholder — confirm with Marc]</span></p>
+      <p>Address: <span class="placeholder">[Placeholder — confirm with Marc]</span></p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="consultation.html">Consultation</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p class="demo-badge">Prototype / Demo — not a live site. No data entered here is sent or stored anywhere.</p>
+    <p>&copy; 2026 Lindsay Blinds concept. Built for internal review with Marc Bilz.</p>
+  </div>
+</footer>
+
+<script src="js/nav.js"></script>
+<script src="js/consultation.js"></script>
