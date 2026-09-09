@@ -1,9 +1,11 @@
 /*
- * Lindsay Blinds prototype — consultation wizard + mock AI assistant.
+ * Lindsay Blinds prototype — consultation wizard + demo AI concierge.
  *
  * Everything here is client-side only:
- *  - No fetch/XHR/WebSocket calls.
- *  - The "AI assistant" is a scripted, canned chat flow — not a live model.
+ *  - No fetch/XHR/WebSocket calls anywhere in this file.
+ *  - The "AI Concierge" is a scripted, canned chat flow (a small state
+ *    machine with fixed questions/answers) — not a live model, and it
+ *    cannot go off script. See the big comment above initAiWidget().
  *  - The multi-step form only shows/hides DOM state; "submit" never sends
  *    or stores data anywhere.
  */
@@ -25,22 +27,122 @@
   }
 
   /* ---------------------------------------------------------------
-   * AI Consultation Assistant — scripted mock chat.
-   * Explicitly never: claims to be Marc, quotes prices, promises
-   * dates, or confirms availability. Copy is fixed/canned.
+   * AI Concierge — DEMO / SIMULATED ONLY.
+   *
+   * This entire widget is a fixed-script JS state machine:
+   *  - No fetch/XHR/WebSocket, no real NLP or AI model of any kind.
+   *  - Free-text input is matched against a small local keyword list
+   *    (see CATEGORY_PATTERNS / ROOM_PATTERNS) purely to pick a
+   *    starting branch of the script — it cannot "understand"
+   *    anything outside that list, and nothing typed is sent anywhere
+   *    or stored after the page is closed.
+   *  - The script explicitly never: quotes or estimates a price,
+   *    promises an installation date, confirms that a product is in
+   *    stock/available, or claims to be Marc or speak on his behalf.
+   *  - The closing "Recommended direction" is a plain-language recap
+   *    of the visitor's own picks, not a real recommendation engine.
    * ------------------------------------------------------------- */
-  var NEED_LABELS = {
-    blinds: "blinds",
-    shades: "shades",
-    shutters: "shutters",
-    motorized: "motorized coverings",
-    unsure: "figuring out what fits your space"
+  var CATEGORY_INFO = {
+    blinds: { label: "blinds", display: "Blinds", radioId: "blinds" },
+    shades: { label: "shades", display: "Shades", radioId: "shades" },
+    shutters: { label: "shutters", display: "Shutters", radioId: "shutters" },
+    motorized: { label: "motorized coverings", display: "Motorization", radioId: "motorized" },
+    repair: { label: "a repair", display: "Repair / service", radioId: "repair" },
+    unsure: { label: "figuring out what fits your space", display: "Not sure yet", radioId: "unsure" }
   };
+  var CATEGORY_ORDER = ["blinds", "shades", "shutters", "motorized", "repair", "unsure"];
+
+  // Order matters: more specific words (repair, motorized) are checked
+  // before generic ones so "fix my motorized shade" resolves sensibly.
+  var CATEGORY_PATTERNS = [
+    { key: "repair", pattern: /\brepair|\bfix\b|\bbroken\b|\bstuck\b|stopped working|not working/i },
+    { key: "motorized", pattern: /\bmotor|\bremote control|automat|smart (shade|blind)/i },
+    { key: "shutters", pattern: /\bshutter/i },
+    { key: "shades", pattern: /\bshade/i },
+    { key: "blinds", pattern: /\bblind/i }
+  ];
+
+  var ROOM_PATTERNS = [
+    { label: "Living room", pattern: /living room|family room|great room/i },
+    { label: "Bedroom", pattern: /bedroom/i },
+    { label: "Kitchen", pattern: /kitchen/i },
+    { label: "Bathroom", pattern: /bathroom|\bbath\b/i },
+    { label: "Home office", pattern: /office|\bden\b/i },
+    { label: "Dining room", pattern: /dining/i },
+    { label: "Sunroom", pattern: /sun ?room/i },
+    { label: "Cottage", pattern: /cottage/i }
+  ];
+
+  var CONCIERGE_STEPS = [
+    {
+      key: "windowType",
+      question: "Good to know. What best describes the window(s) you're covering?",
+      options: [
+        "Standard-size window(s)",
+        "Large or patio-style window(s)",
+        "An odd shape — bay, arch, or skylight",
+        "Not sure yet"
+      ]
+    },
+    {
+      key: "light",
+      question: "How much light control are you after in that space?",
+      options: [
+        "Block out light completely",
+        "Soften and diffuse the light",
+        "Let light in, just cut the glare",
+        "No strong preference"
+      ]
+    },
+    {
+      key: "privacy",
+      question: "And privacy — how important is that here?",
+      options: ["Full privacy, day and night", "Mainly just in the evening", "Not a big concern"]
+    },
+    {
+      key: "style",
+      question: "On style, which direction feels closest to you?",
+      options: ["Clean and modern", "Classic and traditional", "Warm and textured", "Not sure yet"]
+    },
+    {
+      key: "colour",
+      question: "Any colour direction in mind?",
+      options: ["Light, neutral tones", "Warm wood tones", "Bold or dark tones", "Still undecided"]
+    },
+    {
+      key: "budget",
+      question:
+        "Roughly what range are you thinking — just a general direction? " +
+        "(I can't quote exact prices, that's Marc's call.)",
+      options: [
+        "Keep it simple and budget-friendly",
+        "Mid-range",
+        "Open to premium or motorized options",
+        "Not sure — I'd like guidance"
+      ]
+    },
+    {
+      key: "install",
+      question: "Last question — will you need installation help too?",
+      options: [
+        "Yes, full installation please",
+        "Just product advice for now",
+        "I have my own installer",
+        "Not sure yet"
+      ]
+    }
+  ];
 
   function initAiWidget() {
     var chat = document.getElementById("aiChat");
     var replies = document.getElementById("chatQuickReplies");
+    var textForm = document.getElementById("aiChatForm");
+    var textInput = document.getElementById("aiChatInput");
+    var orLabel = document.querySelector(".chat-or");
     if (!chat || !replies) return;
+
+    var ctx = {};
+    var stepIndex = -1;
 
     function addMessage(text, from) {
       var msg = document.createElement("div");
@@ -48,47 +150,233 @@
       msg.textContent = text;
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
+      return msg;
     }
 
-    function firstRoundReply(need, label) {
+    function clearOptions() {
       replies.innerHTML = "";
-      addMessage(label, "user");
+    }
 
-      var response =
-        "Thanks — " + label.toLowerCase() + " is good to know. I can't quote " +
-        "prices, confirm exact availability, or promise a date here — Marc " +
-        "will cover all of that once he reviews your details. Want to jump " +
-        "into the quick consultation form below so he has what he needs?";
-      window.setTimeout(function () {
-        addMessage(response, "bot");
-        var goBtn = document.createElement("button");
-        goBtn.type = "button";
-        goBtn.textContent = "Take me to the form ↓";
-        goBtn.addEventListener("click", function () {
-          var wizard = document.getElementById("wizard");
-          if (need) {
-            var input = document.getElementById("need-" + need);
-            if (input) input.checked = true;
-          }
-          if (wizard) {
-            wizard.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+    function addOption(label, onClick, extraClass) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = extraClass ? extraClass : "";
+      btn.textContent = label;
+      btn.addEventListener("click", onClick);
+      replies.appendChild(btn);
+      return btn;
+    }
+
+    function disableOptions() {
+      Array.prototype.forEach.call(replies.querySelectorAll("button"), function (b) {
+        b.disabled = true;
+      });
+    }
+
+    function hideTextEntry() {
+      // Only the opening message is free text; every question after
+      // that is answered with a button so the script stays fully
+      // deterministic and never has to "interpret" open-ended input.
+      if (textForm) textForm.hidden = true;
+      if (orLabel) orLabel.hidden = true;
+    }
+
+    function renderInitialOptions() {
+      CATEGORY_ORDER.forEach(function (key) {
+        addOption(CATEGORY_INFO[key].display, function () {
+          disableOptions();
+          hideTextEntry();
+          addMessage(CATEGORY_INFO[key].display, "user");
+          ctx.category = key;
+          askRoom();
         });
-        replies.appendChild(goBtn);
+      });
+    }
+
+    function askRoom() {
+      window.setTimeout(function () {
+        addMessage("Which room or area is this for?", "bot");
+        clearOptions();
+        ["Living room", "Bedroom", "Kitchen", "Bathroom", "Home office", "Other / multiple rooms"].forEach(
+          function (label) {
+            addOption(label, function () {
+              disableOptions();
+              addMessage(label, "user");
+              ctx.room = label;
+              beginGuidedSteps();
+            });
+          }
+        );
       }, 350);
     }
 
-    replies.addEventListener("click", function (event) {
-      var btn = event.target.closest("button[data-reply]");
-      if (!btn || btn.disabled) return;
-      var need = btn.getAttribute("data-need");
-      var label = NEED_LABELS[need] || btn.getAttribute("data-reply");
-      // Disable the whole first round of quick replies once one is picked.
-      Array.prototype.forEach.call(replies.querySelectorAll("button[data-reply]"), function (b) {
-        b.disabled = true;
+    function askCategoryClarify() {
+      window.setTimeout(function () {
+        addMessage("No problem — which of these is closest?", "bot");
+        clearOptions();
+        CATEGORY_ORDER.forEach(function (key) {
+          addOption(CATEGORY_INFO[key].display, function () {
+            disableOptions();
+            addMessage(CATEGORY_INFO[key].display, "user");
+            ctx.category = key;
+            askRoom();
+          });
+        });
+      }, 300);
+    }
+
+    function beginGuidedSteps() {
+      stepIndex = 0;
+      askStep();
+    }
+
+    function askStep() {
+      if (stepIndex >= CONCIERGE_STEPS.length) {
+        buildSummary();
+        return;
+      }
+      var step = CONCIERGE_STEPS[stepIndex];
+      window.setTimeout(function () {
+        addMessage(step.question, "bot");
+        clearOptions();
+        step.options.forEach(function (label) {
+          addOption(label, function () {
+            disableOptions();
+            addMessage(label, "user");
+            ctx[step.key] = label;
+            stepIndex += 1;
+            askStep();
+          });
+        });
+      }, 400);
+    }
+
+    function buildSummary() {
+      window.setTimeout(function () {
+        var info = CATEGORY_INFO[ctx.category] || CATEGORY_INFO.unsure;
+        var card = document.createElement("div");
+        card.className = "chat-msg bot ai-summary-card";
+
+        var itemsHtml = "";
+        function row(label, value) {
+          if (!value) return;
+          itemsHtml += "<li><strong>" + label + ":</strong> " + value + "</li>";
+        }
+        row("Looking for", info.display);
+        row("Room", ctx.room);
+        row("Window", ctx.windowType);
+        row("Light control", ctx.light);
+        row("Privacy", ctx.privacy);
+        row("Style", ctx.style);
+        row("Colour", ctx.colour);
+        row("Budget direction", ctx.budget);
+        row("Installation", ctx.install);
+
+        // Every value inserted above comes from our own fixed option
+        // labels (button clicks) or the closed ROOM_PATTERNS/CATEGORY_INFO
+        // lists — never from raw, unfiltered visitor text — so this is
+        // safe to build as innerHTML.
+        card.innerHTML =
+          "<h4>Recommended direction</h4>" +
+          "<ul>" +
+          itemsHtml +
+          "</ul>" +
+          "<p>This is a suggested starting point only — not a price quote, order, " +
+          "or scheduled appointment. Marc reviews every request personally and will " +
+          "confirm specifics, pricing and timing with you directly.</p>";
+        chat.appendChild(card);
+        chat.scrollTop = chat.scrollHeight;
+
+        clearOptions();
+        addOption(
+          "Request Consultation →",
+          function () {
+            var wizard = document.getElementById("wizard");
+            var radio = document.getElementById("need-" + info.radioId);
+            if (radio) radio.checked = true;
+            if (wizard) {
+              wizard.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          },
+          "cta-final"
+        );
+        addOption(
+          "Start over",
+          function () {
+            resetChat();
+          },
+          "chat-restart"
+        );
+      }, 450);
+    }
+
+    function resetChat() {
+      ctx = {};
+      stepIndex = -1;
+      chat.innerHTML = "";
+      addMessage(
+        "Hi again! Tell me a bit about what you're working on (for example, " +
+          '"I need blinds for my living room") and I’ll ask a few quick ' +
+          "follow-up questions — or pick an option below.",
+        "bot"
+      );
+      clearOptions();
+      renderInitialOptions();
+      if (textForm) textForm.hidden = false;
+      if (orLabel) orLabel.hidden = false;
+      if (textInput) textInput.value = "";
+    }
+
+    function parseCategory(text) {
+      for (var i = 0; i < CATEGORY_PATTERNS.length; i++) {
+        if (CATEGORY_PATTERNS[i].pattern.test(text)) return CATEGORY_PATTERNS[i].key;
+      }
+      return null;
+    }
+
+    function parseRoom(text) {
+      for (var i = 0; i < ROOM_PATTERNS.length; i++) {
+        if (ROOM_PATTERNS[i].pattern.test(text)) return ROOM_PATTERNS[i].label;
+      }
+      return null;
+    }
+
+    function handleFreeText(text) {
+      addMessage(text, "user");
+      hideTextEntry();
+      var category = parseCategory(text);
+      var room = parseRoom(text);
+      if (room) ctx.room = room;
+
+      if (category) {
+        ctx.category = category;
+        if (room) {
+          window.setTimeout(function () {
+            addMessage(
+              "Got it — " + CATEGORY_INFO[category].label + " for the " + room.toLowerCase() + ". Let's narrow it down.",
+              "bot"
+            );
+            beginGuidedSteps();
+          }, 350);
+        } else {
+          askRoom();
+        }
+      } else {
+        askCategoryClarify();
+      }
+    }
+
+    if (textForm && textInput) {
+      textForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var value = textInput.value.trim();
+        if (!value) return;
+        textInput.value = "";
+        handleFreeText(value);
       });
-      firstRoundReply(need, btn.getAttribute("data-reply"));
-    });
+    }
+
+    renderInitialOptions();
   }
 
   /* ---------------------------------------------------------------

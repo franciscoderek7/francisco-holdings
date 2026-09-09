@@ -57,35 +57,40 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M9 12h.01M15 12h.01M9 18v2M15 18v2" stroke-linecap="round"/></svg>
           </span>
           <div>
-            <h2 id="ai-widget-heading">AI Consultation Assistant</h2>
-            <p>A scripted demo — helps gather project info before Marc follows up personally.</p>
+            <h2 id="ai-widget-heading">AI Concierge</h2>
+            <p>Demo AI Concierge — simulated for this prototype, not connected to a live AI service.</p>
           </div>
         </div>
         <div class="ai-disclaimer">
-          <strong>What this assistant is (and isn't):</strong> it only asks basic
-          questions to help organize your request. It is <strong>not</strong> Marc,
-          cannot quote prices, cannot promise installation dates, cannot confirm
-          product availability, and cannot make any business commitments. Marc
-          reviews every request personally before anything is finalized. This is a
+          <strong>What this assistant is (and isn't):</strong> it asks a short,
+          scripted set of questions to sketch out a starting point before Marc
+          gets involved. It is <strong>not</strong> Marc and does not act or
+          speak on his behalf. It will <strong>never</strong>: quote or estimate
+          a price, promise an installation date, confirm that a product is in
+          stock or available, or make any business commitment. Marc reviews
+          every request personally before anything is finalized. This is a
           scripted demo, not a live AI service — nothing you type here is sent
-          anywhere.
+          anywhere or stored after you leave the page.
         </div>
         <div class="ai-chat" id="aiChat" aria-live="polite">
           <div class="chat-msg bot">
-            Hi! I'm the Lindsay Blinds AI Consultation Assistant. I help collect a
-            few basic details before Marc follows up personally — I can't quote
-            prices or confirm dates, just questions for now. What are you working on?
+            Hi! I'm the Lindsay Blinds AI Concierge — a simulated demo assistant.
+            Tell me a bit about what you're working on (for example, "I need
+            blinds for my living room") and I'll ask a few quick follow-up
+            questions, or just pick an option below.
           </div>
         </div>
-        <div class="chat-quick-replies" id="chatQuickReplies">
-          <button type="button" data-reply="Blinds" data-need="blinds">Blinds</button>
-          <button type="button" data-reply="Shades" data-need="shades">Shades</button>
-          <button type="button" data-reply="Shutters" data-need="shutters">Shutters</button>
-          <button type="button" data-reply="Motorization" data-need="motorized">Motorization</button>
-          <button type="button" data-reply="Not sure yet" data-need="unsure">Not sure yet</button>
-        </div>
+        <form class="chat-textrow" id="aiChatForm">
+          <label for="aiChatInput" class="visually-hidden">Type a message to the demo AI concierge</label>
+          <input type="text" id="aiChatInput" name="aiChatInput" placeholder="e.g. I need blinds for my living room" autocomplete="off" />
+          <button type="submit" class="btn btn-primary btn-sm">Send</button>
+        </form>
+        <p class="chat-or">…or pick a starting point:</p>
+        <div class="chat-quick-replies" id="chatQuickReplies"></div>
         <div class="ai-widget-footer">
-          Prototype / demo assistant — scripted responses only, no live AI call, no data leaves your browser.
+          Demo AI Concierge — scripted responses only, no live AI call, no data
+          leaves your browser. Never quotes prices, never promises dates, never
+          confirms availability, never impersonates Marc.
         </div>
       </div>
     </div>
@@ -360,6 +365,40 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section-alt" aria-labelledby="flow-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Behind the scenes</p>
+        <h2 id="flow-heading">How this concept turns a visit into a lead</h2>
+        <p>
+          A simplified look at the path this prototype illustrates — from someone
+          finding the site to Marc having what he needs to follow up personally.
+        </p>
+      </div>
+      <ol class="flow-diagram" aria-label="Lead capture flow, seven steps">
+        <li class="flow-step"><span class="flow-num">1</span><span class="flow-label">Visitor</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">2</span><span class="flow-label">Website</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">3</span><span class="flow-label">AI Concierge</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">4</span><span class="flow-label">Service Interest</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">5</span><span class="flow-label">Consultation</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">6</span><span class="flow-label">Lead Form</span></li>
+        <li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><span class="flow-num">7</span><span class="flow-label">Confirmation</span></li>
+      </ol>
+      <p class="placeholder-note" style="margin-top:1.5rem;max-width:54rem;">
+        In this prototype every step happens locally in your browser — the
+        "Lead Form" and "Confirmation" steps above do not send data anywhere.
+        A real production version would need an actual backend to deliver a
+        lead to Marc; see the README for what that would take to build.
+      </p>
     </div>
   </section>
 </main>
