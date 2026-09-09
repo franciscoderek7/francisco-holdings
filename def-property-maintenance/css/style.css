@@ -65,10 +65,12 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background: var(--color-bg);
   color: var(--color-ink);
@@ -495,7 +497,8 @@ textarea:focus-visible,
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
   border: 1.5px solid transparent;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .badge::before {
