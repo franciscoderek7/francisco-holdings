@@ -16,7 +16,7 @@ website projects.
 | `FAILURE` | Something that was attempted and did not work, with the reason recorded. |
 
 Repository: `franciscoderek7/francisco-holdings` · Branch: `claude/three-website-prototypes-95en8x`
-· Last verified against commit `9ecb2e4`.
+· Last verified against commit `5c1d835`.
 
 ---
 
@@ -24,8 +24,8 @@ Repository: `franciscoderek7/francisco-holdings` · Branch: `claude/three-websit
 
 | Project | Label | Status |
 |---|---|---|
-| Dylan — Floor 17 | Northern Forge Blinds | `DEVELOPMENT / PROTOTYPE` |
-| Dylan — Floor 18 | DEF Property Maintenance | `DEVELOPMENT / PROTOTYPE` |
+| Dylan — Floor 17 | Northern Forge Windows, Blinds & Doors | `DEVELOPMENT / PROTOTYPE` |
+| Dylan — Floor 18 | DEF Property Maintenance & Security | `DEVELOPMENT / PROTOTYPE` |
 | Marc | Lindsay Blinds | `DEMO / NOT AUTHORIZED FOR PRODUCTION` |
 
 "Floor 17" / "Floor 18" are internal labels for this runbook only — they do not appear anywhere on
@@ -44,8 +44,8 @@ sites themselves (see Phase 4).
 - [x] No credentials required for prototype work — `VERIFIED`
 - [x] Three businesses remain logically separated — `VERIFIED` (separate directories, separate
       branding, no shared content, no cross-links between the three sites)
-- [x] Dylan Floor 17 identified as Northern Forge Blinds — `VERIFIED`
-- [x] Dylan Floor 18 identified as DEF Property Maintenance — `VERIFIED`
+- [x] Dylan Floor 17 identified as Northern Forge Windows, Blinds & Doors — `VERIFIED`
+- [x] Dylan Floor 18 identified as DEF Property Maintenance & Security — `VERIFIED`
 - [x] Marc identified as Lindsay Blinds — `VERIFIED`
 - [ ] Marc production authorization = NOT YET GRANTED — `CONFIRMATION REQUIRED`
 
@@ -72,73 +72,139 @@ commit that introduced it.
 
 ---
 
-## PHASE 2 — DYLAN / FLOOR 17 — NORTHERN FORGE BLINDS
+## PHASE 2 — DYLAN / FLOOR 17 — NORTHERN FORGE WINDOWS, BLINDS & DOORS
 
-Directory: `northern-forge-blinds/`
+Directory: `northern-forge-blinds/` (path unchanged; business scope/name expanded in-place rather
+than renaming the directory again — see Phase 1 rationale on avoiding unnecessary churn)
+
+Renamed from "Northern Forge Blinds" to **"Northern Forge Windows, Blinds & Doors"** — scope
+expanded from blinds-only to windows + blinds/shades/shutters + doors, per Dylan's build order.
 
 | Requested page | Built as | Status |
 |---|---|---|
 | Homepage | `index.html` | `VERIFIED` |
-| Products | `products.html` (Blinds / Shades / Shutters / Motorization as anchored sections) | `VERIFIED` |
-| Services | *Folded into Products by design decision* — installation/consultation guidance lives inside Products and the Consultation flow rather than its own page (normal pattern for a small local business, left as-is) | `VERIFIED` |
+| Windows | Anchored section on `products.html` (6 conceptual sub-categories) | `VERIFIED` |
+| Blinds & Shades | Anchored sections on `products.html` (existing Blinds/Shades/Shutters) | `VERIFIED` |
+| Doors | Anchored section on `products.html` (6 conceptual sub-categories) | `VERIFIED` |
+| Products | `products.html` — single page, sub-nav + anchored sections per category (deliberate structure decision over 4 thin pages) | `VERIFIED` |
+| Projects (Gallery) | `projects.html` — 14 tiles, now with category filter tabs (All/Windows/Blinds/Shades/Doors/Full Projects) | `VERIFIED` |
 | About | `about.html` | `VERIFIED` |
-| Gallery | `projects.html` | `VERIFIED` |
-| Consultation | `consultation.html` | `VERIFIED` |
+| Consultation | `consultation.html` (expanded intake) | `VERIFIED` |
 | Contact | `contact.html` | `VERIFIED` |
 
 Feature checklist:
 
-- [x] Responsive mobile design — `VERIFIED` (tested 390px/1280px, zero horizontal overflow)
-- [x] Professional branding — `VERIFIED` (distinct dark-slate/forged-copper identity, custom
-      wordmark treatment, angled section dividers)
-- [x] Product presentation — `VERIFIED`
-- [x] Strong CTAs — `VERIFIED` ("Book a Consultation" / "Request a Quote" throughout)
-- [x] Consultation flow — `VERIFIED` (demo-only, client-side validation, success state)
-- [x] AI concierge demonstration — `VERIFIED` / `DEMO` — "AI Blinds Concierge" on `consultation.html`,
-      explicitly labeled "Demo AI Concierge — simulated for this prototype, not connected to a live
-      AI service." Zero network calls (confirmed via grep + Playwright).
-- [x] Lead-capture demonstration — `VERIFIED` / `DEMO` — visual flow diagram + concierge hand-off
-      into the consultation form; nothing is transmitted or stored anywhere.
-- [x] Wow-factor motion/visual pass — `VERIFIED` — scroll-reveal animations, hero entrance
-      choreography, hover micro-interactions, `prefers-reduced-motion` respected site-wide.
+- [x] Responsive mobile design — `VERIFIED` (independently re-tested 390px/1440px, zero horizontal overflow)
+- [x] Professional branding — `VERIFIED` (dark-slate/forged-copper identity retained; new
+      "Windows, Blinds & Doors" tagline under the wordmark site-wide)
+- [x] Windows product presentation — `VERIFIED` — 6 conceptual categories (replacement,
+      energy-efficient, modern, custom, residential, specialty); no fabricated ratings/manufacturers
+- [x] Doors product presentation — `VERIFIED` — 6 conceptual categories (entry, exterior, patio,
+      sliding, modern systems, replacement); no fabricated brands/materials/warranties
+- [x] Product Finder (DEMO) — `VERIFIED` / `DEMO` — new `js/finder.js`, 9-step walk, explicitly
+      labeled "Northern Forge Product Finder — Demo," never represented as live AI, no network calls
+- [x] Upgraded AI Concierge — `VERIFIED` / `DEMO` — visible progress state, contextual follow-ups,
+      explained recommendations (not just a bare suggestion); still fully scripted, still labeled
+      simulated, never quotes prices/dates/availability
+- [x] Technology Showcase — `VERIFIED` — smart-home integration concepts (motorized/automated
+      treatments, scheduling, voice/remote control); explicit disclaimer that no named platform/
+      ecosystem compatibility is claimed
+- [x] Strong CTAs — `VERIFIED` ("Book a Consultation" / "Explore Products" throughout)
+- [x] Consultation flow — `VERIFIED` — expanded intake (property type, project type, room/location,
+      window/door requirements, privacy, light, style, budget, timeline, installation, notes);
+      demo-only, client-side validation, success state
+- [x] Lead-capture demonstration — `VERIFIED` / `DEMO`
+- [x] Wow-factor motion/visual pass — `VERIFIED` (unchanged from the previous round, still respected
+      by the new sections)
+
+Independently re-verified this round (not just the build agent's own report): grepped for the
+"Windows, Blinds & Doors" rebrand and the technology-platform disclaimer directly in the files: both
+present as claimed. Fresh Playwright pass, 12/12 page×viewport combinations return 200 with zero
+console errors and zero horizontal overflow; mobile nav opens **and closes** correctly (the exact
+toggle-covered-by-panel bug class fixed on Lindsay Blinds earlier does not regress here); the
+Product Finder was clicked through 12 steps end-to-end with zero JS errors.
 
 No business facts were invented. All contact/pricing/certification fields remain explicitly
 placeholder-labeled (see Phase 8).
 
 ---
 
-## PHASE 3 — DYLAN / FLOOR 18 — DEF PROPERTY MAINTENANCE
+## PHASE 3 — DYLAN / FLOOR 18 — DEF PROPERTY MAINTENANCE & SECURITY
 
-Directory: `def-property-maintenance/`
+Directory: `def-property-maintenance/` (path unchanged; business scope/name expanded in-place)
+
+Renamed from "DEF Property Maintenance" to **"DEF Property Maintenance & Security"** — expanded
+from a maintenance-only business into maintenance + a smart-security/property-technology showcase
+line, per Dylan's build order. **DEF stands for Don Eric Francisco** — supplied as real information
+this round (not fabricated), noted tastefully on the About page.
 
 | Requested page | Built as | Status |
 |---|---|---|
 | Homepage | `index.html` | `VERIFIED` |
-| Services | `services.html` (all 7 categories, status-badged) | `VERIFIED` |
-| About | `about.html` | `VERIFIED` |
+| Services | `services.html` (original 7 maintenance categories, status-badged, unchanged) | `VERIFIED` |
+| Smart Security & Property Protection | `security.html` (**new**) — 8 technology categories + the 7-layer security model | `VERIFIED` |
+| Smart Property / Environmental / Pet Safety | `smart-property.html` (**new**) — environmental protection, pet safety, automation-chain examples, Property Intelligence concept dashboard, future roadmap | `VERIFIED` |
+| Security Assessment | `security-assessment.html` (**new**) + `js/assessment.js` — 5-step interactive demo | `VERIFIED` |
+| Service Matrix | `service-matrix.html` (**new**) — one table, 5 status labels, every category | `VERIFIED` |
+| About | `about.html` (DEF meaning + explicit licensing non-claim added) | `VERIFIED` |
 | Service Areas | `service-area.html` | `VERIFIED` |
-| Projects/Gallery | `projects.html` (concept gallery — added this session to close a gap against this phase's spec) | `VERIFIED` |
-| Request a Quote | `request-service.html` (+ "Request a Quote" CTA on homepage) | `VERIFIED` |
-| Contact | `contact.html` | `VERIFIED` |
+| Projects/Gallery | `projects.html` — now 14 tiles (added Security Technology ×3, Smart Property ×2, Pet Containment ×2, Before & After) | `VERIFIED` |
+| Request a Quote | `request-service.html` — expanded with service-type selector (Maintenance/Security/Smart Property/Pet Containment/Multiple), urgency, existing/desired tech, local-only photo upload | `VERIFIED` |
+| Contact | `contact.html` — now includes an Urgent Request triage section | `VERIFIED` |
 
 Feature checklist:
 
-- [x] Responsive mobile design — `VERIFIED` (tested 390/768/1024/1440px, zero horizontal overflow)
-- [x] Professional branding — `VERIFIED` (spruce/teal + terracotta identity, reads as
-      "established operations company" per brief)
-- [x] Service presentation — `VERIFIED` — all 7 categories carry an honest status badge
-      (`Potential Service` / `Coming Soon` / `Availability TBC`); **none is presented as active**
-- [x] Strong CTAs — `VERIFIED` ("Request a Quote" and "Contact Us" both literal, prominent CTAs)
-- [x] Quote/contact flow — `VERIFIED` / `DEMO`
-- [x] AI concierge demonstration — `VERIFIED` / `DEMO` — "AI Concierge" on `index.html` and
-      `request-service.html`. If a visitor selects a "Coming Soon" category, the concierge says so
-      honestly rather than implying availability.
-- [x] Lead-capture demonstration — `VERIFIED` / `DEMO` — flow diagram + concierge hand-off into the
-      intake form via same-site query params, nothing persisted.
-- [x] Wow-factor motion/visual pass — `VERIFIED` — scroll-reveal (including a staggered build of the
-      7-step customer journey diagram), hero entrance, badge pulse, `prefers-reduced-motion` respected.
+- [x] Responsive mobile design — `VERIFIED` (independently re-tested across all 13 pages, 390/1440px, zero overflow)
+- [x] Professional branding — `VERIFIED` — spruce/teal + terracotta identity retained; site now reads
+      as "maintenance + protection + technology," not a generic lawn-care site
+- [x] Maintenance service presentation — `VERIFIED` — unchanged, all 7 categories still honestly
+      status-badged, none presented as active
+- [x] **Security technology catalog** — `VERIFIED` / mostly `DEMO`/`Technology Showcase` — 8
+      categories (video surveillance, motion detection, ground/perimeter sensing, door/window
+      protection, glass-break detection, smart access control, video doorbells, smart lighting),
+      each individually status-badged, defaulting to **Technology Showcase**
+- [x] Environmental protection + pet/property safety — `VERIFIED` — water/freeze/temperature/
+      humidity/smoke-CO sensing concepts; pet fencing/containment concepts; no product/certification
+      claims made
+- [x] Smart Property Automation examples — `VERIFIED` / `DEMO` — 4 example chains (e.g. "motion
+      detected → light activates → camera records → owner notified → event logged"), explicitly
+      labeled as demonstration of possible automation, not a claim DEF currently operates these
+- [x] DEF Property Intelligence — `VERIFIED` / `DEMO` — static concept dashboard mockup (fixed
+      example values: Security/Perimeter/Cameras/Doors/Gates/Motion/Water/Temperature/Pet
+      Boundary), explicitly labeled **CONCEPT DEMONSTRATION**, not live data, not connected to any
+      device
+- [x] 7-layer security model — `VERIFIED` — Visibility → Perimeter → Entry → Interior →
+      Verification → Automation → Response; Response framed only as "notification/escalation
+      options," never a monitoring or police/fire-response promise
+- [x] Security Assessment (interactive demo) — `VERIFIED` / `DEMO` — independently re-tested this
+      round with real form interaction (selects + checkboxes, not button-mashing): correctly blocks
+      on missing required name/email, then completes to a generated "Property Protection Profile"
+      that explicitly states no price/availability/installation is implied
+- [x] Service Matrix — `VERIFIED` — every maintenance and security/technology category mapped to
+      one of 5 statuses (Available–Confirmed / Coming Soon / Assessment Required / Technology
+      Showcase / Business Confirmation Required); the one "Available — Confirmed" badge instance is
+      legend text only, confirmed via grep to never be applied to an actual category
+- [x] Upgraded AI Property Concierge — `VERIFIED` / `DEMO` — now parses a free-text property
+      description into a "Property Profile" before suggesting technology categories; still fully
+      scripted, no network calls, no pricing/availability/licensing claims
+- [x] Expanded Request a Quote flow — `VERIFIED` / `DEMO`
+- [x] Urgent Request triage — `VERIFIED` — routes to a call or the request form only; does **not**
+      claim 24/7 or emergency response anywhere (confirmed via direct grep)
+- [x] Wow-factor motion/visual pass — `VERIFIED`, plus one real bug found and fixed this round:
+      `js/reveal.js` was deduping on the `.reveal` CSS class itself, so any element already authored
+      with that class in HTML was silently skipped and stayed invisible under normal motion
+      settings. Fixed to dedupe on a data attribute instead; re-verified 0 stuck-invisible elements
+      under `prefers-reduced-motion: reduce` emulation.
 
-No service was ever implied active. No business facts were invented.
+**The single most important rule on this site, independently verified this round:** grepped the
+entire site myself for "licensed," "bonded," "insured," "certified," "24/7," "emergency response,"
+and "professional monitoring" — every single hit is either a negation ("DEF is **not** a licensed
+alarm company...") or a `Business Confirmation Required` matrix row. No page anywhere claims or
+implies Dylan/DEF is licensed, bonded, insured, certified, a security guard company, or a
+professional/alarm monitoring company.
+
+No service or technology capability was ever presented as confirmed-active beyond its honest
+status badge. No business facts were invented.
 
 ---
 
@@ -146,8 +212,8 @@ No service was ever implied active. No business facts were invented.
 
 | Floor | Business | Status |
 |---|---|---|
-| 17 | Northern Forge Blinds | `PROTOTYPE / DEVELOPMENT` |
-| 18 | DEF Property Maintenance | `PROTOTYPE / DEVELOPMENT` |
+| 17 | Northern Forge Windows, Blinds & Doors | `PROTOTYPE / DEVELOPMENT` |
+| 18 | DEF Property Maintenance & Security | `PROTOTYPE / DEVELOPMENT` |
 
 This representation is conceptual and exists **only in this runbook**, for Derek's internal
 tracking. It is explicitly not implemented, referenced, or hinted at on either live prototype site.
@@ -250,8 +316,8 @@ LEAD  →  (ends here in the prototype — nothing is transmitted or persisted)
 | Business | Where this is shown | Status |
 |---|---|---|
 | Lindsay Blinds | Visual diagram + wizard on `consultation.html` | `VERIFIED` / `DEMO` |
-| Northern Forge Blinds | Visual diagram + wizard on `consultation.html` | `VERIFIED` / `DEMO` |
-| DEF Property Maintenance | Visual diagram + wizard on `index.html`/`request-service.html` | `VERIFIED` / `DEMO` |
+| Northern Forge Windows, Blinds & Doors | Visual diagram + wizard on `consultation.html` | `VERIFIED` / `DEMO` |
+| DEF Property Maintenance & Security | Visual diagram + wizard on `index.html`/`request-service.html` | `VERIFIED` / `DEMO` |
 
 A real lead database, CRM integration, or notification pipeline for any of the three is `FUTURE`
 work (see Phase 11) and requires explicit authorization before any credentials or connections are
@@ -287,7 +353,7 @@ open item. All open items are `CONFIRMATION REQUIRED`.
 </details>
 
 <details>
-<summary><strong>Northern Forge Blinds</strong> (click to expand)</summary>
+<summary><strong>Northern Forge Windows, Blinds & Doors</strong> (click to expand)</summary>
 
 | Item | Status |
 |---|---|
@@ -309,7 +375,7 @@ open item. All open items are `CONFIRMATION REQUIRED`.
 </details>
 
 <details>
-<summary><strong>DEF Property Maintenance</strong> (click to expand)</summary>
+<summary><strong>DEF Property Maintenance &amp; Security</strong> (click to expand)</summary>
 
 | Item | Status |
 |---|---|
@@ -318,10 +384,15 @@ open item. All open items are `CONFIRMATION REQUIRED`.
 | Address | `CONFIRMATION REQUIRED` |
 | Service area | `CONFIRMATION REQUIRED` |
 | Hours | `CONFIRMATION REQUIRED` |
-| Services | `CONFIRMATION REQUIRED` — **which of the 7 proposed categories are real is the single biggest open question** |
+| Maintenance services | `CONFIRMATION REQUIRED` — **which of the 7 proposed categories are real is still the single biggest open question** |
+| Security/technology services | `CONFIRMATION REQUIRED` — which of the 8 security categories (if any) Dylan actually intends to assess/install/coordinate, vs. showcase-only |
+| Licensing / insurance for security work | `CONFIRMATION REQUIRED` — **not resolved by this prototype**; installing or coordinating security systems may carry real licensing/insurance requirements depending on jurisdiction and scope — this needs real research before any security service is activated, not just a website decision |
+| Hardware/vendor partnerships | `CONFIRMATION REQUIRED` — no camera/sensor/access-control vendor relationships exist; all technology is shown conceptually |
+| Professional monitoring partnership | `CONFIRMATION REQUIRED` — no monitoring-centre relationship exists; site never claims one |
+| 24/7 / emergency response | `CONFIRMATION REQUIRED` — explicitly not claimed anywhere; decide if this will ever be offered |
 | Products | N/A (service business) |
 | Pricing | `CONFIRMATION REQUIRED` |
-| Photos | `CONFIRMATION REQUIRED` — concept gallery is illustrative only, not real project photos |
+| Photos | `CONFIRMATION REQUIRED` — concept gallery (now 14 tiles, incl. security/smart-property/pet) is illustrative only, not real project photos |
 | Logo | `CONFIRMATION REQUIRED` |
 | Branding assets | `CONFIRMATION REQUIRED` |
 | Social accounts | `CONFIRMATION REQUIRED` |
@@ -337,7 +408,7 @@ open item. All open items are `CONFIRMATION REQUIRED`.
 All results below reflect an actual Playwright/Chromium automated pass plus manual interaction
 checks performed this session — nothing is marked `VERIFIED` without having been run.
 
-| Check | Lindsay Blinds | Northern Forge Blinds | DEF Property Maintenance |
+| Check | Lindsay Blinds | Northern Forge Windows, Blinds & Doors | DEF Property Maintenance & Security |
 |---|---|---|---|
 | Desktop layout (1440px) | `VERIFIED` | `VERIFIED` | `VERIFIED` |
 | Mobile layout (390px) | `VERIFIED` | `VERIFIED` | `VERIFIED` |
@@ -368,8 +439,8 @@ emulation, which shows all content immediately. Recorded here rather than silent
 
 | Business | Presentation label | Ready to demo | Status |
 |---|---|---|---|
-| Northern Forge Blinds | "Floor 17 — Northern Forge Blinds" (internal label only) | Yes, on phone or desktop | `VERIFIED` |
-| DEF Property Maintenance | "Floor 18 — DEF Property Maintenance" (internal label only) | Yes, on phone or desktop | `VERIFIED` |
+| Northern Forge Windows, Blinds & Doors | "Floor 17 — Northern Forge Windows, Blinds & Doors" (internal label only) | Yes, on phone or desktop | `VERIFIED` |
+| DEF Property Maintenance & Security | "Floor 18 — DEF Property Maintenance & Security" (internal label only) | Yes, on phone or desktop | `VERIFIED` |
 | Lindsay Blinds | "Lindsay Blinds — AI Website Concept" | Yes, on phone or desktop | `VERIFIED` — every page carries a visible "Prototype / Demo" banner so it cannot be mistaken for the live site |
 
 All three are runnable locally with zero setup (see each business's own README for exact commands).
@@ -380,7 +451,7 @@ All three are runnable locally with zero setup (see each business's own README f
 
 Nothing in this phase has been performed. All items are `FUTURE`.
 
-**Dylan (Northern Forge Blinds + DEF Property Maintenance):**
+**Dylan (Northern Forge Windows, Blinds & Doors + DEF Property Maintenance & Security):**
 
 - [ ] Domains — `FUTURE`
 - [ ] Production hosting — `FUTURE`
@@ -412,54 +483,81 @@ order**, none of which have happened yet:
 ### VERIFIED
 - All three prototypes render correctly, are fully navigable, and pass an automated responsive/
   accessibility/console-error pass at mobile and desktop widths.
-- Two real bugs were found by testing and fixed: a mobile-nav toggle that became unclickable once
-  its own panel opened (Lindsay Blinds), and a badge/text overflow on mobile (DEF Property
-  Maintenance property-care page). Both re-verified fixed.
-- No production site, domain, DNS, or credential was touched, requested, or required.
+- Three real bugs were found by testing and fixed across the life of this project: a mobile-nav
+  toggle that became unclickable once its own panel opened (Lindsay Blinds), a badge/text overflow
+  on mobile (DEF property-care page), and a scroll-reveal dedup bug that could leave elements
+  permanently invisible (DEF, found during this round's expansion). All re-verified fixed.
+- No production site, domain, DNS, or credential was touched, requested, or required, across any
+  round of this work.
+- This round's two major builds (Northern Forge's windows/doors expansion and DEF's security/
+  technology expansion) were independently re-verified against the actual files and a fresh
+  Playwright pass — not accepted on the build agents' self-reports alone.
 
 ### BUILT
-- **Lindsay Blinds** (`lindsay-blinds/`): 6 pages (including the Contact page added this session),
-  AI Concierge, 4-step consultation wizard, gallery, lead-flow diagram, traditional-vs-AI contrast
-  section, scroll/motion polish.
-- **Northern Forge Blinds** (`northern-forge-blinds/`): 6 pages, AI Blinds Concierge, consultation
-  form, projects gallery, lead-flow diagram, contrast section, scroll/motion polish.
-- **DEF Property Maintenance** (`def-property-maintenance/`): 9 pages (including the concept gallery
-  added this session), AI Concierge, request-a-quote flow, 7-category status-badged service
-  architecture, customer-journey diagram, scroll/motion polish.
+- **Lindsay Blinds** (`lindsay-blinds/`): 6 pages, AI Concierge, 4-step consultation wizard,
+  gallery, lead-flow diagram, traditional-vs-AI contrast section, scroll/motion polish. Unchanged
+  this round — out of scope per Dylan's build order ("after Dylan's two sites are finished, STOP").
+- **Northern Forge Windows, Blinds & Doors** (`northern-forge-blinds/`): 6 pages, now covering
+  windows + blinds/shades/shutters + doors. AI Concierge (upgraded with visible progress state and
+  explained recommendations), new Product Finder demo tool, new Technology Showcase, expanded
+  consultation intake, 14-tile filterable gallery, lead-flow diagram, contrast section,
+  scroll/motion polish.
+- **DEF Property Maintenance & Security** (`def-property-maintenance/`): 13 pages — the original 9
+  (7 maintenance categories + gallery) plus 4 new pages this round (`security.html`,
+  `smart-property.html`, `security-assessment.html`, `service-matrix.html`). Upgraded AI Property
+  Concierge, new interactive Security Assessment tool, expanded Request-a-Quote flow, Urgent
+  Request triage, 14-tile gallery, lead-flow diagram, scroll/motion polish.
 - This runbook (`RUNBOOK.md`).
 
 ### DEMO
-- All three AI concierge widgets — scripted decision trees, zero network calls, explicitly labeled
-  as simulated.
-- All consultation/quote/contact forms — client-side validation and a success state only; nothing
-  is transmitted or persisted anywhere.
-- DEF's customer-journey diagram and all three sites' lead-capture diagrams are illustrative, not
-  wired to any real scheduling or CRM system.
+- All AI concierge/finder/assessment widgets on all three sites (Lindsay's AI Concierge, Northern
+  Forge's AI Concierge + Product Finder, DEF's AI Property Concierge + Security Assessment) —
+  scripted decision trees, zero network calls, explicitly labeled as simulated, never claim live
+  AI, pricing, availability, or scheduling.
+- All consultation/quote/contact forms on all three sites — client-side validation and a success
+  state only; nothing is transmitted or persisted anywhere.
+- DEF's customer-journey diagram, Property Intelligence dashboard (explicitly labeled CONCEPT
+  DEMONSTRATION), and Smart Property Automation flow-chain examples, plus all three sites'
+  lead-capture diagrams — all illustrative, none wired to any real scheduling, CRM, or IoT/device
+  system.
+- DEF's entire security/technology catalog — presented as a showcase (defaulting to "Technology
+  Showcase" status) of what a modern property-protection company could offer, not a description of
+  what DEF currently does.
 
 ### ACCESS REQUIRED
 - Any future production deployment for any of the three businesses (hosting, domain, DNS).
 - Any real AI API integration (needs a server-side API key — never client-side — plus a backend
-  endpoint).
+  endpoint), for any of the three concierge/assessment tools.
+- Any real security-hardware vendor integration for DEF (cameras, sensors, access control, etc.) —
+  no such relationship exists today.
 - Marc's Lindsay Blinds production credentials, if and when Phase 11's Marc gate is cleared.
 
 ### CONFIRMATION REQUIRED
-- All business information listed in Phase 8, for all three businesses.
+- All business information listed in Phase 8, for all three businesses — DEF's list grew
+  substantially this round (which security categories are real, hardware/vendor partnerships,
+  monitoring partnership, 24/7 response decision, and licensing/insurance for security work
+  specifically).
 - All six Phase 11 gates for Marc, none of which are cleared yet.
 
-*(Resolved without re-asking: Northern Forge Blinds and Lindsay Blinds keep Services folded into
-Products rather than a separate page, and Lindsay Blinds now has a standalone `contact.html` —
-both were reasonable-default calls made this session rather than blocking on Derek.)*
+*(Resolved without re-asking, across this project: Northern Forge and Lindsay keep Services folded
+into Products rather than a separate page; Lindsay has a standalone `contact.html`; both Dylan
+sites kept their existing directory names through their rebrands rather than churning paths again
+— all reasonable-default calls made in-session rather than blocking on Derek.)*
 
 ### FUTURE
 - Everything listed in Phase 11 for both Dylan and Marc — domains, hosting, DNS, business email,
   real AI APIs, production lead databases, analytics, SEO, CRM integration, scheduling,
   notifications, and production deployment.
+- For DEF specifically: real licensing/regulatory research for security-technology work (this
+  prototype does not resolve whether or how security services can legally be offered — that's real
+  work for Dylan, independent of the website).
 
 ### FAILURE
 - The requested audit of the live `LindsayBlinds.com` production site could not be performed:
   network egress to that domain is blocked by this session's proxy policy (403 on the CONNECT
   tunnel). No workaround was attempted. If this audit is still wanted, it needs either a session
-  with that domain unblocked, or the content supplied directly (screenshots, page text).
+  with that domain unblocked, or the content supplied directly (screenshots, page text). Still
+  unresolved as of this round — Lindsay Blinds work is on hold per Dylan's build order anyway.
 
 ---
 
