@@ -204,6 +204,11 @@ h4{ font-size:var(--step-1); }
   width:2.1rem; height:2.1rem;
   flex:none;
 }
+.brand__text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
 .brand__word{
   font-family:var(--font-display);
   font-weight:800;
@@ -213,8 +218,22 @@ h4{ font-size:var(--step-1); }
   white-space:nowrap;
 }
 .brand__word .accent{ color:var(--copper-600); }
+.brand__sub{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:0.6rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-500);
+  white-space:nowrap;
+}
 .section--ink .brand,
 .footer .brand{ color:var(--paper-000); }
+.section--ink .brand__sub,
+.footer .brand__sub{ color:var(--ink-400); }
+@media (max-width:26em){
+  .brand__sub{ display:none; }
+}
 
 /* -------------------------------------------------------------------------
    5. Header / nav
@@ -1100,3 +1119,120 @@ legend{ font-family:var(--font-display); font-weight:700; padding-inline:0.3rem;
 
 .pill{ transition:border-color .15s ease, transform .15s ease; }
 .pill:hover{ border-color:var(--copper-500); transform:translateY(-1px); }
+
+/* -------------------------------------------------------------------------
+   23. Guided-tool progress bar (shared by AI Concierge + Product Finder)
+   ------------------------------------------------------------------------- */
+.concierge__progress-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:var(--space-2);
+  margin-bottom:var(--space-2);
+}
+.concierge__progress-track{
+  flex:1;
+  height:6px;
+  border-radius:999px;
+  background:var(--paper-200);
+  overflow:hidden;
+}
+.concierge__progress-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--copper-500), var(--copper-400));
+  transition:width .3s cubic-bezier(.16,.72,.29,1);
+  width:0%;
+}
+.concierge__progress-label{
+  font-size:var(--step--1);
+  color:var(--ink-500);
+  font-family:var(--font-display);
+  font-weight:700;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.concierge__why{
+  border:1.5px solid var(--line);
+  background:var(--paper-100);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
+  font-size:var(--step--1);
+  color:var(--ink-700);
+  margin-bottom:var(--space-3);
+}
+.concierge__why strong{ color:var(--ink-900); }
+
+/* -------------------------------------------------------------------------
+   24. Product Finder (demo) — reuses .concierge component classes so it
+   matches the AI Concierge visually; distinguished only by its badge label.
+   ------------------------------------------------------------------------- */
+.concierge__badge--finder{ background:var(--ink-900); }
+.concierge__badge--finder svg{ stroke:var(--copper-400); }
+
+/* -------------------------------------------------------------------------
+   25. Project gallery category filter tabs
+   ------------------------------------------------------------------------- */
+.filter-tabs{
+  display:flex; flex-wrap:wrap; gap:0.6rem;
+  margin:0 0 var(--space-5);
+}
+.filter-tab{
+  border:1.5px solid var(--line);
+  background:var(--paper-000);
+  color:var(--ink-700);
+  font-family:var(--font-display); font-weight:700; font-size:var(--step--1);
+  letter-spacing:0.03em; text-transform:uppercase;
+  padding:0.55rem 1.1rem;
+  border-radius:999px;
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, color .15s ease, transform .15s ease;
+}
+.filter-tab:hover{ border-color:var(--copper-500); transform:translateY(-1px); }
+.filter-tab[aria-pressed="true"]{
+  background:var(--ink-900); border-color:var(--ink-900); color:var(--paper-000);
+}
+.tile[hidden]{ display:none; }
+
+/* -------------------------------------------------------------------------
+   26. Technology showcase grid (smart-home concept cards)
+   ------------------------------------------------------------------------- */
+.tech-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-3);
+}
+@media (min-width:40em){
+  .tech-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:64em){
+  .tech-grid{ grid-template-columns:repeat(3,1fr); }
+}
+.tech-card{
+  border:1px solid var(--ink-700);
+  background:var(--ink-800);
+  border-radius:var(--radius-lg);
+  padding:var(--space-4);
+  display:flex; flex-direction:column; gap:0.6rem;
+}
+.tech-card .icon-badge{ background:var(--ink-700); }
+.tech-card h3{ color:var(--paper-000); font-size:var(--step-1); margin:0; }
+.tech-card p{ color:var(--ink-300); margin:0; font-size:var(--step--1); }
+
+/* -------------------------------------------------------------------------
+   27. Sub-navigation row (anchored category jump links on Products page)
+   ------------------------------------------------------------------------- */
+.subnav{
+  display:flex; flex-wrap:wrap; gap:0.5rem;
+  margin-top:var(--space-5);
+}
+.subnav a{
+  border:1.5px solid var(--ink-600);
+  color:var(--paper-100);
+  border-radius:999px;
+  padding:0.5rem 1rem;
+  font-family:var(--font-display); font-weight:700; font-size:var(--step--1);
+  letter-spacing:0.02em;
+  text-decoration:none;
+  transition:border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.subnav a:hover{ border-color:var(--copper-500); background:rgba(193,101,47,0.12); transform:translateY(-1px); }

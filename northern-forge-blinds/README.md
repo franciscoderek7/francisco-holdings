@@ -1,57 +1,123 @@
-# Northern Forge Blinds — Visual Prototype
+# Northern Forge Windows, Blinds & Doors — Visual Prototype
 
 This is a **static, self-contained visual prototype** of a concept website for
-Northern Forge Blinds — an idea for Dylan's own independent, long-term
-window-coverings business (blinds, shades, shutters, motorization).
+Northern Forge Windows, Blinds & Doors — an idea for Dylan's own independent,
+long-term home-openings business, recently **expanded in scope** from a
+blinds-only concept to also cover windows and doors (windows, blinds, shades,
+shutters, doors, and motorization).
 
 **This is not a live site.** It exists only to gather Dylan's feedback on
 direction, tone, structure, and visual identity. Every piece of contact
-information, credential, review, price, and years-in-business claim is a
-clearly labeled placeholder — nothing here is real business information.
+information, credential, review, price, hours, and years-in-business claim is
+a clearly labeled placeholder — nothing here is real business information.
 
-Northern Forge Blinds is an independent concept and is not affiliated with,
-endorsed by, a successor to, or otherwise connected to any other
-window-coverings company.
+Northern Forge Windows, Blinds & Doors is an independent concept and is not
+affiliated with, endorsed by, a successor to, or otherwise connected to any
+other windows/blinds/doors company.
+
+**Production deployment of this prototype is not authorized.** See
+**Production readiness statement** near the end of this file.
 
 ---
 
 ## Business name / status
 
-- **Working name:** Northern Forge Blinds — treat this as a working name for
-  the prototype, not a confirmed final business name. Dylan should confirm
-  the exact legal name and any registration/entity status before it appears
-  on anything public.
+- **Working name:** Northern Forge Windows, Blinds & Doors (previously
+  "Northern Forge Blinds," before the scope expanded) — treat this as a
+  working name for the prototype, not a confirmed final business name. Dylan
+  should confirm the exact legal name and any registration/entity status
+  before it appears on anything public.
+- **Scope:** originally blinds, shades, shutters, and motorization only; now
+  expanded to also include windows and doors as full categories, not just a
+  passing mention.
 - **Status:** concept only. There is no operating business behind this site
-  yet — no confirmed phone number, email, address, service area, pricing,
-  licensing, or insurance. Nothing here should be treated as an active offer
-  of services.
+  yet — no confirmed phone number, email, address, hours, service area,
+  pricing, licensing, or insurance. Nothing here should be treated as an
+  active offer of services.
 
 ## Current status
 
 - A fully static, click-through prototype covering Home, Products, Projects,
   About, Consultation, and Contact.
-- Includes a new scripted "AI Blinds Concierge" demo widget, a "traditional
-  vs. AI-powered website" explainer section, and a lead-capture architecture
-  diagram (see **New in this revision** below).
+- **Products page** now covers six anchored categories — Windows, Blinds,
+  Shades, Shutters, Doors, and Motorization — plus a **Technology Showcase**
+  section and an interactive **Product Finder (demo)**.
+- **Consultation page** includes the upgraded **Northern Forge Concierge**
+  (demo) with a visible step progress bar, contextual follow-up questions,
+  and an explained recommendation, plus a substantially expanded intake form.
+- **Projects page** now includes category filter tabs (Windows / Blinds /
+  Shades / Doors / Full Projects) over an extended placeholder gallery.
 - No backend, no database, no real AI integration, no analytics, and no
   deployment — this only exists as local files today.
 
-### New in this revision
+### What changed in this revision (scope expansion)
 
-- **Renamed** from "Northforge Blinds" to **"Northern Forge Blinds"**
-  throughout the site (wordmark, titles, meta tags, body copy, footer,
-  README). The project directory is now `northern-forge-blinds/`.
-- **AI Blinds Concierge (demo)** — a scripted, chat-style guided flow on
-  `consultation.html` (`js/concierge.js`), separate from the existing
-  multi-field consultation form. See **Prototype limitations** and **AI
-  integration requirements** below for exactly what it does and doesn't do.
-- **"Traditional website vs. AI-powered website" section** on `index.html`
-  contrasting the old browse-and-call pattern with this concept's guided,
-  lead-capturing pattern.
-- **Lead-capture architecture diagram** on `consultation.html` — a simple
-  CSS/SVG-free step-flow (Visitor → Website → AI Concierge → Product
-  Interest → Consultation/Quote → Lead Form → Confirmation) built from plain
-  HTML and CSS.
+- **Rebrand / scope expansion** from "Northern Forge Blinds" to **"Northern
+  Forge Windows, Blinds & Doors."** The wordmark now shows "Northern Forge"
+  as the primary mark with a small "Windows, Blinds & Doors" tagline
+  underneath (`.brand__sub` in `css/style.css`) on every page header and
+  footer. Titles, meta descriptions, and headings were updated site-wide.
+- **Windows** and **Doors** added as full, substantial categories on
+  `products.html` (`#windows` and `#doors`), each with six conceptual
+  sub-categories (e.g. Replacement Windows, Energy-Efficient Windows for
+  windows; Entry Doors, Patio Doors for doors) — not just a token mention.
+  No manufacturer, brand, technical rating, or warranty claims are made
+  anywhere in these sections.
+- **Navigation decision:** rather than adding four more top-level nav items
+  (Home / Windows / Blinds & Shades / Doors / Products / Projects / About /
+  Consultation / Contact, as sketched in the original brief), the six
+  product categories were kept as anchored sections on a single, well
+  organized `products.html` page — the same pattern the site already used
+  for Blinds/Shades/Shutters/Motorization — with a sub-nav of jump links at
+  the top of the page. Main navigation stays Home / Products / Projects /
+  About / Consultation / Contact, which keeps the header usable at phone
+  width. This was a judgment call in line with the brief's own guidance to
+  prefer "genuinely useful" over "padding."
+- **Northern Forge Product Finder (demo)** — a new interactive tool on
+  `products.html` (`#product-finder`, `js/finder.js`), explicitly labeled
+  "Northern Forge Product Finder — Demo." Walks: what are you looking for
+  (Windows/Blinds/Shades/Doors) → room/property type → privacy requirements
+  → light-control requirements → style → colour → manual or motorized →
+  approximate budget (placeholder ranges) → installation required → a
+  simulated recommendation with a plain-language explanation. Pure
+  client-side scripted logic, no network calls, never represented as a live
+  AI or inventory system.
+- **Northern Forge Concierge upgraded** (`js/concierge.js`, on
+  `consultation.html`) — renamed from "AI Blinds Concierge" and
+  substantially reworked: a visible step progress bar ("Step X of Y" plus a
+  filled progress track), contextual follow-up questions that reference the
+  visitor's own prior answers (e.g. referencing the room or light preference
+  already given), and a final recommendation that includes a plain-language
+  explanation of *why* ("Based on your preference for X and wanting to Y, a
+  Z direction may be a good starting point..."). Still 100% scripted, zero
+  network calls, explicitly labeled as a simulated/demo tool — never quotes
+  real prices, never claims inventory or appointment availability, never
+  claims a live AI backend.
+- **Technology Showcase** — a new section on `products.html` (`#technology`)
+  covering nine smart-home concept capabilities: motorized blinds, automated
+  shades, scheduled opening/closing, light-level automation, privacy
+  automation, smart-home integration, remote control, voice control, and
+  sensor-triggered automation. No compatibility with any named smart-home
+  platform or voice assistant is claimed — the section explicitly says any
+  such integration "could integrate with popular smart-home platforms, to be
+  confirmed."
+- **Projects gallery extended** — `projects.html` now has category filter
+  tabs (All / Windows / Blinds / Shades / Doors / Full Projects,
+  `js/gallery.js`) over 14 placeholder tiles (up from 8), including new
+  Windows and Doors placeholder tiles. Every tile keeps the existing
+  "Placeholder" tag/caption/`alt`-text convention — none are implied to be
+  Dylan's real completed work.
+- **Consultation intake expanded** (`consultation.html`,
+  `js/consultation.js`) to collect: product interest (now including Windows
+  and Doors), property type, project type, room/location, window/door
+  requirements, privacy requirements, light requirements, style, budget
+  (placeholder ranges), installation preference, timeline, additional notes,
+  name, phone, and email. Still demo-only: client-side validation and a
+  success state, no network calls, nothing stored anywhere (not even
+  `localStorage`).
+- **Contact page** — branding updated; phone/email/address/service-area
+  placeholders kept, and an **hours** placeholder was added alongside them,
+  plus a consultation CTA next to the contact details.
 
 ## Technology
 
@@ -61,8 +127,13 @@ window-coverings company.
   tracking pixels, no third-party embeds.
 - No `fetch`, `XMLHttpRequest`, `WebSocket`, form `action`/`method`
   submission, cookies, or `localStorage` anywhere in the codebase — every
-  "submit" and every AI Concierge answer is handled entirely with in-memory
-  JavaScript state and `preventDefault()`.
+  "submit," every Concierge answer, and every Product Finder answer is
+  handled entirely with in-memory JavaScript state and `preventDefault()`.
+- **Technology assumptions:** every "smart-home integration" claim on the
+  Technology Showcase is **generic and unconfirmed** — no specific ecosystem
+  or voice-assistant brand is named or implied as compatible anywhere on the
+  site. Any real integration would need to be selected, tested, and
+  confirmed before being advertised.
 
 ## How to run locally
 
@@ -72,8 +143,8 @@ Either works:
    your browser via a `file://` URL. No ES modules are used, so this works
    without a server.
 2. **Local static server (optional):** from inside `northern-forge-blinds/`,
-   run `npx serve .` (or any static file server) and open the printed local
-   URL.
+   run `python3 -m http.server 8000` (or `npx serve .`, or any static file
+   server) and open the printed local URL.
 
 There is no backend, no database, and no build process — just plain HTML,
 CSS, and JavaScript files referencing each other with relative paths.
@@ -87,13 +158,13 @@ instructions at that time.
 
 ## How to deploy
 
-**Not deployed anywhere.** This prototype has no domain and no hosting.
-Before any real deployment:
+**Not deployed anywhere, and not authorized for deployment.** This prototype
+has no domain and no hosting. Before any real deployment:
 
 - Pick and register a domain name (not yet decided).
 - Choose a hosting approach (static host, e.g. Netlify/Vercel/GitHub Pages
-  style, vs. something with a real backend once forms and the AI Concierge
-  need to actually submit somewhere).
+  style, vs. something with a real backend once forms, the Concierge, and
+  the Product Finder need to actually submit somewhere).
 - Decide on the real form-handling and (optionally) real AI backend first —
   see **AI integration requirements** below — since that decision affects
   hosting choice.
@@ -105,27 +176,34 @@ privately previewed set of files.
 
 Be explicit with anyone reviewing this that:
 
-- **The AI Concierge is not real AI.** `js/concierge.js` is a fixed,
-  hand-written decision tree — a fixed sequence of questions, fixed answer
-  options, and simple `if`/`else` logic to pick a "demo recommendation." It
-  does not call any language model, API, or external service of any kind.
-  The UI is intentionally labeled "Demo AI Concierge — simulated for this
-  prototype, not connected to a live AI service" so this is never ambiguous
-  to a visitor.
+- **Neither the Concierge nor the Product Finder is real AI.**
+  `js/concierge.js` and `js/finder.js` are fixed, hand-written decision
+  trees — a fixed sequence of questions, fixed answer options, and simple
+  `if`/`else` logic (including template strings that splice in prior
+  answers to sound contextual) to pick a "demo recommendation." Neither
+  calls any language model, API, or external service of any kind. Both are
+  intentionally labeled as demos — "Northern Forge Concierge — Demo" and
+  "Northern Forge Product Finder — Demo" — so this is never ambiguous to a
+  visitor.
 - **No form submits anywhere.** The Consultation form, the Contact form, and
-  the AI Concierge's "Book a Consultation" / "Request a Quote" actions only
-  update on-page state (or link/scroll to another part of the site). No
-  email is sent, no data is stored server-side, and no lead is actually
-  captured anywhere outside the visitor's own browser tab.
+  the Concierge's and Product Finder's "Book a Consultation" / "Request a
+  Quote" actions only update on-page state (or link/scroll to another part
+  of the site). No email is sent, no data is stored server-side or in
+  `localStorage`, and no lead is actually captured anywhere outside the
+  visitor's own browser tab for that visit.
 - **All project photography is placeholder art.** Every image on
   `projects.html`, the homepage projects teaser, and the About page headshot
   area is a CSS/inline-SVG placeholder graphic, clearly labeled
   "Placeholder" in the UI and in `alt` text — none are real photos, stock
-  photos, or renders of actual work.
+  photos, or renders of actual work. This includes the new Windows and
+  Doors placeholder tiles.
 - **No claims of experience, credentials, reviews, or pricing.** These are
   deliberately absent, not just unfinished — see **Required business info**
   below for what would need to be supplied and verified before anything like
   that could be added.
+- **No named smart-home platform or manufacturer/brand is claimed anywhere**
+  — the Technology Showcase and Windows/Doors category pages are
+  deliberately generic.
 
 ## Required business info
 
@@ -137,61 +215,76 @@ public site, Dylan needs to supply and confirm:
 - **Business email address**
 - **Business/mailing address** (or confirmation that no public address will
   be listed, e.g. mobile/in-home service only)
+- **Business hours**
 - **Service area** (cities/regions actually served)
-- **Real business name/legal status** — confirm "Northern Forge Blinds" is
-  the final name, and whether it's a registered business entity, sole
-  proprietorship, etc.
+- **Real business name/legal status** — confirm "Northern Forge Windows,
+  Blinds & Doors" is the final name, and whether it's a registered business
+  entity, sole proprietorship, etc.
 - **Pricing or pricing approach** (none is shown anywhere in this prototype,
-  including in the AI Concierge demo, which only offers vague qualitative
-  budget bands like "cost-conscious" or "mid-range" — even a starting-price
-  range or "free consultation" claim needs Dylan's sign-off)
+  including in the Concierge and Product Finder demos, which only offer
+  vague qualitative budget bands like "cost-conscious" or "mid-range" — even
+  a starting-price range or "free consultation" claim needs Dylan's
+  sign-off)
 - **Any certifications, licenses, or insurance** Dylan actually holds or
   plans to hold (none are claimed anywhere in this prototype — do not add
   any without verifying they're accurate and current)
 - **Years of experience / specific work history** — the About page
   deliberately avoids specific numbers or named past employers; Dylan should
   decide what, if anything, he wants to disclose
+- **Window and door supplier/manufacturer relationships** — none are named
+  anywhere in this prototype; the Windows and Doors sections are
+  deliberately generic/conceptual until real supplier relationships exist
+- **Smart-home platform/ecosystem partnerships**, if any — the Technology
+  Showcase makes no compatibility claims about any named voice assistant or
+  smart-home ecosystem
 - **Legal/compliance review** — privacy policy, terms, accessibility
   statement, and any required business licensing disclosures are not
   included and should be added before public launch
 - **Final wording sign-off** — all category descriptions, the About page
-  narrative, the AI Concierge's scripted questions/copy, and CTA copy are
-  drafts written for this prototype and should be reviewed by Dylan for
-  accuracy and tone
+  narrative, the Concierge's and Product Finder's scripted questions/copy,
+  and CTA copy are drafts written for this prototype and should be reviewed
+  by Dylan for accuracy and tone
 
 ## Required images/assets
 
 - **Real project photography** to replace every placeholder tile on
   `projects.html` and the homepage projects teaser (with actual customer
-  permission to publish, where applicable).
+  permission to publish, where applicable) — including new Windows and
+  Doors project photography once real work exists in those categories.
 - **A real headshot or "about" photo** for `about.html` (currently a
   placeholder box).
 - **Real logo/brand decision** — this prototype invents a wordmark and mark
   from scratch; Dylan may want a designer-made logo instead of (or in
   addition to) this CSS/SVG treatment.
 - **A favicon and any social-share (Open Graph) image**, once a real domain
-  and brand are finalized — neither exists yet.
+  and brand are finalized — neither exists yet (the browser tab currently
+  falls back to a default/missing favicon, which is expected for a
+  prototype).
 
 ## Future production tasks
 
 - Real form handling — every "submit" on `consultation.html` and
-  `contact.html`, and the AI Concierge's CTA buttons, currently only
-  validate/react in the browser and show a fake success message; a live
-  site needs a real backend, email service, or hosted form provider before
-  it can actually receive inquiries.
+  `contact.html`, and the Concierge's and Product Finder's CTA buttons,
+  currently only validate/react in the browser and show a fake success
+  message; a live site needs a real backend, email service, or hosted form
+  provider before it can actually receive inquiries.
 - Domain registration and hosting setup (see **How to deploy**).
 - Legal/compliance review (privacy policy, terms, accessibility statement,
   any licensing disclosures).
 - Replace all placeholder photography and confirm final logo treatment.
-- Decide whether the AI Concierge should ever become a real AI integration
-  (see next section) or should stay a scripted demo permanently — both are
-  legitimate choices.
+- Decide whether the Concierge/Product Finder should ever become a real AI
+  integration (see next section) or should stay scripted demos permanently
+  — both are legitimate choices.
+- Confirm real window/door supplier relationships (or a fabrication/sourcing
+  model) before publishing any specific product, brand, or rating claims.
+- Confirm (or drop) any smart-home platform partnership before publishing
+  any compatibility claim on the Technology Showcase.
 
 ## AI integration requirements
 
-The AI Concierge in this prototype is 100% scripted (see **Prototype
-limitations**). If a future version integrates a **real** AI backend instead
-of the scripted demo, that would require at minimum:
+The Concierge and Product Finder in this prototype are 100% scripted (see
+**Prototype limitations**). If a future version integrates a **real** AI
+backend instead of either scripted demo, that would require at minimum:
 
 - **A real backend endpoint.** The browser must never call an AI provider
   directly — a server-side endpoint should own the request to the AI
@@ -205,11 +298,11 @@ of the scripted demo, that would require at minimum:
   answers may include personal details about someone's home, so this needs
   a clear retention and privacy stance, not an accidental default.
 - **The same guardrails already baked into the demo copy, enforced for
-  real.** The scripted version never quotes a real price, promises an
-  installation date, or confirms product availability — a real AI backend
-  would need those same constraints enforced server-side (e.g. through
-  system-level instructions and/or output filtering), not just hoped for in
-  a prompt.
+  real.** The scripted versions never quote a real price, promise an
+  installation date, or confirm product/inventory availability — a real AI
+  backend would need those same constraints enforced server-side (e.g.
+  through system-level instructions and/or output filtering), not just
+  hoped for in a prompt.
 - **Rate limiting**, to prevent abuse or runaway API costs on a
   publicly-reachable endpoint.
 - **Fallback UX** for when the AI backend is slow, unavailable, or returns
@@ -230,8 +323,8 @@ prototype today. Listed here only to make the eventual scope visible:
 - CMS (content management for pages, product info, project photos)
 - Lead dashboard (a place to actually view/manage submitted consultation
   and contact requests)
-- AI configuration panel (for tuning a real AI Concierge's behavior/prompts
-  without a code deploy)
+- AI configuration panel (for tuning a real Concierge/Finder's
+  behavior/prompts without a code deploy)
 - Analytics
 - SEO (structured data, sitemaps, meta strategy beyond the current
   `noindex, nofollow` prototype tags)
@@ -243,9 +336,10 @@ prototype today. Listed here only to make the eventual scope visible:
 - SMS notifications
 - Production database
 - Authentication (for any admin/dashboard area)
+- Real smart-home platform integration(s), if and when confirmed
 - Real domain deployment
 
-Any future integration with a broader business infrastructure Derek may
+Any future integration with a broader business infrastructure Dylan may
 already run would be a separate, deliberate decision made later — nothing
 in this prototype assumes or depends on that.
 
@@ -257,37 +351,44 @@ brand:
 
 - **Name treatment / wordmark:** "Northern Forge" is set as a two-word
   wordmark — a heavier "Northern" and a copper-colored "Forge" — in a bold,
-  wide-tracked geometric sans (system font stack, no external font files).
-  It's paired with a small square mark containing a custom-drawn "N"
-  monogram (inline SVG, no logo file).
+  wide-tracked geometric sans (system font stack, no external font files),
+  with a small uppercase "Windows, Blinds & Doors" tagline underneath it
+  (`.brand__sub`), reflecting the expanded scope while keeping "Northern
+  Forge" as the primary mark. It's paired with a small square mark
+  containing a custom-drawn "N" monogram (inline SVG, no logo file).
 - **Color palette:** a "northern / architectural" palette — deep slate/ink
   (`#141a22`–`#2a3646`) as the dominant dark tone, a warm off-white paper
   background (`#faf8f4`), and a forged-copper accent (`#c1652f` family) used
-  for CTAs, icons, and highlights. This is meant to read as durable and
-  premium-but-accessible rather than a typical bright, generic "blinds
-  store" look.
+  for CTAs, icons, and highlights. Unchanged from the original prototype —
+  this scope expansion deliberately kept the existing visual identity
+  rather than rebranding from scratch.
 - **Typography:** no external fonts are loaded (per the offline
   requirement). Headings use a bold, tightly-tracked system sans (`Avenir
   Next` / `Segoe UI` / `Helvetica Neue` fallback stack); body copy uses the
   standard system UI stack. A distinct type scale (`--step--1` through
   `--step-5`) is defined in `css/style.css`.
 - **Iconography:** a single consistent inline-SVG icon style (2px stroke,
-  rounded joins, no fill) is used for the four product categories — slats
-  for blinds, a fabric wave for shades, a divided panel grid for shutters,
-  and a remote/bolt for motorization — each inside a dark rounded "badge."
+  rounded joins, no fill) is used across all six product categories —
+  windowpane cross-lines for windows, slats for blinds, a fabric wave for
+  shades, a divided panel grid for shutters, a door-with-handle glyph for
+  doors, and a remote/bolt for motorization — each inside a dark rounded
+  "badge." The Technology Showcase reuses the same icon language for its
+  nine concept cards.
 - **Section transitions:** alternating light/dark/paper/band section
   backgrounds with angled CSS `clip-path` dividers between them, instead of
-  hard-edged section breaks — intended to feel more "architectural" than a
-  stock template. The new AI Concierge, compare, and architecture-diagram
-  sections reuse this same divider system.
+  hard-edged section breaks. The new Windows, Doors, Technology Showcase,
+  and Product Finder sections all reuse this same divider system so the
+  expanded page still reads as one continuous design.
 - **Tone of voice:** conservative and factual throughout. Product category
-  copy describes general, well-known facts about each category (e.g.
-  "roller shades use continuous fabric," "shutters are panel-fit to the
-  frame") rather than making specific claims about Dylan's business. The
-  About page explicitly avoids inventing years of experience,
-  certifications, or specific past employers/clients. The AI Concierge demo
-  follows the same rule — its scripted "recommendation" never invents a
-  price, date, or availability claim.
+  copy (including the new Windows and Doors sub-categories) describes
+  general, well-known concepts (e.g. "roller shades use continuous fabric,"
+  "entry doors factor in security and weatherproofing") rather than making
+  specific claims about Dylan's business, named manufacturers, or
+  performance ratings. The About page explicitly avoids inventing years of
+  experience, certifications, or specific past employers/clients. The
+  Concierge and Product Finder demos follow the same rule — neither
+  scripted "recommendation" ever invents a price, date, availability claim,
+  or platform-compatibility claim.
 - **Logo/photography:** there are no real photos or logo files anywhere in
   this prototype. The headshot area on the About page and every project
   tile on the Projects page are placeholder graphics built from CSS and
@@ -296,62 +397,103 @@ brand:
 
 ## Visual / motion design notes
 
-A polish pass was added on top of the existing dark-slate/forged-copper
-system to give the prototype a stronger "wow factor" on both mobile and
-desktop, without touching the color palette, wordmark, or page structure:
+A polish pass was carried forward and extended on top of the existing
+dark-slate/forged-copper system, without touching the color palette,
+wordmark, or established page structure:
 
 - **Scroll-triggered reveals (`js/reveal.js`)** — a single shared, vanilla
   `IntersectionObserver` script loaded on every page. Section intros, card
-  grids (categories, About's "what Dylan brings," the compare grid, the
-  lead-capture flow steps, the projects teaser tiles) and the AI Concierge
-  panel fade and slide gently into place as they scroll into view, with a
-  small `nth-child`-based stagger so grids feel choreographed rather than
-  snapping in all at once.
-- **Hero upgrade (`index.html` / `css/style.css`)** — the homepage hero now
-  has a staggered fade-up entrance (eyebrow → headline → lede → CTA →
-  badges → graphic), a recurring subtle light-sweep across the decorative
-  slat graphic, a touch more shadow weight on the primary CTA, and a
-  contained, `requestAnimationFrame`-throttled parallax drift on the hero's
-  background gradient layer as the page scrolls (capped to ±24px, confined
-  by the hero's own `overflow:hidden`, so it can't affect layout or cause
-  overflow).
-- **Angled divider accents** — rather than moving the existing clip-path
-  dividers on scroll (which would risk opening a visible seam against the
-  sections they overlap), each divider now plays a one-time light sweep,
+  grids (categories, the new Windows/Doors sub-category cards, About's
+  "what Dylan brings," the compare grid, the lead-capture flow steps, the
+  projects teaser tiles), the Technology Showcase grid, the filter-tab row,
+  and both the Concierge and Product Finder panels fade and slide gently
+  into place as they scroll into view, with a small `nth-child`-based
+  stagger so grids feel choreographed rather than snapping in all at once.
+- **Hero upgrade** — the homepage hero has a staggered fade-up entrance
+  (eyebrow → headline → lede → CTA → badges → graphic), a recurring subtle
+  light-sweep across the decorative slat graphic, a touch more shadow
+  weight on the primary CTA, and a contained, `requestAnimationFrame`-
+  throttled parallax drift on the hero's background gradient layer as the
+  page scrolls (capped to ±24px, confined by the hero's own
+  `overflow:hidden`, so it can't affect layout or cause overflow).
+- **Angled divider accents** — each divider plays a one-time light sweep,
   fully clipped to its own angled shape, the first time it scrolls into
-  view. True scroll-linked parallax on the dividers themselves was
-  deliberately skipped as an unnecessary jank/seam risk for a purely
-  decorative effect.
-- **Micro-interactions** — buttons now lift and deepen their shadow on
+  view.
+- **Micro-interactions** — buttons lift and deepen their shadow on
   hover/press, category icon badges scale slightly on card hover, footer
-  links and the AI Concierge's option buttons and the guided-form choice
-  cards all got small, consistent hover transitions. All existing
-  `:focus-visible` outlines were kept exactly as-is and were not touched or
-  weakened by any of this work.
+  links, filter tabs, and both guided tools' option buttons all got small,
+  consistent hover transitions.
+- **Guided-tool progress bar** — a shared `.concierge__progress-*` component
+  (filled track + "Step X of Y" label) used by both the Concierge and the
+  Product Finder, so the upgraded conversational flow has a visible sense
+  of how far along the visitor is, not just a text counter.
 - **`prefers-reduced-motion: reduce` is fully respected.** The stylesheet's
   existing sitewide rule (which forces all animation/transition durations
-  to near-zero for that preference) already covers every new animation and
-  transition added here. `js/reveal.js` goes further for the
+  to near-zero for that preference) already covers every animation and
+  transition on the site, old and new. `js/reveal.js` goes further for the
   scroll-reveal system specifically: when reduced motion is requested (or
   `IntersectionObserver` isn't available), it does nothing at all — content
   is simply shown at full opacity immediately, with no hidden state to wait
   on and no scroll listener attached. The hero parallax listener is also
-  skipped entirely under reduced motion.
-- **No new dependencies, no network calls.** `js/reveal.js` is plain,
-  dependency-free JavaScript (same ES5-safe style as the rest of the site,
-  safe for `file://`); everything else is plain CSS. No CDNs, fonts, or
-  libraries were added.
-- **Verified:** all six pages were checked in a real Chromium browser at
-  both 390px and 1280px widths with realistic (mouse-wheel) scrolling —
-  zero console errors, zero elements left stuck invisible, and
-  `document.documentElement.scrollWidth` stays equal to the viewport width
-  (no horizontal overflow introduced). Buttons remain clickable immediately
-  during their entrance animation, and keyboard tab order plus
-  `:focus-visible` outlines were confirmed unaffected.
+  skipped entirely under reduced motion. This was re-verified for every new
+  section added in this revision (see **Tested** notes below).
+- **No new dependencies, no network calls.** `js/finder.js` and
+  `js/gallery.js` are plain, dependency-free JavaScript (same ES5-safe
+  style as the rest of the site, safe for `file://`); everything else is
+  plain CSS. No CDNs, fonts, or libraries were added.
 
-A future pass would benefit most from real project photography and a real
-headshot — the placeholder SVG art is the main thing now holding back the
-site from feeling fully "finished" next to the new motion polish.
+## Testing performed for this revision
+
+Verified with a real Chromium browser (via Playwright, headless) against a
+local static server (`python3 -m http.server`), covering:
+
+- All six pages (`index.html`, `products.html`, `projects.html`,
+  `about.html`, `consultation.html`, `contact.html`) load with an HTTP 200
+  status and produce no console errors other than the expected favicon
+  404 (no favicon file exists yet — see **Required images/assets**), at
+  both 390px and 1440px viewport widths.
+- No horizontal overflow at either 390px or 1440px on any page
+  (`document.documentElement.scrollWidth` matches the viewport width).
+- The mobile nav toggle was clicked twice in sequence (open, then close) and
+  confirmed to: set `aria-expanded` correctly both times, show/hide the nav
+  panel correctly both times, and — specifically checked, since a bug of
+  this exact shape (an open nav panel painting over its own toggle button)
+  was found and fixed on a sibling prototype this session — that the toggle
+  button remains the topmost, clickable element at its own screen position
+  while the panel is open, confirmed via `document.elementFromPoint`.
+- The Northern Forge Concierge was clicked through end-to-end (all 9
+  questions), confirmed to reach the summary panel with a non-empty "why
+  this direction" explanation and a "Complete" progress state, with zero
+  JavaScript errors.
+- The Northern Forge Product Finder was clicked through end-to-end (all 9
+  questions) on `products.html`, confirmed to reach its summary panel with
+  a non-empty explanation, zero JavaScript errors.
+- The consultation form was submitted empty and confirmed to show the
+  error status message with multiple fields flagged `has-error`; then
+  filled with valid data (product interest, room, name, email) and
+  confirmed to show the success panel.
+- The contact form was submitted empty (error state shown) and then with
+  valid data (success state shown).
+- The projects gallery's category filter tabs were exercised (filtering to
+  "Doors") and confirmed to show only matching tiles.
+- `prefers-reduced-motion: reduce` was emulated and confirmed that no
+  `.reveal` element is left stuck at low opacity — `reveal.js` correctly
+  skips adding the class entirely under that preference, per its existing
+  design.
+
+This was a functional/regression pass, not a full manual design review —
+Dylan should still click through the live prototype himself before treating
+any of the above as a substitute for his own review.
+
+## Production readiness statement
+
+**This prototype is not authorized for production deployment.** It has no
+real business information, no backend, no legal/compliance review, and no
+confirmed brand, pricing, or supplier relationships. Treat everything in
+this repository as a design/direction concept for internal review only,
+until Dylan explicitly signs off on a real launch plan covering the items in
+**Required business info**, **Required images/assets**, **Future production
+tasks**, and (if applicable) **AI integration requirements** above.
 
 ## Accessibility & technical notes
 
@@ -359,22 +501,25 @@ site from feeling fully "finished" next to the new motion polish.
   page, and a logical heading hierarchy throughout.
 - Skip-to-content link on every page.
 - Visible focus states on all interactive elements (links, buttons, form
-  fields, the mobile nav toggle, and the AI Concierge's option buttons).
+  fields, the mobile nav toggle, and both guided tools' option buttons).
 - Mobile nav is a keyboard-operable hamburger menu (`Tab`/`Enter`/`Space` to
-  open, `Escape` to close, focus returns to the toggle button).
-- The AI Concierge is keyboard-operable end to end: each question's options
-  are plain `<button>` elements (not free-text input, by design — this
-  keeps the demo fully deterministic and avoids implying the widget
-  understands open-ended input), focus moves to the first option after each
-  question renders, the conversation log is an `aria-live="polite"` region,
-  and the final recommendation panel receives focus when it appears.
+  open, `Escape` to close, focus returns to the toggle button); confirmed
+  the toggle stays clickable while the panel is open (see **Testing
+  performed for this revision**).
+- The Concierge and Product Finder are keyboard-operable end to end: each
+  question's options are plain `<button>` elements (not free-text input, by
+  design — this keeps the demos fully deterministic and avoids implying
+  either widget understands open-ended input), focus moves to the first
+  option after each question renders, the conversation log is an
+  `aria-live="polite"` region, and the final recommendation panel receives
+  focus when it appears.
 - All decorative SVGs are `aria-hidden`; meaningful/placeholder images use
   descriptive `alt` text or `aria-label`, including the standardized
   "Placeholder project photo — replace with real installation photography"
-  pattern used across every project tile.
+  pattern used across every project tile (Windows and Doors tiles included).
 - No `fetch`, `XMLHttpRequest`, `WebSocket`, `<form action>` submission,
-  cookies, or `localStorage` usage anywhere — the consultation form,
-  contact form, and AI Concierge are all intercepted with
+  cookies, or `localStorage` usage anywhere — the consultation form, contact
+  form, Concierge, and Product Finder are all intercepted with
   `preventDefault()` (or simply never wired to submit anywhere) and only
   change on-page state.
 - No external network requests at runtime: no CDNs, no analytics, no web
@@ -384,28 +529,42 @@ site from feeling fully "finished" next to the new motion polish.
 
 ```
 northern-forge-blinds/
-├── index.html            Home — hero, category overview, traditional-vs-AI
+├── index.html            Home — hero, six-category overview, traditional-vs-AI
 │                          compare section, projects teaser, about teaser,
 │                          consultation CTA, contact teaser
-├── products.html          Blinds / Shades / Shutters / Motorization, as four
-│                          anchored sections with their own sub-nav
-├── projects.html          Grid of placeholder project tiles (CSS/SVG only)
+├── products.html          Windows / Blinds / Shades / Shutters / Doors /
+│                          Motorization, as six anchored sections with a
+│                          sub-nav, plus a Technology Showcase section and the
+│                          Northern Forge Product Finder (demo)
+├── projects.html          Placeholder project gallery with category filter
+│                          tabs (Windows / Blinds / Shades / Doors / Full
+│                          Projects) — CSS/SVG placeholders only
 ├── about.html              About Dylan (conservative, no invented credentials)
-├── consultation.html      AI Blinds Concierge (demo), lead-capture
-│                          architecture diagram, and the standard demo-only
-│                          guided consultation form
-├── contact.html            Placeholder contact details + demo contact form
+├── consultation.html      Northern Forge Concierge (demo, with progress bar
+│                          and explained recommendations), lead-capture
+│                          architecture diagram, and the expanded demo-only
+│                          consultation intake form
+├── contact.html            Placeholder contact details (incl. hours) + demo
+│                          contact form
 ├── css/
 │   └── style.css           Full design system: tokens, layout, components,
-│                            including the Concierge widget and compare grid
+│                            including the Concierge/Finder widget, compare
+│                            grid, Technology Showcase grid, filter tabs, and
+│                            the brand tagline treatment
 ├── js/
 │   ├── main.js              Mobile nav toggle + current-page nav highlighting
 │   ├── reveal.js             Scroll-triggered reveal animations + hero
 │   │                        parallax accent (shared across every page; see
 │   │                        Visual/motion design notes above)
-│   ├── concierge.js         AI Blinds Concierge — scripted demo logic only,
-│   │                        no network calls (see AI integration section)
-│   ├── consultation.js      Demo-only consultation form logic (no network calls)
+│   ├── concierge.js         Northern Forge Concierge — upgraded scripted demo
+│   │                        logic (progress bar, contextual follow-ups,
+│   │                        explained recommendation), no network calls
+│   ├── finder.js             Northern Forge Product Finder — scripted demo
+│   │                        logic, no network calls
+│   ├── gallery.js            Projects page category filter tabs, no network
+│   │                        calls
+│   ├── consultation.js      Demo-only, expanded consultation form logic (no
+│   │                        network calls)
 │   └── contact.js           Demo-only contact form logic (no network calls)
 └── README.md                This file
 ```

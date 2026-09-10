@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Northern Forge Blinds — Consultation (Prototype Demo)</title>
-<meta name="description" content="Demo-only consultation form for the Northern Forge Blinds concept site. Nothing entered here is sent or stored anywhere.">
+<title>Northern Forge Windows, Blinds &amp; Doors — Consultation (Prototype Demo)</title>
+<meta name="description" content="Demo-only consultation intake and Concierge for the Northern Forge Windows, Blinds &amp; Doors concept site. Nothing entered here is sent or stored anywhere.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<div class="demo-banner"><strong>Prototype / Demo</strong> — a concept site for Northern Forge Blinds, built for internal review. Not a live business or a real website.</div>
+<div class="demo-banner"><strong>Prototype / Demo</strong> — a concept site for Northern Forge Windows, Blinds &amp; Doors, built for internal review. Not a live business or a real website.</div>
 
 <header class="site-header">
   <div class="container">
@@ -22,7 +22,10 @@
           <path d="M12 28V12h4l8 12V12h4v16h-4l-8-12v12z" fill="#c1652f"></path>
         </svg>
       </span>
-      <span class="brand__word">Northern <span class="accent">Forge</span></span>
+      <span class="brand__text">
+        <span class="brand__word">Northern <span class="accent">Forge</span></span>
+        <span class="brand__sub">Windows, Blinds &amp; Doors</span>
+      </span>
     </a>
     <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">
       <span class="visually-hidden">Menu</span>
@@ -57,15 +60,15 @@
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Try it first</p>
-        <h2 id="concierge-heading">AI Blinds Concierge</h2>
-        <p class="lede">A guided, chat-style way to think through your project before — or instead of — filling out the full form below.</p>
+        <h2 id="concierge-heading">Northern Forge Concierge</h2>
+        <p class="lede">A guided, chat-style way to think through your windows, blinds, shades, shutters, doors, or motorization project before — or instead of — filling out the full form below.</p>
       </div>
 
       <div class="concierge" data-concierge>
         <div class="concierge__header">
           <span class="concierge__badge">
             <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"></path></svg>
-            Demo AI Concierge
+            Northern Forge Concierge — Demo
           </span>
           <p class="concierge__disclaimer">Simulated for this prototype — not connected to a live AI service. It does not quote real prices, promise installation dates, or confirm product availability.</p>
         </div>
@@ -73,7 +76,10 @@
           <div class="concierge__log" id="concierge-log" role="log" aria-live="polite" aria-label="Concierge conversation"></div>
 
           <div id="concierge-active">
-            <p class="concierge__progress" id="concierge-progress"></p>
+            <div class="concierge__progress-row">
+              <span class="concierge__progress-label" id="concierge-progress-label">Step 1</span>
+              <div class="concierge__progress-track"><div class="concierge__progress-fill" id="concierge-progress-fill"></div></div>
+            </div>
             <p class="concierge__question" id="concierge-question"></p>
             <div class="concierge__options" id="concierge-options" role="group" aria-labelledby="concierge-question"></div>
             <div class="concierge__actions">
@@ -85,6 +91,7 @@
             <div class="concierge__disclaimer-box">
               <strong>Demo recommendation only.</strong> This is a simulated suggestion for this prototype — not a real quote, price, product-availability confirmation, or installation-date commitment.
             </div>
+            <div class="concierge__why" id="concierge-summary-why"></div>
             <h3>Your demo recommendation</h3>
             <dl id="concierge-summary-list"></dl>
             <div class="concierge__actions">
@@ -106,14 +113,14 @@
       <div class="section-head section-head--center">
         <p class="eyebrow">Concept architecture</p>
         <h2 id="architecture-heading">How a lead moves through this concept</h2>
-        <p class="lede">A simplified view of the path from a first visit to a real follow-up. The AI Concierge step is fully simulated here — nothing on this page connects to a live backend.</p>
+        <p class="lede">A simplified view of the path from a first visit to a real follow-up. The Concierge and Product Finder steps are fully simulated here — nothing on this page connects to a live backend.</p>
       </div>
       <ol class="arch-flow" aria-label="Lead-capture flow, seven steps">
         <li class="arch-flow__step"><span class="arch-flow__num">1</span><span class="arch-flow__label">Visitor</span></li>
         <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
         <li class="arch-flow__step"><span class="arch-flow__num">2</span><span class="arch-flow__label">Website</span></li>
         <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
-        <li class="arch-flow__step"><span class="arch-flow__num">3</span><span class="arch-flow__label">AI Concierge</span><span class="arch-flow__sub">(demo)</span></li>
+        <li class="arch-flow__step"><span class="arch-flow__num">3</span><span class="arch-flow__label">Concierge / Finder</span><span class="arch-flow__sub">(demo)</span></li>
         <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
         <li class="arch-flow__step"><span class="arch-flow__num">4</span><span class="arch-flow__label">Product Interest</span></li>
         <li class="arch-flow__arrow" aria-hidden="true">&rarr;</li>
@@ -135,15 +142,20 @@
         <h2>Or fill out the full consultation form</h2>
       </div>
       <div class="placeholder" style="max-width:44rem; margin-bottom:var(--space-5);">
-        <strong>Demo only:</strong> this form uses client-side JavaScript to validate and show a success message. It does not use <code>fetch</code>, <code>XHR</code>, email, or any backend — no data leaves your browser.
+        <strong>Demo only:</strong> this form uses client-side JavaScript to validate and show a success message. It does not use <code>fetch</code>, <code>XHR</code>, email, or any backend — no data leaves your browser, and nothing is stored, even locally.
       </div>
 
       <form id="consultation-form" novalidate style="max-width:44rem;">
 
         <fieldset id="category-fieldset" style="margin-bottom:var(--space-5);">
           <legend>1. What are you interested in?</legend>
-          <p class="hint">Choose one or more categories.</p>
-          <div class="choice-grid" role="group" aria-label="Product category">
+          <p class="hint">Choose one or more product categories.</p>
+          <div class="choice-grid" role="group" aria-label="Product interest">
+            <label class="choice-card">
+              <input type="checkbox" name="category" value="Windows">
+              <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="1"></rect><line x1="12" y1="3" x2="12" y2="21"></line><line x1="3" y1="12" x2="21" y2="12"></line></svg></span>
+              <span class="choice-card__label">Windows</span>
+            </label>
             <label class="choice-card">
               <input type="checkbox" name="category" value="Blinds">
               <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="1"></rect><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg></span>
@@ -160,6 +172,11 @@
               <span class="choice-card__label">Shutters</span>
             </label>
             <label class="choice-card">
+              <input type="checkbox" name="category" value="Doors">
+              <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="2" width="14" height="20" rx="1"></rect><circle cx="15" cy="12" r="0.7"></circle></svg></span>
+              <span class="choice-card__label">Doors</span>
+            </label>
+            <label class="choice-card">
               <input type="checkbox" name="category" value="Motorization">
               <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="8" y="2" width="8" height="20" rx="2"></rect><circle cx="12" cy="6" r="0.6"></circle><path d="M13 10l-3 5h2.5l-1 4 4-5.5H13z"></path></svg></span>
               <span class="choice-card__label">Motorization</span>
@@ -169,16 +186,101 @@
         </fieldset>
 
         <fieldset style="margin-bottom:var(--space-5);">
-          <legend>2. Project details</legend>
+          <legend>2. Property &amp; project details</legend>
           <div class="form-grid form-grid--2" style="margin-top:var(--space-3);">
             <div class="field">
-              <label for="rooms">Rooms / windows involved</label>
-              <input type="text" id="rooms" name="rooms" placeholder="e.g. Living room, 3 windows" autocomplete="off">
-              <p class="field-error" role="alert"></p>
+              <label for="property-type">Property type</label>
+              <select id="property-type" name="property-type">
+                <option value="">Select one (optional)</option>
+                <option value="Single-family home">Single-family home</option>
+                <option value="Condo / apartment">Condo / apartment</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="New construction">New construction</option>
+                <option value="Other / not sure">Other / not sure</option>
+              </select>
             </div>
             <div class="field">
-              <label for="timeframe">Timeframe</label>
-              <select id="timeframe" name="timeframe">
+              <label for="project-type">Project type</label>
+              <select id="project-type" name="project-type">
+                <option value="">Select one (optional)</option>
+                <option value="New installation">New installation</option>
+                <option value="Replacement / upgrade">Replacement / upgrade</option>
+                <option value="Repair">Repair</option>
+                <option value="Full renovation">Full renovation</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-top:var(--space-3);">
+            <label for="room">Room / location</label>
+            <input type="text" id="room" name="room" placeholder="e.g. Living room, front entry, 3 windows" autocomplete="off">
+            <p class="field-error" role="alert"></p>
+          </div>
+        </fieldset>
+
+        <fieldset style="margin-bottom:var(--space-5);">
+          <legend>3. Window &amp; door requirements</legend>
+          <div class="field" style="margin-top:var(--space-3);">
+            <label for="window-door-reqs">Window / door requirements (optional)</label>
+            <input type="text" id="window-door-reqs" name="window-door-reqs" placeholder="e.g. egress window, security-rated entry door, sliding patio door" autocomplete="off">
+          </div>
+          <div class="form-grid form-grid--2" style="margin-top:var(--space-3);">
+            <div class="field">
+              <label for="privacy">Privacy requirements</label>
+              <select id="privacy" name="privacy">
+                <option value="">Select one (optional)</option>
+                <option value="Full privacy at all times">Full privacy at all times</option>
+                <option value="Privacy in the evenings only">Privacy in the evenings only</option>
+                <option value="Some privacy, open otherwise">Some privacy, open otherwise</option>
+                <option value="Not a big concern">Not a big concern</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="light">Light requirements</label>
+              <select id="light" name="light">
+                <option value="">Select one (optional)</option>
+                <option value="Block light completely">Block light completely</option>
+                <option value="Filter / soften light">Filter / soften light</option>
+                <option value="Maximize natural light">Maximize natural light</option>
+                <option value="Depends on time of day">Depends on time of day</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid form-grid--2" style="margin-top:var(--space-3);">
+            <div class="field">
+              <label for="style">Style</label>
+              <select id="style" name="style">
+                <option value="">Select one (optional)</option>
+                <option value="Clean & minimal">Clean &amp; minimal</option>
+                <option value="Warm & traditional">Warm &amp; traditional</option>
+                <option value="Bold & architectural">Bold &amp; architectural</option>
+                <option value="Not sure — open to suggestions">Not sure — open to suggestions</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="budget">Budget (placeholder ranges only)</label>
+              <select id="budget" name="budget">
+                <option value="">Select one (optional)</option>
+                <option value="Cost-conscious">Cost-conscious</option>
+                <option value="Mid-range / balanced">Mid-range / balanced</option>
+                <option value="Premium / top-of-line">Premium / top-of-line</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid form-grid--2" style="margin-top:var(--space-3);">
+            <div class="field">
+              <label for="install-pref">Installation preference</label>
+              <select id="install-pref" name="install-pref">
+                <option value="">Select one (optional)</option>
+                <option value="Professional installation">Professional installation</option>
+                <option value="DIY / self-install">DIY / self-install</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="timeline">Timeline</label>
+              <select id="timeline" name="timeline">
                 <option value="Just researching">Just researching</option>
                 <option value="Within 3 months">Within 3 months</option>
                 <option value="Within a month">Within a month</option>
@@ -186,6 +288,10 @@
               </select>
             </div>
           </div>
+        </fieldset>
+
+        <fieldset style="margin-bottom:var(--space-5);">
+          <legend>4. Additional notes</legend>
           <div class="field" style="margin-top:var(--space-3);">
             <label for="notes">Notes (optional)</label>
             <textarea id="notes" name="notes" placeholder="Anything else worth knowing about the project"></textarea>
@@ -193,7 +299,7 @@
         </fieldset>
 
         <fieldset style="margin-bottom:var(--space-5);">
-          <legend>3. Contact details</legend>
+          <legend>5. Contact details</legend>
           <div class="form-grid form-grid--2" style="margin-top:var(--space-3);">
             <div class="field">
               <label for="name">Full name</label>
@@ -243,9 +349,12 @@
               <path d="M12 28V12h4l8 12V12h4v16h-4l-8-12v12z" fill="#c1652f"></path>
             </svg>
           </span>
-          <span class="brand__word">Northern <span class="accent">Forge</span></span>
+          <span class="brand__text">
+            <span class="brand__word">Northern <span class="accent">Forge</span></span>
+            <span class="brand__sub">Windows, Blinds &amp; Doors</span>
+          </span>
         </a>
-        <p class="footer-lede">A concept for an independent window-coverings business — blinds, shades, shutters, and motorization — planned around straightforward advice and durable installs.</p>
+        <p class="footer-lede">A concept for an independent windows, blinds &amp; doors business — windows, blinds, shades, shutters, doors, and motorization — planned around straightforward advice and durable installs.</p>
       </div>
       <nav aria-label="Footer">
         <h4>Site</h4>
@@ -264,7 +373,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Northern Forge Blinds — concept for review purposes only.</p>
+      <p>&copy; 2026 Northern Forge Windows, Blinds &amp; Doors — concept for review purposes only.</p>
       <p class="prototype-note"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Prototype / Demo — not a live site</p>
     </div>
   </div>

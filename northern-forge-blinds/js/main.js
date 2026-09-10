@@ -1,5 +1,5 @@
 /*
- * Northern Forge Blinds — prototype site
+ * Northern Forge Windows, Blinds & Doors — prototype site
  * main.js: mobile nav toggle + current-page nav highlighting.
  * No network calls, no dependencies, no ES modules (safe for file://).
  */

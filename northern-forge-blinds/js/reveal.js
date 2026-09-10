@@ -1,5 +1,5 @@
 /*
- * Northern Forge Blinds — prototype site
+ * Northern Forge Windows, Blinds & Doors — prototype site
  * reveal.js: scroll-triggered reveal animations + a contained, rAF-throttled
  * hero parallax accent. Vanilla JS only, no dependencies, no network calls,
  * safe for file:// (no ES modules). Shared by every page.
@@ -29,7 +29,9 @@
       ".compare-grid > *",
       ".arch-flow__step",
       ".steps > *",
-      ".concierge"
+      ".concierge",
+      ".tech-grid > *",
+      ".filter-tabs"
     ].join(",");
 
     var els = document.querySelectorAll(selector);

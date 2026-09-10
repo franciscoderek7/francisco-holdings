@@ -1,9 +1,9 @@
 /*
- * Northern Forge Blinds — prototype site
+ * Northern Forge — prototype site
  * consultation.js: demo-only consultation form.
  * IMPORTANT: This never sends data anywhere. No fetch/XHR. It only
  * validates in the browser and swaps in a success state, for
- * demonstration purposes.
+ * demonstration purposes. Nothing is stored, even locally.
  */
 (function () {
   "use strict";
@@ -25,34 +25,33 @@
       if (errorEl) errorEl.textContent = message;
     }
 
-    function clearError(field) {
-      var wrapper = field.closest(".field") || field.closest("fieldset");
-      if (!wrapper) return;
-      wrapper.classList.remove("has-error");
-    }
-
     function clearAllErrors() {
       form.querySelectorAll(".has-error").forEach(function (el) {
         el.classList.remove("has-error");
       });
     }
 
+    function fieldValue(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+
     function validate() {
       var valid = true;
       clearAllErrors();
 
-      // Category: at least one radio checked
+      // Product interest: at least one checkbox checked
       var categoryChecked = form.querySelector('input[name="category"]:checked');
       var categoryFieldset = document.getElementById("category-fieldset");
       if (!categoryChecked) {
         valid = false;
         categoryFieldset.classList.add("has-error");
         var catErr = categoryFieldset.querySelector(".field-error");
-        if (catErr) catErr.textContent = "Choose at least one category to continue.";
+        if (catErr) catErr.textContent = "Choose at least one product interest to continue.";
       }
 
-      // Required text-ish fields
-      ["name", "email", "rooms"].forEach(function (id) {
+      // Required text fields
+      ["name", "email", "room"].forEach(function (id) {
         var field = document.getElementById(id);
         if (!field) return;
         if (!field.value || !field.value.trim()) {
@@ -109,13 +108,21 @@
       ).join(", ");
 
       var data = [
-        ["Category interest", categories],
-        ["Name", document.getElementById("name").value.trim()],
-        ["Email", document.getElementById("email").value.trim()],
-        ["Phone", document.getElementById("phone").value.trim()],
-        ["Rooms / windows involved", document.getElementById("rooms").value.trim()],
-        ["Timeframe", document.getElementById("timeframe").value],
-        ["Notes", document.getElementById("notes").value.trim()]
+        ["Product interest", categories],
+        ["Property type", fieldValue("property-type")],
+        ["Project type", fieldValue("project-type")],
+        ["Room / location", fieldValue("room")],
+        ["Window / door requirements", fieldValue("window-door-reqs")],
+        ["Privacy requirements", fieldValue("privacy")],
+        ["Light requirements", fieldValue("light")],
+        ["Style", fieldValue("style")],
+        ["Budget (placeholder ranges)", fieldValue("budget")],
+        ["Installation preference", fieldValue("install-pref")],
+        ["Timeline", fieldValue("timeline")],
+        ["Additional notes", fieldValue("notes")],
+        ["Name", fieldValue("name")],
+        ["Phone", fieldValue("phone")],
+        ["Email", fieldValue("email")]
       ];
       buildSummary(data);
 
