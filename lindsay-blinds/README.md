@@ -39,12 +39,13 @@ building this) and is not connected to it in any way.
 
 Plain, dependency-free front-end code:
 
-- **HTML** — five static pages (`index.html`, `products.html`,
-  `gallery.html`, `about.html`, `consultation.html`).
+- **HTML** — six static pages (`index.html`, `products.html`,
+  `gallery.html`, `about.html`, `consultation.html`, `contact.html`).
 - **CSS** — one shared stylesheet (`css/style.css`), hand-written, no
   framework, no preprocessor.
-- **JavaScript** — three small vanilla-JS files (`js/nav.js`, `js/gallery.js`,
-  `js/consultation.js`), no framework, no bundler, no dependencies.
+- **JavaScript** — four small vanilla-JS files (`js/nav.js`, `js/gallery.js`,
+  `js/consultation.js`, `js/contact.js`), no framework, no bundler, no
+  dependencies.
 - **No build step.** There is no `package.json`, no compiler, no bundler, no
   transpiler, and nothing to `npm install`.
 - **No backend.** No server-side code, no database, no API of any kind.
@@ -64,12 +65,14 @@ lindsay-blinds/
 ├── gallery.html            Placeholder project gallery (SVG placeholder tiles)
 ├── consultation.html      4-step guided consultation flow + demo "AI Concierge"
 │                          chat widget + lead-capture flow diagram
+├── contact.html           Contact details + demo-only contact form
 ├── css/
 │   └── style.css         Shared stylesheet (palette, layout, components)
 ├── js/
 │   ├── nav.js             Mobile hamburger nav + active-link highlighting
 │   ├── gallery.js          Generates the placeholder gallery tiles
-│   └── consultation.js    Wizard logic, validation, demo AI concierge, photo preview
+│   ├── consultation.js    Wizard logic, validation, demo AI concierge, photo preview
+│   └── contact.js          Demo-only contact form validation + success state
 └── README.md              This file
 ```
 
@@ -208,9 +211,14 @@ these with Marc):
 - Decide on hosting and a domain strategy (see "How to deploy" above — this
   is a decision for Marc, not an assumption baked into this prototype).
 - Cross-browser and real-device testing beyond what a prototype review covers.
-- Basic on-page SEO pass (meta descriptions, structured data, sitemap) once
-  the site is meant to be indexed — currently every page explicitly opts out
-  of indexing.
+- Decide when (if ever) to remove `<meta name="robots" content="noindex,
+  nofollow">` and let the site be indexed. Every page already has a unique
+  `<title>`/description, a data-URI favicon, and Open Graph tags
+  (`og:title`, `og:description`, `og:type`) as of this pass — a sitemap is
+  N/A for now precisely because indexing is still intentionally opted out.
+  Structured data (e.g. LocalBusiness schema) is unbuilt and would need real,
+  confirmed business details (address, hours) first — see "Required business
+  information" above.
 
 ## AI integration requirements
 
@@ -317,3 +325,55 @@ This is true throughout the site, by design:
 - All placeholder gallery graphics carry descriptive `alt`/`aria-label` text
   following the pattern: "Placeholder project photo — replace with real
   installation photography. Category: … Room type: …"
+
+## Production Implementation Plan — Contact Form Fix
+
+This section is **pure documentation**. Nothing in it was executed. It does
+**not** touch, access, or modify `lindsayblinds.com` (the real production
+site) or any WordPress/Hostinger system in any way — it only records the plan
+to follow once someone with the right access is ready to do that work.
+
+**The problem:** the real production site, `lindsayblinds.com` (WordPress,
+hosted on Hostinger/hPanel), currently has no working contact form on its
+Contact page. A visitor filling out the existing form has no confirmed way to
+actually reach Marc through it.
+
+**The planned fix:** the **Contact Form 7** WordPress plugin, paired with
+**WP Mail SMTP**. Contact Form 7 alone is not sufficient on many
+WordPress + Hostinger setups — the underlying `wp_mail()` / PHP `mail()`
+function is frequently blocked, unauthenticated, or silently dropped by the
+host or by receiving mail servers (a very common WordPress/Hostinger failure
+mode: the form "submits successfully" from the visitor's point of view, but
+the email never arrives). WP Mail SMTP routes outgoing mail through a real,
+authenticated sending method instead, so delivery can actually be confirmed
+rather than assumed.
+
+**Concrete steps to follow once WordPress admin access is available:**
+
+1. **Install and activate the Contact Form 7 plugin** on the production
+   WordPress site (Plugins → Add New → search "Contact Form 7" → Install →
+   Activate).
+2. **Install and activate the WP Mail SMTP plugin** the same way, so mail
+   sending is handled reliably rather than left to the server's default,
+   often-unreliable `mail()` function.
+3. **Configure WP Mail SMTP with a real sending method** — e.g. an SMTP
+   provider (such as a transactional email service) or Hostinger's own mail
+   service tied to a real mailbox on the domain. This step explicitly
+   **needs Marc's real email address and hosting/mail account details** —
+   no specific provider, mailbox, or credential is invented or assumed here.
+4. **Send a real test submission through the live form and confirm actual
+   email delivery** (check the inbox it's supposed to land in, including
+   spam/junk) before considering this done. A successful-looking on-screen
+   confirmation is not sufficient — delivery must be verified directly.
+5. **Build the Contact Form 7 form fields to mirror this prototype's
+   existing consultation/contact fields**, so the real site's form matches
+   what has already been designed and reviewed here: name, phone, email,
+   preferred contact method, and message (see `contact.html` and the
+   contact-info step of `consultation.html` in this prototype for the exact
+   field set and labels already validated with Marc).
+
+**STATUS: ACCESS REQUIRED.** No WordPress/Hostinger credentials are
+available in this session. Nothing on the production site has been
+installed, configured, or verified. This plan is ready to execute once
+access is granted — do not treat the production contact form as fixed until
+a real test submission has been confirmed delivered.
