@@ -294,6 +294,65 @@ brand:
   inline SVG, each labeled "Placeholder" in the UI and in the image's `alt`
   text.
 
+## Visual / motion design notes
+
+A polish pass was added on top of the existing dark-slate/forged-copper
+system to give the prototype a stronger "wow factor" on both mobile and
+desktop, without touching the color palette, wordmark, or page structure:
+
+- **Scroll-triggered reveals (`js/reveal.js`)** — a single shared, vanilla
+  `IntersectionObserver` script loaded on every page. Section intros, card
+  grids (categories, About's "what Dylan brings," the compare grid, the
+  lead-capture flow steps, the projects teaser tiles) and the AI Concierge
+  panel fade and slide gently into place as they scroll into view, with a
+  small `nth-child`-based stagger so grids feel choreographed rather than
+  snapping in all at once.
+- **Hero upgrade (`index.html` / `css/style.css`)** — the homepage hero now
+  has a staggered fade-up entrance (eyebrow → headline → lede → CTA →
+  badges → graphic), a recurring subtle light-sweep across the decorative
+  slat graphic, a touch more shadow weight on the primary CTA, and a
+  contained, `requestAnimationFrame`-throttled parallax drift on the hero's
+  background gradient layer as the page scrolls (capped to ±24px, confined
+  by the hero's own `overflow:hidden`, so it can't affect layout or cause
+  overflow).
+- **Angled divider accents** — rather than moving the existing clip-path
+  dividers on scroll (which would risk opening a visible seam against the
+  sections they overlap), each divider now plays a one-time light sweep,
+  fully clipped to its own angled shape, the first time it scrolls into
+  view. True scroll-linked parallax on the dividers themselves was
+  deliberately skipped as an unnecessary jank/seam risk for a purely
+  decorative effect.
+- **Micro-interactions** — buttons now lift and deepen their shadow on
+  hover/press, category icon badges scale slightly on card hover, footer
+  links and the AI Concierge's option buttons and the guided-form choice
+  cards all got small, consistent hover transitions. All existing
+  `:focus-visible` outlines were kept exactly as-is and were not touched or
+  weakened by any of this work.
+- **`prefers-reduced-motion: reduce` is fully respected.** The stylesheet's
+  existing sitewide rule (which forces all animation/transition durations
+  to near-zero for that preference) already covers every new animation and
+  transition added here. `js/reveal.js` goes further for the
+  scroll-reveal system specifically: when reduced motion is requested (or
+  `IntersectionObserver` isn't available), it does nothing at all — content
+  is simply shown at full opacity immediately, with no hidden state to wait
+  on and no scroll listener attached. The hero parallax listener is also
+  skipped entirely under reduced motion.
+- **No new dependencies, no network calls.** `js/reveal.js` is plain,
+  dependency-free JavaScript (same ES5-safe style as the rest of the site,
+  safe for `file://`); everything else is plain CSS. No CDNs, fonts, or
+  libraries were added.
+- **Verified:** all six pages were checked in a real Chromium browser at
+  both 390px and 1280px widths with realistic (mouse-wheel) scrolling —
+  zero console errors, zero elements left stuck invisible, and
+  `document.documentElement.scrollWidth` stays equal to the viewport width
+  (no horizontal overflow introduced). Buttons remain clickable immediately
+  during their entrance animation, and keyboard tab order plus
+  `:focus-visible` outlines were confirmed unaffected.
+
+A future pass would benefit most from real project photography and a real
+headshot — the placeholder SVG art is the main thing now holding back the
+site from feeling fully "finished" next to the new motion polish.
+
 ## Accessibility & technical notes
 
 - Semantic landmarks (`header`, `nav`, `main`, `footer`), one `<h1>` per
@@ -341,6 +400,9 @@ northern-forge-blinds/
 │                            including the Concierge widget and compare grid
 ├── js/
 │   ├── main.js              Mobile nav toggle + current-page nav highlighting
+│   ├── reveal.js             Scroll-triggered reveal animations + hero
+│   │                        parallax accent (shared across every page; see
+│   │                        Visual/motion design notes above)
 │   ├── concierge.js         AI Blinds Concierge — scripted demo logic only,
 │   │                        no network calls (see AI integration section)
 │   ├── consultation.js      Demo-only consultation form logic (no network calls)

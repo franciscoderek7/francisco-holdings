@@ -980,3 +980,123 @@ legend{ font-family:var(--font-display); font-weight:700; padding-inline:0.3rem;
 @media (max-width:24em){
   .brand__word{ font-size:0.98rem; letter-spacing:0.01em; }
 }
+
+/* -------------------------------------------------------------------------
+   20. Scroll-triggered reveal system (progressive enhancement, js/reveal.js)
+   Base state below is only ever applied by JS adding the "reveal" class, so
+   content is fully visible with no JS and with prefers-reduced-motion.
+   ------------------------------------------------------------------------- */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .48s cubic-bezier(.16,.72,.29,1), transform .48s cubic-bezier(.16,.72,.29,1);
+}
+.reveal-visible{
+  opacity:1;
+  transform:none;
+}
+/* Stagger siblings within a revealed grid/row so groups choreograph rather
+   than snapping in all at once. Capped so a long row (e.g. the 13-item
+   lead-capture flow) doesn't keep the tail waiting too long. */
+.reveal:nth-child(2){ transition-delay:60ms; }
+.reveal:nth-child(3){ transition-delay:120ms; }
+.reveal:nth-child(4){ transition-delay:180ms; }
+.reveal:nth-child(5){ transition-delay:240ms; }
+.reveal:nth-child(6){ transition-delay:300ms; }
+.reveal:nth-child(7){ transition-delay:360ms; }
+.reveal:nth-child(n+8){ transition-delay:400ms; }
+
+/* One-time light sweep across an angled divider as it enters view. Confined
+   entirely to the divider's own clip-path shape — it does not move or
+   resize the divider, so it cannot open a seam or introduce overflow. */
+.divider::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(100deg, transparent 35%, rgba(255,255,255,0.14) 50%, transparent 65%);
+  transform:translateX(-140%);
+  opacity:0;
+  pointer-events:none;
+}
+.divider--sweep::after{
+  animation:nfDividerSweep 1s ease-out both;
+}
+@keyframes nfDividerSweep{
+  0%{ transform:translateX(-140%); opacity:0; }
+  20%{ opacity:1; }
+  100%{ transform:translateX(140%); opacity:0; }
+}
+
+/* -------------------------------------------------------------------------
+   21. Hero upgrade — staggered entrance + a contained, subtle light-sweep
+   and scroll parallax accent on the background layer only.
+   ------------------------------------------------------------------------- */
+@keyframes nfHeroUp{
+  from{ opacity:0; transform:translateY(22px); }
+  to{ opacity:1; transform:none; }
+}
+.hero::before{
+  transform:translateY(var(--nf-parallax, 0px));
+}
+.hero .eyebrow{ animation:nfHeroUp .6s cubic-bezier(.16,.72,.29,1) both; }
+.hero h1{ animation:nfHeroUp .65s cubic-bezier(.16,.72,.29,1) .08s both; }
+.hero .lede{ animation:nfHeroUp .65s cubic-bezier(.16,.72,.29,1) .16s both; }
+.hero__cta{ animation:nfHeroUp .65s cubic-bezier(.16,.72,.29,1) .24s both; }
+.hero__badge-row{ animation:nfHeroUp .65s cubic-bezier(.16,.72,.29,1) .32s both; }
+.hero-graphic{ animation:nfHeroUp .7s cubic-bezier(.16,.72,.29,1) .2s both; }
+
+/* Give the primary hero CTA a touch more visual weight. */
+.hero .btn--primary{
+  box-shadow:0 10px 28px -10px rgba(193,101,47,0.55);
+}
+
+/* Subtle recurring light-sweep across the hero graphic panel, fully
+   contained by the panel's own overflow:hidden. */
+.hero-graphic::after{
+  content:"";
+  position:absolute; inset:-30% -15%;
+  background:linear-gradient(100deg, transparent 42%, rgba(255,255,255,0.10) 50%, transparent 58%);
+  transform:translateX(-120%);
+  animation:nfSweep 3.4s ease-in-out 1.2s infinite;
+  pointer-events:none;
+}
+@keyframes nfSweep{
+  0%{ transform:translateX(-120%); }
+  45%{ transform:translateX(120%); }
+  100%{ transform:translateX(120%); }
+}
+
+/* -------------------------------------------------------------------------
+   22. Micro-interaction refinements (hover/focus lift + shadow deepen)
+   ------------------------------------------------------------------------- */
+.btn{
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease,
+             transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn--primary:hover{ box-shadow:0 14px 30px -10px rgba(193,101,47,0.5); }
+.btn--secondary:hover{ box-shadow:var(--shadow-sm); }
+.btn:active{ transform:translateY(1px); box-shadow:none; }
+
+.icon-badge{ transition:transform .2s ease; }
+.card:hover .icon-badge{ transform:scale(1.08) rotate(-2deg); }
+
+.footer-nav a{
+  position:relative;
+  transition:color .15s ease;
+}
+.footer-nav a::after{
+  content:"";
+  position:absolute; left:0; right:100%; bottom:-1px; height:1px;
+  background:var(--copper-400);
+  transition:right .18s ease;
+}
+.footer-nav a:hover::after{ right:0; }
+
+.choice-card{ transition:border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease; }
+.choice-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+
+.concierge__option{ transition:border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease; }
+.concierge__option:hover{ transform:translateY(-1px); box-shadow:var(--shadow-sm); }
+
+.pill{ transition:border-color .15s ease, transform .15s ease; }
+.pill:hover{ border-color:var(--copper-500); transform:translateY(-1px); }
