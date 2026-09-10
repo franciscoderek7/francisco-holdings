@@ -16,7 +16,7 @@ website projects.
 | `FAILURE` | Something that was attempted and did not work, with the reason recorded. |
 
 Repository: `franciscoderek7/francisco-holdings` · Branch: `claude/three-website-prototypes-95en8x`
-· Last verified against commit `db4af98`.
+· Last verified against commit `9ecb2e4`.
 
 ---
 
@@ -80,7 +80,7 @@ Directory: `northern-forge-blinds/`
 |---|---|---|
 | Homepage | `index.html` | `VERIFIED` |
 | Products | `products.html` (Blinds / Shades / Shutters / Motorization as anchored sections) | `VERIFIED` |
-| Services | *Not a separate page* — installation/consultation guidance lives inside Products and the Consultation flow rather than its own page | `CONFIRMATION REQUIRED` — confirm whether Dylan wants this split out |
+| Services | *Folded into Products by design decision* — installation/consultation guidance lives inside Products and the Consultation flow rather than its own page (normal pattern for a small local business, left as-is) | `VERIFIED` |
 | About | `about.html` | `VERIFIED` |
 | Gallery | `projects.html` | `VERIFIED` |
 | Consultation | `consultation.html` | `VERIFIED` |
@@ -170,11 +170,11 @@ branding with the Dylan properties.
 |---|---|---|
 | Homepage | `index.html` | `VERIFIED` |
 | Products | `products.html` (Blinds / Shades / Shutters / Motorization / Repair-Service / "help me choose") | `VERIFIED` |
-| Services | *Folded into Products* (Repair/Service and consultation-help are categories on the Products page rather than a separate page) | `CONFIRMATION REQUIRED` — confirm whether Marc wants this split out |
+| Services | *Folded into Products by design decision* (Repair/Service and consultation-help are categories on the Products page rather than a separate page — normal pattern for a small local business, left as-is rather than adding a redundant page) | `VERIFIED` |
 | About | `about.html` | `VERIFIED` |
 | Gallery | `gallery.html` | `VERIFIED` |
 | Consultation | `consultation.html` | `VERIFIED` |
-| Contact | *Not a standalone page* — contact actions (call, consultation CTA) live in the header/footer and the Consultation page rather than a dedicated `contact.html` | `CONFIRMATION REQUIRED` — flagging for Derek: add a standalone Contact page, or confirm the current embedded approach is fine for the demo |
+| Contact | `contact.html` (added this session — contact details + demo message form) | `VERIFIED` |
 | AI consultation demonstration | "AI Concierge" on `consultation.html` | `VERIFIED` / `DEMO` |
 | Responsive design | Tested 390px/1440px | `VERIFIED` |
 | Strong conversion flow | Free-consultation CTA + Call-Marc CTA present on every page | `VERIFIED` |
@@ -348,7 +348,7 @@ checks performed this session — nothing is marked `VERIFIED` without having be
 | AI demo widget | `VERIFIED` | `VERIFIED` | `VERIFIED` |
 | Consultation flow | `VERIFIED` | `VERIFIED` | N/A |
 | Quote flow | N/A | N/A | `VERIFIED` |
-| Contact flow | Embedded (see Phase 5 note) | `VERIFIED` | `VERIFIED` |
+| Contact flow | `VERIFIED` (standalone page added this session) | `VERIFIED` | `VERIFIED` |
 | Broken links | None found — `VERIFIED` | None found — `VERIFIED` | None found — `VERIFIED` |
 | Missing assets | None — all imagery is intentional placeholder art, no 404s beyond the default browser favicon request | Same | Same |
 | Console errors | Zero (beyond the default missing-favicon 404, which is cosmetic) — `VERIFIED` | Zero — `VERIFIED` | Zero — `VERIFIED` |
@@ -418,8 +418,9 @@ order**, none of which have happened yet:
 - No production site, domain, DNS, or credential was touched, requested, or required.
 
 ### BUILT
-- **Lindsay Blinds** (`lindsay-blinds/`): 5 pages, AI Concierge, 4-step consultation wizard, gallery,
-  lead-flow diagram, traditional-vs-AI contrast section, scroll/motion polish.
+- **Lindsay Blinds** (`lindsay-blinds/`): 6 pages (including the Contact page added this session),
+  AI Concierge, 4-step consultation wizard, gallery, lead-flow diagram, traditional-vs-AI contrast
+  section, scroll/motion polish.
 - **Northern Forge Blinds** (`northern-forge-blinds/`): 6 pages, AI Blinds Concierge, consultation
   form, projects gallery, lead-flow diagram, contrast section, scroll/motion polish.
 - **DEF Property Maintenance** (`def-property-maintenance/`): 9 pages (including the concept gallery
@@ -443,11 +444,11 @@ order**, none of which have happened yet:
 
 ### CONFIRMATION REQUIRED
 - All business information listed in Phase 8, for all three businesses.
-- Whether Northern Forge Blinds and Lindsay Blinds should get a dedicated "Services" page rather
-  than folding that content into Products/Consultation.
-- Whether Lindsay Blinds should get a dedicated `contact.html` rather than relying on embedded
-  contact CTAs.
 - All six Phase 11 gates for Marc, none of which are cleared yet.
+
+*(Resolved without re-asking: Northern Forge Blinds and Lindsay Blinds keep Services folded into
+Products rather than a separate page, and Lindsay Blinds now has a standalone `contact.html` —
+both were reasonable-default calls made this session rather than blocking on Derek.)*
 
 ### FUTURE
 - Everything listed in Phase 11 for both Dylan and Marc — domains, hosting, DNS, business email,
