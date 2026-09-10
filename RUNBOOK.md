@@ -16,7 +16,7 @@ website projects.
 | `FAILURE` | Something that was attempted and did not work, with the reason recorded. |
 
 Repository: `franciscoderek7/francisco-holdings` · Branch: `claude/three-website-prototypes-95en8x`
-· Last verified against commit `5c1d835`.
+· Last verified against commit `92943d9`.
 
 ---
 
@@ -127,6 +127,19 @@ Product Finder was clicked through 12 steps end-to-end with zero JS errors.
 No business facts were invented. All contact/pricing/certification fields remain explicitly
 placeholder-labeled (see Phase 8).
 
+**Master-pass addendum (this round):** added Garage Doors as a 7th product category
+(`#garage-doors`, 6 conceptual sub-categories) and an Installation section (`#installation`,
+4-step conceptual process, placeholder-labeled pending Dylan's real installation model), both
+wired into the Product Finder, AI Concierge, and consultation intake. Added a favicon and Open
+Graph tags (previously missing sitewide). Fixed two real bugs found during testing: a sub-nav
+click-blocking regression from the new links, and a pre-existing bug where the Concierge/Product
+Finder auto-focused on page load and force-scrolled ~10,000px past the hero on every visit — both
+independently re-verified fixed (18/18 pages×widths clean, `scrollY≈0` on load confirmed via
+Playwright). Property Improvements and Construction remain explicitly out of scope (future growth
+path only). Revenue readiness re-assessed this round: **NOT READY** (no backend exists to receive
+a lead — consistent with, if more literally worded than, the "PRESENTABLE" rating given to the
+other two sites for the same underlying reason; see Final Report).
+
 ---
 
 ## PHASE 3 — DYLAN / FLOOR 18 — DEF PROPERTY MAINTENANCE & SECURITY
@@ -206,6 +219,17 @@ professional/alarm monitoring company.
 No service or technology capability was ever presented as confirmed-active beyond its honest
 status badge. No business facts were invented.
 
+**Master-pass addendum (this round):** corrected the "DEF" meaning across about.html and
+README.md — "Don Eric Francisco" (based on an earlier garbled transcription) → **"Dylan, Eric,
+Francisco"** (D=Dylan, E=Eric, F=Francisco), per the business owner's direct clarification.
+Verified the full required page/section structure was already complete from prior rounds (no
+rebuild needed). Added a favicon and Open Graph tags (previously missing sitewide) and fixed 3
+heading-hierarchy skip-levels (h1→h3 with no h2) on services.html, security.html, and
+contact.html. Independently re-verified: 13/13 pages carry the favicon+OG tags, zero remaining
+"Don Eric Francisco" instances, zero cross-business mentions, 39/39 page×width Playwright checks
+clean. Revenue readiness: **PRESENTABLE** (polished and demo-tested, but no form transmits or
+stores a lead anywhere real).
+
 ---
 
 ## PHASE 4 — TOWER REPRESENTATION
@@ -270,6 +294,17 @@ endpoint, not a transient error). No workaround was attempted, per the rule agai
 even routing around access to the production property. The Lindsay Blinds prototype was built
 using only the one verified fact (the phone number) rather than any assumed knowledge of the real
 site's current content.
+
+**Master-pass addendum (this round):** added a new README section, "Production Implementation
+Plan — Contact Form Fix," documenting the concrete Contact Form 7 + WP Mail SMTP plan for the real
+production site's missing contact form, ending in an explicit `STATUS: ACCESS REQUIRED` line — no
+WordPress/Hostinger access was attempted or claimed. Added a favicon and Open Graph tags
+(previously missing sitewide), a global `prefers-reduced-motion` override (a real gap found this
+pass), and bumped the mobile nav toggle to a full 44px touch target. Independently re-verified:
+favicon+OG on 6/6 pages, 705-808-3022 consistent with zero other phone numbers present anywhere,
+zero cross-business mentions, 18/18 page×width Playwright checks clean. Revenue readiness (this
+prototype): **PRESENTABLE**; separately, the real production site's revenue-readiness stays
+blocked by the contact-form gap regardless, pending WordPress access.
 
 ---
 
