@@ -1,19 +1,28 @@
 /*
- * DEF Property Maintenance — prototype
- * "Demo AI Concierge" — a scripted, decision-tree chat experience.
+ * DEF Property Maintenance & Security — prototype
+ * "DEF AI Property Concierge" — a scripted, decision-tree chat experience.
  *
  * IMPORTANT: this is NOT a real AI. There is no model, no API call, and no
  * network request anywhere in this file — every assistant line below is a
  * hard-coded string, and every branch is a fixed lookup table keyed off the
- * same seven service categories and status badges used elsewhere on this
- * site. It exists purely to demonstrate the *shape* of an AI-guided intake
- * flow for feedback.
+ * same maintenance + security/technology categories and status badges used
+ * elsewhere on this site. The free-text "Property Profile" step runs a
+ * small fixed keyword-matching function (parsePropertyDescription) over
+ * whatever the visitor typed — never a model call — to fill in traits like
+ * rural/driveway/pets/garage and suggest relevant technology categories. It
+ * exists purely to demonstrate the *shape* of an AI-guided intake flow for
+ * feedback, and is explicitly labeled "simulated" everywhere it appears.
  *
  * Guardrails enforced everywhere in this file (do not remove if extending):
- *   - Never state or imply a service category is bookable/active — always
- *     reflect its real badge status (Potential / Coming Soon / TBC).
+ *   - Never state or imply a service or technology category is bookable,
+ *     installed, or active — always reflect its real badge status
+ *     (Potential / Coming Soon / TBC / Technology Showcase / Assessment
+ *     Required).
  *   - Never invent a price, quote, or estimate.
- *   - Never promise a response time, appointment, or schedule.
+ *   - Never promise a response time, appointment, schedule, or 24/7 /
+ *     emergency response.
+ *   - Never state or imply DEF is licensed, bonded, insured, certified, a
+ *     security guard company, or a professional monitoring company.
  *   - Never send, store, or transmit anything the visitor types. The only
  *     "hand-off" is a same-site link with the answers in the URL, read back
  *     by js/forms.js on request-service.html to prefill that page's form.
@@ -28,7 +37,17 @@
     { id: "exterior-maintenance", name: "Exterior Maintenance", status: "potential", statusLabel: "Potential Service" },
     { id: "cottage-property-services", name: "Cottage / Property Services", status: "coming-soon", statusLabel: "Coming Soon" },
     { id: "turnover-services", name: "Turnover Services", status: "potential", statusLabel: "Potential Service" },
-    { id: "vendor-coordination", name: "Vendor Coordination", status: "tbc", statusLabel: "Availability TBC" }
+    { id: "vendor-coordination", name: "Vendor Coordination", status: "tbc", statusLabel: "Availability TBC" },
+    { id: "video-surveillance", name: "Video Surveillance", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#video-surveillance" },
+    { id: "motion-detection", name: "Motion Detection", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#motion-detection" },
+    { id: "perimeter-sensing", name: "Ground / Perimeter Sensing", status: "assessment", statusLabel: "Assessment Required", href: "security.html#perimeter-sensing" },
+    { id: "door-window-protection", name: "Door & Window Protection", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#door-window-protection" },
+    { id: "glass-break-detection", name: "Glass Break Detection", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#glass-break-detection" },
+    { id: "smart-access-control", name: "Smart Access Control", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#smart-access-control" },
+    { id: "video-doorbells", name: "Video Doorbells", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#video-doorbells" },
+    { id: "smart-lighting-security", name: "Smart Lighting Security", status: "showcase", statusLabel: "Technology Showcase", href: "security.html#smart-lighting-security" },
+    { id: "environmental-protection", name: "Environmental Protection", status: "showcase", statusLabel: "Technology Showcase", href: "smart-property.html#environmental-protection" },
+    { id: "pet-property-safety", name: "Pet & Property Safety", status: "showcase", statusLabel: "Technology Showcase", href: "smart-property.html#pet-property-safety" }
   ];
 
   var STATUS_RESPONSES = {
@@ -40,6 +59,12 @@
     },
     tbc: function (name) {
       return name + "'s availability is <strong>To Be Confirmed</strong> — Dylan hasn't decided whether or when this will be offered. I'll note it either way.";
+    },
+    showcase: function (name) {
+      return name + " is a <strong>Technology Showcase</strong> — an illustration of what DEF could eventually assess, install, or coordinate, not something currently sold, installed, or monitored. DEF is not a licensed security company.";
+    },
+    assessment: function (name) {
+      return name + " is marked <strong>Assessment Required</strong> — it's too site-specific to describe generically, so it would need an actual visit before anything could be said about it.";
     }
   };
 
@@ -89,8 +114,8 @@
     header.innerHTML =
       '<span class="concierge-icon" aria-hidden="true">' + BOT_ICON + "</span>" +
       "<div>" +
-      "<h2>Demo AI Concierge</h2>" +
-      '<span class="badge badge-tbc">Simulated — not a live AI service</span>' +
+      "<h2>DEF AI Property Concierge</h2>" +
+      '<span class="badge badge-showcase">Simulated — not a live AI service</span>' +
       "</div>";
     root.appendChild(header);
 
@@ -99,8 +124,10 @@
     disclaimer.innerHTML =
       INFO_ICON +
       '<p style="margin:0;">This concierge is <strong>scripted for this prototype</strong> — it is not ' +
-      "connected to a real AI service. It will never invent service availability, quote a price, or promise " +
-      "a schedule, and nothing you type here is sent, saved, or transmitted anywhere.</p>";
+      "connected to a real AI service, model, or API. The free-text \"Property Profile\" step below uses " +
+      "simple keyword matching on your own words, run entirely in your browser. It will never invent service " +
+      "availability, quote a price, promise a schedule, or claim DEF is licensed/insured/a monitoring company, " +
+      "and nothing you type here is sent, saved, or transmitted anywhere.</p>";
     root.appendChild(disclaimer);
 
     var log = document.createElement("div");
@@ -114,7 +141,7 @@
     inputArea.className = "concierge-input-area";
     root.appendChild(inputArea);
 
-    var state = { answers: {} };
+    var state = { answers: {}, profile: {} };
 
     function scrollLog() {
       log.scrollTop = log.scrollHeight;
@@ -279,10 +306,189 @@
           state.answers.propertyType = choice.label;
           addMessage("visitor", choice.label, true);
           addAssistant(
-            "Thanks. Which service are you interested in? These are the same categories and honest statuses shown across this site.",
-            stepCategory
+            "Now, in your own words — tell me a bit about the property. For example: “I have a rural property with a long driveway, two dogs, a detached garage and no existing security system.”",
+            stepFreeText
           );
         }
+      );
+    }
+
+    // Very small, fixed keyword-matching function — NOT a real NLP/AI model.
+    // It only ever looks for a short fixed list of substrings in the
+    // visitor's own text and sets booleans on a "profile" object. It never
+    // sends the text anywhere, and it never invents a fact the visitor
+    // didn't type.
+    function parsePropertyDescription(text) {
+      var t = (text || "").toLowerCase();
+      var has = function (words) {
+        return words.some(function (w) {
+          return t.indexOf(w) > -1;
+        });
+      };
+      return {
+        rural: has(["rural", "farm", "acreage", "acres", "countryside", "no neighbours", "no neighbors"]),
+        longDriveway: has(["long driveway", "driveway"]),
+        detachedGarage: has(["detached garage", "garage"]),
+        pets: has(["dog", "dogs", "cat", "cats", "pet", "pets"]),
+        noSecurity: has(["no security", "no alarm", "no existing security", "nothing installed", "no cameras"]),
+        gate: has(["gate", "gated"]),
+        fencing: has(["fence", "fenced", "fencing"]),
+        water: has(["basement", "sump", "well", "flood", "leak"]),
+        cottage: has(["cottage", "cabin", "seasonal", "vacation home"]),
+        multipleEntrances: has(["multiple doors", "several entrances", "side door", "back door"])
+      };
+    }
+
+    function stepFreeText() {
+      renderTextStep(
+        {
+          id: "free-description",
+          type: "textarea",
+          label: "Describe the property (optional — skip if you'd rather not)",
+          required: false,
+          placeholder: "e.g. Rural property, long driveway, two dogs, detached garage, no existing security system…",
+          submitLabel: "Continue",
+          errorText: ""
+        },
+        function (value) {
+          state.answers.freeDescription = value;
+          state.profile = parsePropertyDescription(value);
+          if (value) {
+            addMessage("visitor", value, true);
+          } else {
+            addMessage("visitor", "(skipped)", true);
+          }
+          stepFollowUp();
+        }
+      );
+    }
+
+    // At most one or two intelligent follow-ups, only for details the free
+    // text didn't already cover — never re-asking something already known.
+    function stepFollowUp() {
+      var p = state.profile || {};
+      if (!("noSecurity" in state.answers)) {
+        if (p.noSecurity) {
+          state.answers.hasExistingSecurity = "No — nothing installed yet";
+          return stepFollowUpPriority();
+        }
+        return renderChoices(
+          [
+            { label: "Yes, some security is already in place" },
+            { label: "No, nothing is installed yet" },
+            { label: "Not sure" }
+          ],
+          function (choice) {
+            state.answers.hasExistingSecurity = choice.label;
+            addMessage("visitor", choice.label, true);
+            addAssistant("Understood — does the property currently have any existing security system?", function () {
+              stepFollowUpPriority();
+            });
+          }
+        );
+      }
+      stepFollowUpPriority();
+    }
+
+    function stepFollowUpPriority() {
+      addAssistant("Got it. One more thing — what's the biggest priority: the perimeter/outside of the property, the entry points, or keeping an eye on things while you're away?", function () {
+        renderChoices(
+          [
+            { label: "Perimeter / outside the property" },
+            { label: "Entry points (doors, windows, garage)" },
+            { label: "Monitoring while away" },
+            { label: "Not sure yet" }
+          ],
+          function (choice) {
+            state.answers.priority = choice.label;
+            addMessage("visitor", choice.label, true);
+            stepProfileSummary();
+          }
+        );
+      });
+    }
+
+    function suggestedCategoriesFromProfile() {
+      var p = state.profile || {};
+      var names = [];
+      function add(n) {
+        if (names.indexOf(n) === -1) names.push(n);
+      }
+      if (p.rural || p.longDriveway || p.gate || p.fencing) add("Ground / Perimeter Sensing");
+      if (p.detachedGarage || p.gate) add("Smart Access Control");
+      if (p.noSecurity || state.answers.hasExistingSecurity === "No — nothing installed yet") {
+        add("Video Surveillance");
+        add("Motion Detection");
+      }
+      if (p.pets) add("Pet & Property Safety");
+      if (p.water) add("Environmental Protection");
+      if (state.answers.priority === "Perimeter / outside the property") add("Smart Lighting Security");
+      if (state.answers.priority === "Monitoring while away") add("Video Doorbells");
+      if (!names.length) add("Door & Window Protection");
+      return names;
+    }
+
+    function stepProfileSummary() {
+      var p = state.profile || {};
+      var traits = [];
+      if (p.rural) traits.push("Rural property");
+      if (p.longDriveway) traits.push("Long driveway");
+      if (p.detachedGarage) traits.push("Detached garage");
+      if (p.pets) traits.push("Pets on the property");
+      if (p.gate || p.fencing) traits.push("Perimeter features (gate/fencing)");
+      if (p.water) traits.push("Environmental considerations (basement/water)");
+      if (p.cottage) traits.push("Seasonal / cottage property");
+      if (!traits.length) traits.push("No specific property traits detected from your description");
+
+      var suggestions = suggestedCategoriesFromProfile();
+
+      var wrap = document.createElement("div");
+      wrap.className = "concierge-summary";
+      var title = document.createElement("p");
+      title.innerHTML = '<strong>Property Profile</strong> <span class="badge badge-showcase">Simulated</span>';
+      title.style.marginBottom = "0.5rem";
+      wrap.appendChild(title);
+
+      var list = document.createElement("dl");
+      var dt1 = document.createElement("dt");
+      dt1.textContent = "Detected traits";
+      var dd1 = document.createElement("dd");
+      dd1.textContent = traits.join(" · ");
+      var dt2 = document.createElement("dt");
+      dt2.textContent = "Existing security";
+      var dd2 = document.createElement("dd");
+      dd2.textContent = state.answers.hasExistingSecurity || "Not stated";
+      var dt3 = document.createElement("dt");
+      dt3.textContent = "Stated priority";
+      var dd3 = document.createElement("dd");
+      dd3.textContent = state.answers.priority || "Not stated";
+      list.appendChild(dt1); list.appendChild(dd1);
+      list.appendChild(dt2); list.appendChild(dd2);
+      list.appendChild(dt3); list.appendChild(dd3);
+      wrap.appendChild(list);
+
+      var chipsLabel = document.createElement("p");
+      chipsLabel.style.marginTop = "0.75rem";
+      chipsLabel.style.marginBottom = "0.25rem";
+      chipsLabel.innerHTML = "<strong>Technology categories worth exploring:</strong>";
+      wrap.appendChild(chipsLabel);
+
+      var chips = document.createElement("div");
+      chips.className = "chip-list";
+      suggestions.forEach(function (name) {
+        var chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = name;
+        chips.appendChild(chip);
+      });
+      wrap.appendChild(chips);
+
+      addMessageNode("assistant", wrap);
+      state.answers.suggestedCategories = suggestions;
+
+      addAssistant(
+        "This Property Profile is <strong>simulated</strong> — built from simple keyword matching on what you typed, run entirely in your browser. It's not a real assessment, it doesn't imply a live AI backend, and it never invents a price, a schedule, or an installation promise. Now — which service are you interested in? These use the same categories and honest statuses shown across the site.",
+        stepCategory
       );
     }
 
@@ -473,6 +679,18 @@
       if (state.answers.propertyType) {
         noteParts.push("Property type: " + state.answers.propertyType + ".");
       }
+      if (state.answers.freeDescription) {
+        noteParts.push("Property description: " + state.answers.freeDescription);
+      }
+      if (state.answers.hasExistingSecurity) {
+        noteParts.push("Existing security: " + state.answers.hasExistingSecurity + ".");
+      }
+      if (state.answers.priority) {
+        noteParts.push("Priority: " + state.answers.priority + ".");
+      }
+      if (state.answers.suggestedCategories && state.answers.suggestedCategories.length) {
+        noteParts.push("Concierge-suggested categories (simulated): " + state.answers.suggestedCategories.join(", ") + ".");
+      }
       if (state.answers.urgency) {
         noteParts.push("Urgency: " + state.answers.urgency + ".");
       }
@@ -490,6 +708,14 @@
       var list = document.createElement("dl");
       var rows = [
         ["Property type", state.answers.propertyType],
+        ["Existing security", state.answers.hasExistingSecurity],
+        ["Stated priority", state.answers.priority],
+        [
+          "Suggested categories",
+          state.answers.suggestedCategories && state.answers.suggestedCategories.length
+            ? state.answers.suggestedCategories.join(", ")
+            : null
+        ],
         ["Service interest", state.answers.categoryName],
         ["Location", state.answers.location],
         ["Urgency", state.answers.urgency],
@@ -536,6 +762,7 @@
           restart.addEventListener("click", function () {
             log.innerHTML = "";
             state.answers = {};
+            state.profile = {};
             stepStart();
           });
           inputArea.appendChild(restart);

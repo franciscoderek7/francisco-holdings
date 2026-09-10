@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Request Service Demo — DEF Property Maintenance Prototype</title>
-<meta name="description" content="An interactive but demo-only Request Service intake flow. Nothing is sent or stored anywhere." />
+<title>Request Service Demo — DEF Property Maintenance &amp; Security Prototype</title>
+<meta name="description" content="An interactive but demo-only Request Service intake flow covering maintenance, security, smart property, and pet containment. Nothing is sent or stored anywhere." />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -26,7 +26,7 @@
         </svg>
       </span>
       <span class="brand-text">
-        DEF Property Maintenance
+        DEF Property Maintenance &amp; Security
         <span class="brand-sub">Concept Prototype</span>
       </span>
     </a>
@@ -40,8 +40,8 @@
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="property-care.html">Property Care</a>
-      <a href="seasonal-services.html">Seasonal Care</a>
+      <a href="security.html">Security</a>
+      <a href="smart-property.html">Smart Property</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="service-area.html">Service Area</a>
@@ -72,7 +72,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Try it conversationally</span>
-        <h2>Demo AI Concierge</h2>
+        <h2>DEF AI Property Concierge</h2>
         <p>
           Prefer a guided conversation instead of the form below? Try the scripted demo concierge — it walks
           through the same information and hands off into the form when you're done. Or
@@ -80,7 +80,7 @@
         </p>
       </div>
 
-      <div class="concierge" data-concierge aria-label="Demo AI Concierge chat"></div>
+      <div class="concierge" data-concierge aria-label="DEF AI Property Concierge chat"></div>
       <noscript>
         <p class="hint">This interactive demo requires JavaScript. You can still fill in the form below.</p>
       </noscript>
@@ -156,6 +156,19 @@
         <form data-demo-form data-success-target="request-success" class="form" novalidate>
           <div class="form-fields">
 
+            <div class="form-row">
+              <label for="service-type">What kind of service is this? <span class="required-mark">*</span></label>
+              <select id="service-type" name="service-type" required>
+                <option value="">Choose one…</option>
+                <option value="maintenance">Property Maintenance</option>
+                <option value="security">Security</option>
+                <option value="smart-property">Smart Property</option>
+                <option value="pet-containment">Pet Containment</option>
+                <option value="multiple">Multiple Services</option>
+              </select>
+              <p class="error-text" role="alert">Please choose a service type.</p>
+            </div>
+
             <div class="two-col">
               <div class="form-row">
                 <label for="full-name">Full name <span class="required-mark">*</span></label>
@@ -176,25 +189,88 @@
             </div>
 
             <div class="form-row">
-              <label for="address">Property address (optional)</label>
-              <input type="text" id="address" name="address" autocomplete="street-address" />
+              <label for="address">Property address / location <span class="required-mark">*</span></label>
+              <input type="text" id="address" name="address" required autocomplete="street-address" />
+              <p class="error-text" role="alert">Let us know roughly where the property is.</p>
               <p class="hint">This is a prototype field — no address is validated, geocoded, or stored.</p>
             </div>
 
             <div class="form-row">
-              <label for="category">Service category of interest <span class="required-mark">*</span></label>
+              <label for="property-type">Property type</label>
+              <select id="property-type" name="property-type">
+                <option value="residential">Residential (primary home)</option>
+                <option value="rental">Rental or managed property</option>
+                <option value="cottage">Cottage / seasonal property</option>
+                <option value="commercial">Commercial property</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="category">Specific category of interest <span class="required-mark">*</span></label>
               <select id="category" name="category" required>
                 <option value="">Choose a category…</option>
-                <option value="property-maintenance">Property Maintenance (Availability TBC)</option>
-                <option value="seasonal-property-care">Seasonal Property Care (Coming Soon)</option>
-                <option value="small-repairs">Small Repairs (Potential Service)</option>
-                <option value="exterior-maintenance">Exterior Maintenance (Potential Service)</option>
-                <option value="cottage-property-services">Cottage / Property Services (Coming Soon)</option>
-                <option value="turnover-services">Turnover Services (Potential Service)</option>
-                <option value="vendor-coordination">Vendor Coordination (Availability TBC)</option>
+                <optgroup label="Property Maintenance">
+                  <option value="property-maintenance">Property Maintenance (Availability TBC)</option>
+                  <option value="seasonal-property-care">Seasonal Property Care (Coming Soon)</option>
+                  <option value="small-repairs">Small Repairs (Potential Service)</option>
+                  <option value="exterior-maintenance">Exterior Maintenance (Potential Service)</option>
+                  <option value="cottage-property-services">Cottage / Property Services (Coming Soon)</option>
+                  <option value="turnover-services">Turnover Services (Potential Service)</option>
+                  <option value="vendor-coordination">Vendor Coordination (Availability TBC)</option>
+                </optgroup>
+                <optgroup label="Security & Property Protection (Technology Showcase)">
+                  <option value="video-surveillance">Video Surveillance</option>
+                  <option value="motion-detection">Motion Detection</option>
+                  <option value="perimeter-sensing">Ground / Perimeter Sensing (Assessment Required)</option>
+                  <option value="door-window-protection">Door &amp; Window Protection</option>
+                  <option value="glass-break-detection">Glass Break Detection</option>
+                  <option value="smart-access-control">Smart Access Control</option>
+                  <option value="video-doorbells">Video Doorbells</option>
+                  <option value="smart-lighting-security">Smart Lighting Security</option>
+                </optgroup>
+                <optgroup label="Smart Property (Technology Showcase)">
+                  <option value="environmental-protection">Environmental Protection</option>
+                  <option value="pet-property-safety">Pet &amp; Property Safety</option>
+                  <option value="smart-automation">Smart Property Automation</option>
+                </optgroup>
                 <option value="not-sure">Not sure yet</option>
               </select>
               <p class="error-text" role="alert">Please choose a category.</p>
+            </div>
+
+            <div class="form-row">
+              <label for="urgency">Urgency</label>
+              <select id="urgency" name="urgency">
+                <option value="emergency">Emergency — needs attention right away</option>
+                <option value="soon" selected>Soon — within the next few weeks</option>
+                <option value="flexible">Flexible — no rush</option>
+                <option value="exploring">Just exploring ideas</option>
+              </select>
+              <p class="hint">DEF does not offer 24/7 or emergency response in this prototype — selecting "Emergency" does not trigger any faster handling.</p>
+            </div>
+
+            <div class="form-row">
+              <label>Existing technology already on the property (optional, check all that apply)</label>
+              <div class="chip-list">
+                <label class="concierge-choice"><input type="checkbox" name="existing-tech" value="cameras" style="margin-right:0.4rem;" />Cameras</label>
+                <label class="concierge-choice"><input type="checkbox" name="existing-tech" value="alarm" style="margin-right:0.4rem;" />Alarm system</label>
+                <label class="concierge-choice"><input type="checkbox" name="existing-tech" value="lighting" style="margin-right:0.4rem;" />Exterior lighting</label>
+                <label class="concierge-choice"><input type="checkbox" name="existing-tech" value="access-control" style="margin-right:0.4rem;" />Access control / smart locks</label>
+                <label class="concierge-choice"><input type="checkbox" name="existing-tech" value="none" style="margin-right:0.4rem;" />None yet</label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>Technology you'd like to explore (optional, check all that apply)</label>
+              <div class="chip-list">
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="cameras" style="margin-right:0.4rem;" />Video surveillance</label>
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="access" style="margin-right:0.4rem;" />Smart access</label>
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="lighting" style="margin-right:0.4rem;" />Smart lighting</label>
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="environmental" style="margin-right:0.4rem;" />Environmental sensors</label>
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="pet-containment" style="margin-right:0.4rem;" />Pet containment</label>
+                <label class="concierge-choice"><input type="checkbox" name="desired-tech" value="automation" style="margin-right:0.4rem;" />Automation / dashboard</label>
+              </div>
             </div>
 
             <div class="form-row">
@@ -203,9 +279,20 @@
             </div>
 
             <div class="form-row">
-              <label for="notes">Notes / description <span class="required-mark">*</span></label>
+              <label for="notes">Project description <span class="required-mark">*</span></label>
               <textarea id="notes" name="notes" rows="4" required placeholder="Describe what you're hoping to have looked at…"></textarea>
               <p class="error-text" role="alert">Please add a short description.</p>
+            </div>
+
+            <div class="form-row">
+              <label for="photo-upload">Photos (optional)</label>
+              <div class="upload-drop">
+                <input type="file" id="photo-upload" name="photo-upload" accept="image/*" multiple data-photo-upload />
+                <p class="hint" style="margin-top:0.6rem; margin-bottom:0;">
+                  Preview only — photos stay in your browser for this demo and are never uploaded, sent, or stored anywhere.
+                </p>
+                <div class="upload-preview-grid" data-photo-preview aria-live="polite"></div>
+              </div>
             </div>
 
           </div>
@@ -245,7 +332,7 @@
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5" /><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" /><path d="M10 20v-5h4v5" /></svg>
         </span>
         <span class="brand-text">
-          DEF Property Maintenance
+          DEF Property Maintenance &amp; Security
           <span class="brand-sub">Concept Prototype</span>
         </span>
       </div>
@@ -257,6 +344,10 @@
     <nav class="footer-nav" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
+      <a href="security.html">Security</a>
+      <a href="smart-property.html">Smart Property</a>
+      <a href="security-assessment.html">Security Assessment</a>
+      <a href="service-matrix.html">Service Matrix</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="service-area.html">Service Area</a>

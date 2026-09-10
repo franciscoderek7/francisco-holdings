@@ -673,6 +673,42 @@ textarea:focus-visible,
   border-style: dashed;
 }
 
+/* Extended status set for the security / smart-property technology
+   content. Same visual language (dot + pill), new roles:
+   - Available — Confirmed: the only badge that reads as genuinely active.
+   - Technology Showcase: the DEFAULT for advanced security/tech capability —
+     deliberately the most "cool but inert" looking badge (violet/indigo),
+     never mistaken for green/active.
+   - Assessment Required: needs a site visit/consult before anything is
+     decided — used for ground/perimeter sensing per the brief.
+   - Business Confirmation Required: Dylan must confirm before this can be
+     claimed at all (partnerships, licensing-adjacent claims, etc.). */
+.badge-available {
+  color: #fff;
+  background: var(--ok-600);
+  border-color: var(--ok-600);
+}
+
+.badge-showcase {
+  color: #4c3f8f;
+  background: #ece9fa;
+  border-color: #b7abe8;
+}
+
+.badge-assessment {
+  color: #8a4a20;
+  background: #f6e3cf;
+  border-color: var(--accent-500);
+  border-style: dashed;
+}
+
+.badge-business-confirm {
+  color: #b3261e;
+  background: #fbe9e7;
+  border-color: #e6a19b;
+  border-style: dashed;
+}
+
 .status-key {
   display: grid;
   gap: 0.6rem;
@@ -1694,4 +1730,402 @@ a.service-card:focus-visible .card-link svg {
   font-size: 0.85rem;
   color: var(--color-ink-soft);
   margin-bottom: 0.6rem;
+}
+
+/* ==========================================================================
+   Security / Smart-Property expansion — new components
+   Reuses existing tokens (--ink-*, --accent-*, --slate-*) and the existing
+   .badge / .service-card / .notice / .journey patterns wherever possible.
+   ========================================================================== */
+
+/* ---- Security Layers model (7-layer stack) -------------------------------- */
+.layers {
+  display: grid;
+  gap: 0.75rem;
+  counter-reset: layer;
+}
+
+.layer-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--ink-600);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+.layer-num {
+  counter-increment: layer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink-900);
+  color: var(--paper-50);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.layer-num::before {
+  content: counter(layer);
+}
+
+/* Used when layer rows are generated dynamically (e.g. the Security
+   Assessment demo output) for a non-sequential subset of layers — the
+   number is provided as real text content instead of the CSS counter. */
+.layer-num.is-fixed::before {
+  content: none;
+}
+
+.layer-row h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.layer-row p {
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.layer-row.layer-response {
+  border-left-color: var(--accent-500);
+}
+
+/* ---- Automation flow chains ------------------------------------------------ */
+.flow-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1rem;
+}
+
+.flow-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--paper-50);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.flow-node svg {
+  width: 16px;
+  height: 16px;
+  color: var(--ink-700);
+  flex-shrink: 0;
+}
+
+.flow-arrow {
+  color: var(--slate-300);
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+/* ---- DEF Property Intelligence — concept dashboard mockup ------------------ */
+.dashboard-mock {
+  background: var(--ink-950);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: var(--paper-50);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-mock-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-400);
+  background: rgba(201, 122, 61, 0.16);
+  border: 1px solid rgba(221, 154, 95, 0.4);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.dashboard-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.9rem;
+}
+
+.dashboard-row-label {
+  font-size: 0.85rem;
+  color: var(--slate-200);
+}
+
+.dashboard-row-value {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--paper-0);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dashboard-row-value::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--slate-300);
+}
+
+.dashboard-row-value.is-normal::before {
+  background: var(--ok-600);
+}
+
+.dashboard-row-value.is-neutral::before {
+  background: var(--slate-300);
+}
+
+.dashboard-caption {
+  margin-top: 1.25rem;
+  font-size: 0.78rem;
+  color: var(--slate-300);
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+}
+
+/* ---- Service / Technology matrix table ------------------------------------- */
+.matrix-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.matrix-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.matrix-table caption {
+  text-align: left;
+  padding: 0.9rem 1.1rem 0;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.matrix-table th,
+.matrix-table td {
+  text-align: left;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.matrix-table thead th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-500);
+  background: var(--paper-50);
+}
+
+.matrix-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.matrix-table td.matrix-group {
+  font-weight: 800;
+  color: var(--ink-700);
+  background: var(--paper-50);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Urgent request triage -------------------------------------------------- */
+.triage-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.triage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.triage-card:hover,
+.triage-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--ink-500);
+}
+
+.triage-card svg {
+  width: 26px;
+  height: 26px;
+  color: var(--accent-600);
+}
+
+.triage-card h3 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.triage-card p {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+/* ---- Photo upload demo (local preview only) --------------------------------- */
+.upload-drop {
+  border: 2px dashed var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  background: var(--paper-50);
+}
+
+.upload-drop input[type="file"] {
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+.upload-preview-grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  margin-top: 0.85rem;
+}
+
+.upload-preview-item {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  aspect-ratio: 1 / 1;
+  background: var(--paper-100);
+}
+
+.upload-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-preview-remove {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(16, 32, 29, 0.75);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+/* ---- DEF-meaning aside (About page) ------------------------------------------ */
+.def-meaning {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+  align-items: baseline;
+  background: var(--paper-50);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+}
+
+.def-meaning strong {
+  color: var(--color-primary-strong);
+}
+
+/* ---- Assessment / concierge progress meter ----------------------------------- */
+.progress-meter {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--slate-100);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-meter-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-meter-fill {
+    transition: none;
+  }
+}
+
+/* ---- Category chip list (concierge / assessment suggestions) ---------------- */
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--slate-100);
+  color: var(--ink-700);
+  border: 1px solid var(--slate-200);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
 }

@@ -108,6 +108,10 @@
         if (successPanel) {
           successPanel.classList.remove("is-visible");
         }
+        var previewGrid = form.querySelector("[data-photo-preview]");
+        if (previewGrid) {
+          previewGrid.innerHTML = "";
+        }
         resetJourneyProgress();
         var firstField = form.querySelector("input, select, textarea");
         if (firstField) {
@@ -187,10 +191,44 @@
     }
   }
 
+  // Local-only photo preview for the Request Service form's optional photo
+  // field. Uses FileReader to read the chosen files straight into <img
+  // src="data:..."> thumbnails in the DOM — files are never appended to a
+  // FormData, never fetched/XHR'd anywhere, and vanish on reload since
+  // nothing is written to storage. Matches the "local preview only" pattern
+  // used elsewhere in this prototype's demo forms.
+  function initPhotoUpload(input) {
+    var wrap = input.closest(".upload-drop") || document;
+    var previewGrid = wrap.querySelector("[data-photo-preview]");
+    if (!previewGrid) return;
+
+    input.addEventListener("change", function () {
+      previewGrid.innerHTML = "";
+      var files = Array.prototype.slice.call(input.files || []).slice(0, 12);
+      files.forEach(function (file) {
+        if (!file.type || file.type.indexOf("image/") !== 0) return;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var item = document.createElement("div");
+          item.className = "upload-preview-item";
+          var img = document.createElement("img");
+          img.src = e.target.result;
+          img.alt = "Local preview of " + file.name + " — not uploaded anywhere.";
+          item.appendChild(img);
+          previewGrid.appendChild(item);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  }
+
   function init() {
     var forms = document.querySelectorAll("[data-demo-form]");
     forms.forEach(initDemoForm);
     prefillFromConciergeHandoff();
+
+    var photoInputs = document.querySelectorAll("[data-photo-upload]");
+    photoInputs.forEach(initPhotoUpload);
   }
 
   if (document.readyState === "loading") {

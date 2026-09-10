@@ -1,74 +1,132 @@
-# DEF Property Maintenance — Visual Prototype
+# DEF Property Maintenance & Security — Visual Prototype
 
 This directory is a **self-contained, static visual prototype** built for Dylan to review as a
-concept for a possible property-maintenance business expansion. It is **not** a live website, has
-no backend, sends no data anywhere, and should not be linked from or confused with any production
+concept for a possible property-services business expansion. It is **not** a live website, has no
+backend, sends no data anywhere, and should not be linked from or confused with any production
 system.
+
+**Production deployment of this prototype is not authorized.** Nothing here should be pointed at a
+real domain, connected to real customers, or represented as an operating business until Dylan has
+confirmed the information listed later in this file and made a deliberate decision to launch.
 
 ## Business name / status
 
-"DEF Property Maintenance" is a **working name only**, used as a placeholder to give this concept
-prototype a consistent identity. It is not confirmed as the real trading or legal name of any
-business. No entity currently operates under this name as far as this prototype is concerned.
+"DEF Property Maintenance & Security" is a **working name only**, used as a placeholder to give this
+concept prototype a consistent identity. It is not confirmed as the real trading or legal name of
+any business. No entity currently operates under this name as far as this prototype is concerned.
+
+**"DEF" stands for Don Eric Francisco** — this was supplied as real information, so the About page
+notes it as a small, tasteful aside. It is not a claim about any registered trade name.
+
+## Scope: maintenance *and* security/technology
+
+This prototype was originally a property-maintenance concept only. It has since been substantially
+expanded to also cover **smart security and property-protection technology** — cameras, sensors,
+access control, environmental monitoring, pet containment, and simple automation/dashboard concepts
+— as a second, complementary line alongside maintenance. Nothing about that expansion is presented
+as an existing capability; see "Demo functionality" and the status-badge system below.
 
 ## Current status
 
 - **Stage:** internal concept / design prototype, shared for feedback only.
-- **Not deployed:** this directory has never been published to a live domain and is not linked
-  from any production system.
+- **Not deployed:** this directory has never been published to a live domain and is not linked from
+  any production system.
 - **Not connected to anything real:** no backend, no database, no AI service, no analytics, no
-  payment processor, no scheduling tool, no CRM.
-- **No service is confirmed active.** Every one of the seven service categories carries an
-  explicit status badge (Potential Service / Coming Soon / Availability TBC) everywhere it
-  appears, including inside the new Demo AI Concierge described below.
+  payment processor, no scheduling tool, no CRM, no security hardware, no monitoring service.
+- **No service or technology category is confirmed active.** Every category — the original seven
+  maintenance categories and every new security/technology category — carries an explicit status
+  badge everywhere it appears, including inside the AI Property Concierge and Security Assessment
+  demos described below.
 
 ## What this is (and isn't)
 
 - **Is:** a design concept and interaction prototype, meant to gather feedback on structure, tone,
-  and visual direction before any real content, pricing, or service commitments exist.
-- **Isn't:** a live booking system, a functioning contact form, a real map, a real AI assistant, or
-  a source of truth for Dylan's actual business details. Every page carries a "Prototype / Demo"
-  banner and footer note saying so.
+  and visual direction before any real content, pricing, hardware partnerships, or service
+  commitments exist.
+- **Isn't:** a live booking system, a functioning contact/quote form, a real map, a real AI
+  assistant, a real security system, a monitoring service, or a source of truth for Dylan's actual
+  business details. Every page carries a "Prototype / Demo" banner and footer note saying so.
+
+## THE single most important rule this prototype follows
+
+**Nowhere on this site does any page state or imply that Dylan/DEF is licensed, bonded, insured,
+certified, a security guard company, a professional monitoring company, an alarm monitoring centre,
+or authorized to provide any regulated service.** None of that is confirmed, and this is called out
+explicitly and repeatedly (About page, Security page, AI Concierge disclaimer, footers). Every new
+security/technology feature defaults to a **Technology Showcase** badge — the safe default that
+avoids implying an active business capability — unless a different honest status genuinely applies
+(Coming Soon, Assessment Required, etc.). Nothing claims 24/7 response, professional monitoring, or
+emergency response.
 
 ## File list
 
 ```
 def-property-maintenance/
-├── index.html               Home — hero, Demo AI Concierge, traditional-vs-AI contrast, lead-capture
-│                             flow diagram, service overview grid, customer journey diagram,
-│                             About/Service Area teasers
-├── services.html            Full grid of all 7 service categories + in-page detail sections
-├── property-care.html       Detail page: "Property Maintenance" concept
-├── seasonal-services.html   Detail page: "Seasonal Property Care" concept
-├── projects.html             Concept gallery — 7 illustrative CSS/SVG placeholder tiles (one per
-│                             service category, each carrying its real status badge). Explicitly
-│                             framed as concept art, never as photos of completed work, since no
-│                             category is confirmed active yet.
-├── about.html                About Dylan / DEF Property Maintenance (conservative, no invented credentials)
-├── service-area.html        Placeholder service area page with a stylized CSS/SVG graphic
-├── request-service.html     Demo AI Concierge (top of page) + interactive demo intake flow +
-│                             customer journey diagram
-├── contact.html              Placeholder contact details + demo contact form
+├── index.html                 Home — hero, DEF AI Property Concierge, traditional-vs-AI contrast,
+│                               lead-capture flow, 7 maintenance categories, Security & Property
+│                               Protection teaser, "One Company. One Property." differentiator,
+│                               customer journey, About/Service Area teasers
+├── services.html               Full grid of the 7 maintenance categories + detail sections
+│                               (unchanged pattern), with a cross-link into Security & Smart Property
+├── security.html                NEW — Smart Security & Property Protection hub: 8 technology
+│                               categories (card grid + detail sections, same pattern as
+│                               services.html) plus the 7-layer Security Layers model
+├── smart-property.html          NEW — Environmental Protection, Pet & Property Safety, Smart
+│                               Property Automation (example flow chains), DEF Property Intelligence
+│                               (concept-only dashboard mockup), "One Company. One Property." detail,
+│                               and the Future Technology Roadmap
+├── security-assessment.html     NEW — interactive, demo-only, multi-step Security Assessment that
+│                               generates a simulated "DEF Property Protection Profile" referencing
+│                               the 7-layer model. No network calls.
+├── service-matrix.html          NEW — one table applying all 5 extended status labels across both
+│                               the 7 maintenance categories and every security/technology category
+├── property-care.html           Detail page: "Property Maintenance" concept (unchanged)
+├── seasonal-services.html       Detail page: "Seasonal Property Care" concept (unchanged)
+├── projects.html                 Concept gallery — now 14 illustrative CSS/SVG placeholder tiles,
+│                               spanning the original 7 maintenance categories plus Security
+│                               Technology, Smart Property, Pet Containment, and a Before & After
+│                               illustration. Still explicitly "concept only," never a real photo.
+├── about.html                    About Dylan / DEF Property Maintenance & Security (conservative,
+│                               no invented credentials), including the "DEF" name meaning and an
+│                               explicit non-claim about security licensing/monitoring
+├── service-area.html            Placeholder service area page with a stylized CSS/SVG graphic
+│                               (unchanged)
+├── request-service.html          Demo AI Concierge + a substantially expanded, demo-only intake
+│                               form (service type, property type, maintenance/security/smart-
+│                               property/pet-containment categories, urgency, existing/desired
+│                               technology, local-only photo preview, contact info) + customer
+│                               journey diagram
+├── contact.html                   Placeholder contact details, a new Urgent Request triage section
+│                               (routes to a call or Request Service — never a response-time
+│                               promise), and the demo contact form
 ├── css/
-│   └── style.css             Shared stylesheet (design tokens, layout, components, incl. the
-│                              concierge widget, compare section, lead-flow diagram, and concept
-│                              gallery tile styles)
+│   └── style.css                  Shared stylesheet — original design tokens/components plus the
+│                               extended status-badge set, security-layers stack, automation flow
+│                               chains, dashboard mockup, service-matrix table, urgent-triage cards,
+│                               local photo-upload preview, and the About-page "DEF meaning" aside
 ├── js/
-│   ├── nav.js                 Mobile hamburger nav toggle (keyboard accessible)
-│   ├── forms.js                Demo form validation + success-state handling (no network calls),
-│   │                            plus reading the AI Concierge hand-off from the URL to prefill
-│   │                            the Request Service form
-│   ├── concierge.js            Demo AI Concierge — scripted decision-tree chat widget (no real
-│   │                            AI, no network calls; see "AI integration requirements" below for
-│   │                            what a real backend would need)
-│   ├── gallery.js               Generates the projects.html concept tiles (CSS/SVG only, no
-│   │                             external images)
-│   └── reveal.js                Shared scroll-reveal animation (IntersectionObserver, no
-│                                 dependencies) — see "Visual/motion design notes" below
-└── README.md                  This file
+│   ├── nav.js                      Mobile hamburger nav toggle (unchanged)
+│   ├── forms.js                     Demo form validation + success-state handling (no network
+│   │                                calls), the Concierge → Request Service URL hand-off, and the
+│   │                                new local-only photo preview for the intake form's photo field
+│   ├── concierge.js                  DEF AI Property Concierge — now asks a free-text property
+│   │                                description, runs a small fixed keyword-matching function to
+│   │                                build a simulated "Property Profile," asks 1–2 intelligent
+│   │                                follow-ups, and suggests technology categories from the full
+│   │                                maintenance + security/technology list — still a scripted
+│   │                                decision tree with zero network calls, see below
+│   ├── assessment.js                  NEW — drives the Security Assessment demo's multi-step form
+│   │                                and generates its simulated "DEF Property Protection Profile"
+│   │                                (recommended layers + suggested categories) from a small,
+│   │                                fixed set of if/else rules. No network calls.
+│   ├── gallery.js                     Generates the projects.html concept tiles (CSS/SVG only),
+│   │                                now covering 14 concepts across all categories
+│   └── reveal.js                      Shared scroll-reveal animation (IntersectionObserver, no
+│                                    dependencies) — see "Visual/motion design notes" below
+└── README.md                      This file
 ```
 
-All 9 pages share the same header navigation, footer, and stylesheet for a consistent feel.
+All 16 pages share the same header navigation, footer, and stylesheet for a consistent feel.
 
 ## How to run locally
 
@@ -93,193 +151,76 @@ reloading the page is the entire workflow.
 
 ## How to deploy
 
-**This prototype is not deployed anywhere.** Before it could be, Dylan/Derek would need to make a
-few deliberate decisions:
+**This prototype is not deployed anywhere, and deploying it is not authorized by this pass of
+work.** Before it could be, Dylan/Derek would need to make a few deliberate decisions — see
+"Production requirements" below for the full list, including the security-specific items (hardware
+partnerships, licensing research, possible regulatory compliance) that go well beyond a normal
+static-site launch checklist.
 
-1. Choose and register a real domain (or a subdomain of an existing one).
-2. Choose a static hosting provider (e.g. Netlify, Vercel, GitHub Pages, Cloudflare Pages, or a
-   plain web host) — any of them can serve this directory as-is, since it's static HTML/CSS/JS.
-3. Remove or update the `noindex, nofollow` robots meta tag and the "Prototype / Demo" banner/
-   footer notes once (and only once) real content replaces every placeholder.
-4. Decide whether any of the "Future architecture roadmap" items below are needed before launch,
-   or after.
+## Status-badge system (extended)
 
-No deployment step exists today, and none should be taken until Dylan has confirmed the business
-details listed further down.
+The original three-badge system has been extended to five additional statuses to honestly cover
+security/technology content without ever implying an active business capability:
 
-## Proposed service architecture & status-labeling approach
+| Badge | Meaning | Used for |
+|---|---|---|
+| `badge-potential` — Potential Service | An idea under consideration, not yet planned for launch. | Some of the 7 maintenance categories |
+| `badge-coming-soon` — Coming Soon | Planned for future activation, not bookable yet. | Some of the 7 maintenance categories |
+| `badge-tbc` — Availability TBC | Status is Dylan's call. | Some of the 7 maintenance categories |
+| `badge-available` — Available — Confirmed | Genuinely active today. | **Not used anywhere in this prototype** — the badge exists in the system for the day something real launches. |
+| `badge-showcase` — Technology Showcase | Illustrates a category conceptually; **the default for every new security/technology capability** unless told otherwise. | Nearly all security/smart-property categories |
+| `badge-assessment` — Assessment Required | Too site-specific to describe generically; needs an actual visit. | Ground / Perimeter Sensing |
+| `badge-business-confirm` — Business Confirmation Required | Needs Dylan's sign-off before it can be claimed at all. | Professional/third-party monitoring partnership, 24/7 emergency response — see `service-matrix.html` |
 
-The prototype treats "services" as a small, repeatable pattern rather than one-off page content,
-specifically so the real business can grow into it later without a redesign:
+No category anywhere in this prototype carries "Available — Confirmed." The `service-matrix.html`
+page is the single place to see every category's status side by side.
 
-1. **One card component, one detail-section component.** Every service category — regardless of
-   how developed the idea is — uses the same card markup on `index.html`/`services.html` and the
-   same detail-section markup on `services.html` (and, for the two most-developed concepts, their
-   own dedicated pages: `property-care.html` and `seasonal-services.html`). Adding an eighth
-   category, or fleshing out a stub into a full page, means duplicating an existing block — not
-   inventing new layout.
+## Demo functionality — everything simulated, listed explicitly
 
-2. **Status is a separate, explicit attribute of every category**, never baked into the copy. Three
-   badge states are defined in `css/style.css` (`.badge-potential`, `.badge-coming-soon`,
-   `.badge-tbc`) and used consistently:
-   - **Potential Service** — an idea under consideration, not yet planned for launch.
-   - **Coming Soon** — planned for future activation, not bookable yet.
-   - **Availability TBC** *("Service availability to be confirmed")* — status is Dylan's call.
+Every interactive feature below runs **entirely in the browser**. None of them make a `fetch`/XHR/
+WebSocket call, none write to `localStorage`/`sessionStorage`/cookies, and none persist anything
+after the page is reloaded or closed.
 
-   None of the seven categories is ever presented as active or bookable today. When Dylan decides a
-   category is ready, "activating" it is meant to be a small, contained change: swap its badge,
-   replace the conceptual "could include" bullets with real ones, and (optionally) wire up
-   `request-service.html`'s category dropdown to only offer active categories. The page structure,
-   icons, and grid do not need to change.
-
-3. **Icons are decorative and swappable.** Every category has one small inline SVG icon, all drawn
-   in the same stroke-based style, so a category's icon can be refined later without touching
-   layout.
-
-4. **The customer-journey diagram (`Request Service → Intake → Review → Scheduling → Service →
-   Completion → Follow-up`) is a separate, reusable component** (`.journey` / `.journey-step` in
-   `css/style.css`) shown on both `index.html` (static overview) and `request-service.html`
-   (interactive, demo-only). It's deliberately generic — it doesn't assume any particular service
-   category — so it keeps working as more categories go live.
-
-5. **All demo forms share one JS module** (`js/forms.js`) that validates fields and swaps in a
-   success panel. There is no `fetch`/`XHR` call anywhere in the codebase, and no form has an
-   `action` attribute — every submit is intercepted, validated client-side, and only changes
-   visible DOM state. Nothing is written to `localStorage`/`sessionStorage`/cookies either, so nothing
-   persists once the page is closed or reloaded.
-
-6. **The Demo AI Concierge (`js/concierge.js`) is a single reusable widget**, mounted into any page
-   via a `<div data-concierge>` container — that's how it appears on both `index.html` (prominently,
-   in its own section) and at the top of `request-service.html`. It is a fixed decision tree, not a
-   real AI:
-   - Every assistant line is a hard-coded string; there is no model, no prompt, and no API call.
-   - It walks the same shape described in the project brief: property type → service category →
-     location → urgency → project details → contact info → a summary → hand-off.
-   - The service-category step uses the *exact same* seven categories and status badges as
-     `services.html`/`request-service.html`, from one shared list in `concierge.js`. If a visitor
-     picks a "Coming Soon" or "Potential Service" category, the concierge says so explicitly and
-     never implies it's bookable.
-   - It never invents a price, quotes an estimate, or promises a schedule/response time — this is
-     stated in the widget's own header disclaimer, reinforced again near the urgency step, and
-     again in its closing summary.
-   - Nothing typed into it is sent, saved, or transmitted. The only "hand-off" is a same-site link:
-     finishing the conversation lands on `request-service.html?...&category=...#request-form` with
-     the visitor's answers in the URL's query string, which `js/forms.js` reads (still purely
-     client-side) to prefill that page's existing intake form — demonstrating "Quote Request → Lead
-     Capture" without any network call or storage write.
-
-The seven categories shown, with the illustrative status assigned in this prototype (Dylan should
-treat these as placeholders to relabel, not as recommendations):
-
-| Category | Status shown in this prototype |
-|---|---|
-| Property Maintenance | Availability TBC |
-| Seasonal Property Care | Coming Soon |
-| Small Repairs | Potential Service |
-| Exterior Maintenance | Potential Service |
-| Cottage / Property Services | Coming Soon |
-| Turnover Services | Potential Service |
-| Vendor Coordination | Availability TBC |
-
-## Visual/motion design notes
-
-A polish pass was applied on top of the existing spruce/teal + terracotta system to give the
-prototype more of a "wow factor" and an established-company feel, without changing the palette,
-copy, information architecture, or any service's honest status badge. Everything below is pure
-CSS + one small vanilla-JS file — no libraries, no CDNs, no network calls, no build step.
-
-- **Scroll-triggered reveals (`js/reveal.js`, `.reveal`/`.reveal.is-visible` in `css/style.css`).**
-  A single shared `IntersectionObserver` script fades/slides content into view as it scrolls into
-  the viewport (opacity + `translateY(22px)`, ~550ms, `cubic-bezier(0.16,1,0.3,1)`), applied on
-  every page to section intros, service cards, notices, form cards, the map placeholder, the
-  concierge widget, and the "could include" detail sections on `services.html`. Grouped items —
-  the 7 service-category cards, the 7-step customer-journey diagram (`Request Service → Intake →
-  Review → Scheduling → Service → Completion → Follow-up` on `index.html` and
-  `request-service.html`), the lead-capture flow, the contact-info grid, and the traditional-vs-AI
-  comparison — are staggered by ~70ms per item so each group visually "builds" in sequence.
-  Progressive enhancement is built in at the CSS level: with JS disabled, or on very old browsers
-  without `IntersectionObserver`, every `.reveal` element is simply visible by default.
-
-- **Hero upgrade (`index.html`, shared `.hero` styles).** The hero's headline, eyebrow, lede, CTA
-  row, and "how this prototype is structured" card now enter with a confident, staggered rise
-  (~650–700ms each, ~90ms apart) on page load — precise rather than playful, matching the brand's
-  "organized/scalable" positioning. A very subtle animated architectural grid (a faint two-line CSS
-  gradient, panning slowly over ~48s) sits behind the hero content on every page that uses the
-  `.hero` component, echoing the site's line-art icon system without competing with the text.
-
-- **Micro-interactions.** Buttons (`.btn-primary`/`.btn-ghost`/`.btn-outline`), the 7 service cards,
-  and their icons now have smoother, slightly deeper hover/focus-visible states — a small lift
-  (`translateY`), a deepened shadow, and a subtle icon scale/color shift — so the service grid and
-  calls to action feel tactile without changing their layout or color roles. All existing
-  `:focus-visible` outline rings (3px solid, visible for keyboard users) are untouched and still
-  render on top of the new hover treatments; nothing here changed how focus is indicated.
-
-- **Status badge polish.** Every status badge's leading dot (`badge-potential` / `badge-coming-soon`
-  / `badge-tbc`) now has a slow, deliberate "breathing" pulse (~2.6s, scale + opacity, no colour
-  change to anything resembling a "live/active" green indicator) so the badges read as a designed
-  system rather than an afterthought. This is purely a visual treatment of the *same* three honest
-  statuses already in use — no badge's wording, color family, or meaning changed, and no category
-  is implied to be more available than it is.
-
-- **`prefers-reduced-motion: reduce` support (hard requirement).** A blanket rule collapses every
-  animation and transition on the site (new and pre-existing — nav dropdown, concierge typing dots,
-  card hover, skip-link, all of the above) to effectively instant whenever the OS/browser preference
-  is set. On top of that, the reveal system, hero entrance, grid pan, and badge pulse are each
-  additionally scoped inside `@media (prefers-reduced-motion: no-preference)` blocks, so a
-  reduced-motion visitor sees the finished page immediately — fully visible, no motion, no delay —
-  rather than a "reduced" version of the animation.
-
-- **No new dependencies, no overflow.** Everything added is inline CSS/JS already living in
-  `css/style.css` and the new `js/reveal.js` — no CDN scripts, no web fonts, no images, no
-  `fetch`/`XHR`/`WebSocket` calls anywhere. Verified with a scripted Playwright/Chromium pass across
-  all 8 pages at 390px, 768px, 1024px, and 1440px widths, with and without reduced motion: zero
-  console errors, `document.documentElement.scrollWidth` never exceeds the viewport width on any
-  page, and every reveal element resolves to visible after scrolling (the one exception, the
-  desktop-only "vs" divider between the traditional/AI comparison columns, is `display:none` below
-  760px regardless, so it has nothing to reveal there).
-
-## Design notes
-
-- **Palette:** a deep spruce/forest-teal (`--ink-*` tokens) paired with a warm terracotta accent
-  (`--accent-*`) and warm off-white paper background — chosen to read as capable/organized "field
-  services" rather than a retail storefront, and to stay visually distinct from the other unrelated
-  prototypes in this repo.
-- **Type:** system font stack only (no Google Fonts / CDN font loads), leaning on weight and
-  letter-spacing for hierarchy so the site has zero external runtime dependencies.
-- **Accessibility:** semantic landmarks (`header`/`nav`/`main`/`footer`), a skip-to-content link on
-  every page, a logical heading hierarchy, visible `:focus-visible` states, a fully keyboard-operable
-  hamburger nav (`Enter`/`Space` to toggle, `Escape` to close and return focus), `alt`/`aria-label`
-  text on all meaningful graphics, and decorative icons marked `aria-hidden="true"`.
-- **No external network calls at runtime:** no analytics, no CDNs, no web fonts, no maps API, and
-  no AI/model API. The "map" on `service-area.html` is a hand-built inline SVG illustration, not
-  real geographic data, and the "Demo AI Concierge" (`js/concierge.js`) is a hard-coded decision
-  tree, not a real AI call.
-- **Concierge widget accessibility:** the chat log is an `aria-live="polite"` region so new
-  messages are announced; every choice is a real `<button>`; every text step is a labeled form
-  field with the same validation pattern as the rest of the site's forms; focus moves to the next
-  control after each step for fast keyboard use.
-
-## Prototype limitations
-
-Read this before treating anything in this prototype as functional:
-
-- **The "AI" is not AI.** The Demo AI Concierge (`js/concierge.js`) is a fixed, hard-coded decision
-  tree with pre-written responses and a fixed branch for each of the seven service categories'
-  status badges. It does not call any model, API, or external service, and it cannot answer
-  anything outside its scripted steps.
-- **No form submits anywhere.** Every form on the site (contact, intake, concierge) intercepts its
-  own submit event, validates client-side, and swaps in an on-page success state. None has an
-  `action` attribute; none performs a `fetch`/`XHR` call.
-- **No service is confirmed active.** The Potential Service / Coming Soon / Availability TBC badge
-  system is illustrative — see the table above — and is not a recommendation for which categories
-  to launch first.
-- **Nothing persists.** No `localStorage`, `sessionStorage`, or cookies are used anywhere. The only
-  data that crosses a page boundary is the Concierge → Request Service hand-off, which rides in the
-  URL's query string for that single navigation and is not saved anywhere afterward.
-- **No real business details exist yet.** Phone, email, address, hours, certifications, years in
-  operation, pricing, and team size are all placeholders — see the confirmation list below.
-- **No real photography, testimonials, certifications, stats, or awards** appear anywhere in this
-  prototype, by design.
+1. **DEF AI Property Concierge** (`js/concierge.js`, on `index.html` and `request-service.html`) —
+   a fixed decision tree, not a real AI. It now includes a free-text "describe your property" step;
+   a small, fixed keyword-matching function (`parsePropertyDescription`) looks for a short list of
+   substrings (rural, driveway, pets, garage, gate, fencing, water/basement, "no security", etc.)
+   and uses them to render a simulated **Property Profile** (detected traits, existing-security
+   follow-up, stated priority, and suggested technology categories from the full maintenance +
+   security/technology list). It never invents a fact the visitor didn't imply, never quotes a
+   price, never promises a schedule, and never claims DEF is licensed/insured/a monitoring company.
+2. **Security Assessment** (`security-assessment.html` + `js/assessment.js`) — a 5-step demo form
+   (property basics, access & grounds, current technology, concerns & desired automation, budget &
+   contact) that generates a simulated **DEF Property Protection Profile**: recommended layers from
+   the 7-layer Security Layers model plus suggested technology categories, computed by a small fixed
+   set of if/else rules run against the visitor's own answers. No price is generated.
+3. **DEF Property Intelligence dashboard** (`smart-property.html`) — a static UI mockup with fixed
+   example values (Security: SECURE, Cameras: 8 ONLINE, etc.), explicitly labeled "CONCEPT
+   DEMONSTRATION" in the page and in a visible caption. It is not live data and is not connected to
+   any device, sensor, or property.
+4. **Smart Property Automation chains** (`smart-property.html`) — four illustrated example
+   automation sequences (e.g. "Motion detected → light activates → camera records → owner
+   notified → event logged"), explicitly framed as a demonstration of possible automation, not a
+   claim that DEF currently operates any of it.
+5. **Expanded Request Service form** (`request-service.html`) — collects service type (Property
+   Maintenance / Security / Smart Property / Pet Containment / Multiple Services), property type,
+   location, category, urgency, existing/desired technology, a project description, an optional
+   local-only photo preview (see below), and contact info. Client-side validated, on-page success
+   state only — no email, no server call.
+6. **Local-only photo preview** (`js/forms.js`, on the Request Service form) — uses `FileReader` to
+   render chosen image files as thumbnails directly in the page. Files are never attached to a
+   network request, never uploaded, and vanish on reload.
+7. **Urgent Request triage** (`contact.html`) — a simple routing UI ("Property damage," "Security
+   concern," "Gate/access problem," "Water/environmental issue," "Other") that links to either the
+   phone placeholder or the Request Service form. It explicitly does **not** claim 24/7 or emergency
+   response, and tells a visitor with a genuine emergency to contact real emergency services instead
+   of this site.
+8. **Concept gallery** (`projects.html` + `js/gallery.js`) — 14 CSS/SVG placeholder tiles (no photos
+   of real work), each carrying its category's real status badge, now spanning maintenance,
+   Security Technology, Smart Property, Pet Containment, and a Before & After illustration.
+9. **Demo contact / intake forms generally** (`js/forms.js`) — shared client-side validation and
+   success-panel logic; no form anywhere in this prototype has an `action` attribute or a
+   `fetch`/XHR call.
 
 ## Full list of information Dylan must confirm before this could go live
 
@@ -287,72 +228,184 @@ This prototype intentionally invents **none** of the following. Before any versi
 made public or connected to real customers, Dylan needs to supply/confirm:
 
 **Business identity & legitimacy**
-- Legal/trading business name (confirm "DEF Property Maintenance" is the intended final name)
-- Business phone number
-- Business email address
-- Physical/mailing address (if any is to be shown publicly)
-- Business hours
-- Any licenses, certifications, insurance, or bonding to disclose (none are currently claimed)
-- Years in operation / founding date (none is currently claimed)
-- Team size or who performs the work (none is currently claimed)
+- Legal/trading business name (confirm "DEF Property Maintenance & Security" is the intended final name)
+- Business phone number, email address, physical/mailing address (if shown), business hours
+- Any licenses, certifications, insurance, or bonding to disclose (none are currently claimed —
+  this applies to maintenance work **and** to any security/technology installation or monitoring)
+- Years in operation / founding date, team size, or who performs the work (none currently claimed)
 
-**Services**
-- Which of the seven listed categories (Property Maintenance, Seasonal Property Care, Small
-  Repairs, Exterior Maintenance, Cottage/Property Services, Turnover Services, Vendor Coordination)
-  are actually going to be offered, and on what timeline
-- Correct status for each category (replacing the illustrative Potential/Coming Soon/TBC labels
-  used in this prototype)
-- Real descriptions of what's included/excluded in each active category
-- Any services that should be added or removed from this list entirely
+**Maintenance services**
+- Which of the 7 listed maintenance categories are actually going to be offered, and on what timeline
+- Real status for each category (replacing the illustrative Potential/Coming Soon/TBC labels here)
+- Real descriptions of what's included/excluded, and any categories to add or remove
+
+**Security / smart-property technology**
+- Whether DEF will actually assess, install, or coordinate any of the security/technology categories
+  shown, and which ones — none are currently sold, installed, or monitored
+- Any hardware, vendor, or platform partnerships (none are named or implied anywhere in this
+  prototype — see "Production requirements" below)
+- Whether any form of professional/third-party monitoring partnership will ever be offered (labeled
+  "Business Confirmation Required" in this prototype; DEF does not operate monitoring today)
+- Whether 24/7 or emergency response will ever be offered (also "Business Confirmation Required";
+  not offered today, and this prototype never implies otherwise)
+- What, if any, licensing or regulatory requirements apply to security-technology work in Dylan's
+  jurisdiction (not researched as part of this prototype — see below)
 
 **Commercial details**
-- Pricing or pricing model (nothing is priced in this prototype)
-- Payment methods accepted
-- Cancellation/rescheduling policy
-- Any minimum job size, call-out fee, or similar terms
+- Pricing or pricing model for either line (nothing is priced anywhere in this prototype, including
+  in the Security Assessment's "budget range" field, which only records the visitor's own guess)
+- Payment methods, cancellation/rescheduling policy, minimum job size or call-out fee
 
 **Service area**
-- The actual geographic area(s) served (towns, regions, radius, etc.) — `service-area.html` is a
-  placeholder with no real location data
-- Whether a real map/embed is wanted, and what provider (which would introduce an external
-  dependency not present in this prototype)
+- The actual geographic area(s) served — `service-area.html` is a placeholder with no real location data
+- Whether a real map/embed is wanted, and what provider (an external dependency not present today)
 
 **Trust content**
-- Real customer testimonials or reviews (none are included or implied)
-- Real project photography (all image areas are placeholder frames)
-- A real photo of Dylan for the About page (currently a placeholder silhouette)
-- Any awards, associations, or affiliations to mention
+- Real customer testimonials/reviews, real project photography, a real photo of Dylan, any awards
+  or affiliations — none exist or are implied anywhere in this prototype
 
 **Operational / journey details**
-- How requests should actually be received (email inbox, phone, a real scheduling tool, etc.) —
-  `request-service.html` only demonstrates the *shape* of a request/intake/review/scheduling/
-  service/completion/follow-up flow, with no backend behind it
-- Who reviews incoming requests and how
-- What "scheduling" actually looks like in practice (calendar tool, manual calls, etc.)
-- What follow-up after a completed job should involve, if anything
+- How requests should actually be received and reviewed, what "scheduling" looks like in practice,
+  and what follow-up after a job should involve — `request-service.html` only demonstrates the
+  *shape* of a flow, with no backend behind it
 
-**Technical/legal (out of scope for this prototype, but needed before going live)**
+**Technical/legal**
 - A real domain name and hosting plan
 - Privacy policy / terms of service, if the site will ever collect real customer data
-- Analytics or lead-tracking requirements, if any (this prototype deliberately has none)
-- Any accessibility or regulatory requirements specific to Dylan's jurisdiction
+- Analytics or lead-tracking requirements, if any (deliberately none today)
+- Any accessibility or regulatory requirements specific to Dylan's jurisdiction — **for the security
+  line specifically, this may include licensing for alarm/security work, rules around camera or
+  license-plate-recognition use, and requirements for anyone offering monitoring or access-control
+  services.** This prototype does not research or resolve any of that; it is flagged here as a real,
+  separate piece of work Dylan/Derek would need before the security line could operate for real.
 
 Until these are confirmed, this prototype should be treated strictly as an internal
 feedback/design artifact.
 
+## Technology assumptions made by this prototype
+
+To keep the security/smart-property content honest while still showing what a real offering could
+look like, this prototype makes a few explicit, disclosed assumptions — none of which are claims
+about real capability:
+
+- No specific hardware brand, vendor, platform, or monitoring-service partner is named anywhere.
+  Every technology category is described generically (e.g. "smart locks," not a named product).
+- License-plate-aware camera capability is mentioned once (on `security.html`) only as something
+  that would apply "where legally appropriate" — this prototype makes no claim about what's legal in
+  any specific jurisdiction and does not recommend using it.
+- The 7-layer Security Layers model, the automation chains, and the DEF Property Intelligence
+  dashboard are original illustrative frameworks built for this prototype, not descriptions of any
+  real product or existing DEF system.
+- "Ground / Perimeter Sensing" is deliberately the one category marked "Assessment Required" rather
+  than "Technology Showcase," because it's genuinely too site-specific (terrain, property size,
+  fencing) to describe generically the way an indoor sensor can be.
+
+## Production requirements — what "making the security line real" would actually take
+
+This is flagged explicitly for Dylan: expanding into smart security/property-protection technology
+for real is **not** something this static prototype resolves, and it's a meaningfully bigger step
+than adding a new page to a maintenance website. At minimum it would need:
+
+- **Real hardware/vendor partnerships.** Every camera, sensor, lock, and lighting category shown
+  here is generic; an actual offering needs specific products, suppliers, and pricing.
+- **Licensing and regulatory research**, which varies by jurisdiction and may include: licensing to
+  sell/install alarm or security equipment, rules around camera placement and license-plate capture,
+  data-retention and privacy obligations for recorded video, and separate licensing/insurance
+  requirements if DEF ever wants to offer monitoring, access control, or anything positioned as a
+  "security service" rather than a technology-installation service. **This prototype has not done
+  this research and does not attempt to.** It's a real consideration for Dylan to look into before
+  any of the security content becomes a genuine offering, not something solved by this pass of work.
+- **Insurance and liability review**, separate from (and likely more involved than) whatever
+  coverage a maintenance-only business would carry, given the nature of security/access-control work.
+- **A real backend**, if any of the "concept" features (the Property Intelligence dashboard, the
+  automation chains, device status) are ever meant to reflect real, live data — none of that exists
+  today; see "AI integration requirements" below for the closely related concierge case.
+- **A decision on monitoring.** If DEF ever wants to offer or partner for professional/third-party
+  monitoring or emergency escalation, that is its own regulated business decision, not a feature to
+  flip on — this prototype deliberately never promises it.
+
+None of this exists yet, and none of it is committed to. It's listed here so "add real security
+services" isn't mistaken for a simple content update once Dylan reviews this prototype.
+
+## Visual/motion design notes
+
+A polish pass was applied on top of the existing spruce/teal + terracotta system, then extended
+again for the security/technology content, to keep a consistent "wow factor" and established-company
+feel without changing the palette, the honest status-badge meanings, or breaking any existing
+pattern. Everything below is pure CSS + small vanilla-JS files — no libraries, no CDNs, no network
+calls, no build step.
+
+- **Scroll-triggered reveals (`js/reveal.js`, `.reveal`/`.reveal.is-visible` in `css/style.css`).** A
+  single shared `IntersectionObserver` script fades/slides content into view as it scrolls into the
+  viewport, applied across every page including the new security/smart-property sections, the
+  Security Layers stack, automation flow chains, the DEF Property Intelligence dashboard, and the
+  Service Matrix table. The script's element-dedup logic was fixed during this pass: it now tracks
+  "already bound" state on a `data-reveal-bound` attribute instead of the `reveal` CSS class itself,
+  so markup that's authored with `class="reveal"` already in the HTML (several new sections use this
+  pattern, matching one pre-existing example on `projects.html`) is still picked up and properly
+  animated to visible — previously such elements could be permanently skipped and stay invisible.
+  A few extra selectors (`.text-center.reveal`, `.dashboard-mock`, `.matrix-scroll`, `.layers`,
+  `.flow-chain`, `.triage-grid`) were added so these new components participate correctly.
+- **`prefers-reduced-motion: reduce` support (hard requirement, unchanged).** A blanket rule collapses
+  every animation/transition site-wide, and the reveal/hero/badge-pulse systems are additionally
+  scoped inside `@media (prefers-reduced-motion: no-preference)` so a reduced-motion visitor sees the
+  finished page immediately, fully visible, no motion, no delay. Verified for the new pages and
+  components during this pass (see "Testing" notes in the working session, not duplicated here).
+- **No new dependencies, no overflow.** Every new component is inline CSS/JS living in
+  `css/style.css`, `js/reveal.js`, `js/concierge.js`, and the new `js/assessment.js` — no CDN
+  scripts, no web fonts, no images, no `fetch`/`XHR`/`WebSocket` calls anywhere in the codebase.
+
+## Design notes
+
+- **Palette:** unchanged — a deep spruce/forest-teal (`--ink-*` tokens) paired with a warm terracotta
+  accent (`--accent-*`) and warm off-white paper background. The new `badge-showcase` status uses a
+  restrained violet/indigo so it never reads as "green/active," and `badge-business-confirm` uses a
+  dashed red-adjacent border to read clearly as "not yet," not as an error state.
+- **Type:** system font stack only (no Google Fonts / CDN font loads).
+- **Accessibility:** semantic landmarks, a skip-to-content link on every page, a logical heading
+  hierarchy, visible `:focus-visible` states, a fully keyboard-operable hamburger nav, `alt`/
+  `aria-label` text on all meaningful graphics, decorative icons marked `aria-hidden="true"`. The
+  Security Assessment's multi-step form moves focus to each step's heading as it advances, and its
+  progress meter carries `role="progressbar"` with live `aria-valuenow`.
+- **No external network calls at runtime:** no analytics, no CDNs, no web fonts, no maps API, no
+  AI/model API. The DEF AI Property Concierge and the Security Assessment are both hard-coded
+  logic, not real AI calls — see "AI integration requirements" below.
+
+## Prototype limitations
+
+Read this before treating anything in this prototype as functional:
+
+- **The "AI" is not AI.** The DEF AI Property Concierge (`js/concierge.js`) is a fixed, hard-coded
+  decision tree with pre-written responses; its "Property Profile" step is simple keyword matching
+  on the visitor's own text, not a model call. It cannot answer anything outside its scripted steps.
+- **The Security Assessment is not a real assessment.** `js/assessment.js` runs a small, fixed set of
+  if/else rules against the visitor's own answers. No professional reviews anything, no price is
+  generated, and no installation availability is implied.
+- **The DEF Property Intelligence dashboard is a static mockup.** Every value is fixed content baked
+  into the page. It is not live, not refreshed, and not connected to any device.
+- **No form submits anywhere.** Every form on the site intercepts its own submit event, validates
+  client-side, and swaps in an on-page success state. None has an `action` attribute; none performs
+  a `fetch`/XHR call.
+- **No service or technology category is confirmed active.** See the status-badge table above and
+  `service-matrix.html` for the full picture.
+- **Nothing persists.** No `localStorage`, `sessionStorage`, or cookies are used anywhere. The only
+  data that crosses a page boundary is the Concierge → Request Service hand-off (URL query string,
+  single navigation, not saved afterward).
+- **No real business details, hardware partnerships, or licensing status exist yet.** Phone, email,
+  address, hours, certifications, years in operation, pricing, vendor partnerships, and monitoring
+  partnerships are all placeholders or explicitly unconfirmed — see the confirmation list above.
+- **No real photography, testimonials, certifications, stats, or awards** appear anywhere.
+
 ## Required images/assets
 
 None of the following exist in this prototype today — every image area is a labeled placeholder
-frame (`.placeholder-frame`) or a hand-built inline SVG, never a real photo or graphic:
+frame or a hand-built inline SVG, never a real photo or graphic:
 
 - A real headshot photo of Dylan (About page currently shows a placeholder silhouette icon)
-- Real project/work photography for the homepage and service pages (currently empty placeholder
-  frames with dashed borders and captions)
+- Real project/work photography for the homepage and service pages
 - A real logo (currently a simple inline SVG "house" mark used as a stand-in brand icon)
-- A real map or location graphic for `service-area.html` (currently a stylized, non-geographic
-  inline SVG illustration)
-- Any category-specific photography, if Dylan wants service cards to show real work instead of the
-  current stroke-icon illustrations
+- A real map or location graphic for `service-area.html`
+- Real product photography for any security/technology category, if Dylan confirms specific hardware
 - A favicon / app icon set (none is currently defined)
 
 ## Future production tasks
@@ -360,45 +413,45 @@ frame (`.placeholder-frame`) or a hand-built inline SVG, never a real photo or g
 Roughly in the order they'd need attention before this could become a real, public site:
 
 1. Confirm the business information listed above (name, contact details, service area, pricing,
-   which categories actually launch).
-2. Replace every placeholder image/graphic with real assets (see above).
-3. Update each service category's status badge and "could include" copy to reflect reality.
-4. Decide how incoming requests should actually be received and handled (see "AI integration
+   which maintenance categories and which security/technology categories actually launch).
+2. Resolve the security-specific items above: hardware/vendor partnerships, licensing/regulatory
+   research, insurance/liability review, and a real decision on monitoring/emergency response.
+3. Replace every placeholder image/graphic with real assets.
+4. Update each category's status badge and descriptive copy to reflect reality, and remove any
+   category that won't launch.
+5. Decide how incoming requests should actually be received and handled (see "AI integration
    requirements" below if that includes a real AI concierge; otherwise a plain form-to-email/CRM
    integration would need a real backend of its own).
-5. Add a privacy policy / terms of service before collecting any real visitor data.
-6. Choose a domain and hosting plan, then deploy (see "How to deploy" above).
-7. Remove the `noindex, nofollow` robots tag and all "Prototype / Demo" banners/footers once the
+6. Add a privacy policy / terms of service before collecting any real visitor data.
+7. Choose a domain and hosting plan, then deploy.
+8. Remove the `noindex, nofollow` robots tag and all "Prototype / Demo" banners/footers once the
    site is genuinely ready for the public.
-8. Revisit the "Future architecture roadmap" below and decide what's actually needed for launch.
+9. Revisit the "Future Technology Roadmap" (`smart-property.html`) and decide what's actually needed
+   for launch versus genuinely future direction.
 
 ## AI integration requirements
 
-The Demo AI Concierge in this prototype is intentionally fake — a scripted decision tree with zero
-external calls. If Dylan/Derek later want a **real** AI-assisted concierge, that is a separate,
-non-trivial project. At minimum it would need:
+The DEF AI Property Concierge in this prototype is intentionally fake — a scripted decision tree
+with keyword matching and zero external calls. If Dylan/Derek later want a **real** AI-assisted
+concierge (or a real backend behind the Security Assessment), that is a separate, non-trivial
+project. At minimum it would need:
 
-- **An API key held server-side only.** A real AI provider's API key must never be embedded in
-  client-side JavaScript (which is all this static site has) — it would be publicly visible and
-  abusable within minutes. This alone means the current static-only architecture is not sufficient.
-- **A real backend endpoint.** Something (a small server, a serverless function, etc.) that the
-  browser calls instead of a model provider directly, so the API key and request logic stay off
-  the client. This is new infrastructure this prototype does not have.
-- **Conversation logging considerations.** Deciding whether/how conversations are logged, for how
-  long, who can access them, and how that's disclosed to visitors — none of which exists today
-  because nothing is logged at all in this prototype.
-- **The same guardrails already baked into this demo's scripted copy**, but enforced against a real
-  model's output instead of assumed: never claim a service category is active/bookable when its
-  real status says otherwise, never invent a price or quote, never promise a specific schedule or
-  response time. A real model needs these enforced by the backend (e.g. via system-prompt
-  constraints *and* server-side output checks), not just trusted to "know better."
+- **An API key held server-side only** — never embedded in client-side JavaScript, which is all this
+  static site has.
+- **A real backend endpoint** the browser calls instead of a model provider directly.
+- **Conversation logging considerations** — deciding whether/how conversations are logged, for how
+  long, who can access them, and how that's disclosed to visitors.
+- **The same guardrails already baked into this demo's scripted copy**, enforced against a real
+  model's output instead of assumed: never claim a category is active/bookable/installed when its
+  real status says otherwise, never invent a price or quote, never promise a schedule or 24/7/
+  emergency response, and never state or imply DEF is licensed/insured/a monitoring company. A real
+  model needs these enforced by the backend, not just trusted to "know better."
 - **Rate limiting**, to prevent cost blowouts or abuse once a real, billed API is involved.
 - **A fallback UX** for when the AI service is slow, errors, or is deliberately disabled — ideally
-  falling back to something like this prototype's scripted flow or a plain form, so a visitor is
-  never stuck with nothing.
+  falling back to something like this prototype's scripted flow or a plain form.
 
-None of this exists yet. The current widget is safe to demo publicly precisely because it makes no
-calls to anything.
+None of this exists yet. The current widgets are safe to demo publicly precisely because they make
+no calls to anything.
 
 ## Future architecture roadmap
 
@@ -409,16 +462,16 @@ committed:
 - Content management system (CMS)
 - Lead dashboard (for viewing/managing captured requests)
 - AI configuration panel (for managing a real AI concierge's behavior, if one is ever built)
-- Analytics
-- SEO tooling/strategy
+- Real device/sensor integration behind the DEF Property Intelligence dashboard
+- Analytics, SEO tooling/strategy
 - Customer management (CRM)
 - Appointment/scheduling system
-- Email notifications
-- SMS notifications
+- Email/SMS notifications
 - Production database
 - Authentication (for any staff-facing tools above)
 - Real domain deployment
+- Real monitoring-service partnership or emergency-escalation integration
 
-Any future integration of this business's tooling with Derek's broader business infrastructure
-would be a separate, deliberate decision made later, and is not assumed, implied, or in progress
-anywhere in this prototype.
+Any future integration of this business's tooling with Derek's broader business infrastructure would
+be a separate, deliberate decision made later, and is not assumed, implied, or in progress anywhere
+in this prototype.

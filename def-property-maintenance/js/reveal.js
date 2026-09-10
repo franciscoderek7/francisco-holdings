@@ -36,7 +36,13 @@
     ".map-placeholder",
     ".notice",
     ".status-key",
-    ".service-detail"
+    ".service-detail",
+    ".text-center.reveal",
+    ".dashboard-mock",
+    ".matrix-scroll",
+    ".layers",
+    ".flow-chain",
+    ".triage-grid"
   ];
 
   var STEP_DELAY_MS = 70;
@@ -57,9 +63,17 @@
   }
 
   function markElement(el, delayMs) {
-    if (el.classList.contains("reveal")) {
+    // Dedup on a data attribute rather than the "reveal" class itself: some
+    // markup (e.g. a CTA block or a concept-demo card) is authored with
+    // class="reveal" already in the HTML, ahead of this script running, so
+    // it renders correctly even with JS disabled. Deduping on the class
+    // would skip those elements entirely and leave them permanently at
+    // opacity:0 whenever prefers-reduced-motion allows motion, since
+    // nothing would ever add "is-visible" to them.
+    if (el.hasAttribute("data-reveal-bound")) {
       return false;
     }
+    el.setAttribute("data-reveal-bound", "");
     el.classList.add("reveal");
     if (delayMs) {
       el.style.setProperty("--reveal-delay", delayMs + "ms");
