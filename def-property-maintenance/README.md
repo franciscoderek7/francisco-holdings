@@ -40,6 +40,10 @@ def-property-maintenance/
 ├── services.html            Full grid of all 7 service categories + in-page detail sections
 ├── property-care.html       Detail page: "Property Maintenance" concept
 ├── seasonal-services.html   Detail page: "Seasonal Property Care" concept
+├── projects.html             Concept gallery — 7 illustrative CSS/SVG placeholder tiles (one per
+│                             service category, each carrying its real status badge). Explicitly
+│                             framed as concept art, never as photos of completed work, since no
+│                             category is confirmed active yet.
 ├── about.html                About Dylan / DEF Property Maintenance (conservative, no invented credentials)
 ├── service-area.html        Placeholder service area page with a stylized CSS/SVG graphic
 ├── request-service.html     Demo AI Concierge (top of page) + interactive demo intake flow +
@@ -47,7 +51,8 @@ def-property-maintenance/
 ├── contact.html              Placeholder contact details + demo contact form
 ├── css/
 │   └── style.css             Shared stylesheet (design tokens, layout, components, incl. the
-│                              concierge widget, compare section, and lead-flow diagram styles)
+│                              concierge widget, compare section, lead-flow diagram, and concept
+│                              gallery tile styles)
 ├── js/
 │   ├── nav.js                 Mobile hamburger nav toggle (keyboard accessible)
 │   ├── forms.js                Demo form validation + success-state handling (no network calls),
@@ -56,12 +61,14 @@ def-property-maintenance/
 │   ├── concierge.js            Demo AI Concierge — scripted decision-tree chat widget (no real
 │   │                            AI, no network calls; see "AI integration requirements" below for
 │   │                            what a real backend would need)
+│   ├── gallery.js               Generates the projects.html concept tiles (CSS/SVG only, no
+│   │                             external images)
 │   └── reveal.js                Shared scroll-reveal animation (IntersectionObserver, no
 │                                 dependencies) — see "Visual/motion design notes" below
 └── README.md                  This file
 ```
 
-All 8 pages share the same header navigation, footer, and stylesheet for a consistent feel.
+All 9 pages share the same header navigation, footer, and stylesheet for a consistent feel.
 
 ## How to run locally
 

@@ -1631,3 +1631,67 @@ a.service-card:focus-visible .card-link svg {
   gap: 0.5rem;
   margin-top: 1rem;
 }
+
+/* ---- Concept gallery (projects.html) --------------------------------------
+   Illustrative CSS/SVG placeholder tiles only — DEF has no confirmed active
+   services yet, so this is framed as a concept gallery (what documented work
+   could look like per category), never as photos of completed projects. */
+.gallery-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.gallery-tile {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.gallery-tile:hover,
+.gallery-tile:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -18px rgba(16, 32, 29, 0.32), var(--shadow-pop);
+}
+
+.gallery-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-50);
+}
+
+.gallery-placeholder-flag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  background: rgba(16, 32, 29, 0.82);
+  color: var(--paper-0);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+}
+
+.gallery-caption {
+  padding: 1rem 1.1rem 1.25rem;
+}
+
+.gallery-caption h3 {
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.gallery-caption p {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.6rem;
+}
