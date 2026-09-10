@@ -147,6 +147,48 @@ textarea:focus-visible,
   top: 0.75rem;
 }
 
+/* ---- Reduced motion — hard requirement, applies site-wide -------------- *
+ * Belt-and-braces: every animation/transition added in this pass is also
+ * individually scoped inside "@media (prefers-reduced-motion: no-preference)"
+ * blocks below, but this blanket rule guarantees compliance even for
+ * pre-existing motion (nav dropdown, concierge typing dots, card hover,
+ * skip-link) without having to track every rule separately. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Scroll-triggered reveal system -------------------------------------
+ * Progressive enhancement: with no JS, or with reduced motion requested,
+ * every ".reveal" element is simply visible (opacity:1, no transform) — the
+ * hidden/animated state only exists inside the "no-preference" query below,
+ * and is only ever applied by js/reveal.js via IntersectionObserver. */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ---- Prototype ribbon -------------------------------------------------- */
 .proto-banner {
   background: var(--ink-950);
@@ -259,6 +301,7 @@ textarea:focus-visible,
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--color-ink-soft);
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 .site-nav a:hover {
@@ -325,11 +368,79 @@ textarea:focus-visible,
     linear-gradient(180deg, var(--ink-950), var(--ink-900) 60%, var(--ink-800));
   color: var(--paper-50);
   padding-block: 3.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slow, precise architectural grid — a confident, "scalable" motion cue
+   rather than decoration for its own sake. Purely CSS, no image assets. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before {
+    animation: hero-grid-pan 48s linear infinite;
+  }
+}
+
+@keyframes hero-grid-pan {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 88px 88px, 88px 88px;
+  }
 }
 
 .hero .container {
   display: grid;
   gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Confident, staggered entrance for the hero content — precise, not playful. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .eyebrow,
+  .hero .badge {
+    animation: hero-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero h1 {
+    animation: hero-rise 0.65s 0.09s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero .lede {
+    animation: hero-rise 0.65s 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-actions {
+    animation: hero-rise 0.65s 0.27s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-card {
+    animation: hero-rise 0.7s 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 900px) {
@@ -421,6 +532,8 @@ textarea:focus-visible,
   border: 1px solid transparent;
   cursor: pointer;
   font-family: inherit;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease,
+    background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-primary {
@@ -430,6 +543,8 @@ textarea:focus-visible,
 
 .btn-primary:hover {
   background: var(--accent-600);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -12px rgba(176, 96, 42, 0.55);
 }
 
 .btn-ghost {
@@ -440,6 +555,7 @@ textarea:focus-visible,
 
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -450,11 +566,19 @@ textarea:focus-visible,
 
 .btn-outline:hover {
   background: var(--paper-50);
+  border-color: var(--ink-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* ---- Sections --------------------------------------------------------- */
@@ -508,6 +632,26 @@ textarea:focus-visible,
   border-radius: 50%;
   background: currentColor;
   flex-shrink: 0;
+}
+
+/* A slow, deliberate "breathing" dot — reads as an intentional status
+   indicator, never as an "active/live" signal (no green, no fast blink). */
+@media (prefers-reduced-motion: no-preference) {
+  .badge::before {
+    animation: badge-pulse 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
 }
 
 .badge-potential {
@@ -564,13 +708,26 @@ textarea:focus-visible,
   gap: 0.85rem;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 a.service-card:hover,
 a.service-card:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-pop);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -18px rgba(16, 32, 29, 0.32), var(--shadow-pop);
+  border-color: var(--ink-500);
+}
+
+a.service-card:hover .service-icon,
+a.service-card:focus-visible .service-icon {
+  background: var(--ink-700);
+  transform: scale(1.07);
+}
+
+a.service-card:hover .card-link svg,
+a.service-card:focus-visible .card-link svg {
+  transform: translateX(3px);
 }
 
 .service-card-top {
@@ -589,6 +746,7 @@ a.service-card:focus-visible {
   display: grid;
   place-items: center;
   flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
 }
 
 .service-icon svg {
@@ -615,6 +773,10 @@ a.service-card:focus-visible {
   align-items: center;
   gap: 0.3rem;
   margin-top: auto;
+}
+
+.card-link svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ---- Detail sections on services page ----------------------------------- */

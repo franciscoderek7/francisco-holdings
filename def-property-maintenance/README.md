@@ -53,9 +53,11 @@ def-property-maintenance/
 │   ├── forms.js                Demo form validation + success-state handling (no network calls),
 │   │                            plus reading the AI Concierge hand-off from the URL to prefill
 │   │                            the Request Service form
-│   └── concierge.js            Demo AI Concierge — scripted decision-tree chat widget (no real
-│                                AI, no network calls; see "AI integration requirements" below for
-│                                what a real backend would need)
+│   ├── concierge.js            Demo AI Concierge — scripted decision-tree chat widget (no real
+│   │                            AI, no network calls; see "AI integration requirements" below for
+│   │                            what a real backend would need)
+│   └── reveal.js                Shared scroll-reveal animation (IntersectionObserver, no
+│                                 dependencies) — see "Visual/motion design notes" below
 └── README.md                  This file
 ```
 
@@ -171,6 +173,63 @@ treat these as placeholders to relabel, not as recommendations):
 | Cottage / Property Services | Coming Soon |
 | Turnover Services | Potential Service |
 | Vendor Coordination | Availability TBC |
+
+## Visual/motion design notes
+
+A polish pass was applied on top of the existing spruce/teal + terracotta system to give the
+prototype more of a "wow factor" and an established-company feel, without changing the palette,
+copy, information architecture, or any service's honest status badge. Everything below is pure
+CSS + one small vanilla-JS file — no libraries, no CDNs, no network calls, no build step.
+
+- **Scroll-triggered reveals (`js/reveal.js`, `.reveal`/`.reveal.is-visible` in `css/style.css`).**
+  A single shared `IntersectionObserver` script fades/slides content into view as it scrolls into
+  the viewport (opacity + `translateY(22px)`, ~550ms, `cubic-bezier(0.16,1,0.3,1)`), applied on
+  every page to section intros, service cards, notices, form cards, the map placeholder, the
+  concierge widget, and the "could include" detail sections on `services.html`. Grouped items —
+  the 7 service-category cards, the 7-step customer-journey diagram (`Request Service → Intake →
+  Review → Scheduling → Service → Completion → Follow-up` on `index.html` and
+  `request-service.html`), the lead-capture flow, the contact-info grid, and the traditional-vs-AI
+  comparison — are staggered by ~70ms per item so each group visually "builds" in sequence.
+  Progressive enhancement is built in at the CSS level: with JS disabled, or on very old browsers
+  without `IntersectionObserver`, every `.reveal` element is simply visible by default.
+
+- **Hero upgrade (`index.html`, shared `.hero` styles).** The hero's headline, eyebrow, lede, CTA
+  row, and "how this prototype is structured" card now enter with a confident, staggered rise
+  (~650–700ms each, ~90ms apart) on page load — precise rather than playful, matching the brand's
+  "organized/scalable" positioning. A very subtle animated architectural grid (a faint two-line CSS
+  gradient, panning slowly over ~48s) sits behind the hero content on every page that uses the
+  `.hero` component, echoing the site's line-art icon system without competing with the text.
+
+- **Micro-interactions.** Buttons (`.btn-primary`/`.btn-ghost`/`.btn-outline`), the 7 service cards,
+  and their icons now have smoother, slightly deeper hover/focus-visible states — a small lift
+  (`translateY`), a deepened shadow, and a subtle icon scale/color shift — so the service grid and
+  calls to action feel tactile without changing their layout or color roles. All existing
+  `:focus-visible` outline rings (3px solid, visible for keyboard users) are untouched and still
+  render on top of the new hover treatments; nothing here changed how focus is indicated.
+
+- **Status badge polish.** Every status badge's leading dot (`badge-potential` / `badge-coming-soon`
+  / `badge-tbc`) now has a slow, deliberate "breathing" pulse (~2.6s, scale + opacity, no colour
+  change to anything resembling a "live/active" green indicator) so the badges read as a designed
+  system rather than an afterthought. This is purely a visual treatment of the *same* three honest
+  statuses already in use — no badge's wording, color family, or meaning changed, and no category
+  is implied to be more available than it is.
+
+- **`prefers-reduced-motion: reduce` support (hard requirement).** A blanket rule collapses every
+  animation and transition on the site (new and pre-existing — nav dropdown, concierge typing dots,
+  card hover, skip-link, all of the above) to effectively instant whenever the OS/browser preference
+  is set. On top of that, the reveal system, hero entrance, grid pan, and badge pulse are each
+  additionally scoped inside `@media (prefers-reduced-motion: no-preference)` blocks, so a
+  reduced-motion visitor sees the finished page immediately — fully visible, no motion, no delay —
+  rather than a "reduced" version of the animation.
+
+- **No new dependencies, no overflow.** Everything added is inline CSS/JS already living in
+  `css/style.css` and the new `js/reveal.js` — no CDN scripts, no web fonts, no images, no
+  `fetch`/`XHR`/`WebSocket` calls anywhere. Verified with a scripted Playwright/Chromium pass across
+  all 8 pages at 390px, 768px, 1024px, and 1440px widths, with and without reduced motion: zero
+  console errors, `document.documentElement.scrollWidth` never exceeds the viewport width on any
+  page, and every reveal element resolves to visible after scrolling (the one exception, the
+  desktop-only "vs" divider between the traditional/AI comparison columns, is `display:none` below
+  760px regardless, so it has nothing to reveal there).
 
 ## Design notes
 
