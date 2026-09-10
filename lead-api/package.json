@@ -1,0 +1,14 @@
+{
+  "name": "fh-lead-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared lead-capture backend for Northern Forge Windows Blinds & Doors, DEF Property Maintenance & Security, and Lindsay Blinds. Each business is isolated by business_id; see lib/businesses.js.",
+  "main": "api/lead.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node test/run.js"
+  },
+  "license": "UNLICENSED"
+}
