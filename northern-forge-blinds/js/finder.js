@@ -22,7 +22,7 @@
     {
       id: "type",
       question: "What are you looking for?",
-      options: ["Windows", "Blinds", "Shades", "Doors"]
+      options: ["Windows", "Blinds", "Shades", "Doors", "Garage Doors"]
     },
     {
       id: "property",
@@ -72,6 +72,7 @@
   var INTRO_LINE = "Answer a few questions and I'll put together a demo product direction — pick an option below to begin.";
 
   function recommendFamily(a) {
+    if (a.type === "Garage Doors") return "Garage Doors";
     if (a.type === "Doors") return "Doors";
     if (a.type === "Windows") return "Windows";
     if (a.style === "Bold & architectural") return "Shutters";
@@ -112,6 +113,12 @@
 
     var stepIndex = 0;
     var answers = {};
+    // Only move keyboard focus into the widget once the visitor has
+    // actually interacted with it (an answer click, Back, or Start Over) —
+    // never on the automatic initial render, since focusing an
+    // off-screen element there would force the whole page to auto-scroll
+    // down to this widget the instant the page loads.
+    var autoFocus = false;
 
     function addBubble(text, who) {
       var bubble = document.createElement("p");
@@ -145,12 +152,13 @@
       });
       backBtn.hidden = stepIndex === 0;
       var firstOption = optionsEl.querySelector(".concierge__option");
-      if (firstOption) firstOption.focus();
+      if (firstOption && autoFocus) firstOption.focus();
     }
 
     function handleAnswer(step, label) {
       answers[step.id] = label;
       addBubble(label, "user");
+      autoFocus = true;
       stepIndex += 1;
       if (stepIndex < STEPS.length) {
         var nextStep = STEPS[stepIndex];
@@ -221,10 +229,14 @@
         log.removeChild(log.lastElementChild);
       }
       delete answers[STEPS[stepIndex].id];
+      autoFocus = true;
       renderStep();
     });
 
-    restartBtn.addEventListener("click", reset);
+    restartBtn.addEventListener("click", function () {
+      autoFocus = true;
+      reset();
+    });
 
     reset();
   });

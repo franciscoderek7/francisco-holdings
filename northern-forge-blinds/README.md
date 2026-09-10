@@ -39,9 +39,15 @@ other windows/blinds/doors company.
 
 - A fully static, click-through prototype covering Home, Products, Projects,
   About, Consultation, and Contact.
-- **Products page** now covers six anchored categories — Windows, Blinds,
-  Shades, Shutters, Doors, and Motorization — plus a **Technology Showcase**
-  section and an interactive **Product Finder (demo)**.
+- **Products page** now covers seven anchored categories — Windows, Blinds,
+  Shades, Shutters, Doors, Garage Doors, and Motorization — plus an
+  **Installation** overview section, a **Technology Showcase** section, and
+  an interactive **Product Finder (demo)**.
+- The business owner's stated product/service architecture is: Blinds →
+  Windows → Doors → Garage Doors → Property Improvements → Construction (a
+  growth path). Only the first four are built out concretely in this
+  prototype; **Property Improvements and Construction are explicitly future
+  scope and do not appear anywhere in this site.**
 - **Consultation page** includes the upgraded **Northern Forge Concierge**
   (demo) with a visible step progress bar, contextual follow-up questions,
   and an explained recommendation, plus a substantially expanded intake form.
@@ -50,7 +56,52 @@ other windows/blinds/doors company.
 - No backend, no database, no real AI integration, no analytics, and no
   deployment — this only exists as local files today.
 
-### What changed in this revision (scope expansion)
+### What changed in this revision (Garage Doors, Installation, SEO & polish pass)
+
+- **Garage Doors added as a full seventh category** on `products.html`
+  (`#garage-doors`), following the exact same pattern already established
+  for Windows and Doors: an anchored section with an intro, a sub-nav entry,
+  and six conceptual sub-categories (Sectional, Insulated, Modern /
+  Carriage-Style, Garage Door Openers & Automation, Replacement, and
+  Custom-Size Garage Doors). No manufacturer, brand, technical rating, or
+  warranty is named, matching the existing Windows/Doors convention. Garage
+  Doors was also added to the homepage's category grid ("Seven categories,
+  one straightforward process"), the **Northern Forge Product Finder**
+  (`js/finder.js`), the **Northern Forge Concierge** (`js/concierge.js`,
+  including a garage-door-specific phrasing of the operation question), and
+  the consultation intake form's product-interest checkboxes
+  (`consultation.html`).
+- **Installation section added** on `products.html` (`#installation`) — a
+  four-step conceptual walkthrough (Consultation & Measurement, Planning &
+  Scheduling, Installation Day, Final Walkthrough) covering what
+  installation involves and what to expect, without claiming certified or
+  licensed installers, a specific installation guarantee, or a warranty —
+  those are explicitly marked `[Placeholder — confirm installation
+  model/credentials with Dylan]`, per the site's existing placeholder
+  convention, since none of that is confirmed yet.
+- **SEO pass:** every page now has a consistent inline-SVG data-URI favicon
+  (dark-slate rounded square with the copper "N" mark, matching the
+  existing brand mark), Open Graph tags (`og:title`, `og:description` reused
+  from each page's existing meta description, `og:type` set to `website`;
+  no `og:image` is included since no real image asset exists). Every page's
+  `<title>` and meta description were confirmed unique (they already were),
+  and heading hierarchy (exactly one `<h1>` per page, logical `h2`/`h3`
+  nesting) was confirmed across all six pages including the new Garage
+  Doors and Installation content. `noindex, nofollow` remains on every page
+  — intentional for a prototype with no real business info, so sitemap
+  strategy stays not applicable.
+- **Business name confirmation:** "Northern Forge Windows, Blinds & Doors"
+  continues to be used throughout as directed explicitly by the business
+  owner in an earlier build order — it is not a guessed or invented name.
+- **Business-separation self-check:** the full directory was grepped
+  (case-insensitively) for the specific names, numbers, and business terms
+  tied to Dylan's other business and to the other windows/blinds company
+  named in the build order for this check — zero hits, confirming this site
+  contains no reference to, or implied connection with, either one. (Those
+  literal terms are deliberately not restated here, so this note itself
+  can't produce a false hit on a future re-run of the same check.)
+
+### What changed in the previous revision (scope expansion)
 
 - **Rebrand / scope expansion** from "Northern Forge Blinds" to **"Northern
   Forge Windows, Blinds & Doors."** The wordmark now shows "Northern Forge"
@@ -231,9 +282,17 @@ public site, Dylan needs to supply and confirm:
 - **Years of experience / specific work history** — the About page
   deliberately avoids specific numbers or named past employers; Dylan should
   decide what, if anything, he wants to disclose
-- **Window and door supplier/manufacturer relationships** — none are named
-  anywhere in this prototype; the Windows and Doors sections are
-  deliberately generic/conceptual until real supplier relationships exist
+- **Window, door, and garage door supplier/manufacturer relationships** —
+  none are named anywhere in this prototype; the Windows, Doors, and Garage
+  Doors sections are deliberately generic/conceptual until real supplier
+  relationships exist
+- **Installation model and credentials** — this prototype does not claim
+  certified or licensed installers, a specific installation guarantee, or a
+  warranty of any kind, and does not say whether installation would be done
+  in-house or subcontracted. All of this is marked `[Placeholder — confirm
+  installation model/credentials with Dylan]` on the Installation section of
+  `products.html` and needs Dylan's real answer before anything like it can
+  be published.
 - **Smart-home platform/ecosystem partnerships**, if any — the Technology
   Showcase makes no compatibility claims about any named voice assistant or
   smart-home ecosystem
@@ -256,10 +315,11 @@ public site, Dylan needs to supply and confirm:
 - **Real logo/brand decision** — this prototype invents a wordmark and mark
   from scratch; Dylan may want a designer-made logo instead of (or in
   addition to) this CSS/SVG treatment.
-- **A favicon and any social-share (Open Graph) image**, once a real domain
-  and brand are finalized — neither exists yet (the browser tab currently
-  falls back to a default/missing favicon, which is expected for a
-  prototype).
+- **A social-share (Open Graph) image**, once a real domain and brand are
+  finalized — `og:image` is deliberately omitted from every page since no
+  real image asset exists yet. (A simple inline-SVG data-URI favicon, in
+  the site's dark-slate/forged-copper palette, is now in place on every
+  page and does not need to wait on a real domain.)
 
 ## Future production tasks
 
@@ -326,9 +386,15 @@ prototype today. Listed here only to make the eventual scope visible:
 - AI configuration panel (for tuning a real Concierge/Finder's
   behavior/prompts without a code deploy)
 - Analytics
-- SEO (structured data, sitemaps, meta strategy beyond the current
-  `noindex, nofollow` prototype tags)
+- SEO beyond the current favicon, Open Graph tags, and `noindex, nofollow`
+  prototype tags (structured data, sitemaps, a real meta strategy once a
+  real domain exists — sitemap strategy stays not applicable while the site
+  is intentionally `noindex, nofollow`)
 - Customer management (CRM-style tracking of leads/customers over time)
+- **Property Improvements and Construction** — the two remaining stages of
+  the business owner's stated growth path (Blinds → Windows → Doors →
+  Garage Doors → Property Improvements → Construction). Deliberately out of
+  scope for this prototype; nothing about either exists here yet.
 - Appointment/consultation scheduling (real calendar booking, not just a
   demo form)
 - Email notifications (e.g. confirming a submission to the visitor, alerting
@@ -485,6 +551,75 @@ This was a functional/regression pass, not a full manual design review —
 Dylan should still click through the live prototype himself before treating
 any of the above as a substitute for his own review.
 
+### Testing performed for the Garage Doors / Installation / SEO revision
+
+Also verified with a real Chromium browser (via Playwright) against a local
+static server:
+
+- The specific customer journey requested for tonight's demo — **Home →
+  Products (Doors → Garage Doors) → Product Finder (selecting Garage Doors)
+  → Book a Consultation → Northern Forge Concierge (selecting Garage Doors)
+  → full consultation form submission** — was clicked through end to end for
+  real (not just page loads), confirming zero console errors at every step,
+  the Product Finder's summary correctly recommending "Garage Doors" when
+  selected, the Concierge showing its garage-door-specific operation
+  question and recommending "Garage Doors," the matching checkbox on the
+  standard consultation form being pre-checked from the Concierge result,
+  and the demo success panel appearing after submission.
+- All six pages (including the new Garage Doors and Installation content on
+  `products.html`) were loaded at 390px, 430px, and 1440px widths and
+  confirmed to return HTTP 200, produce zero console errors, and have no
+  horizontal overflow (`scrollWidth` matches viewport width) at any tested
+  width.
+- All 30 unique internal link targets collected across all six pages
+  (relative page links and same-page anchors, including the new
+  `#garage-doors` and `#installation` anchors) were checked and confirmed to
+  resolve, with zero broken links.
+- Keyboard navigation was spot-checked (first `Tab` stop is the skip link,
+  focus-visible outlines render on interactive elements) and the mobile nav
+  toggle was re-confirmed to stay the topmost, clickable element at its own
+  screen position while its panel is open.
+- `prefers-reduced-motion: reduce` was re-emulated on `index.html` and the
+  expanded `products.html` (including the new Garage Doors and Installation
+  sections) and confirmed that `reveal.js` still adds no `.reveal` class at
+  all under that preference, so nothing is left stuck at a hidden opacity.
+- The favicon was confirmed to load with no separate `favicon.ico` network
+  request or 404 on any page (previously the browser tab fell back to a
+  missing favicon, which is now fixed).
+- **A real bug was found and fixed by this testing pass:** adding two more
+  links to the Products page sub-nav (Garage Doors, Installation) caused it
+  to wrap onto a second line at common widths, and that second line was
+  being covered by the angled section divider immediately below it (which
+  is deliberately pulled upward to overlap the end of its section) — this
+  made "Product Finder (Demo)" and other sub-nav links unclickable at that
+  position. Fixed by removing a one-off `padding-bottom` override on that
+  intro section so it uses the site's normal section padding, which gives
+  the now-taller sub-nav its full intended clearance from the divider.
+- **A second, pre-existing bug (not introduced by this revision) was found
+  and fixed:** both the Northern Forge Concierge (`js/concierge.js`) and the
+  Product Finder (`js/finder.js`) called `.focus()` on their first answer
+  button as part of their normal step-rendering logic, including during
+  their automatic initial render on page load. Since both widgets sit well
+  down the page, calling `.focus()` on an off-screen button made the browser
+  auto-scroll the *entire page* down to the widget immediately on load —
+  confirmed via a real scroll-position check, `products.html` loaded
+  scrolled roughly 10,000px down to the Product Finder, and
+  `consultation.html` loaded scrolled to the Concierge, skipping the hero
+  and intro content entirely on every visit. Fixed in both files with an
+  `autoFocus` flag that only allows the focus-management behavior once the
+  visitor has actually interacted with the widget (clicking an answer,
+  Back, or Start Over) — never on the automatic first render — confirmed
+  both widgets now load at the top of the page while still moving focus
+  correctly during real keyboard-driven interaction.
+- Re-ran the full regression pass listed in the section above (mobile nav
+  toggle, Concierge and Product Finder end-to-end, consultation and contact
+  form validation/success states, projects gallery filters) after these
+  fixes and confirmed everything still passes.
+
+As with the previous pass, this was a functional/regression pass, not a
+full manual design review — Dylan should still click through the live
+prototype himself.
+
 ## Production readiness statement
 
 **This prototype is not authorized for production deployment.** It has no
@@ -533,12 +668,19 @@ northern-forge-blinds/
 │                          compare section, projects teaser, about teaser,
 │                          consultation CTA, contact teaser
 ├── products.html          Windows / Blinds / Shades / Shutters / Doors /
-│                          Motorization, as six anchored sections with a
-│                          sub-nav, plus a Technology Showcase section and the
+│                          Garage Doors / Motorization, as seven anchored
+│                          sections with a sub-nav, plus an Installation
+│                          overview, a Technology Showcase section, and the
 │                          Northern Forge Product Finder (demo)
 ├── projects.html          Placeholder project gallery with category filter
 │                          tabs (Windows / Blinds / Shades / Doors / Full
-│                          Projects) — CSS/SVG placeholders only
+│                          Projects) — CSS/SVG placeholders only. Garage
+│                          Doors was intentionally left out of this filter
+│                          set in this revision (no placeholder gallery
+│                          content exists for it yet); add a Garage Doors
+│                          filter tab and tiles here once real or
+│                          placeholder garage-door project photography
+│                          exists.
 ├── about.html              About Dylan (conservative, no invented credentials)
 ├── consultation.html      Northern Forge Concierge (demo, with progress bar
 │                          and explained recommendations), lead-capture

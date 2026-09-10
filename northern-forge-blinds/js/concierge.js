@@ -30,7 +30,7 @@
       question: function () {
         return "What are you primarily interested in exploring today?";
       },
-      options: ["Windows", "Blinds & Shades", "Shutters", "Doors", "Motorized / smart control", "Not sure — I'd like guidance"]
+      options: ["Windows", "Blinds & Shades", "Shutters", "Doors", "Garage Doors", "Motorized / smart control", "Not sure — I'd like guidance"]
     },
     {
       id: "room",
@@ -83,6 +83,9 @@
         if (a.interest === "Doors") {
           return "For a door, would you want any motorized or smart-lock style features, or fully manual?";
         }
+        if (a.interest === "Garage Doors") {
+          return "For a garage door, would you want a garage door opener / automation feature, or fully manual operation?";
+        }
         return "Manual operation, or motorized (remote / app-controlled)?";
       },
       options: ["Manual (cord or wand)", "Motorized (remote or app)", "Not sure — I'd like to compare both"]
@@ -118,6 +121,12 @@
 
     var stepIndex = 0;
     var answers = {};
+    // Only move keyboard focus into the widget once the visitor has
+    // actually interacted with it (an answer click, Back, or Start Over) —
+    // never on the automatic initial render, since focusing an
+    // off-screen element there would force the whole page to auto-scroll
+    // down to this widget the instant the page loads.
+    var autoFocus = false;
 
     function addBubble(text, who) {
       var bubble = document.createElement("p");
@@ -151,12 +160,13 @@
       });
       backBtn.hidden = stepIndex === 0;
       var firstOption = optionsEl.querySelector(".concierge__option");
-      if (firstOption) firstOption.focus();
+      if (firstOption && autoFocus) firstOption.focus();
     }
 
     function handleAnswer(step, label) {
       answers[step.id] = label;
       addBubble(label, "user");
+      autoFocus = true;
       stepIndex += 1;
       if (stepIndex < STEPS.length) {
         var nextStep = STEPS[stepIndex];
@@ -173,7 +183,9 @@
     function computeRecommendation() {
       var categories = [];
 
-      if (answers.interest === "Doors") {
+      if (answers.interest === "Garage Doors") {
+        categories.push("Garage Doors");
+      } else if (answers.interest === "Doors") {
         categories.push("Doors");
       } else if (answers.interest === "Windows") {
         categories.push("Windows");
@@ -292,10 +304,14 @@
         log.removeChild(log.lastElementChild);
       }
       delete answers[STEPS[stepIndex].id];
+      autoFocus = true;
       renderStep();
     });
 
-    restartBtn.addEventListener("click", reset);
+    restartBtn.addEventListener("click", function () {
+      autoFocus = true;
+      reset();
+    });
 
     if (bookLink) {
       bookLink.addEventListener("click", function () {
