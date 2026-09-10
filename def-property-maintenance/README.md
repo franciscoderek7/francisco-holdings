@@ -15,8 +15,9 @@ confirmed the information listed later in this file and made a deliberate decisi
 concept prototype a consistent identity. It is not confirmed as the real trading or legal name of
 any business. No entity currently operates under this name as far as this prototype is concerned.
 
-**"DEF" stands for Don Eric Francisco** — this was supplied as real information, so the About page
-notes it as a small, tasteful aside. It is not a claim about any registered trade name.
+**"DEF" stands for Dylan, Eric, Francisco (D = Dylan, E = Eric, F = Francisco)** — this was supplied
+as real information by the business owner, so the About page notes it as a small, tasteful aside. It
+is not a claim about any registered trade name.
 
 ## Scope: maintenance *and* security/technology
 
