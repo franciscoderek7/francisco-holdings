@@ -1575,3 +1575,42 @@ body.nav-open {
   font-size: 0.8rem;
   color: var(--color-text-muted);
 }
+
+/* ---------- Contact form (contact.html) ---------- */
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin: 1rem 0 0.35rem;
+  font-size: 0.9rem;
+}
+
+.contact-form label:first-of-type {
+  margin-top: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 8px);
+  font: inherit;
+  background: var(--color-surface, #fff);
+  color: var(--color-text);
+}
+
+.contact-form .field-error {
+  display: block;
+  min-height: 1.1em;
+  color: #b3261e;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.contact-form .form-success {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+}
