@@ -710,3 +710,154 @@ justify `LEAD-READY` without any further engineering work.
 5. Update each site's `js/lead-submit-config.js` `endpoint` to the real deployed URL.
 6. Submit one real test lead per business and confirm a real email actually arrives before telling
    anyone this is live.
+
+## PHASE 14 — REAL DEV PERSISTENCE + HONEST FRONTEND FAILURE STATES
+
+Phase 13 closed the "sent nowhere" gap with a real, tested backend, but two gaps remained: (1) there
+was no way to durably prove a submission reached the backend without deploying somewhere, and (2) if
+a real, configured endpoint ever genuinely failed, the frontend fell back to the same demo-success
+message as the placeholder case — a visitor could be told "received" when it was not. This phase
+closes exactly those two gaps and proves the complete local path empirically.
+
+### 1. Dev persistence architecture
+
+`lead-api/lib/devStore.js` — local, gitignored, JSON-Lines-per-business file store under
+`lead-api/.dev-data/`, opt-in via `LEAD_DEV_PERSIST=1` (never on by default, never touched by a real
+deployment). `lead-api/lib/persistence.js` is the single adapter `api/lead.js` calls after
+`validateLead()` succeeds:
+
+```
+request -> validateLead() -> persistence.persist() -> devStore.appendLead()   (dev, file)
+                                                     -> email.persistLead()    (production, webhook)
+```
+
+Swapping in a real production database/CRM later means changing `persistence.js` only —
+`api/lead.js` and the validation layer never need to change. There is no GET/list/admin route
+anywhere that exposes persisted leads; the only way to read them back is `devStore.readLeadsForBusiness()`,
+called directly from test code or a human running scripts locally, never over HTTP.
+
+### 2. Real local HTTP server
+
+`lead-api/dev-server.js` — a dependency-free Node `http` wrapper around the real `api/lead.js`
+handler (`LEAD_DEV_PERSIST=1 node dev-server.js [port]`). This is what makes the full path real
+rather than mocked:
+
+```
+REAL BROWSER -> REAL FORM SUBMISSION -> REAL HTTP POST -> dev-server.js -> REAL api/lead.js handler
+  -> REAL server-side validation -> REAL dev persistence -> READ-BACK VERIFICATION
+```
+
+The server returns distinct, machine-readable outcomes and never leaks internals: `200` (accepted,
+including the silent honeypot/timing/duplicate-reuse cases), `400` (validation failure / unknown
+`business_id` / malformed JSON), `429` (rate-limited), `405`/`204` (method handling). No stack trace,
+filesystem path, or credential is ever included in a response body.
+
+### 3. Frontend endpoint-state design
+
+Every site's lead-submission code (`lindsay-blinds/js/lead-submit.js`,
+`northern-forge-blinds/js/{consultation,contact}.js`, `def-property-maintenance/js/forms.js`) now
+distinguishes three outcomes instead of two:
+
+- **Placeholder/demo endpoint** (`js/lead-submit-config.js` still holds the
+  `REPLACE-WITH-DEPLOYED-LEAD-API-URL` marker) — unchanged: no network request is attempted, the
+  original demo-success copy shows exactly as before.
+- **Real, configured endpoint + genuine success** (`2xx` with a body shaped `{ok:true, ...}`) — the
+  server's own confirmation message is shown.
+- **Real, configured endpoint + genuine failure** — a non-2xx response, a network error, an
+  unreachable host, a request that times out (15s client-side `AbortController`), or a `2xx` body
+  that isn't the shape `lead-api` actually returns (malformed/unexpected) — all resolve to an
+  honest, visible failure state (new `.form-error` / `.form-failure` / status-box UI per site). The
+  form stays visible so the visitor can retry; no technical detail is exposed. **A configured
+  backend failure is never shown as demo success.**
+
+### 4-6. Real end-to-end test matrix, isolation proof, failure-state testing
+
+Ran via a real Playwright-driven Chromium browser against a real running `dev-server.js` (script
+lives outside the repo, in the session scratchpad — never committed, and all synthetic data was
+tagged `SYNTHETIC`/prefixed and deleted after the run). Result: **10/10 matrix cases pass, 4/4
+failure-state cases pass.**
+
+| Case | Expected | Actual | Persisted? |
+|---|---|---|---|
+| Northern Forge valid (real browser submit) | 200 / success UI | 200 / success UI | yes, read back |
+| DEF valid (real browser submit) | 200 / success UI | 200 / success UI | yes, read back |
+| Lindsay valid (real browser submit) | 200 / success UI | 200 / success UI | yes, read back |
+| Invalid `business_id` | 400, rejected | 400, rejected | no |
+| Missing required field | 400 | 400 | no |
+| Invalid field (bad email) | 400 | 400 | no |
+| Honeypot populated | 200, silently dropped | 200, silently dropped | no |
+| Timing violation (<3s) | 200, silently dropped | 200, silently dropped | no |
+| Duplicate submission | 200, same `lead_id` reused | 200, same `lead_id` reused | yes (once) |
+| Rate limit (8 rapid, one IP) | `429` appears | `429` appeared | n/a |
+| Endpoint unreachable (real refused connection) | honest failure UI, no success | failure UI shown, no success | no |
+| Endpoint returns real HTTP 500 | honest failure UI, no success | failure UI shown, no success | no |
+| Endpoint returns malformed 200 body | honest failure UI, no success | failure UI shown, no success | no |
+| Placeholder endpoint (control) | unchanged demo-success copy | unchanged demo-success copy | no |
+
+**Business isolation, proved by reading the actual persisted files after all three valid
+submissions ran** (not by grepping source code): `northern-forge.jsonl` contained only a
+`northern-forge` record; `def-property-maintenance.jsonl` contained only a `def-property-maintenance`
+record; `lindsay-blinds.jsonl` contained only a `lindsay-blinds` record. Cross-checked each file's
+raw text for the other two businesses' unique test tags — zero matches in either direction. The
+invalid-`business_id` probe created no file/record for that fake id at all.
+
+### 7. Security
+
+No secrets in any frontend JS file (grepped for `api[_-]?key|secret|password|token|bearer` across
+all three sites — one false-positive comment, no actual value). No `.env`-with-real-values tracked
+(`.env.example` only, every value blank). `.dev-data/` is gitignored; the E2E run's synthetic
+records were deleted immediately after the run — none were committed. Persisted dev records are
+reachable only from local scripts/tests, never over HTTP. CORS, request-body size limits (200KB),
+consent-required validation, and honeypot/timing/rate-limit protections are all unchanged and were
+re-exercised by the tests above.
+
+**Known, honestly-reported limitation, not fixed in this phase:** `business_id` is client-supplied
+and checked only against the hardcoded allow-list — it is not proof of which site actually sent the
+request. The only current boundary against a wrong-site submission is per-business CORS
+(`*_ALLOWED_ORIGIN`), which is unconfigured today (falls back to `*`) and, being a browser-enforced
+header, would not stop a direct server-to-server POST regardless. This does not create a
+cross-business **data leak** (there is still no read/list endpoint at all — the worst case is a
+spam/miscategorized lead, not a confidentiality breach), but it means `business_id` must not be
+treated as an authorization mechanism. Closing this properly (e.g. one endpoint per business, or a
+per-site shared secret) is a real production blocker, listed below.
+
+### 8. Regression
+
+- `lead-api/test/run.js`: **14/14 pass** (unchanged, unaffected by the persistence-adapter refactor).
+- `lead-api/test/dev-persistence.js` (new): **7/7 pass** (unit tests for `devStore.js` + real HTTP
+  tests against `dev-server.js`).
+- The scratchpad E2E script above: **10/10 matrix + 4/4 failure-state cases pass.**
+- No existing test was weakened, skipped, or deleted to make anything pass.
+
+### 9. What this phase does NOT claim
+
+No production persistence (still `LEAD_STORE_WEBHOOK_URL` = `CONFIGURATION REQUIRED`), no production
+email (still `RESEND_API_KEY` = `CONFIGURATION REQUIRED`), no deployment, no production readiness.
+Every "PASS" above is a **local development** result against a locally-run `dev-server.js` — not a
+claim about any deployed environment, because none exists yet.
+
+### LEAD SYSTEM STATUS (update)
+
+| Site | Status |
+|---|---|
+| `lead-api` (shared backend) | `BUILT — CONFIGURED FOR LOCAL DEV — TESTED (local dev only)` |
+| Northern Forge Windows, Blinds & Doors | `BUILT — TESTED (local dev only)` |
+| DEF Property Maintenance & Security | `BUILT — TESTED (local dev only)` |
+| Lindsay Blinds (this prototype) | `BUILT — TESTED (local dev only)` |
+| Lindsay Blinds (real lindsayblinds.com production) | `NOT BUILT` — unchanged, untouched |
+
+None reach `PRODUCTION READY` or `PRODUCTION LIVE` — those still require real hosting, a real email
+provider, real notification addresses, and a real end-to-end test against a real deployed URL, none
+of which exist yet.
+
+### Remaining blockers before real deployment
+
+1. Deploy `lead-api/` somewhere real (Vercel/Netlify/etc.) — still nobody's account, still not done here.
+2. Configure `RESEND_API_KEY` + `LEAD_NOTIFY_FROM_EMAIL` and each business's real `*_NOTIFY_EMAIL`.
+3. Update each site's `js/lead-submit-config.js` `endpoint` to the real deployed URL.
+4. Decide and configure real production persistence (`LEAD_STORE_WEBHOOK_URL` or a real DB) — the
+   dev file store must never be treated as this.
+5. Address the `business_id`-is-not-authorization gap above before this is exposed to real traffic
+   from untrusted origins.
+6. Submit one real test lead per business against the real deployed URL and confirm a real
+   notification actually arrives before calling any of this "live."
