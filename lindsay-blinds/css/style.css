@@ -1649,3 +1649,13 @@ body.nav-open {
   background: var(--color-bg-alt);
   border: 1px solid var(--color-border);
 }
+
+.contact-form .form-error,
+.form-error {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+}

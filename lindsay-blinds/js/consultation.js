@@ -11,6 +11,9 @@
  *    backend is not deployed anywhere yet, this always resolves to the
  *    same local "demo success" behavior that has always been here — see
  *    the submit handler below for exactly where that fallback happens.
+ *    Once a real endpoint IS configured, a genuine failure response shows
+ *    an honest failure message (#wizardFailure) instead of the success
+ *    screen — see showFailure() below.
  */
 (function () {
   "use strict";
@@ -712,7 +715,22 @@
       return ok;
     }
 
+    function showFailure(result) {
+      // A real, configured lead-api endpoint was reached but the
+      // submission genuinely failed (validation rejected it, rate
+      // limited, network/server error). The wizard stays visible on its
+      // current step so the visitor can retry — never show the success
+      // screen when the real, configured backend actually failed.
+      var failureBox = document.getElementById("wizardFailure");
+      if (!failureBox) return;
+      failureBox.hidden = false;
+      failureBox.setAttribute("tabindex", "-1");
+      failureBox.focus();
+    }
+
     function showSuccessScreen(result) {
+      var failureBox = document.getElementById("wizardFailure");
+      if (failureBox) failureBox.hidden = true;
       wizard.querySelector(".progress").hidden = true;
       form.hidden = true;
       successScreen.hidden = false;
@@ -784,7 +802,11 @@
 
       submitPromise
         .then(function (result) {
-          showSuccessScreen(result);
+          if (result && result.ok === false) {
+            showFailure(result);
+          } else {
+            showSuccessScreen(result);
+          }
         })
         .catch(function () {
           // Defensive only — window.submitLead is designed to never

@@ -7,6 +7,9 @@
  * Since that backend is not deployed anywhere yet, this always falls back
  * to the same local "demo success" behavior that has always been here —
  * see the submit handler below for exactly where that fallback happens.
+ * Once a real endpoint IS configured, a genuine failure response shows an
+ * honest failure message (#contactFailure) instead of a false success —
+ * see showFailure() below.
  */
 (function () {
   "use strict";
@@ -16,6 +19,7 @@
     if (!form) return;
 
     var successBox = document.getElementById("contactSuccess");
+    var failureBox = document.getElementById("contactFailure");
     var submitBtn = form.querySelector('button[type="submit"]');
 
     // Lead-api timing field: MUST be set on page/form load, not at submit
@@ -95,6 +99,7 @@
 
     function showSuccess(result) {
       form.hidden = true;
+      if (failureBox) failureBox.hidden = true;
       if (!successBox) return;
 
       if (result && result.demo === false) {
@@ -109,6 +114,17 @@
       successBox.hidden = false;
       successBox.setAttribute("tabindex", "-1");
       successBox.focus();
+    }
+
+    function showFailure(result) {
+      // A real, configured lead-api endpoint was reached but the
+      // submission genuinely failed (validation rejected it, rate
+      // limited, network/server error). The form stays visible so the
+      // visitor can retry — never show a false success state here.
+      if (!failureBox) return;
+      failureBox.hidden = false;
+      failureBox.setAttribute("tabindex", "-1");
+      failureBox.focus();
     }
 
     form.addEventListener("submit", function (event) {
@@ -143,7 +159,11 @@
 
       submitPromise
         .then(function (result) {
-          showSuccess(result);
+          if (result && result.ok === false) {
+            showFailure(result);
+          } else {
+            showSuccess(result);
+          }
         })
         .catch(function () {
           // Defensive only — window.submitLead is designed to never reject.
