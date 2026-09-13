@@ -84,6 +84,13 @@
           exists to demonstrate the flow.
         </p>
 
+        <!-- Honeypot + timing fields for lead-api spam checks (see
+             js/lead-submit.js and ../lead-api/lib/spam.js). Real visitors
+             never see or fill website_url; form_rendered_at is set by JS on
+             page load, not at submit time. -->
+        <input type="text" name="website_url" id="contactWebsiteUrl" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true" />
+        <input type="hidden" name="form_rendered_at" id="contactFormRenderedAt" />
+
         <label for="contactName">Name</label>
         <input type="text" id="contactName" name="name" required autocomplete="name" />
         <span class="field-error" id="contactNameError" role="alert"></span>
@@ -98,6 +105,12 @@
         <label for="contactMessage">Message</label>
         <textarea id="contactMessage" name="message" rows="4" required></textarea>
         <span class="field-error" id="contactMessageError" role="alert"></span>
+
+        <label class="consent-field" for="contactConsent">
+          <input type="checkbox" id="contactConsent" name="consent" required />
+          <span>I agree that the information I submit here will be used to follow up on my request.</span>
+        </label>
+        <span class="field-error" id="contactConsentError" role="alert"></span>
 
         <button type="submit" class="btn btn-primary" style="margin-top:1rem;">Send demo message</button>
 
@@ -137,4 +150,6 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script src="js/lead-submit-config.js"></script>
+<script src="js/lead-submit.js"></script>
 <script src="js/contact.js"></script>

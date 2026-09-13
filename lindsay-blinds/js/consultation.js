@@ -1,13 +1,16 @@
 /*
  * Lindsay Blinds prototype — consultation wizard + demo AI concierge.
  *
- * Everything here is client-side only:
- *  - No fetch/XHR/WebSocket calls anywhere in this file.
  *  - The "AI Concierge" is a scripted, canned chat flow (a small state
  *    machine with fixed questions/answers) — not a live model, and it
- *    cannot go off script. See the big comment above initAiWidget().
- *  - The multi-step form only shows/hides DOM state; "submit" never sends
- *    or stores data anywhere.
+ *    cannot go off script. See the big comment above initAiWidget(). It
+ *    never sends anything anywhere and is not wired to lead submission.
+ *  - The multi-step wizard's final "Submit request" now ATTEMPTS a real
+ *    submission to the shared lead-api backend via window.submitLead()
+ *    (see js/lead-submit.js + js/lead-submit-config.js). Since that
+ *    backend is not deployed anywhere yet, this always resolves to the
+ *    same local "demo success" behavior that has always been here — see
+ *    the submit handler below for exactly where that fallback happens.
  */
 (function () {
   "use strict";
@@ -16,6 +19,16 @@
    * Step 1 pre-selection via ?need=... query param (used by
    * products.html deep links, e.g. consultation.html?need=blinds)
    * ------------------------------------------------------------- */
+  /* ---------------------------------------------------------------
+   * Lead-api timing field: MUST be set on page/form load, not at
+   * submit time — the backend rejects submissions filled in under 3s
+   * as likely bots (see ../lead-api/lib/spam.js isTimingSuspicious).
+   * ------------------------------------------------------------- */
+  function stampFormRenderedAt() {
+    var field = document.getElementById("consultFormRenderedAt");
+    if (field) field.value = String(Date.now());
+  }
+
   function preselectFromQuery() {
     var params = new URLSearchParams(window.location.search);
     var need = params.get("need");
@@ -634,11 +647,100 @@
       });
     }
 
+    /* ---------------------------------------------------------------
+     * Build the JSON payload for the shared lead-api backend, mapping
+     * the wizard's existing fields onto the exact keys defined in
+     * ../lead-api/lib/schema.js for business_id "lindsay-blinds".
+     *
+     * Fields the wizard doesn't collect (room, window_type, privacy,
+     * light_control, style, colour, budget, installation_interest) are
+     * all OPTIONAL in that schema and are simply omitted — only the
+     * scripted AI concierge demo asks those, and it is intentionally
+     * not wired to submission (see the file header comment above).
+     * ------------------------------------------------------------- */
+    var CONTACT_METHOD_ENUM = { phone: "phone", email: "email", text: "phone" };
+
+    function buildLeadPayload() {
+      var need = checkedValue("need");
+      var contactMethod = checkedValue("contactMethod");
+      var numWindows = fieldValue("#numWindows");
+      var timeframeLabel = TIMEFRAME_TEXT[fieldValue("#timeframe")] || "";
+      var prefTimeLabel = PREFTIME_TEXT[fieldValue("#prefTime")] || "";
+      var propertyLabel = PROPERTY_TEXT[checkedValue("propertyType")] || "";
+      var projectLabel = PROJECT_TEXT[checkedValue("projectType")] || "";
+      var locationValue = fieldValue("#location");
+
+      var messageParts = [];
+      if (propertyLabel) messageParts.push("Property type: " + propertyLabel + ".");
+      if (projectLabel) messageParts.push("Project type: " + projectLabel + ".");
+      if (numWindows) messageParts.push("Approx. windows: " + numWindows + ".");
+      if (locationValue) messageParts.push("Location/community: " + locationValue + ".");
+      messageParts.push(
+        "Photos attached locally: " +
+          selectedFiles.length +
+          " (prototype only — not uploaded anywhere)."
+      );
+      if (contactMethod === "text") {
+        messageParts.push("Prefers text message contact.");
+      }
+
+      var timingParts = [];
+      if (timeframeLabel) timingParts.push("Timeframe: " + timeframeLabel);
+      if (prefTimeLabel) timingParts.push("Preferred consult time: " + prefTimeLabel);
+
+      return {
+        name: fieldValue("#fullName"),
+        email: fieldValue("#email"),
+        phone: fieldValue("#phone"),
+        message: messageParts.join(" "),
+        preferred_contact_method: CONTACT_METHOD_ENUM[contactMethod] || "",
+        preferred_timing: timingParts.join("; "),
+        source_page: "consultation.html",
+        inquiry_type: "consultation_wizard",
+        consent: !!document.getElementById("consultConsent").checked,
+        product_interest: NEED_TEXT[need] || "",
+      };
+    }
+
+    function validateConsent() {
+      var consentField = document.getElementById("consentField");
+      var consentInput = document.getElementById("consultConsent");
+      var errConsent = document.getElementById("err-consent");
+      var ok = !!(consentInput && consentInput.checked);
+      if (consentField) consentField.classList.toggle("has-error", !ok);
+      if (errConsent) errConsent.style.display = ok ? "none" : "block";
+      return ok;
+    }
+
+    function showSuccessScreen(result) {
+      wizard.querySelector(".progress").hidden = true;
+      form.hidden = true;
+      successScreen.hidden = false;
+
+      if (result && result.demo === false) {
+        // LIVE branch: lead-api actually accepted this submission (only
+        // possible once lead-submit-config.js points at a real deployed
+        // endpoint) — show the real server message instead of the demo
+        // copy below, which would otherwise be inaccurate.
+        var heading = successScreen.querySelector("h2");
+        var lead = successScreen.querySelector("p.max-w-prose");
+        var alertBox = successScreen.querySelector(".prototype-alert");
+        if (heading) heading.textContent = "Request received";
+        if (lead) {
+          lead.textContent =
+            result.message || "Marc has your details and will follow up personally.";
+        }
+        if (alertBox) alertBox.hidden = true;
+      }
+
+      successScreen.querySelector("h2").focus({ preventScroll: true });
+      successScreen.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     /* ------------------------------ Submit ----------------------------- */
     form.addEventListener("submit", function (event) {
       event.preventDefault();
-      // Deliberately no fetch/XHR here — this is a static prototype.
-      // Re-validate every step defensively before showing "success".
+      // Re-validate every step defensively before attempting to submit.
       var allValid = [1, 2, 3].every(function (s) {
         return validateStep(s);
       });
@@ -653,12 +755,51 @@
         }
         return;
       }
-      wizard.querySelector(".progress").hidden = true;
-      form.hidden = true;
-      successScreen.hidden = false;
-      successScreen.querySelector("h2").focus({ preventScroll: true });
-      successScreen.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      if (!validateConsent()) {
+        currentStep = 4;
+        showStep(currentStep);
+        document.getElementById("consultConsent").focus();
+        return;
+      }
+
+      var renderedAtField = document.getElementById("consultFormRenderedAt");
+      var honeypotField = document.getElementById("consultWebsiteUrl");
+      var formRenderedAt = renderedAtField ? Number(renderedAtField.value) : Date.now();
+      var honeypotValue = honeypotField ? honeypotField.value : "";
+      var payload = buildLeadPayload();
+
+      btnSubmit.disabled = true;
+
+      // Attempts a real POST to the lead-api backend when window.submitLead
+      // is available (js/lead-submit.js); always resolves (never rejects),
+      // falling back to the exact same demo success state below when the
+      // endpoint is still a placeholder or the request fails — which is
+      // the ONLY thing that can happen right now, since lead-api is BUILT
+      // but NOT DEPLOYED. See js/lead-submit.js for the full branch logic.
+      var submitPromise =
+        typeof window.submitLead === "function"
+          ? window.submitLead(payload, honeypotValue, formRenderedAt)
+          : Promise.resolve({ ok: true, demo: true, payload: payload });
+
+      submitPromise
+        .then(function (result) {
+          showSuccessScreen(result);
+        })
+        .catch(function () {
+          // Defensive only — window.submitLead is designed to never
+          // reject, but never leave the visitor stuck on a disabled button.
+          showSuccessScreen({ demo: true });
+        })
+        .then(function () {
+          btnSubmit.disabled = false;
+        });
     });
+
+    // Preserve the original demo success-screen copy so it can be restored
+    // on "Start over" even if a LIVE lead-api response swapped it out.
+    var defaultSuccessHeading = successScreen.querySelector("h2").textContent;
+    var defaultSuccessLead = successScreen.querySelector("p.max-w-prose").textContent;
 
     var btnStartOver = document.getElementById("btnStartOver");
     if (btnStartOver) {
@@ -668,8 +809,12 @@
         uploadPreview.innerHTML = "";
         currentStep = 1;
         successScreen.hidden = true;
+        successScreen.querySelector("h2").textContent = defaultSuccessHeading;
+        successScreen.querySelector("p.max-w-prose").textContent = defaultSuccessLead;
+        successScreen.querySelector(".prototype-alert").hidden = false;
         form.hidden = false;
         wizard.querySelector(".progress").hidden = false;
+        stampFormRenderedAt(); // reset the timing baseline for a fresh attempt
         showStep(currentStep);
         wizard.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -679,6 +824,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    stampFormRenderedAt();
     preselectFromQuery();
     initAiWidget();
     initWizard();

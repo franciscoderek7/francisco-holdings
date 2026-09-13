@@ -377,3 +377,51 @@ available in this session. Nothing on the production site has been
 installed, configured, or verified. This plan is ready to execute once
 access is granted — do not treat the production contact form as fixed until
 a real test submission has been confirmed delivered.
+
+## Lead Capture Integration (this prototype — separate from the plan above)
+
+**This is a different thing from the WordPress plan above.** The section above is about fixing the
+real production site, lindsayblinds.com, once WordPress access exists. This section is about giving
+*this standalone prototype* real lead capture, independent of WordPress, using the same shared
+backend built for Northern Forge and DEF.
+
+**Status: BUILT — NOT CONFIGURED — NOT DEPLOYED.** Matches the shared backend's own status (see
+`lead-api/README.md`). The consultation wizard and the contact form now attempt a real submission to
+that backend on every valid submit; because the backend is not deployed anywhere yet, every
+submission today still falls back to this prototype's original, unchanged local demo confirmation.
+The AI Concierge remains a fully scripted demo that never submits anything itself.
+
+### What was wired
+
+- `js/lead-submit-config.js` (new) — `window.LEAD_API_CONFIG`: the shared backend's endpoint URL
+  (currently a placeholder) and this site's `business_id` (`"lindsay-blinds"`, must match
+  `lead-api/lib/businesses.js` exactly).
+- `js/lead-submit.js` (new) — a shared `window.submitLead(fields, honeypotValue, formRenderedAt)`
+  helper used by both forms, so they build and attempt-send a payload the same way rather than
+  duplicating the fetch/fallback logic. Two branches: the **fallback** (active today — placeholder
+  endpoint or any fetch failure resolves with the exact existing demo success state) and the **live**
+  branch (dormant until deployed, resolves with the server's real message instead).
+- `consultation.html` / `contact.html` — each form gained a hidden honeypot field
+  (`name="website_url"`), a hidden `form_rendered_at` field stamped via JS on page load, and a
+  visible, required consent checkbox.
+
+### Field mapping (consultation wizard → lead-api's `"lindsay-blinds"` schema)
+
+| Consultation form field | Payload key | Notes |
+|---|---|---|
+| Full name (`#fullName`) | `name` | required |
+| Email (`#email`) | `email` | required |
+| Phone (`#phone`) | `phone` | optional |
+| Preferred contact method | `preferred_contact_method` | `"phone"` for text or phone, `"email"` for email |
+| Consent checkbox | `consent` | required, boolean |
+| — | `product_interest` | the wizard's "need" selection (e.g. "Blinds") |
+| Property type, project type, window count, location, timeframe, preferred time | folded into `message` / `preferred_timing`, one labeled line each | the wizard doesn't collect room/window_type/privacy/light_control/style/colour/budget as separate fields the way the AI Concierge conversation does — those richer fields only exist inside the scripted Concierge chat, which is intentionally not wired to submission (it's a discovery aid, not itself a lead form) |
+| — | `business_id` | constant `"lindsay-blinds"` |
+| — | `source_page` | constant `"consultation.html"` |
+| — | `inquiry_type` | constant `"consultation_wizard"` |
+| Hidden honeypot / timing fields | `website_url` / `form_rendered_at` | spam checks, handled server-side |
+
+The plain Contact form maps only the common fields (name/email/message) with
+`inquiry_type: "contact_form"`.
+
+**705-808-3022 is unaffected by any of this wiring** — it remains exactly as it was.

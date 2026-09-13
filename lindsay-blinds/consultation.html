@@ -125,6 +125,12 @@
         </ol>
 
         <form id="consultForm" novalidate>
+          <!-- Honeypot + timing fields for lead-api spam checks (see
+               js/lead-submit.js and ../lead-api/lib/spam.js). Real visitors
+               never see or fill website_url; form_rendered_at is set by JS
+               on page load, not at submit time. -->
+          <input type="text" name="website_url" id="consultWebsiteUrl" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true" />
+          <input type="hidden" name="form_rendered_at" id="consultFormRenderedAt" />
           <!-- Step 1 -->
           <div class="wizard-step is-active" data-step="1" role="group" aria-labelledby="step1-heading">
             <h3 id="step1-heading">What do you need?</h3>
@@ -332,6 +338,12 @@
             <h3 style="margin-top:2rem;">Review your details</h3>
             <dl class="summary-list" id="summaryList"></dl>
 
+            <label class="consent-field" for="consultConsent" id="consentField">
+              <input type="checkbox" id="consultConsent" name="consent" required aria-describedby="err-consent" />
+              <span>I agree that the information I submit here will be used to follow up on my request.</span>
+            </label>
+            <p class="error-msg" id="err-consent" role="alert">Please confirm you agree before submitting.</p>
+
             <div class="prototype-alert">
               <strong>Before you submit:</strong> this is a prototype. Clicking
               "Submit request" below will not send an email, will not save to a
@@ -435,4 +447,6 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script src="js/lead-submit-config.js"></script>
+<script src="js/lead-submit.js"></script>
 <script src="js/consultation.js"></script>

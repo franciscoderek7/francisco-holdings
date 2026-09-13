@@ -1587,6 +1587,30 @@ body.nav-open {
   color: var(--color-text-muted);
 }
 
+/* ---------- Consent checkbox (consultation wizard + contact form) ---------- */
+.consent-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 1.5rem 0 0.4rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.consent-field input[type="checkbox"] {
+  margin-top: 0.2rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.consent-field.has-error {
+  color: var(--color-error);
+}
+
 /* ---------- Contact form (contact.html) ---------- */
 .contact-form label {
   display: block;
