@@ -173,7 +173,7 @@
       </div>
 
       <div class="form-card">
-        <form data-demo-form data-success-target="contact-success" class="form" novalidate>
+        <form data-demo-form data-lead-form="contact" data-success-target="contact-success" class="form" novalidate>
           <div class="form-fields">
             <div class="form-row">
               <label for="contact-name">Name <span class="required-mark">*</span></label>
@@ -190,20 +190,46 @@
               <textarea id="contact-message" name="contact-message" rows="4" required placeholder="What would you like to ask or share?"></textarea>
               <p class="error-text" role="alert">Please enter a message.</p>
             </div>
+            <div class="form-row">
+              <label class="concierge-choice" style="display:inline-flex; align-items:flex-start;">
+                <input type="checkbox" id="contact-consent" name="consent" required style="margin-right:0.5rem; margin-top:0.2rem;" />
+                <span>I agree that the information I submit here will be used to follow up on my request. <span class="required-mark">*</span></span>
+              </label>
+              <p class="error-text" role="alert">Please check this box to continue.</p>
+            </div>
+
+            <!-- Honeypot: left blank by real visitors, hidden from view and
+                 from screen readers/tab order. lead-api treats any value
+                 here as a bot signal and silently accepts-but-discards. -->
+            <input type="text" name="website_url" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true" />
+            <!-- Stamped by js/forms.js with Date.now() when this form loads
+                 (not at submit time) — lead-api rejects submissions made
+                 less than 3 seconds after this timestamp as likely bots. -->
+            <input type="hidden" name="form_rendered_at" value="" />
           </div>
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Send demo message</button>
-            <p class="hint mt-lg" style="margin-top:0.75rem;">Demo only — no message is sent or saved anywhere.</p>
+            <p class="hint mt-lg" style="margin-top:0.75rem;">
+              This attempts a real submission to DEF's lead-capture backend; since that backend
+              isn't deployed yet, it falls back to updating only this page's on-screen state — no
+              message is actually sent right now.
+            </p>
           </div>
         </form>
 
         <div class="form-success" id="contact-success">
           <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m8 12.5 2.5 2.5L16 9.5" /></svg>
-          <h2>Demo message "sent"</h2>
-          <p>
-            This is a <strong>prototype</strong>. Nothing was actually emailed or stored — this
-            success state is only here to show what the experience could feel like.
-          </p>
+          <div data-demo-success-copy>
+            <h2>Demo message "sent"</h2>
+            <p>
+              This is a <strong>prototype</strong>. Nothing was actually emailed or stored — this
+              success state is only here to show what the experience could feel like.
+            </p>
+          </div>
+          <div data-live-success-copy hidden>
+            <h2>Message sent</h2>
+            <p data-live-message></p>
+          </div>
           <button type="button" class="btn btn-outline" data-demo-reset>Start over</button>
         </div>
       </div>
@@ -254,6 +280,7 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script src="js/lead-submit-config.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/reveal.js"></script>
 </body>

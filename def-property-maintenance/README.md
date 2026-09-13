@@ -476,3 +476,47 @@ committed:
 Any future integration of this business's tooling with Derek's broader business infrastructure would
 be a separate, deliberate decision made later, and is not assumed, implied, or in progress anywhere
 in this prototype.
+
+## Lead Capture Integration
+
+**Status: BUILT — NOT CONFIGURED — NOT DEPLOYED.** Matches the shared backend's own status (see
+`lead-api/README.md`). The Request Service form and the plain Contact form (the two forms carrying
+`[data-lead-form]`) now attempt a real submission to that backend on every valid submit; because the
+backend is not deployed anywhere yet, every submission today still falls back to this prototype's
+original, unchanged local demo confirmation. The Security Assessment and AI Concierge remain fully
+scripted demos that never submit anything themselves.
+
+### What was wired
+
+- `js/lead-submit-config.js` (new) — `window.LEAD_API_CONFIG`: the shared backend's endpoint URL
+  (currently a placeholder) and this site's `business_id` (`"def-property-maintenance"`, must match
+  `lead-api/lib/businesses.js` exactly).
+- `request-service.html` / `contact.html` — each `[data-lead-form]` form gained: a hidden honeypot
+  field (`name="website_url"`), a hidden `form_rendered_at` field stamped via JS on page load, and a
+  visible, required consent checkbox.
+- `js/forms.js` — `handleLeadSubmission()` builds a JSON payload per form (`buildRequestServicePayload`
+  / `buildContactPayload`) matching `lead-api/lib/schema.js`'s `"def-property-maintenance"` schema,
+  and attempts `fetch(window.LEAD_API_CONFIG.endpoint, ...)`. Two branches: the **fallback** (active
+  today — placeholder endpoint or any fetch failure shows the exact existing demo success copy) and
+  the **live** branch (dormant until `lead-api` is deployed and configured, shows the server's real
+  message instead).
+
+### Field mapping (Request Service form → lead-api's `"def-property-maintenance"` schema)
+
+| Request Service field | Payload key | Notes |
+|---|---|---|
+| Service type (`#service-type`) | `inquiry_type` | selected option's visible label |
+| Category (`#category`) | `requested_service` | selected option's visible label |
+| Property type (`#property-type`) | `property_type` | selected option's visible label |
+| Address / location (`#address`) | `service_area` | no dedicated service-area selector exists on this form yet; the address field is the closest match |
+| Urgency (`#urgency`) | `urgency` | mapped to the schema's enum (`not-urgent`/`soon`/`urgent`) — explicitly never implies faster or emergency response |
+| Existing/desired technology checkboxes | folded into `message` | listed as labeled lines, nothing dropped |
+| Notes (`#notes`) | `property_concern` (truncated server-side to 200 chars) **and** the full text in `message` | so nothing is lost even though `property_concern` is capped |
+| Preferred date (`#preferred-date`) | `preferred_timing` | |
+| Name/email/phone | `name` / `email` / `phone` | name and email required |
+| Consent checkbox | `consent` | required, boolean |
+| — | `business_id` | constant `"def-property-maintenance"` |
+| Hidden honeypot / timing fields | `website_url` / `form_rendered_at` | spam checks, handled server-side |
+
+The plain Contact form maps only the common fields (name/email/message) with `inquiry_type: "general"`
+— it doesn't ask for the DEF-specific fields above.
