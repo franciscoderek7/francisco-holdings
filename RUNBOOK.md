@@ -16,7 +16,7 @@ website projects.
 | `FAILURE` | Something that was attempted and did not work, with the reason recorded. |
 
 Repository: `franciscoderek7/francisco-holdings` · Branch: `claude/three-website-prototypes-95en8x`
-· Last verified against commit `92943d9`.
+· Last verified against commit `7502bce`.
 
 ---
 
@@ -600,3 +600,113 @@ sites kept their existing directory names through their rebrands rather than chu
 ≠ authorization. Current position for all three businesses: **BUILD → TEST → DEMONSTRATE** (done).
 **GET APPROVAL → COLLECT AUTHORIZED INFORMATION → THEN CONSIDER PRODUCTION** (not started for any
 of the three).
+
+---
+
+## PHASE 13 — REAL LEAD CAPTURE & REVENUE READINESS
+
+A local "success" message that sends and stores nothing is not a lead system. This phase replaces
+that with a real, tested, shared backend (`lead-api/`), wired into all three sites, while keeping
+the businesses fully isolated.
+
+### Architecture
+
+```
+Website form (client-side validation = UX only)
+  -> POST /api/lead { business_id, ...schema fields, honeypot, form_rendered_at }
+  -> lead-api/api/lead.js:
+       1. business_id checked against a hardcoded 3-entry allow-list (reject unknown)
+       2. honeypot / rate-limit / timing spam checks
+       3. server-side schema validation (the real source of truth, not the frontend)
+       4. duplicate-submission guard (30s window, reuses the first lead_id)
+       5. lead_id + timestamp generated, status = NEW
+       6. notification email attempted (Resend) to THAT business's configured recipient only
+       7. optional persistence webhook
+       8. honest confirmation returned: "Your request has been received. A member of the
+          team will review it and follow up."
+```
+
+**Isolation, enforced not just claimed:** every business's notification/archive recipient and
+allowed-origin come from that business's own environment variables only
+(`lead-api/lib/businesses.js`). The endpoint has no read/list/admin capability at all — it only
+ever accepts a new submission. A cross-business-isolation test submits to two businesses
+concurrently and asserts they never collide.
+
+### Status: `BUILT — NOT CONFIGURED — NOT DEPLOYED` (all three sites + the backend)
+
+Honest reasons, not excuses: this session has no hosting/deployment credentials (no Vercel/Netlify
+account), no email-provider API key (no Resend account), and no real notification email addresses
+for Dylan or Marc — none of which can be invented. `ACCESS/CONFIGURATION REQUIRED` for all three.
+
+### What was built and independently verified
+
+- **`lead-api/`** (new, standalone, shared by all three): `api/lead.js` handler,
+  `lib/{businesses,schema,validate,spam,sanitize,email}.js`, `.env.example` (every value empty),
+  `test/run.js`. **14/14 tests pass against the real handler** (not a reimplementation): valid
+  submission, missing name, invalid email/phone, missing consent, oversized input (truncated, not
+  crashed), malicious `<script>` input (HTML-encoded, never raw), unknown `business_id` (rejected
+  without revealing the allow-list), honeypot, timing-based bot detection, 30s duplicate-submission
+  handling, concurrent business isolation, rate limiting, and the honest "accepted but not notified"
+  behavior with no email config present. Grepped the whole directory for secret-shaped strings —
+  none found.
+- **All three sites wired** (Northern Forge, DEF, Lindsay): each gained a `js/lead-submit-config.js`
+  (placeholder endpoint + real `business_id`), a honeypot field, a `form_rendered_at` timestamp, and
+  a required consent checkbox on every form meant to capture a lead. Each site maps its own existing
+  form fields onto `lead-api`'s schema for that business — documented in full in each site's own
+  README under "Lead Capture Integration."
+- **Independently re-verified, not accepted on the wiring agents' self-reports** (two of the three
+  wiring agents were interrupted mid-task by a session-level rate limit and resumed/finished
+  directly by Claude rather than re-dispatched, to avoid compounding the same limit): for each
+  site's Contact form, captured the exact outgoing payload via Playwright request interception and
+  ran it through `lead-api`'s real `validateLead()` — **all three pass with zero errors**, correct
+  `business_id`, honeypot and timing fields present. Separately re-confirmed the demo fallback is
+  completely unchanged for today's visitors (no interception, no config override — exactly what
+  ships): all three show the original local success state, zero console errors. A full regression
+  pass across all three sites' pages (50 page×viewport combinations) came back clean.
+- **Today's actual visitor experience is unchanged** — every submission still shows the same local
+  demo success message it always has, because the configured endpoint is still a placeholder.
+  Nothing is silently now "more live" than before; the difference is that the code to go live now
+  exists, tested, and ready.
+
+### LEAD SYSTEM STATUS
+
+| Site | Status |
+|---|---|
+| `lead-api` (shared backend) | `BUILT — NOT CONFIGURED` |
+| Northern Forge Windows, Blinds & Doors | `BUILT — NOT CONFIGURED` |
+| DEF Property Maintenance & Security | `BUILT — NOT CONFIGURED` |
+| Lindsay Blinds (this prototype) | `BUILT — NOT CONFIGURED` |
+| Lindsay Blinds (real lindsayblinds.com production) | `NOT BUILT` — separate WordPress Contact Form 7 + WP Mail SMTP plan remains `ACCESS REQUIRED`, untouched |
+
+None reach `CONFIGURED`, `TESTED` (in the "real email arrived" sense), `PRODUCTION READY`, or
+`PRODUCTION LIVE` — those require, in order: a hosting deployment, a real Resend account + API key,
+Dylan's and Marc's real notification addresses, updating each site's placeholder endpoint, then a
+real end-to-end test (a real form submission producing a real received email) before any of that
+language would be honest.
+
+### REVENUE READINESS (all three)
+
+| Site | Rating | Why |
+|---|---|---|
+| Northern Forge | `FUNCTIONAL` | Premium, tested, fully-scripted demo experience with a real, tested lead-capture *code path* — but no lead is actually received by anyone yet |
+| DEF Property Maintenance & Security | `FUNCTIONAL` | Same reasoning |
+| Lindsay Blinds (prototype) | `FUNCTIONAL` | Same reasoning |
+| Lindsay Blinds (real production site) | `NOT READY` | The production contact-form gap is unresolved and blocked on WordPress access, independent of this prototype's state |
+
+None reach `LEAD-READY` — per the task's own definition, that requires a lead to actually be
+receivable and preserved somewhere real, which requires deployment + configuration that doesn't
+exist yet. None reach `SALES-READY` or `REVENUE-READY` for the same reason, one level further out
+(a human must be able to receive and act on a real lead first). This is a deliberate, honest
+classification, not a conservative guess — the same code, once deployed and configured, would
+justify `LEAD-READY` without any further engineering work.
+
+### To reach LEAD-READY (all three, concretely)
+
+1. Deploy `lead-api/` (e.g. to Vercel — see `lead-api/README.md`).
+2. Create a Resend account, get an API key, set `RESEND_API_KEY` + `LEAD_NOTIFY_FROM_EMAIL`.
+3. Get Dylan's real notification email (Northern Forge + DEF) and Marc's real notification email
+   (Lindsay) — not invented here.
+4. Set each business's `*_NOTIFY_EMAIL` (and optionally `*_ARCHIVE_EMAIL`, `*_ALLOWED_ORIGIN`).
+5. Update each site's `js/lead-submit-config.js` `endpoint` to the real deployed URL.
+6. Submit one real test lead per business and confirm a real email actually arrives before telling
+   anyone this is live.
