@@ -176,10 +176,16 @@ other windows/blinds/doors company.
   frameworks, no npm dependencies).
 - No external requests at runtime: no CDNs, no web fonts, no analytics, no
   tracking pixels, no third-party embeds.
-- No `fetch`, `XMLHttpRequest`, `WebSocket`, form `action`/`method`
-  submission, cookies, or `localStorage` anywhere in the codebase — every
-  "submit," every Concierge answer, and every Product Finder answer is
-  handled entirely with in-memory JavaScript state and `preventDefault()`.
+- No `XMLHttpRequest`, `WebSocket`, form `action`/`method` submission,
+  cookies, or `localStorage` anywhere in the codebase. The one exception:
+  the consultation form and the contact form each attempt a `fetch()` POST
+  to the shared lead-api backend on submit (see **Lead Capture
+  Integration**) — but that backend is not deployed anywhere, so the
+  configured endpoint is still a placeholder and every real-world
+  submission today still falls back to the original local demo behavior.
+  The Concierge and Product Finder never call `fetch` at all — every
+  Concierge answer and every Product Finder answer is handled entirely
+  with in-memory JavaScript state and `preventDefault()`.
 - **Technology assumptions:** every "smart-home integration" claim on the
   Technology Showcase is **generic and unconfirmed** — no specific ecosystem
   or voice-assistant brand is named or implied as compatible anywhere on the
@@ -321,13 +327,128 @@ public site, Dylan needs to supply and confirm:
   the site's dark-slate/forged-copper palette, is now in place on every
   page and does not need to wait on a real domain.)
 
+## Lead Capture Integration
+
+**Status: BUILT — NOT CONFIGURED — NOT DEPLOYED.** This matches the shared
+backend's own status (see `lead-api/README.md`). The consultation form and
+the contact form now attempt a real submission to that backend on every
+valid submit; because the backend is not deployed anywhere yet, every
+submission today still falls back to this prototype's original, unchanged
+local demo confirmation. The Northern Forge Concierge and Product Finder
+remain fully scripted demos that never submit anything themselves — they
+only pre-fill the standard consultation form's product-interest checkboxes
+as a convenience (see **Prototype limitations**).
+
+### What was wired
+
+- `js/lead-submit-config.js` (new) — holds `window.LEAD_API_CONFIG`, the
+  shared backend's endpoint URL and this site's `business_id`
+  (`"northern-forge"`, must match `lead-api/lib/businesses.js` exactly).
+  The endpoint is currently a placeholder string, since `lead-api` has not
+  been deployed anywhere.
+- `consultation.html` / `contact.html` — each form gained: a hidden
+  honeypot field (`name="website_url"`), a hidden `form_rendered_at` field
+  set via JS to `Date.now()` when the page loads, and a visible, required
+  consent checkbox ("I agree that the information I submit here will be
+  used to follow up on my request.").
+- `js/consultation.js` / `js/contact.js` — on a valid submit (after the
+  existing client-side validation, unchanged), each now builds a JSON
+  payload matching `lead-api/lib/schema.js`'s `"northern-forge"` schema
+  exactly and attempts `fetch(window.LEAD_API_CONFIG.endpoint, ...)`. Two
+  clearly-commented branches:
+  - **Fallback branch (active right now):** the configured endpoint is
+    still the placeholder string (or the fetch fails/errors/returns
+    non-2xx) — shows the exact same demo success copy this prototype has
+    always shown. Nothing is actually sent or stored anywhere.
+  - **Live branch (dormant until `lead-api` is deployed and
+    `lead-submit-config.js`'s `endpoint` is updated to the real URL):**
+    shows the real message returned by the server instead of the demo
+    copy.
+
+### Field mapping (consultation form → lead-api's `"northern-forge"` schema)
+
+| Consultation form field | Payload key | Notes |
+|---|---|---|
+| Product interest checkboxes (`category`) | `product_interest` | Joined as a comma-separated string, e.g. `"Blinds, Motorization"` |
+| Room / location (`room`) | `room_or_property` | |
+| Privacy requirements (`privacy`) | `privacy_preference` | |
+| Light requirements (`light`) | `light_control` | |
+| Style (`style`) | `style` | |
+| Timeline (`timeline`) | `preferred_timing` | |
+| Full name (`name`) | `name` | required |
+| Email (`email`) | `email` | required |
+| Phone (`phone`) | `phone` | optional |
+| Consent checkbox | `consent` | required, boolean |
+| — (not a form field) | `business_id` | constant `"northern-forge"`, from `lead-submit-config.js` |
+| — (not a form field) | `source_page` | constant `"consultation.html"` |
+| — (not a form field) | `inquiry_type` | constant `"Consultation request"` |
+| Derived from `phone`/`email` presence | `preferred_contact_method` | `"either"` if both filled, `"phone"` if only phone, else `"email"` |
+| Product interest includes "Motorization" | `operation` | `"motorized"` if so, otherwise left unset (the form never asks manual-vs-motorized directly outside the Concierge demo, so nothing else is guessed) |
+| Installation preference (`install-pref`) | `installation_interest` | `true` for "Professional installation", `false` for "DIY / self-install", left unset for "Not sure yet" |
+| Property type, project type, window/door requirements, budget, notes | folded into `message`, one labeled line each | No dedicated schema field exists for these on this site's schema; nothing the visitor enters is dropped |
+| Hidden honeypot (`website_url`) | `website_url` | spam check, handled server-side |
+| Hidden `form_rendered_at` | `form_rendered_at` | bot-timing check, handled server-side |
+| — | `colour` | never collected on this form; omitted (optional field) |
+
+Contact form → schema: `contact-name` → `name`, `contact-email` → `email`,
+`contact-message` → `message` (sent as-is, no folding needed),
+`preferred_contact_method` is a constant `"email"` (the only contact
+method this form collects), `source_page` is `"contact.html"`,
+`inquiry_type` is `"Contact form message"`, plus the same consent,
+honeypot, and `form_rendered_at` fields as above. Every
+Northern-Forge-specific field (`product_interest`, `room_or_property`,
+etc.) is simply omitted — all are optional in the schema.
+
+### What's needed to go live
+
+1. Deploy `lead-api/` (see `lead-api/README.md` "Deployment" — not done,
+   and not authorized without explicit go-ahead).
+2. Update `js/lead-submit-config.js`'s `endpoint` value to the real
+   deployed URL. `businessId` should stay exactly `"northern-forge"`.
+3. Run a real end-to-end test (submit a real form on this site, confirm a
+   real notification arrives) before treating this as live — per
+   `lead-api/README.md`'s own guidance, a passing test suite is not proof
+   of that.
+
+### Testing performed for this integration
+
+Verified with a real Chromium browser (Playwright) against a local static
+server (`python3 -m http.server`):
+
+- The existing demo fallback (placeholder endpoint, no interception) still
+  works exactly as before on both the consultation form and the contact
+  form — same success heading and message text, zero console errors.
+- With `page.route()` intercepting the POST to a simulated deployed
+  endpoint, the captured JSON payload from both forms was validated
+  directly against the real backend using
+  `lead-api/lib/validate.js`'s `validateLead()` and
+  `lead-api/lib/schema.js`'s `getSchema("northern-forge")` — **both
+  payloads pass real server-side schema validation with zero errors.**
+- Client-side validation (empty name, invalid email) was confirmed to
+  block submission before any network call is attempted (the intercepted
+  route was never hit).
+- A deliberately invalid phone number, an oversized (5000+ char) message,
+  and a message containing `<script>alert(1)</script>` were each checked
+  directly against the real `validateLead()`/`sanitize.js` — invalid phone
+  is rejected, oversized text is truncated to the schema's 2000-char limit
+  without throwing, and the script tag is accepted as inert plain text
+  (confirmed never executed; `sanitize.encodeForHtml` neutralizes it for
+  any future HTML context).
+- Simulating a bot (honeypot field populated, form submitted immediately
+  after load) confirmed the frontend correctly includes the filled
+  honeypot value and a real, very-recent `form_rendered_at` in the
+  outgoing payload — and that lead-api's own `isHoneypotTripped()` /
+  `isTimingSuspicious()` functions (not reimplemented) correctly flag
+  both.
+- `business_id` was confirmed to be exactly `"northern-forge"` in every
+  captured payload across both forms.
+- Both forms were tested at 390px, 430px, and 1440px widths: no horizontal
+  overflow, zero console errors.
+
+53 assertions, all passing. See the session's test output for details.
+
 ## Future production tasks
 
-- Real form handling — every "submit" on `consultation.html` and
-  `contact.html`, and the Concierge's and Product Finder's CTA buttons,
-  currently only validate/react in the browser and show a fake success
-  message; a live site needs a real backend, email service, or hosted form
-  provider before it can actually receive inquiries.
 - Domain registration and hosting setup (see **How to deploy**).
 - Legal/compliance review (privacy policy, terms, accessibility statement,
   any licensing disclosures).

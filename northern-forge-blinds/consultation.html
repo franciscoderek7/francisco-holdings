@@ -146,10 +146,21 @@
         <h2>Or fill out the full consultation form</h2>
       </div>
       <div class="placeholder" style="max-width:44rem; margin-bottom:var(--space-5);">
-        <strong>Demo only:</strong> this form uses client-side JavaScript to validate and show a success message. It does not use <code>fetch</code>, <code>XHR</code>, email, or any backend — no data leaves your browser, and nothing is stored, even locally.
+        <strong>Demo only:</strong> this form uses client-side JavaScript to validate and show a success message. It attempts a real submission to a shared lead-capture backend, but that backend is not deployed anywhere yet, so every submission today falls back to this same local demo confirmation — no email is sent, and nothing is stored, even locally.
       </div>
 
       <form id="consultation-form" novalidate style="max-width:44rem;">
+
+        <!-- Honeypot: hidden from real visitors (off-screen, unlabeled,
+             unfocusable), matches lead-api's spam.isHoneypotTripped() check
+             on the field name "website_url" exactly. Real visitors never
+             see or fill this; if it has a value, lead-api silently accepts
+             and discards the submission without notifying anyone. -->
+        <input type="text" name="website_url" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true" />
+        <!-- Set via JS to Date.now() when this page loads (see
+             js/consultation.js) — lead-api rejects submissions sent less
+             than 3 seconds after this timestamp as likely automated. -->
+        <input type="hidden" id="consultation-form-rendered-at" name="form_rendered_at" value="">
 
         <fieldset id="category-fieldset" style="margin-bottom:var(--space-5);">
           <legend>1. What are you interested in?</legend>
@@ -327,18 +338,29 @@
           </div>
         </fieldset>
 
+        <fieldset style="margin-bottom:var(--space-5);">
+          <legend>6. Consent</legend>
+          <div class="field" style="margin-top:var(--space-3);">
+            <label style="display:flex; align-items:flex-start; gap:0.6rem; font-weight:400; cursor:pointer;">
+              <input type="checkbox" id="consultation-consent" name="consent" required style="width:auto; margin-top:0.2rem;">
+              <span>I agree that the information I submit here will be used to follow up on my request.</span>
+            </label>
+            <p class="field-error" role="alert"></p>
+          </div>
+        </fieldset>
+
         <div id="consultation-status" class="form-status form-status--error" role="alert" hidden style="margin-bottom:var(--space-4);"></div>
 
         <div class="btn-row">
           <button type="submit" class="btn btn--primary">Submit Demo Consultation</button>
         </div>
-        <p class="hint" style="margin-top:var(--space-3);">Demo only — this does not send a real request.</p>
+        <p class="hint" style="margin-top:var(--space-3);">Demo only — no backend is deployed yet, so this does not send a real request.</p>
       </form>
 
       <div id="consultation-success" class="success-panel" hidden style="max-width:44rem;">
         <svg class="success-panel__icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-        <h2>Demo submission received</h2>
-        <p>In a real version of this site, Northern Forge would follow up using the details below. Nothing has actually been sent — this is a prototype confirmation screen only.</p>
+        <h2 id="consultation-success-heading">Demo submission received</h2>
+        <p id="consultation-success-message">In a real version of this site, Northern Forge would follow up using the details below. Nothing has actually been sent — this is a prototype confirmation screen only.</p>
         <dl id="consultation-summary" style="text-align:left; max-width:28rem; margin:var(--space-4) auto; display:grid; grid-template-columns:auto 1fr; gap:0.3rem 1rem;"></dl>
         <button type="button" id="consultation-restart" class="btn btn--secondary">Start Over</button>
       </div>
@@ -390,6 +412,7 @@
 
 <script src="js/main.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/lead-submit-config.js"></script>
 <script src="js/concierge.js"></script>
 <script src="js/consultation.js"></script>
 </body>

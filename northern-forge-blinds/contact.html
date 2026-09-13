@@ -96,10 +96,19 @@
         <div>
           <h2>Send a demo message</h2>
           <div class="placeholder" style="margin-bottom:var(--space-4);">
-            <strong>Demo only:</strong> this form validates in your browser and shows a confirmation state. It does not send email, use <code>fetch</code>/<code>XHR</code>, or store anything.
+            <strong>Demo only:</strong> this form validates in your browser and shows a confirmation state. It attempts a real submission to a shared lead-capture backend, but that backend is not deployed anywhere yet, so every submission today falls back to this same local demo confirmation — no email is sent, and nothing is stored anywhere outside your browser.
           </div>
 
           <form id="contact-form" novalidate>
+            <!-- Honeypot: hidden from real visitors (off-screen, unlabeled,
+                 unfocusable), matches lead-api's spam.isHoneypotTripped()
+                 check on the field name "website_url" exactly. -->
+            <input type="text" name="website_url" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true" />
+            <!-- Set via JS to Date.now() when this page loads (see
+                 js/contact.js) — lead-api rejects submissions sent less
+                 than 3 seconds after this timestamp as likely automated. -->
+            <input type="hidden" id="contact-form-rendered-at" name="form_rendered_at" value="">
+
             <div class="field" style="margin-bottom:var(--space-3);">
               <label for="contact-name">Full name</label>
               <input type="text" id="contact-name" name="contact-name" autocomplete="name">
@@ -116,16 +125,24 @@
               <p class="field-error" role="alert"></p>
             </div>
 
+            <div class="field" style="margin-bottom:var(--space-3);">
+              <label style="display:flex; align-items:flex-start; gap:0.6rem; font-weight:400; cursor:pointer;">
+                <input type="checkbox" id="contact-consent" name="consent" required style="width:auto; margin-top:0.2rem;">
+                <span>I agree that the information I submit here will be used to follow up on my request.</span>
+              </label>
+              <p class="field-error" role="alert"></p>
+            </div>
+
             <div id="contact-status" class="form-status form-status--error" role="alert" hidden style="margin-bottom:var(--space-3);"></div>
 
             <button type="submit" class="btn btn--primary btn--block">Send Demo Message</button>
-            <p class="hint" style="margin-top:var(--space-2);">Demo only — this does not send a real message.</p>
+            <p class="hint" style="margin-top:var(--space-2);">Demo only — no backend is deployed yet, so this does not send a real message.</p>
           </form>
 
           <div id="contact-success" class="success-panel" hidden>
             <svg class="success-panel__icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-            <h3>Demo message &ldquo;sent&rdquo;</h3>
-            <p>This is a prototype confirmation only — no message was actually delivered anywhere.</p>
+            <h3 id="contact-success-heading">Demo message &ldquo;sent&rdquo;</h3>
+            <p id="contact-success-message">This is a prototype confirmation only — no message was actually delivered anywhere.</p>
             <button type="button" id="contact-restart" class="btn btn--secondary">Send Another</button>
           </div>
         </div>
@@ -179,6 +196,7 @@
 
 <script src="js/main.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/lead-submit-config.js"></script>
 <script src="js/contact.js"></script>
 </body>
 </html>
