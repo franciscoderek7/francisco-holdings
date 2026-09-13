@@ -8,15 +8,20 @@
  * /home/user/francisco-holdings/lead-api/), using the config in
  * js/lead-submit-config.js.
  *
- * Two branches, clearly separated below:
- *   - FALLBACK BRANCH (ACTIVE RIGHT NOW): lead-api is not deployed
+ * Three outcomes, clearly separated below:
+ *   - DEMO FALLBACK (ACTIVE RIGHT NOW): lead-api is not deployed
  *     anywhere yet, so js/lead-submit-config.js still holds the
  *     placeholder endpoint URL. Every submission takes this branch and
  *     shows the exact same "Demo message sent" confirmation this
  *     prototype has always shown — nothing is actually sent anywhere.
- *   - LIVE BRANCH (DORMANT until lead-api is deployed and the config's
+ *   - LIVE SUCCESS (DORMANT until lead-api is deployed and the config's
  *     `endpoint` is updated to a real URL): shows the real message the
  *     server returns instead of the demo copy.
+ *   - LIVE FAILURE (DORMANT until deployed): once a real endpoint is
+ *     configured, a non-2xx response or network error is a genuine
+ *     failure and must NEVER be shown as success — the form stays
+ *     visible and an honest failure message appears in the existing
+ *     status box instead.
  */
 (function () {
   "use strict";
@@ -118,38 +123,69 @@
       };
     }
 
-    // Attempts a real submission to the shared lead-api backend. Resolves
-    // to { real: false } whenever nothing was actually sent (placeholder
-    // endpoint still configured, network error, or a non-2xx response) —
-    // callers should treat that exactly like today's demo-only behavior.
-    // Resolves to { real: true, message } only on an actual 2xx response
-    // from a deployed backend.
+    // A REAL, configured endpoint that never responds must still resolve
+    // to an honest failure rather than leave the visitor waiting forever.
+    var LEAD_REQUEST_TIMEOUT_MS = 15000;
+
+    // Attempts a real submission to the shared lead-api backend.
+    //   { real: false }                 -- placeholder endpoint still
+    //                                      configured; treat exactly like
+    //                                      today's demo-only behavior.
+    //   { real: true, message }         -- an actual 2xx response from a
+    //                                      deployed backend, in the shape
+    //                                      lead-api actually returns.
+    //   { real: false, failed: true, error } -- a REAL, configured
+    //                                      endpoint was reached but
+    //                                      genuinely failed (non-2xx,
+    //                                      network error, timeout, or a
+    //                                      malformed/unexpected response
+    //                                      body). This must never be
+    //                                      shown as demo success.
     function attemptLeadSubmission(payload) {
       var cfg = window.LEAD_API_CONFIG || {};
       var isPlaceholder = !cfg.endpoint || cfg.endpoint.indexOf("REPLACE-WITH-DEPLOYED-LEAD-API-URL") !== -1;
       if (isPlaceholder) {
-        // FALLBACK BRANCH (ACTIVE): nothing is deployed yet, so don't even
+        // DEMO FALLBACK (ACTIVE): nothing is deployed yet, so don't even
         // attempt the network call.
         return Promise.resolve({ real: false });
       }
-      // LIVE BRANCH (DORMANT until a real endpoint is configured):
+      // LIVE BRANCHES (DORMANT until a real endpoint is configured):
+      var controller = typeof AbortController === "function" ? new AbortController() : null;
+      var timeoutId = controller
+        ? window.setTimeout(function () { controller.abort(); }, LEAD_REQUEST_TIMEOUT_MS)
+        : null;
+
       return fetch(cfg.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller ? controller.signal : undefined
       }).then(function (response) {
-        if (!response.ok) return { real: false };
-        return response.json().then(function (data) {
+        return response.json().catch(function () { return null; }).then(function (data) {
+          if (!response.ok) {
+            return { real: false, failed: true, error: (data && data.error) || "The message could not be submitted." };
+          }
+          if (!data || data.ok !== true) {
+            return { real: false, failed: true, error: "Received an unexpected response from the server." };
+          }
           return {
             real: true,
-            message: (data && data.message) || "Your request has been received."
+            message: data.message || "Your request has been received."
           };
-        }).catch(function () {
-          return { real: false };
         });
-      }).catch(function () {
-        // Network error / endpoint unreachable — fall back to demo copy.
-        return { real: false };
+      }).catch(function (err) {
+        // Network error / endpoint unreachable / timed out against a REAL
+        // configured endpoint — a genuine failure, reported honestly.
+        return {
+          real: false,
+          failed: true,
+          error: err && err.name === "AbortError"
+            ? "The request timed out. Please try again, or contact us directly."
+            : "Could not reach the server. Please try again, or contact us directly."
+        };
+      }).then(function (result) {
+        if (timeoutId) window.clearTimeout(timeoutId);
+        return result;
       });
     }
 
@@ -170,12 +206,25 @@
       var payload = buildLeadPayload();
 
       attemptLeadSubmission(payload).then(function (result) {
+        if (result.failed) {
+          // LIVE FAILURE: a real, configured lead-api endpoint was
+          // reached but genuinely failed. Never show the success screen
+          // for this — keep the form visible so the visitor can retry.
+          statusBox.hidden = false;
+          statusBox.className = "form-status form-status--error";
+          statusBox.textContent =
+            result.error || "Your message could not be submitted. Please try again, or contact us directly.";
+          statusBox.setAttribute("tabindex", "-1");
+          statusBox.focus();
+          return;
+        }
+
         if (result.real) {
-          // LIVE BRANCH: show the real server message.
+          // LIVE SUCCESS: show the real server message.
           if (successHeading) successHeading.textContent = "Message received";
           if (successMessage) successMessage.textContent = result.message;
         } else {
-          // FALLBACK BRANCH (ACTIVE RIGHT NOW): identical to this
+          // DEMO FALLBACK (ACTIVE RIGHT NOW): identical to this
           // prototype's original, always-local demo behavior.
           if (successHeading) successHeading.textContent = DEMO_SUCCESS_HEADING;
           if (successMessage) successMessage.textContent = DEMO_SUCCESS_MESSAGE;
