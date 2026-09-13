@@ -157,7 +157,7 @@
           All fields marked <span class="required-mark">*</span> are required for this demo.
         </p>
 
-        <form data-demo-form data-lead-form="request-service" data-success-target="request-success" class="form" novalidate>
+        <form data-demo-form data-lead-form="request-service" data-success-target="request-success" data-failure-target="request-failure" class="form" novalidate>
           <div class="form-fields">
 
             <div class="form-row">
@@ -345,6 +345,12 @@
             <p data-live-message></p>
           </div>
           <button type="button" class="btn btn-outline" data-demo-reset>Start over</button>
+        </div>
+
+        <div class="form-failure" id="request-failure" role="alert" tabindex="-1">
+          <h2>Request could not be submitted</h2>
+          <p>Something went wrong on our end and this request was not delivered. Please try
+            again in a moment, or contact us directly.</p>
         </div>
       </div>
 

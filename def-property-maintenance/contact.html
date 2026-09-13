@@ -173,7 +173,7 @@
       </div>
 
       <div class="form-card">
-        <form data-demo-form data-lead-form="contact" data-success-target="contact-success" class="form" novalidate>
+        <form data-demo-form data-lead-form="contact" data-success-target="contact-success" data-failure-target="contact-failure" class="form" novalidate>
           <div class="form-fields">
             <div class="form-row">
               <label for="contact-name">Name <span class="required-mark">*</span></label>
@@ -231,6 +231,12 @@
             <p data-live-message></p>
           </div>
           <button type="button" class="btn btn-outline" data-demo-reset>Start over</button>
+        </div>
+
+        <div class="form-failure" id="contact-failure" role="alert" tabindex="-1">
+          <h2>Message could not be sent</h2>
+          <p>Something went wrong on our end and this message was not delivered. Please try
+            again in a moment, or contact us directly.</p>
         </div>
       </div>
     </div>

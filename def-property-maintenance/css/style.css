@@ -1143,6 +1143,21 @@ a.service-card:focus-visible .card-link svg {
   display: none;
 }
 
+.form-failure {
+  display: none;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid #b3261e;
+  border-radius: var(--radius-md, 8px);
+  background: #fbeae6;
+  color: #b3261e;
+}
+
+.form-failure.is-visible {
+  display: block;
+}
+
 /* ---- Contact placeholders ------------------------------------------------ */
 .contact-grid {
   display: grid;

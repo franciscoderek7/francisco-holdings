@@ -10,7 +10,11 @@
  * Today that fallback is what actually runs on every submission, because
  * js/lead-submit-config.js still points at a placeholder URL — lead-api has
  * not been deployed anywhere yet. See the "LIVE (dormant)" / "FALLBACK
- * (currently active)" branches inside handleLeadSubmission() below.
+ * (currently active)" branches inside handleLeadSubmission() below. Once a
+ * real endpoint IS configured, a genuine failure (non-2xx response or
+ * network error) shows an honest failure state (.form-failure) instead of
+ * falling back to demo success — a visitor must never be told a request
+ * was received when it was not.
  *
  * Every other form-ish widget on this site (the Security Assessment, the AI
  * Concierge) is untouched and remains fully local/simulated — this file
@@ -239,8 +243,9 @@
     if (liveCopy) liveCopy.hidden = false;
   }
 
-  function finishSubmission(form, successPanel) {
+  function finishSubmission(form, successPanel, failurePanel) {
     form.classList.add("is-submitted");
+    if (failurePanel) failurePanel.classList.remove("is-visible");
     if (successPanel) {
       successPanel.classList.add("is-visible");
       successPanel.setAttribute("tabindex", "-1");
@@ -253,49 +258,84 @@
     }
   }
 
+  // Shows the honest failure state without hiding the form fields, so the
+  // visitor can correct anything and try again. Never used for the
+  // pre-deployment placeholder case (see handleLeadSubmission) — only for
+  // a REAL, configured lead-api endpoint that genuinely failed to accept
+  // the submission.
+  function showFailure(failurePanel) {
+    if (!failurePanel) return;
+    failurePanel.classList.add("is-visible");
+    failurePanel.setAttribute("tabindex", "-1");
+    failurePanel.focus();
+  }
+
+  // A REAL, configured endpoint that never responds must still resolve to
+  // an honest failure rather than leave the visitor waiting forever.
+  var LEAD_REQUEST_TIMEOUT_MS = 15000;
+
   function attemptRealSubmission(payload) {
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var timeoutId = controller
+      ? window.setTimeout(function () {
+          controller.abort();
+        }, LEAD_REQUEST_TIMEOUT_MS)
+      : null;
+
     return fetch(window.LEAD_API_CONFIG.endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-    }).then(function (response) {
-      return response
-        .json()
-        .catch(function () {
-          return {};
-        })
-        .then(function (data) {
-          return { ok: response.ok, data: data };
-        });
-    });
+      signal: controller ? controller.signal : undefined,
+    })
+      .then(function (response) {
+        return response
+          .json()
+          .catch(function () {
+            return null;
+          })
+          .then(function (data) {
+            // lead-api always returns { ok: true, ... } on real success --
+            // anything else (non-2xx, unparseable JSON, or a 2xx body
+            // missing ok:true) is treated as a genuine failure, never
+            // assumed to mean success.
+            var malformed = response.ok && (!data || data.ok !== true);
+            return { ok: response.ok && !malformed, malformed: malformed, data: data };
+          });
+      })
+      .catch(function (err) {
+        return {
+          ok: false,
+          networkError: true,
+          timedOut: !!(err && err.name === "AbortError"),
+        };
+      })
+      .then(function (result) {
+        if (timeoutId) window.clearTimeout(timeoutId);
+        return result;
+      });
   }
 
-  function handleLeadSubmission(form, successPanel, payload) {
+  function handleLeadSubmission(form, successPanel, failurePanel, payload) {
     if (isRealEndpointConfigured()) {
       // ---- LIVE branch (dormant until lead-api is deployed) ----
       // Once js/lead-submit-config.js points at a real, deployed lead-api
       // URL, this is the path that runs: a real POST, and on success the
       // server's own confirmation message is shown instead of demo copy.
-      attemptRealSubmission(payload)
-        .then(function (result) {
-          if (result.ok) {
-            setLiveSuccessCopy(successPanel, result.data && result.data.message);
-          } else {
-            // A real, configured endpoint responded but rejected the
-            // submission (validation error, rate limit, etc.) — fall back
-            // to the demo success state rather than surfacing a raw error,
-            // per spec. (The payload is built to pass real validation —
-            // see js/lead-submit-config.js / README — so this is an
-            // unexpected-case safety net, not the normal path.)
-            setDemoSuccessCopy(successPanel);
-          }
-          finishSubmission(form, successPanel);
-        })
-        .catch(function () {
-          // Network error / endpoint unreachable: same graceful fallback.
-          setDemoSuccessCopy(successPanel);
-          finishSubmission(form, successPanel);
-        });
+      attemptRealSubmission(payload).then(function (result) {
+        if (result.ok) {
+          setLiveSuccessCopy(successPanel, result.data && result.data.message);
+          finishSubmission(form, successPanel, failurePanel);
+        } else {
+          // A real, configured endpoint either rejected the submission
+          // (validation error, rate limit, server error), returned a
+          // malformed/unexpected body, timed out, or was unreachable —
+          // all genuine failures. The visitor must never be told this was
+          // received when it was not, so show the honest failure state
+          // instead of falling back to demo success.
+          showFailure(failurePanel);
+        }
+      });
       return;
     }
 
@@ -304,7 +344,7 @@
     // no network request is attempted at all. This reproduces the
     // prototype's original demo-only behavior exactly.
     setDemoSuccessCopy(successPanel);
-    finishSubmission(form, successPanel);
+    finishSubmission(form, successPanel, failurePanel);
   }
 
   // Stamp form_rendered_at once, when the form is initialized (i.e. when
@@ -349,19 +389,22 @@
       }
 
       var successPanel = document.getElementById(form.dataset.successTarget || "");
+      var failurePanel = document.getElementById(form.dataset.failureTarget || "");
 
       if (form.dataset.leadForm) {
         // Request Service / Contact: attempt a real lead-api submission,
-        // with the original demo success state as a graceful fallback.
+        // with the original demo success state as a graceful fallback
+        // (while the endpoint is still a placeholder) and an honest
+        // failure state once a real endpoint is configured but fails.
         var payload = buildLeadPayload(form);
-        handleLeadSubmission(form, successPanel, payload);
+        handleLeadSubmission(form, successPanel, failurePanel, payload);
         return;
       }
 
       // Any other [data-demo-form] (none exist today beyond the two
       // above, but kept for safety): unchanged original demo-only
       // "submission" — no network request, no storage write.
-      finishSubmission(form, successPanel);
+      finishSubmission(form, successPanel, failurePanel);
     });
 
     // Allow a "start over" control inside the success panel to reset the demo.
@@ -385,6 +428,10 @@
         if (successPanel) {
           successPanel.classList.remove("is-visible");
           setDemoSuccessCopy(successPanel);
+        }
+        var failurePanel = document.getElementById(form.dataset.failureTarget || "");
+        if (failurePanel) {
+          failurePanel.classList.remove("is-visible");
         }
         var previewGrid = form.querySelector("[data-photo-preview]");
         if (previewGrid) {
