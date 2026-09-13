@@ -93,6 +93,29 @@ repository as a storage mechanism. Git history is effectively permanent and thes
 — that would be a real privacy problem (no way to honor a deletion request, PII visible to anyone
 who clones the repo). Don't do this even if it seems convenient later.
 
+### Local dev-only persistence (for testing, never production)
+
+`lib/devStore.js` + `dev-server.js` exist purely to prove the pipeline works end to end without
+needing any hosting account:
+
+```
+LEAD_DEV_PERSIST=1 node dev-server.js [port]
+```
+
+This starts a plain Node `http` server (no new dependency) wrapping the real `api/lead.js` handler
+on `http://127.0.0.1:<port>/api/lead`. With `LEAD_DEV_PERSIST=1` set, every accepted lead is also
+appended as a line of JSON to `lead-api/.dev-data/<business_id>.jsonl` — gitignored, never committed,
+never exposed over HTTP (no GET/list route exists; reading it back means calling
+`devStore.readLeadsForBusiness()` directly from a script or test). Run `node test/dev-persistence.js`
+for a real HTTP proof of this, including business-isolation checks across all three `.jsonl` files.
+
+**This can never become the production database** — it has no access control, no encryption at
+rest, no retention policy, and typical serverless filesystems are ephemeral outside `/tmp` anyway.
+Both `lib/devStore.js` (dev) and `email.js`'s `persistLead()` (production, via
+`LEAD_STORE_WEBHOOK_URL`) are called through the single adapter in `lib/persistence.js`, so a real
+production provider can replace the dev store later without touching `api/lead.js` or the
+validation layer.
+
 ## Deployment (not done — here's exactly how, once authorized)
 
 This is a standard Vercel-style serverless function (`module.exports = async (req, res) => {}` in
@@ -179,6 +202,16 @@ business_id, honeypot, timing-based bot detection, duplicate-submission handling
 isolation under concurrent submissions from two different businesses, rate limiting, and the
 honest "accepted but not notified" behavior when no email/recipient config exists (which is this
 project's actual current state).
+
+```
+node test/dev-persistence.js
+```
+
+7 more tests, run against **real HTTP requests** to a real running `dev-server.js` (not mocked
+`req`/`res`) — see "Local dev-only persistence" above. Proves a real POST creates a real, readable
+record; an invalid submission is rejected by the real server; three businesses submitting
+concurrently over real HTTP never cross-contaminate on disk; and malformed JSON gets an honest 400,
+never a false success.
 
 **Not testable without deployment:** the real Resend API call succeeding, a real email actually
 arriving, and real end-to-end behavior on a live domain. These remain unverified until deployed and
