@@ -22,6 +22,7 @@ var schemas = require("../lib/schema.js");
 var validate = require("../lib/validate.js");
 var spam = require("../lib/spam.js");
 var email = require("../lib/email.js");
+var devStore = require("../lib/devStore.js");
 
 var STATUS_NEW = "NEW";
 
@@ -138,6 +139,11 @@ module.exports = async function handler(req, res) {
   var notifyResult = await email.sendLeadNotification(business, lead, leadId, timestamp);
   var persistResult = await email.persistLead(business, lead, leadId, timestamp);
 
+  // Local dev-only persistence (see lib/devStore.js) -- a no-op unless
+  // LEAD_DEV_PERSIST=1 is set, which only happens when running
+  // dev-server.js locally for testing. Never affects a real deployment.
+  var devPersistResult = devStore.appendLead(body.business_id, leadId, timestamp, lead);
+
   if (!notifyResult.sent) {
     // Server-side log only -- never exposed to the client in detail.
     console.error("[lead-api] notification not sent:", notifyResult.error);
@@ -154,6 +160,7 @@ module.exports = async function handler(req, res) {
       notification_sent: notifyResult.sent,
       persisted: persistResult.persisted,
       persist_method: persistResult.method,
+      dev_persisted: devPersistResult.persisted,
     },
   });
 };

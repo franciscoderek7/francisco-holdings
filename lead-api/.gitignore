@@ -3,3 +3,7 @@
 .env.*.local
 node_modules/
 .vercel
+
+# Local dev-only lead persistence (see lib/devStore.js) — never commit
+# real or test lead data, even dev-generated, to this public repo.
+.dev-data/
